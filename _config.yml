@@ -1,0 +1,28 @@
+# Dependencies
+markdown:            redcarpet
+highlighter:         pygments
+
+# Permalinks
+permalink:           pretty
+
+# Setup
+title:               mxaddict
+tagline:             'My Portfolio'
+description:         'A brazen kind of engineer, never afraid to say he is wrong when proven. Has a temper sometimes. Uses VIM/NeoVIM to code, even on Windows. Does not like people who ask for help yet insist that they already understand.'
+url:                 http://codedmaster.com
+baseurl:             /
+
+author:
+  name:              'Barry Deeney'
+  url:               http://codedmaster.com
+
+paginate:            5
+
+social:
+  github:            mxaddict
+  gitlab:            mxaddict
+  twitter:           _mxaddict
+  facebook:          mxaddict64
+
+# Gems
+gems:                [jekyll-paginate,jekyll-gist,redcarpet,pygments.rb]
