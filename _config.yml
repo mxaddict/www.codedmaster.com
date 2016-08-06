@@ -1,6 +1,6 @@
 # Dependencies
 markdown:            redcarpet
-highlighter:         pygments
+highlighter:         rouge
 
 # Permalinks
 permalink:           pretty
@@ -25,4 +25,4 @@ social:
   facebook:          mxaddict64
 
 # Gems
-gems:                [jekyll-paginate,jekyll-gist,redcarpet,pygments.rb]
+gems:                [jekyll-paginate,jekyll-gist,redcarpet,rouge]
