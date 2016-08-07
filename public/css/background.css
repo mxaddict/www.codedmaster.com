@@ -3,6 +3,7 @@ body {
 }
 
 #sidebar, #content {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -14,4 +15,10 @@ body {
 #content {
     margin-left: 18rem;
     background: #e1e1e1;
+}
+
+@media (min-width: 48em) {
+    #sidebar, #content {
+        display: block;
+    }
 }
