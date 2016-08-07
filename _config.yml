@@ -25,4 +25,4 @@ social:
   facebook:          mxaddict64
 
 # Gems
-gems:                [jekyll-paginate,jekyll-gist]
+gems:                [jekyll-paginate]
