@@ -27,6 +27,9 @@
         {% endif %}
       {% endfor %}
 
+      {% if site.social.steam %}
+        <a class="fa fa-steam" href="https://steamcommunity.com/id/{{ site.social.steam }}"></a>
+      {% endif %}
       {% if site.social.github %}
         <a class="fa fa-github" href="https://github.com/{{ site.social.github }}"></a>
       {% endif %}
