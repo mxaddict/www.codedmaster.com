@@ -8,7 +8,7 @@
     {% include sidebar.html %}
 
     <div class="content container">
-      <div id="content"></div>
+      {% comment %} <div id="content"></div> {% endcomment %}
       {{ content }}
       {% if layout.comments %}
         {% include disqus.html %}
