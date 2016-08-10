@@ -39,9 +39,11 @@
       {% if site.social.twitter %}
         <a class="fa fa-twitter" href="https://twitter.com/{{ site.social.twitter }}"></a>
       {% endif %}
+      {% comment %}
       {% if site.social.facebook %}
         <a class="fa fa-facebook" href="https://facebook.com/{{ site.social.facebook }}"></a>
       {% endif %}
+      {% endcomment %}
     </nav>
 
     <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
