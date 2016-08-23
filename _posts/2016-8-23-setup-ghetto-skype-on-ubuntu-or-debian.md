@@ -16,7 +16,7 @@ wget https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-
 
 NOTE: you can check for the other versions of [Ghetto Skype][skype_ghetto] on it's [releases page](https://github.com/stanfieldr/ghetto-skype/releases){:target="_blank"}
 
-After the download has completed successfully, we shoud do a checksum to make sure it's not corrupted or anything.
+After the download has completed successfully, we should do a checksum to make sure it's not corrupted or anything.
 
 ```bash
 md5sum ghetto-skype_1.4.1_amd64.deb
@@ -49,7 +49,7 @@ Now you should have something like this once you have logged in
 
 Sometimes (Most of the time) the open source community can do a lot with very limited resources
 
-If you are interested in the [Electron][electron] framework for creating desktop apps with web technology, then visit their [github page][electron_github]
+If you are interested in the [Electron][electron] framework for creating desktop applications with web technology, then visit their [Github page][electron_github]
 
 [skype_ghetto]: https://github.com/stanfieldr/ghetto-skype
 {:target="_blank"}
