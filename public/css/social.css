@@ -5,14 +5,14 @@
 
 .social-button {
     -webkit-transition-duration: 0.4s;
-    background-color: white;
+    background-color: #e7e7e7;
     border: 2px solid #555555;
     color: black;
     cursor: pointer;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
-    padding: 16px 32px;
+    margin: 0px 5px 10px 0px;
+    padding: 5px 15px;
     text-align: center;
     text-decoration: none;
     transition-duration: 0.4s;
