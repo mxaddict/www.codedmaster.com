@@ -3,7 +3,7 @@ layout: post
 title: Setup TOR on Ubuntu 16.04?
 ---
 
-[Tor][tor] is a open source, open networking tool that allows you to surf the web with better anonymity, it is basically a free and open proxy type networking tool that will allow you to surf the web from other network nodes. From there [site][tor] :
+[Tor][tor] is a open source, open networking tool that allows you to surf the web with better anonymity, it is basically a free and open proxy type networking tool that will allow you to surf the web from other network nodes. From their [site][tor] :
 
   > Tor is free software and an open network that helps you defend against traffic analysis, a form of network surveillance that threatens personal freedom and privacy, confidential business activities and relationships, and state security.
 
@@ -44,13 +44,13 @@ Now if for some weird reason the service is not started, just run this:
 sudo service tor start
 ```
 
-Once you know you have the service running, then you should find that you can use the torbrowser-launcher to download and install the [Tor][tor] Browser, either open it from your application launcher, or run it from a terminal:
+Once you know you have the service running, run the torbrowser-launcher to download and install the [Tor][tor] Browser. Either open it from your application launcher, or run it from a terminal:
 
 ```bash
 torbrowser-launcher
 ```
 
-After running that command you will get output in the terminal similar to the following before the browser actually loads up:
+After running that command you should get output that is similar to the following before the browser actually loads up:
 
 ```bash
 Tor Browser Launcher
@@ -60,7 +60,7 @@ https://github.com/micahflee/torbrowser-launcher
 Launching './Browser/start-tor-browser --detach'...
 ```
 
-Using the tor browser is the fastest way to get HTTP/HTTPS access using the [Tor][tor] Network.
+Using the tor browser is the fastest way to get HTTP(S) access using the [Tor][tor] Network.
 
 If you want, you can run most terminal commands using [Tor][tor] to anonymize it's traffic, for example, you could run something as simple as an ssh connection using [Tor][tor] with the `torsocks` command:
 
