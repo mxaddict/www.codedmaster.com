@@ -60,7 +60,7 @@ https://github.com/micahflee/torbrowser-launcher
 Launching './Browser/start-tor-browser --detach'...
 ```
 
-Using the tor browser is the fastest way to get HTTP/HTTPS access using the [Tor][tor]] Network.
+Using the tor browser is the fastest way to get HTTP/HTTPS access using the [Tor][tor] Network.
 
 If you want, you can run most terminal commands using [Tor][tor] to anonymize it's traffic, for example, you could run something as simple as an ssh connection using [Tor][tor] with the `torsocks` command:
 
