@@ -1,15 +1,16 @@
-{% capture url %}{{ site.url }}{{ page.url }}{% endcapture %}
+{% capture url %}{{ {{ site.url }}{{ page.url }} | url_encode }}{% endcapture %}
+{% capture title %}{{ page.title | url_encode }}{% endcapture %}
 <div class="social">
-  <a class="social-button" href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ url }}&via={{ site.social.twitter }}&hashtags=" target="_blank" title="Share this post on Twitter">
+  <a class="social-button" href="https://twitter.com/intent/tweet?text={{ title }}&url={{ url }}&via={{ site.social.twitter }}&hashtags=" target="_blank" title="Share this post on Twitter">
     <i class="fa fa-twitter"></i> Tweet
   </a>
-  <a class="social-button" href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&u={{ url }}" target="_blank" title="Share this post on Facebook">
+  <a class="social-button" href="https://www.facebook.com/sharer/sharer.php?t={{ title }}&u={{ url }}" target="_blank" title="Share this post on Facebook">
     <i class="fa fa-facebook"></i> Share
   </a>
   <a class="social-button" href="https://plus.google.com/share?url={{ url }}" target="_blank" title="Share this post on Google Plus">
     <i class="fa fa-google-plus"></i> Share
   </a>
-  <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&title={{ page.title }}&url={{ url }}&source={{ site.url }}" target="_blank" title="Share this post on LinkedIn">
+  <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&title={{ title }}&url={{ url }}&source={{ site.url }}" target="_blank" title="Share this post on LinkedIn">
     <i class="fa fa-linkedin"></i> Share
   </a>
 </div>
