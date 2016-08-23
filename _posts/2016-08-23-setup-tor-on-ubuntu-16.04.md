@@ -72,5 +72,5 @@ torsocks ssh someone@somewhere.tld -p 2222
 
 [Tor][tor] might sound scary, but I assure it, it's much simpler than you might think, I hope you can use this info as a starting point to your [Tor][tor] powered adventure browsing, good luck and have fun. Peace!
 
-[tor]{:target="_blank"}:    https://www.torproject.org/
-[ubuntu]{:target="_blank"}: http://www.ubuntu.com/
+[tor]:    https://www.torproject.org/ {:target="_blank"}
+[ubuntu]: http://www.ubuntu.com/      {:target="_blank"}
