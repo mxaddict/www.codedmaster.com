@@ -1,6 +1,6 @@
 {% capture url %}{{ site.url }}{{ page.url }}{% endcapture %}
 <div class="social">
-  <a class="social-button" href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ url }}&via=&hashtags=" target="_blank" title="Share this post on Twitter">
+  <a class="social-button" href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ url }}&via={{ site.social.twitter }}&hashtags=" target="_blank" title="Share this post on Twitter">
     <i class="fa fa-twitter"></i> Tweet
   </a>
   <a class="social-button" href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&u={{ url }}" target="_blank" title="Share this post on Facebook">
