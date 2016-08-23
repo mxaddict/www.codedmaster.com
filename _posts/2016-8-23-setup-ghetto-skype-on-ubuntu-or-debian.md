@@ -45,6 +45,15 @@ Now you should have something like this once you have logged in
 
 ![Screenshot](/public/img/ghetto-skype.png)
 
+## For lazy people
+
+This is do all of the mentioned in 1 terminal command
+
+```bash
+# I'm talking to you `John Fiel` (Easier to install on Windows my ass)
+wget https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-skype_1.4.1_amd64.deb && sudo dpkg -i ghetto-skype_1.4.1_amd64.deb
+```
+
 ## Conclusion
 
 Sometimes (Most of the time) the open source community can do a lot with very limited resources
