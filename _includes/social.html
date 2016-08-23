@@ -1,4 +1,4 @@
-{% capture url %}{{ {{ site.url }}{{ page.url }} | url_encode }}{% endcapture %}
+{% capture url %}{{ site.url | url_encode }}{{ page.url | url_encode }}{% endcapture %}
 {% capture title %}{{ page.title | url_encode }}{% endcapture %}
 <div class="social">
   <a class="social-button" href="https://twitter.com/intent/tweet?text={{ title }}&url={{ url }}&via={{ site.social.twitter }}&hashtags=" target="_blank" title="Share this post on Twitter">
