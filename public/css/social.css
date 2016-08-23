@@ -18,7 +18,8 @@
     transition-duration: 0.4s;
 }
 
-.social-button:hover {
+.social-button:hover,
+.social-button:active {
     background-color: #555555;
     color: white;
     text-decoration: none;
