@@ -28,3 +28,6 @@ social:
 
 # Gems
 gems:                [jekyll-paginate]
+
+# We need to move our pages inside
+include: [_pages]
