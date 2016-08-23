@@ -3,7 +3,7 @@ layout: post
 title: Setup TOR on Ubuntu 16.04?
 ---
 
-[Tor][tor] is a open source, open networking tool that allows you to surf the web with better anonymity, it is basically a free and open proxy type networking tool that will allow you to surf the web from other network nodes. From there [site](https://www.torproject.org/):
+[Tor][tor] is a open source, open networking tool that allows you to surf the web with better anonymity, it is basically a free and open proxy type networking tool that will allow you to surf the web from other network nodes. From there [site][tor] :
 
   > Tor is free software and an open network that helps you defend against traffic analysis, a form of network surveillance that threatens personal freedom and privacy, confidential business activities and relationships, and state security.
 
