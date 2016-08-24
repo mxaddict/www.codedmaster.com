@@ -14,9 +14,9 @@ Setup is easy, basically we need to download it like so:
 wget https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-skype_1.4.1_amd64.deb
 ```
 
-NOTE: you can check for the other versions of [Ghetto Skype][skype_ghetto] on it's [releases page](https://github.com/stanfieldr/ghetto-skype/releases){:target="_blank"}
+NOTE: You can check for the other versions of [Ghetto Skype][skype_ghetto] on it's [releases page](https://github.com/stanfieldr/ghetto-skype/releases){:target="_blank"}
 
-After the download has completed successfully, we should do a checksum to make sure it's not corrupted or anything.
+After the download has completed, we should do a checksum to make sure it's not corrupted or anything.
 
 ```bash
 md5sum ghetto-skype_1.4.1_amd64.deb
@@ -47,7 +47,7 @@ Now you should have something like this once you have logged in
 
 ## For lazy people
 
-This is do all of the mentioned in 1 terminal command
+This will do all of the mentioned in 1 command
 
 ```bash
 # I'm talking to you `John Fiel` (Easier to install on Windows my ass)
