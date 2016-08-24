@@ -14,7 +14,11 @@ title: Home
 
     <span class="post-date">{{ post.date | date_to_string }}</span>
 
-    {{ post.content }}
+    {% if post.excerpt %}
+      <blockquote>
+        <p>{{ post.excerpt }} <a href="{{ post.url }}">Read More</a></p>
+      </blockquote>
+    {% endif %}
   </div>
   {% endfor %}
 </div>
