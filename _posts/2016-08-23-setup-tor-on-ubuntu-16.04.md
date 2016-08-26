@@ -70,7 +70,7 @@ torsocks ssh someone@somewhere.tld -p 2222
 
 ## Conclusion
 
-[Tor][tor] might sound scary, but I assure it, it's much simpler than you might think, I hope you can use this info as a starting point to your [Tor][tor] powered adventure browsing, good luck and have fun. Peace!
+[Tor][tor] might sound scary, but I assure you, it's much simpler than you might think, I hope you can use this info as a starting point to your [Tor][tor] powered adventure browsing, good luck and have fun. Peace!
 
 [tor]: https://www.torproject.org/
 {:target="_blank"}
