@@ -8,7 +8,6 @@ permalink:           pretty
 # Setup
 title:               mxaddict
 tagline:             'Blog'
-description:         'A brazen kind of engineer, never afraid to say he is wrong when proven. Has a temper sometimes. Uses Vim/nVim to code, even on Windows. Does not like people who ask for help yet insist that they already understand.'
 url:                 http://codedmaster.com
 baseurl:             /
 
