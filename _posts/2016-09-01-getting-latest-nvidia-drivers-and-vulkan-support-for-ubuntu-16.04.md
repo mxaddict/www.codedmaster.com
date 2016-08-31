@@ -25,7 +25,7 @@ sudo apt install nvidia-370 -y
 
 NOTE: At the time of writing, `nvidia-370` package is the latest BETA driver
 
-To check if you have vulkan working correctly you will need `vulkan-utils` package:
+To check if you have [Vulkan][vulkan] working correctly you will need `vulkan-utils` package:
 
 ```bash
 sudo apt install vulkan-utils -y
@@ -45,11 +45,13 @@ Vulkan API Version: 1.0.21
         driverVersion  = 1552269312 (0x5c85c000)
 ```
 
+NOTE: If [Vulkan][vulkan] is not working after the install, you might have to do a simple system reboot, which you can do via the terminal with `sudo reboot`
+
 ## Optional
 
-If you have [Dota 2][dota2] on your machine, you can use it to check for vulkan.
+If you have [Dota 2][dota2] on your machine, you can use it to check for [Vulkan][vulkan].
 
-You will need to open [Steam][steam] and enable vulkan for [Dota 2][dota2]
+You will need to open [Steam][steam] and enable [Vulkan][vulkan] for [Dota 2][dota2]
 
 ![Screenshot](/public/img/vulkan_steam_dota2_01.png)
 
@@ -59,11 +61,11 @@ Just set the following launch option value:
 ![Screenshot](/public/img/vulkan_steam_dota2_03.png)
 ![Screenshot](/public/img/vulkan_steam_dota2_04.png)
 
-Then run [Dota 2][dota2], if it works then you have vulkan setup correctly!
+Then run [Dota 2][dota2], if it works then you have [Vulkan][vulkan] setup correctly!
 
 ## Conclusion
 
-As of the wrinting of this article, this method is the easiest way to get the latest NVIDIA driver with Vulkan support, so If you are reading this in the future, which I damn sure hope so, there may already be Vulkan support on the default [Ubuntu][ubuntu] package repos.
+As of the wrinting of this article, this method is the easiest way to get the latest NVIDIA driver with [Vulkan][vulkan] support, so If you are reading this in the future, which I damn sure hope so, there may already be Vulkan support on the default [Ubuntu][ubuntu] package repos.
 
 [ubuntu_ppa_graphics]: https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
 {:target="_blank"}
@@ -78,4 +80,7 @@ As of the wrinting of this article, this method is the easiest way to get the la
 {:target="_blank"}
 
 [dota2]: http://blog.dota2.com/
+{:target="_blank"}
+
+[vulkan]: https://www.khronos.org/vulkan/
 {:target="_blank"}
