@@ -17,6 +17,8 @@ BTW I created a video version of this tutorial for a more visual feel
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/i5L00dzL3t8" frameborder="0" allowfullscreen></iframe>
 
+I recommend watching in 1080p60 and fullscreen! `^_^`
+
 [ubuntu]: http://www.ubuntu.com/
 {:target="_blank"}
 
