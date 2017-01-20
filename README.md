@@ -2,10 +2,10 @@
 
 ## Credits
 
-###Hyde Jekyll Theme
+### Hyde Jekyll Theme
 [Hyde](https://github.com/poole/hyde)
 
-###Particles.js
+### Particles.js
 [particles.js](https://github.com/VincentGarreau/particles.js)
 
 
