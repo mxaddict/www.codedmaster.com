@@ -10,6 +10,7 @@ The reason for this is that MAC/OSX requires you to have those shortcuts declare
 You can do a simple fix by loading the [Electron Menu][electron_menu] module in your application's code and setting these shortcuts
 
 Sample Code:
+
 ```javascript
 const {app,Menu} = require('electron');
 
