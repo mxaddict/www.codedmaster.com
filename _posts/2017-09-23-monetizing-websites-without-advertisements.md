@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Monetizing Websites without having to use anoying advertisements!
+title: Monetizing Websites without having to use annoying advertisements!
 ---
 
 Have you ever wanted to make a personal website or even a business website that would not require the end user to be anoyed by adverts? If you have, then today is your day!
@@ -47,7 +47,7 @@ Take note that there are options to custimize the miner for example in this next
 
 CONCLUSION:
 
-This is a pretty neat solution for getting RID of anoying adverts and keeping the same or even better income for your content or even service related website.
+This is a pretty neat solution for getting RID of annoying adverts and keeping the same or even better income for your content or even service related website.
 
 [coinhive]: https://cnhv.co/hro
 {:target="_blank"}
