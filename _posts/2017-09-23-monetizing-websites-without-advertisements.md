@@ -9,9 +9,9 @@ And doing it is as simple as 3 steps.
 
 Step 1: Go to the [CoinHive "Sign Up" page][coinhive] and create your account.
 
-Step 2: Go to the [CoinHive "Settings > Sites" page][coinhive_keys] and get your "Site Key"
+Step 2: Go to the [CoinHive "Settings > Sites" page][coinhive_keys] and get your "Site Key".
 
-Step 3: Add the following code snippet to your webpage/webpages
+Step 3: Add the following code snippet to your webpage/webpages.
 
 ```html
 <!-- Monetizing visitor traffic -->
@@ -28,7 +28,7 @@ Step 3: Add the following code snippet to your webpage/webpages
 </script>
 ```
 
-Take note that there are options to custimize the miner for example in this next snippet, we set a 50% throttle for the miner CPU cycles consumed
+Take note that there are options to custimize the miner for example in this next snippet, we set a 50% throttle for the miner CPU cycles consumed.
 
 ```html
 <!-- Monetizing visitor traffic -->
@@ -45,7 +45,9 @@ Take note that there are options to custimize the miner for example in this next
 </script>
 ```
 
-CONCLUSION:
+If you need more info on the options for the JS miner, then go to the [CoinHive "Documentation" page][coinhive_docs].
+
+## Conclusion
 
 This is a pretty neat solution for getting RID of annoying adverts and keeping the same or even better income for your content or even service related website.
 
