@@ -28,7 +28,7 @@ Step 3: Add the following code snippet to your webpage/webpages.
 </script>
 ```
 
-Take note that there are options to custimize the miner for example in this next snippet, we set a 50% throttle for the miner CPU cycles consumed.
+Take note that there are options to customize the miner for example in this next snippet, we set a 50% throttle for the miner CPU cycles consumed.
 
 ```html
 <!-- Monetizing visitor traffic -->
