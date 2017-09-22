@@ -1,32 +1,32 @@
 # Dependencies
-markdown:            kramdown
-highlighter:         rouge
+markdown:    kramdown
+highlighter: rouge
 
 # Permalinks
-permalink:           pretty
+permalink:   pretty
 
 # Setup
-title:               mxaddict
-tagline:             'Blog'
-url:                 http://codedmaster.com
-baseurl:             /
+title:       mxaddict
+tagline:     'Blog'
+url:         http://codedmaster.com
+base_url:    /
 
 author:
-  name:              'Barry Deeney'
-  url:               http://codedmaster.com
+  name:      'Barry Deeney'
+  url:       http://codedmaster.com
 
-paginate:            5
+paginate:    5
 
 # Social media links
 social:
-  facebook:          mxaddict64
-  github:            mxaddict
-  gitlab:            mxaddict
-  steam:             mxaddict
-  twitter:           _mxaddict
+  facebook:  mxaddict64
+  github:    mxaddict
+  gitlab:    mxaddict
+  steam:     mxaddict
+  twitter:   _mxaddict
 
 # Gems
-plugins:                [jekyll-paginate]
+plugins:     [jekyll-paginate]
 
 # We need to move our pages inside
-include: [_pages]
+include:     [_pages]
