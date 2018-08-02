@@ -26,8 +26,15 @@
 
   <!-- Icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.base_url }}public/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="{{ site.base_url }}public/favicon.ico">
+  <link rel="shortcut icon" href="{{ site.base_url }}favicon.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  {% if page.path contains '_posts' %}
+  {% unless page.skip_amp %}
+  <!-- AMP -->
+  <link rel="amphtml" href="{{ page.id | prepend: '/amp' | prepend: site.baseurl | prepend: site.url }}">
+  {% endunless %}
+  {% endif %}
 </head>

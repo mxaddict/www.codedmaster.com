@@ -26,7 +26,13 @@ social:
   twitter:   _mxaddict
 
 # Gems
-plugins:     [jekyll-paginate]
+plugins:
+  - jekyll-paginate
+  - amp-jekyll
+
+# Setup AMP for google
+ampdir: amp
 
 # We need to move our pages inside
-include:     [_pages]
+include:
+  - _pages
