@@ -31,10 +31,12 @@
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 
+  {% comment %}
   {% if page.path contains '_posts' %}
   {% unless page.skip_amp %}
   <!-- AMP -->
   <link rel="amphtml" href="{{ page.id | prepend: '/amp' | prepend: site.baseurl | prepend: site.url }}">
   {% endunless %}
   {% endif %}
+  {% endcomment %}
 </head>
