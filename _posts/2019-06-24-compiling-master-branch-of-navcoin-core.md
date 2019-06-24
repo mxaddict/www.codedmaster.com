@@ -52,7 +52,7 @@ git pull
 
 ## Step 3
 
-Compile required dependencies
+Compile required dependencies.
 
 ```shell
 cd ./depends
@@ -61,7 +61,7 @@ make
 
 ## Step 4
 
-Create and run the `./configure` script
+Create and run the `./configure` script.
 
 ```shell
 # Assuming your working directory is still in `./depends` from last commands
@@ -76,7 +76,7 @@ cd ..
 
 ## Step 5
 
-Compile [NavCoin-Core][navcoin_github] itself
+Compile [NavCoin-Core][navcoin_github] itself.
 
 ```shell
 make
@@ -84,9 +84,9 @@ make
 
 ## Conclusion
 
-Once you have followed this tutorial, you should have a binary in `./src/qt/navcoin-qt` that is the [NavCoin-Core][navcoin_github] `QT` wallet/client
+Once you have followed this tutorial, you should have a binary in `./src/qt/navcoin-qt` that is the [NavCoin-Core][navcoin_github] `QT` wallet/client.
 
-You should also have a binary in `./src/navcoind` which is the [NavCoin-Core][navcoin_github] `daemon` wallet/client
+You should also have a binary in `./src/navcoind` which is the [NavCoin-Core][navcoin_github] `daemon` wallet/client.
 
 ## Things to keep in mind
 
