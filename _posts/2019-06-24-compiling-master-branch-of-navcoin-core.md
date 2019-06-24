@@ -82,8 +82,6 @@ Compile [NavCoin-Core][navcoin_github] itself
 make
 ```
 
-NOTE:
-
 ## Conclusion
 
 Once you have followed this tutorial, you should have a binary in `./src/qt/navcoin-qt` that is the [NavCoin-Core][navcoin_github] `QT` wallet/client
