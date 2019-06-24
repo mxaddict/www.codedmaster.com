@@ -64,7 +64,7 @@ make
 Create and run the `./configure` script
 
 ```shell
-# Assuming you working directory is still in `./depends` from last commands
+# Assuming your working directory is still in `./depends` from last commands
 cd ..
 
 # Create the `./configure` script
