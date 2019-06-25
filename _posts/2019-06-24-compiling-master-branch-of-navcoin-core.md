@@ -71,7 +71,7 @@ cd ..
 ./autogen.sh
 
 # Run the `./configure` script and use the dependencies that we compiled in Step 3
-./configure --prefix=`pwd`/`uname -m`-pc-linux-gnu
+./configure --prefix=`pwd`/depends/`uname -m`-pc-linux-gnu
 ```
 
 ## Step 5
