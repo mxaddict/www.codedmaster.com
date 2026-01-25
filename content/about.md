@@ -18,9 +18,12 @@ black, and khaki/light brown). We rent our home, embracing a minimalist,
 practical lifestyle.
 
 This blog is a reflection of my journey – a place where I share practical tech
-tutorials, delve into web development, explore the nuances of Linux, champion
-privacy, and occasionally touch upon my love for FPS titles. Expect
-straightforward guides and honest insights from someone who’s been in the
-trenches of software engineering for years.
+tutorials, delve into web development (including migrations to modern static
+site generators like Zola), explore the nuances of Linux (from Arch setups to
+dotfiles deep dives), champion privacy, and occasionally touch upon my love for
+FPS titles. You'll also find reflections on past tech trends like Coinhive and
+HashFlare, and insights into building efficient CLI workflows, including tools
+like `quoty`. Expect straightforward guides and honest insights from someone
+who’s been in the trenches of software engineering for years.
 
 Thanks for dropping by!
