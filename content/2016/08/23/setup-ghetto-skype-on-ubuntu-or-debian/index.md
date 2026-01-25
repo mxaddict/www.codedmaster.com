@@ -3,8 +3,10 @@ title = "Setup Ghetto Skype on Ubuntu/Debian?"
 date = 2016-08-23T00:00:00Z
 +++
 
-<!-- more -->
+
 [Ghetto Skype][skype_ghetto] is an open source desktop application powered by [Electron][electron] which acts as the wrapper for the [Web Skype][skype_web] beta that Microsoft has been working on. A quote from the [Ghetto Skype][skype_ghetto] README.md file:
+
+<!-- more -->
 
   > Are you tired of a buggy 32 bit official Skype client? Then Ghetto Skype is for you!
 

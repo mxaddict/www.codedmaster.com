@@ -3,8 +3,10 @@ title = "Monetizing Websites without having to use annoying advertisements! Just
 date = 2017-09-23T00:00:00Z
 +++
 
-<!-- more -->
+
 Have you ever wanted to make a personal website or even a business website that would not require the end user to be annoyed by adverts? If you have, then today is your day!
+
+<!-- more -->
 
 All you have to do is use a JS Miner from [CoinHive][coinhive].
 

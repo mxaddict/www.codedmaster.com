@@ -3,8 +3,10 @@ title = "Setup Virtualbox on Ubuntu 16.04?"
 date = 2016-10-05T00:00:00Z
 +++
 
-<!-- more -->
+
 [Virtualbox][vbox] is a open source, well maintained virtual machine package that can install a huge array of x86 and amd64 operating systems
+
+<!-- more -->
 
 To install [Virtualbox][vbox] on [Ubuntu 16.04][ubuntu] all you need to do is run this in a terminal:
 

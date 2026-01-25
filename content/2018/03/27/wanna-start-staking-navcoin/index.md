@@ -3,8 +3,10 @@ title = "Wanna Start Staking NAV / NAVCoin?"
 date = 2018-03-27T00:00:00Z
 +++
 
-<!-- more -->
+
 Wanna start staking [NAVCoin][navcoin] but don't know exactly how?
+
+<!-- more -->
 
 All you need are the following:
 

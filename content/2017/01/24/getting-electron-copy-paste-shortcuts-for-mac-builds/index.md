@@ -3,8 +3,10 @@ title = "Getting Electron Copy/Paste shortcuts working on MAC builds"
 date = 2017-01-24T00:00:00Z
 +++
 
-<!-- more -->
+
 If you are new to [Electron][electron] and have noticed that when running the Mac/OSX builds there is no copy/paste shortcut support, don't be alarmed.
+
+<!-- more -->
 
 The reason for this is that MAC/OSX requires you to have those shortcuts declared/setup in the application menu, or one of it's sub menus.
 

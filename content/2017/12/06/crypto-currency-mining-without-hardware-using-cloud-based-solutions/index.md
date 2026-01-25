@@ -3,8 +3,10 @@ title = "Wanna start Crypto Currency mining? But don't have the money to invest 
 date = 2017-12-06T00:00:00Z
 +++
 
-<!-- more -->
+
 Wanna start Crypto Currency mining? But don't have the money to invest in an actual hardware solution? Then why not give [HashFlare's][hashflare] Cloud based mining a go!
+
+<!-- more -->
 
 All you have to do is sign up at [HashFlare][hashflare].
 

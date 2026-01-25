@@ -3,8 +3,10 @@ title = "Getting latest NVIDIA drivers and Vulkan support for Ubuntu 16.04"
 date = 2016-09-01T00:00:00Z
 +++
 
-<!-- more -->
+
 Sometimes the [NVIDIA][nvidia] drivers on LTS [Ubuntu][ubuntu] Releases are not the best, sometimes they are good, but old. If you want to have access to the new BETA drivers plus Vulkan support on [Ubuntu][ubuntu] 16.04 this tutorial is for you.
+
+<!-- more -->
 
 You will need to add the PPA Repo to get access to these packages:
 
