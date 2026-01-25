@@ -1,5 +1,5 @@
 +++
-title = "mxaddict's Digital Forge: CLI, Code, and Crafted Insights"
+title = "mxaddict's Corner of the Internet: CLI, Code, and Crafted Insights"
 description = "Welcome to mxaddict's personal blog, a blend of deep dives into Linux (Arch, Hyprland), practical web development, privacy tools like Tor, and reflections from a Staff Engineer who lives on the command line and rides an XSR 900."
 paginate_by = 5
 template = "index.html"
@@ -7,7 +7,9 @@ sort_by = "date"
 
 +++
 
-Welcome to **mxaddict's Digital Forge** – your destination for raw, unfiltered insights from a Staff Engineer who believes in the power of the command line and the open road.
+## Welcome to mxaddict's Corner of the Internet
+
+Your destination for raw, unfiltered insights from a Staff Engineer who believes in the power of the command line and the open road.
 
 Here, you'll find a curated collection of articles, tutorials, and deep dives spanning my passions:
 
