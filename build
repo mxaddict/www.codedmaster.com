@@ -3,6 +3,26 @@
 
 set -e
 
+# --- Git Remote Origin Check and Setup ---
+echo "Checking Git remote 'origin'..."
+REQUIRED_ORIGIN="git@github.com:mxaddict/www.codedmaster.com.git"
+CURRENT_ORIGIN=$(git remote get-url origin 2>/dev/null || echo "")
+
+if [ "$CURRENT_ORIGIN" != "$REQUIRED_ORIGIN" ]; then
+    echo "Remote 'origin' is not set to the required URL: $REQUIRED_ORIGIN"
+    if git remote get-url origin &>/dev/null; then
+        echo "Setting 'origin' URL to $REQUIRED_ORIGIN..."
+        git remote set-url origin "$REQUIRED_ORIGIN"
+    else
+        echo "Adding 'origin' remote with URL $REQUIRED_ORIGIN..."
+        git remote add origin "$REQUIRED_ORIGIN"
+    fi
+    echo "Git remote 'origin' updated."
+else
+    echo "Git remote 'origin' is already set correctly."
+fi
+# --- End Git Remote Origin Check and Setup ---
+
 echo "Starting Zola site deployment..."
 
 # Check if Zola is installed
