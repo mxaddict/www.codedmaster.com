@@ -84,3 +84,9 @@ page][electron_github]
 [skype_web]: https://web.skype.com/
 [electron]: http://electron.atom.io/
 [electron_github]: https://github.com/electron/electron
+
+---
+
+**_Editor's Note (2026):_** Ghetto Skype, the application mentioned in this
+post, is no longer actively maintained. This article is preserved for historical
+context.

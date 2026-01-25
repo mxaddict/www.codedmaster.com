@@ -103,3 +103,7 @@ page][electron_github]
 [node_js]: https://nodejs.org/
 [nvm]: https://github.com/creationix/nvm
 [brew_sh]: http://brew.sh/
+
+---
+
+**_Editor's Note (2026):_** Ghetto Skype, the application mentioned in this post, is no longer actively maintained. This article is preserved for historical context.

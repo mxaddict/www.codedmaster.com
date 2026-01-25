@@ -96,3 +96,7 @@ Vulkan support on the default [Ubuntu][ubuntu] package repos.
 [steam]: http://store.steampowered.com/
 [dota2]: http://blog.dota2.com/
 [vulkan]: https://www.khronos.org/vulkan/
+
+---
+
+**_Editor's Note (2026):_** This post refers to Ubuntu 16.04 (Xenial Xerus), which reached its standard End-of-Life in April 2021. The information is preserved for historical context but is not recommended for use on a modern system.
