@@ -1,0 +1,24 @@
+# The URL the site will be built for
+base_url = "https://www.codedmaster.com"
+title = "mxaddict"
+description = "mxaddict's Blog" # Updated as per user request
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+[markdown]
+external_links_target_blank = true
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
+
+[extra]
+author_name = "mxaddict"
+author_url = "https://www.codedmaster.com"
+
+[extra.social]
+github = "mxaddict"
+gitlab = "mxaddict"

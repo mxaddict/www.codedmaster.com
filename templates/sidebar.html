@@ -1,0 +1,35 @@
+<div class="sidebar">
+  <div id="sidebar"></div>
+  <div class="container">
+    <div class="sidebar-about">
+      <a href="{{ config.base_url }}">
+        <h1>{{ config.title }}</h1>
+        <h2>{{ config.description }}</h2> {# Using config.description for tagline #}
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item{% if current_path is defined and current_path == config.base_url %} active{% endif %}" href="{{ config.base_url }}">Blog</a>
+
+      {# Dynamically generate sidebar nav of pages #}
+      {% set pages_section = get_section(path="pages/_index.md") %}
+      {% for page in pages_section.pages %}
+        <a class="sidebar-nav-item{% if current_path is defined and current_path == page.permalink %} active{% endif %}" href="{{ page.permalink }}">{{ page.title }}</a>
+      {% endfor %}
+
+      
+      {% if config.extra.social.github %}
+        <a target="_blank" class="fa fa-github" href="https://github.com/{{ config.extra.social.github }}"></a>
+      {% endif %}
+      {% if config.extra.social.gitlab %}
+        <a target="_blank" class="fa fa-gitlab" href="https://gitlab.com/{{ config.extra.social.gitlab }}"></a>
+      {% endif %}
+      
+      
+    </nav>
+
+    {% include "ads.html" %}
+
+    <p>&copy; {{ now() | date(format="%Y") }}. All rights reserved.</p>
+  </div>
+</div>
