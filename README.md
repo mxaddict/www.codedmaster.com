@@ -11,4 +11,4 @@ This site is now powered by **Zola**, a fast, Rust-based static site generator.
 
 ## License
 
-[MIT license](LICENSE.md).
+[MIT license](LICENSE).
