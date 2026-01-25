@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# vi: ft=bash
+
+set -e
+
+echo "Starting Zola site deployment..."
+
+# Check if Zola is installed
+if ! command -v zola &> /dev/null
+then
+    echo "Zola is not installed. Please install Zola to proceed."
+    echo "See: https://www.getzola.org/documentation/getting-started/installation/"
+    exit 1
+fi
+
+# Build the Zola site
+echo "Building Zola site..."
+zola build
+
+# Navigate to the public directory
+pushd public
+
+# Initialize a new git repository in the public directory if it doesn't exist
+# This is crucial for maintaining a separate gh-pages branch history.
+if [ ! -d ".git" ]; then
+    echo "Initializing git repository in public/..."
+    git init
+fi
+
+# Create a .nojekyll file to prevent Jekyll processing on GitHub Pages
+echo "Creating .nojekyll file..."
+touch .nojekyll
+
+# Copy CNAME file if it exists in the root
+if [ -f "../CNAME" ]; then
+    echo "Copying CNAME file..."
+    cp ../CNAME .
+fi
+
+# Add all files to the git repository
+echo "Adding files to git..."
+git add -A
+
+# Commit the changes
+echo "Committing changes..."
+# Check if there are any changes to commit
+if git diff --cached --exit-code; then
+    echo "No changes to commit."
+else
+    git commit -m "Deploy to GitHub Pages"
+fi
+
+# Push to the gh-pages branch
+# -f is used because gh-pages is often a generated branch and history doesn't need to be preserved strictly.
+echo "Pushing to gh-pages branch..."
+git push -f origin HEAD:gh-pages
+
+echo "Deployment to GitHub Pages complete!"
+
+# Navigate back to the original directory
+popd
