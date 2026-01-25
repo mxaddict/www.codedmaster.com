@@ -1,18 +1,15 @@
 +++
-title = "About"
-slug = "about"
+title = "About mxaddict: Tech, Typewriters, and Two Wheels"
+description = "Meet mxaddict: a Staff Engineer, Neovim enthusiast, Arch Linux user, and motorcycle rider sharing insights on web development, Linux, privacy, and gaming. Dive into practical CLI-focused tutorials and personal reflections from a family man."
 date = 2026-01-25
-[extra]
-author = "mxaddict"
-display_published = false
-toc = false
 +++
 
-<p class="message">
-  Hey there, I'm not sure what to put on this page yet, you just hang on!
-</p>
+Hey there, I'm mxaddict. I'm 34, a Staff Engineer (formerly Senior Software Engineer), and I live and breathe the command line – literally. You'll find me hammering away at my Neovim setup, hitting 100 WPM, and navigating my Arch Linux desktop powered by Hyprland. My tools are almost exclusively CLI-based, from the MySQL client to the Gemini CLI. For browsing, it's the Vieb browser all the way.
 
-Have questions or suggestions? Feel free to
-[open an issue on GitHub](https://github.com/mxaddict/mxaddict.github.io/issues/new).
+Outside of the digital realm, life's just as driven. I'm a husband and father of two, navigating city life without a car, preferring my 900 CC XSR 900 for daily commutes (boots, not sneakers, for obvious reasons!). My wardrobe is simple: 5 dark grey shirts, 5 navy blue shirts, and 3 pairs of tactical/cargo pants (grey, black, and khaki/light brown). We rent our home, embracing a minimalist, practical lifestyle.
 
-Thanks for reading!
+This blog is a reflection of my journey – a place where I share practical tech tutorials, delve into web development, explore the nuances of Linux, champion privacy, and occasionally touch upon my love for FPS titles. Expect straightforward guides and honest insights from someone who’s been in the trenches of software engineering for years.
+
+Got questions or just want to chat tech, bikes, or CLI tools? Feel free to [open an issue on GitHub](https://github.com/mxaddict/mxaddict.github.io/issues/new).
+
+Thanks for dropping by!
