@@ -18,8 +18,6 @@ theme = "catppuccin-mocha"
 author_name = "mxaddict"
 author_url = "https://www.codedmaster.com"
 
-
-
 [extra.social]
 github = "mxaddict"
 gitlab = "mxaddict"
