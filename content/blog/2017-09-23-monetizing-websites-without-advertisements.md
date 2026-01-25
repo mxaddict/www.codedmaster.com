@@ -24,8 +24,7 @@ following 3 steps.
 
 Step 1: Go to the CoinHive "Sign Up" page and create your account.
 
-Step 2: Go to the CoinHive "Settings > Sites" page and get your
-"Site Key".
+Step 2: Go to the CoinHive "Settings > Sites" page and get your "Site Key".
 
 Step 3: Add the following code snippet to your webpage/webpages.
 
@@ -72,4 +71,9 @@ the same or even better income for your content or even service related website.
 
 ---
 
-**_Editor's Note (2026):_** Coinhive, the service mentioned in this post, has been defunct since 2019. This article is preserved for historical context. While the idea of browser-based mining as an alternative to ads was intriguing, it was widely abused and is no longer a viable or recommended practice. You can read my updated thoughts on the matter in my follow-up post, "[A Look Back at Coinhive: An Idea Too Good to Be True](/2026-01-25-a-look-back-at-coinhive)".
+**_Editor's Note (2026):_** Coinhive, the service mentioned in this post, has
+been defunct since 2019. This article is preserved for historical context. While
+the idea of browser-based mining as an alternative to ads was intriguing, it was
+widely abused and is no longer a viable or recommended practice. You can read my
+updated thoughts on the matter in my follow-up post,
+"[A Look Back at Coinhive: An Idea Too Good to Be True](/blog/a-look-back-at-coinhive)".
