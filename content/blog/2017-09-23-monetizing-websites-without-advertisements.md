@@ -4,7 +4,7 @@ date = 2017-09-23
 draft = false
 description = "Discover how to monetize your website without annoying advertisements by using a JavaScript cryptocurrency miner from CoinHive. Learn the simple 3-step setup process."
 [taxonomies]
-tags = ["Monetization", "Websites", "Advertising", "CoinHive", "JavaScript", "Miner", "Cryptocurrency"]
+tags = ["monetization", "websites", "advertising", "coinhive", "javascript", "miner", "cryptocurrency"]
 [extra]
 toc = true
 display_published = true

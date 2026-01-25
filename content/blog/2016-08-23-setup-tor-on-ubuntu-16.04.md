@@ -4,7 +4,7 @@ date = 2016-08-23
 draft = false
 description = "Learn how to set up Tor on Ubuntu 16.04 to enhance your online anonymity. This tutorial covers installation of Tor and Tor Browser, checking the Tor service, and using `torsocks` for anonymous terminal commands."
 [taxonomies]
-tags = ["Tor", "Ubuntu", "Linux", "Anonymity", "Privacy", "Security", "Networking", "Tor Browser", "Tutorial"]
+tags = ["tor", "ubuntu", "linux", "anonymity", "privacy", "security", "networking", "tor browser", "tutorial"]
 [extra]
 toc = true
 display_published = true

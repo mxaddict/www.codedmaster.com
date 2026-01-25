@@ -4,7 +4,7 @@ date = 2016-08-07
 draft = false
 description = "Discover Jekyll, a simple yet powerful open-source static site generator. Learn how it creates complete, static websites and powers platforms like GitHub Pages."
 [taxonomies]
-tags = ["Jekyll", "Static Site Generator", "GitHub Pages", "Web Development", "Open Source"]
+tags = ["jekyll", "static site generator", "github pages", "web development", "open source"]
 [extra]
 toc = true
 display_published = true
