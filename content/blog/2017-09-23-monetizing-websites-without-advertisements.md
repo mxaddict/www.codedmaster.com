@@ -17,14 +17,14 @@ is your day!
 
 <!-- more -->
 
-All you have to do is use a JS Miner from [CoinHive][coinhive].
+All you have to do is use a JS Miner from CoinHive.
 
 And adding it to a new or even existing website/webpage is as simple as the
 following 3 steps.
 
-Step 1: Go to the [CoinHive "Sign Up" page][coinhive] and create your account.
+Step 1: Go to the CoinHive "Sign Up" page and create your account.
 
-Step 2: Go to the [CoinHive "Settings > Sites" page][coinhive_keys] and get your
+Step 2: Go to the CoinHive "Settings > Sites" page and get your
 "Site Key".
 
 Step 3: Add the following code snippet to your webpage/webpages.
@@ -62,14 +62,14 @@ snippet, we set a 50% throttle for the miner CPU cycles consumed.
 </script>
 ```
 
-If you need more info on the options for the JS miner, then go to the [CoinHive
-"Documentation" page][coinhive_docs].
+If you need more info on the options for the JS miner, then go to the CoinHive
+"Documentation" page.
 
 ## Conclusion
 
 This is a pretty neat solution for getting RID of annoying adverts and keeping
 the same or even better income for your content or even service related website.
 
-[coinhive]: https://cnhv.co/hro
-[coinhive_keys]: https://cnhv.co/hrn
-[coinhive_docs]: https://cnhv.co/hru
+---
+
+**_Editor's Note (2026):_** Coinhive, the service mentioned in this post, has been defunct since 2019. This article is preserved for historical context. While the idea of browser-based mining as an alternative to ads was intriguing, it was widely abused and is no longer a viable or recommended practice. You can read my updated thoughts on the matter in my follow-up post, "[A Look Back at Coinhive: An Idea Too Good to Be True](/2026-01-25-a-look-back-at-coinhive)".
