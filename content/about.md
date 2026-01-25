@@ -1,6 +1,11 @@
 +++
 title = "About"
 slug = "about"
+date = 2026-01-25
+[extra]
+author = "mxaddict"
+display_published = false
+toc = false
 +++
 
 <p class="message">
