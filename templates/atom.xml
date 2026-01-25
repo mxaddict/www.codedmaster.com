@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>{{ config.title }}</title>
+ <link href="{{ config.base_url }}/atom.xml" rel="self"/>
+ <link href="{{ config.base_url }}/"/>
+ <updated>{{ now() | date(format="%Y-%m-%dT%H:%M:%SZ") }}</updated>
+ <id>{{ config.base_url }}/</id>
+ <author>
+   <name>{{ config.extra.author_name | default(value="Unknown") }}</name>
+   {# Zola doesn't have a default site.author.email, so we'll omit unless added to config.extra #}
+   {# <email>{{ config.extra.author_email }}</email> #}
+ </author>
+
+ {% for page in pages | sort(by="date", order="desc") %}
+ <entry>
+   <title>{{ page.title }}</title>
+   <link href="{{ page.permalink }}"/>
+   <updated>{{ page.date | date(format="%Y-%m-%dT%H:%M:%SZ") }}</updated>
+   <id>{{ page.permalink }}</id>
+   <content type="html">{{ page.content | xml_escape }}</content>
+ </entry>
+ {% endfor %}
+
+</feed>

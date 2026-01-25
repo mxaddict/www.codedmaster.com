@@ -22,3 +22,9 @@ author_url = "https://www.codedmaster.com"
 [extra.social]
 github = "mxaddict"
 gitlab = "mxaddict"
+
+[feed]
+generate_feed = true
+feed_filename = "atom.xml"
+# You can adjust the limit, e.g., 10, 20, or null for all.
+feed_limit = 10
