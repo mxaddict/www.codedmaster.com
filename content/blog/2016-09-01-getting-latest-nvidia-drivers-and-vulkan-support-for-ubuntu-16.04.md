@@ -71,13 +71,13 @@ If you have [Dota 2][dota2] on your machine, you can use it to check for
 You will need to open [Steam][steam] and enable [Vulkan][vulkan] for [Dota
 2][dota2]
 
-![Screenshot](/public/img/vulkan_steam_dota2_01.png)
+![Screenshot](/img/vulkan_steam_dota2_01.png)
 
 Just set the following launch option value:
 
-![Screenshot](/public/img/vulkan_steam_dota2_02.png)
-![Screenshot](/public/img/vulkan_steam_dota2_03.png)
-![Screenshot](/public/img/vulkan_steam_dota2_04.png)
+![Screenshot](/img/vulkan_steam_dota2_02.png)
+![Screenshot](/img/vulkan_steam_dota2_03.png)
+![Screenshot](/img/vulkan_steam_dota2_04.png)
 
 Then run [Dota 2][dota2], if it works then you have [Vulkan][vulkan] setup
 correctly!

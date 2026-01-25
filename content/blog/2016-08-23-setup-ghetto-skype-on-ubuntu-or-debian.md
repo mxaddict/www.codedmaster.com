@@ -60,7 +60,7 @@ ghetto-skype
 
 Now you should have something like this once you have logged in
 
-![Screenshot](/public/img/ghetto-skype.png)
+![Screenshot](/img/ghetto-skype.png)
 
 ## For lazy people
 

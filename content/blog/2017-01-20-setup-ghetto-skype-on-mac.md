@@ -82,7 +82,7 @@ open dist/mac
 
 Now, you should see a `.app` and a `.dmg` for [Ghetto Skype][skype_ghetto]
 
-![Screenshot](/public/img/ghetto-skype-finder.png)
+![Screenshot](/img/ghetto-skype-finder.png)
 
 You can either drag the `.app` file to your `Applications` folder, or open the
 `.dmg` file and do as you would with any other `.dmg` installer

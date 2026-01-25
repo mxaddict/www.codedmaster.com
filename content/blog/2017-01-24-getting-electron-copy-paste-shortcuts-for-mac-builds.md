@@ -61,7 +61,7 @@ app.on('ready', () => {
 Once you have added this code to your application code, you should see a new
 menu that looks like the following image
 
-![Screenshot](/public/img/electron-shortcuts.png)
+![Screenshot](/img/electron-shortcuts.png)
 
 [electron]: http://electron.atom.io/
 [electron_menu]:
