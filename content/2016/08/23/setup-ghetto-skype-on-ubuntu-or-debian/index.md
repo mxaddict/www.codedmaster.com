@@ -3,12 +3,15 @@ title = "Setup Ghetto Skype on Ubuntu/Debian?"
 date = 2016-08-23T00:00:00Z
 +++
 
-
-[Ghetto Skype][skype_ghetto] is an open source desktop application powered by [Electron][electron] which acts as the wrapper for the [Web Skype][skype_web] beta that Microsoft has been working on. A quote from the [Ghetto Skype][skype_ghetto] README.md file:
+[Ghetto Skype][skype_ghetto] is an open source desktop application powered by
+[Electron][electron] which acts as the wrapper for the [Web Skype][skype_web]
+beta that Microsoft has been working on. A quote from the [Ghetto
+Skype][skype_ghetto] README.md file:
 
 <!-- more -->
 
-  > Are you tired of a buggy 32 bit official Skype client? Then Ghetto Skype is for you!
+> Are you tired of a buggy 32 bit official Skype client? Then Ghetto Skype is
+> for you!
 
 Setup is easy, basically we need to download it like so:
 
@@ -17,9 +20,12 @@ Setup is easy, basically we need to download it like so:
 wget https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-skype_1.4.1_amd64.deb
 ```
 
-NOTE: You can check for the other versions of [Ghetto Skype][skype_ghetto] on it's [releases page](https://github.com/stanfieldr/ghetto-skype/releases){:target="_blank"}
+NOTE: You can check for the other versions of [Ghetto Skype][skype_ghetto] on
+it's
+[releases page](https://github.com/stanfieldr/ghetto-skype/releases){:target="\_blank"}
 
-After the download has completed, we should do a checksum to make sure it's not corrupted or anything.
+After the download has completed, we should do a checksum to make sure it's not
+corrupted or anything.
 
 ```bash
 md5sum ghetto-skype_1.4.1_amd64.deb
@@ -38,7 +44,8 @@ After that, it's as simple as this to install it:
 sudo dpkg -i ghetto-skype_1.4.1_amd64.deb
 ```
 
-Once installation is done, you should be able to launch it from your application launcher or from a terminal like so:
+Once installation is done, you should be able to launch it from your application
+launcher or from a terminal like so:
 
 ```bash
 ghetto-skype
@@ -59,14 +66,14 @@ wget https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-
 
 ## Conclusion
 
-Sometimes (Most of the time) the open source community can do a lot with very limited resources
+Sometimes (Most of the time) the open source community can do a lot with very
+limited resources
 
-If you are interested in the [Electron][electron] framework for creating desktop applications with web technology, then visit their [Github page][electron_github]
+If you are interested in the [Electron][electron] framework for creating desktop
+applications with web technology, then visit their [Github
+page][electron_github]
 
 [skype_ghetto]: https://github.com/stanfieldr/ghetto-skype
-
 [skype_web]: https://web.skype.com/
-
 [electron]: http://electron.atom.io/
-
 [electron_github]: https://github.com/electron/electron

@@ -74,7 +74,7 @@ cd ..
 # Create the `./configure` script
 ./autogen.sh
 
-# Run the `./configure` script and use the dependencies that we compiled in Step 3
+# Run the `./configure` script and use the dependencies from Step 3
 ./configure --prefix=`pwd`/depends/`uname -m`-pc-linux-gnu
 ```
 
@@ -88,19 +88,24 @@ make
 
 ## Conclusion
 
-Once you have followed this tutorial, you should have a binary in `./src/qt/navcoin-qt` that is the [NavCoin-Core][navcoin_github] `QT` wallet/client.
+Once you have followed this tutorial, you should have a binary in
+`./src/qt/navcoin-qt` that is the [NavCoin-Core][navcoin_github] `QT`
+wallet/client.
 
-You should also have a binary in `./src/navcoind` which is the [NavCoin-Core][navcoin_github] `daemon` wallet/client.
+You should also have a binary in `./src/navcoind` which is the
+[NavCoin-Core][navcoin_github] `daemon` wallet/client.
 
 ## Things to keep in mind
 
-- You should use `./depends` DIR dependencies to have closest experience to the releases from the offical tagged versions
-- You should use `./depends` DIR dependencies if you are not sure what system packages you need
-- You can use system dependencies if you want to have less compiling, you can skip `Step 3` if you have required dependencies install system wide
-- You can run `make` commands with `-j<number of cpu threads>` ( if you have an eight thread cpu, i7-4790k, you can run `make -j8` to speed up the compile time )
+- You should use `./depends` DIR dependencies to have closest experience to the
+  releases from the offical tagged versions
+- You should use `./depends` DIR dependencies if you are not sure what system
+  packages you need
+- You can use system dependencies if you want to have less compiling, you can
+  skip `Step 3` if you have required dependencies install system wide
+- You can run `make` commands with `-j<number of cpu threads>` ( if you have an
+  eight thread cpu, i7-4790k, you can run `make -j8` to speed up the compile
+  time )
 
 [navcoin_github]: https://github.com/navcoin/navcoin-core
-
-
 [git_scm]: https://git-scm.com/
-

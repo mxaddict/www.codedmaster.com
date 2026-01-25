@@ -3,19 +3,19 @@ title = "Wanna Start Staking NAV / NAVCoin?"
 date = 2018-03-27T00:00:00Z
 +++
 
-
 Wanna start staking [NAVCoin][navcoin] but don't know exactly how?
 
 <!-- more -->
 
 All you need are the following:
 
-* A linux server with atleast `1GB RAM` and `1 CPU Core`
-* A [NAVCoin Core][navcoin_github] wallet
-* SOME [NAVCoin][binance] ( Buy some at binance to give me a kick back :D )
-* A tutorial to teach you ( This is that tutorial, LMFAO )
+- A linux server with atleast `1GB RAM` and `1 CPU Core`
+- A [NAVCoin Core][navcoin_github] wallet
+- SOME [NAVCoin][binance] ( Buy some at binance to give me a kick back :D )
+- A tutorial to teach you ( This is that tutorial, LMFAO )
 
-NOTE: For the sake of simplicity, my example will be using an `Ubuntu 16.04 Linux Box`
+NOTE: For the sake of simplicity, my example will be using an
+`Ubuntu 16.04 Linux Box`
 
 ## Step 1
 
@@ -27,7 +27,7 @@ ssh root@server
 
 ## Step 2
 
-Get the latest NAVCoin Core wallet download link from [HERE][navcoin_releases]
+Get the latest NAVCoin Core wallet download link from [navcoin_releases]
 
 Then download via `wget` on the server
 
@@ -82,7 +82,7 @@ crontab -e
 
 Reboot the server
 
-```
+```shell
 # ROOT
 reboot
 
@@ -193,15 +193,16 @@ Which should look like this
 
 ## Things to keep in mind
 
-* Your server should be **`SECURE AND NOT ACCESSIBLE BY ANYONE YOU DON'T TRUST`** with your coins
-* Your wallet keys  **`MUST BE BACKED UP`** in case your server gets corrupted
-* When you first start reboot your server after `Step 6`, it can take a while for the `navcoind` wallet to sync all the block from the network (A few hours on a Gigabit Network)
-* It takes `2 hours` for any coins sent to your wallet to mature and start staking
+- Your server should be
+  **`SECURE AND NOT ACCESSIBLE BY ANYONE YOU DON'T TRUST`** with your coins
+- Your wallet keys **`MUST BE BACKED UP`** in case your server gets corrupted
+- When you first start reboot your server after `Step 6`, it can take a while
+  for the `navcoind` wallet to sync all the block from the network (A few hours
+  on a Gigabit Network)
+- It takes `2 hours` for any coins sent to your wallet to mature and start
+  staking
 
 [navcoin]: https://navcoin.org/
-
 [navcoin_github]: https://github.com/NAVCoin/navcoin-core
-
 [navcoin_releases]: https://github.com/NAVCoin/navcoin-core/releases
-
 [binance]: https://www.binance.com/?ref=12367615
