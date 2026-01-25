@@ -1,7 +1,6 @@
 +++
-title = "About mxaddict: Tech, Typewriters, and Two Wheels"
+title = "About: Tech, Typewriters, and Two Wheels"
 description = "Meet mxaddict: a Staff Engineer, Neovim enthusiast, Arch Linux user, and motorcycle rider sharing insights on web development, Linux, privacy, and gaming. Dive into practical CLI-focused tutorials and personal reflections from a family man."
-date = 2026-01-25
 +++
 
 Hello there, I'm mxaddict. I'm 34, a Staff Engineer (formerly Senior Software
