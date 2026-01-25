@@ -11,16 +11,10 @@ in the power of the command line and the open road.
 Here, you'll find a curated collection of articles, tutorials, and deep dives
 spanning my passions:
 
-- **Linux & Open Source:** Explore the intricacies of Arch Linux, master your
-  Hyprland desktop, and discover CLI tools that streamline your workflow.
-- **Web Development:** From static site generators like Jekyll to JavaScript
-  nuances, get practical advice for building and maintaining robust web
-  projects.
-- **Privacy & Security:** Learn about tools like Tor, understand best practices,
-  and navigate the digital landscape with enhanced anonymity.
-- **And More:** Expect candid thoughts on software engineering, cryptocurrency,
-  and perhaps even a nod to my love for FPS gaming, all delivered with a
-  no-nonsense, practical approach.
+*   **My Workflow & Dotfiles:** Take a deep dive into my [dotfiles setup](/blog/a-deep-dive-into-my-dotfiles), from my Arch Linux and Hyprland configuration to the custom CLI tools like `quoty` that I build to refine my development environment.
+*   **Web Development & Migration:** Follow my journey of migrating this blog from Jekyll to Zola, and learn how I use tools like the Gemini CLI to automate the process.
+*   **Tech Reflections:** Read my thoughts on the rise and fall of services like [Coinhive](/blog/a-look-back-at-coinhive) and [HashFlare](/blog/a-look-back-at-hashflare), and why some "too good to be true" ideas in tech don't always last.
+*   **Linux & Open Source:** Explore practical tutorials on everything from setting up TOR to getting the most out of your hardware on Linux.
 
 This isn't just a blog; it's a window into the daily life and technical journey
 of someone who types at 100 WPM, debates Vim vs. Emacs (just kidding, it's
