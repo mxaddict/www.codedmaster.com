@@ -1,6 +1,8 @@
 +++
 title = "Setup Ubuntu 16.04 in Virtualbox with Guest Additions"
 date = 2016-10-06T00:00:00Z
+description = "A video tutorial on how to install Ubuntu 16.04 in VirtualBox and set up Guest Additions, complete with ISO download links for a smooth virtual machine experience."
+tags = ["Ubuntu", "VirtualBox", "Guest Additions", "Linux", "Installation", "Tutorial"]
 +++
 
 To install [Ubuntu 16.04][ubuntu] in [Virtualbox][vbox] all you need to do is

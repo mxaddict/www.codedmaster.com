@@ -1,6 +1,8 @@
 +++
 title = "Wanna Start Staking NAV / NAVCoin?"
 date = 2018-03-27T00:00:00Z
+description = "Learn how to stake NAVCoin with this tutorial, covering server setup, NAVCoin Core wallet installation, and cron job configuration for continuous staking on a Linux box."
+tags = ["NAVCoin", "Staking", "Cryptocurrency", "Linux", "Wallet", "Tutorial"]
 +++
 
 Wanna start staking [NAVCoin][navcoin] but don't know exactly how?

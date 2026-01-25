@@ -1,8 +1,8 @@
 +++
 title = "Need to compile Master Branch of NavCoin-Core?"
 date = 2019-06-24T00:00:00Z
-description = "A tutorial on how to compile the master branch of NavCoin-Core from source on Ubuntu 18.04 Linux."
-tags = ["NavCoin", "Cryptocurrency", "Linux", "Ubuntu", "Compile", "Development"]
+description = "A comprehensive guide on compiling the master branch of NavCoin-Core, including steps for installing dependencies, cloning the repository, and building the wallet and daemon clients on an Ubuntu 18.04 Linux box."
+tags = ["NavCoin", "Cryptocurrency", "Linux", "Ubuntu", "Compile", "Development", "NavCoin-Core"]
 +++
 
 Need to compile [NavCoin-Core][navcoin_github] but don't know exactly how?

@@ -1,6 +1,8 @@
 +++
 title = "Wanna start Crypto Currency mining? But don't have the money to invest in hardware miner?"
 date = 2017-12-06T00:00:00Z
+description = "Explore cloud-based cryptocurrency mining with HashFlare. This guide is for those interested in crypto mining without investing in expensive hardware, offering insights from a year of successful mining."
+tags = ["Cryptocurrency", "Mining", "Cloud Mining", "HashFlare", "Hardware"]
 +++
 
 Wanna start Crypto Currency mining? But don't have the money to invest in an

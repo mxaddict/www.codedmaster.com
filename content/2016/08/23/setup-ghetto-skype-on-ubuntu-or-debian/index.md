@@ -1,6 +1,8 @@
 +++
 title = "Setup Ghetto Skype on Ubuntu/Debian?"
 date = 2016-08-23T00:00:00Z
+description = "Set up Ghetto Skype, an open-source Electron wrapper for Web Skype beta, on Ubuntu or Debian. This tutorial covers downloading, checksum verification, and installation steps for a lightweight Skype client."
+tags = ["Skype", "Ghetto Skype", "Electron", "Ubuntu", "Debian", "Linux", "Installation", "Tutorial"]
 +++
 
 [Ghetto Skype][skype_ghetto] is an open source desktop application powered by
