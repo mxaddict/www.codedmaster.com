@@ -120,4 +120,8 @@ You should also have a binary in `./src/navcoind` which is the
 
 ---
 
-**_Editor's Note (2026):_** This post is from 2019 and describes the process for compiling the master branch of NavCoin-Core at that time. Build processes and dependencies for cryptocurrency software change frequently. This information is preserved for historical context and is likely outdated. Please refer to the official NavCoin documentation for current instructions.
+**_Editor's Note (2026):_** This post is from 2019 and describes the process for
+compiling the master branch of NavCoin-Core at that time. Build processes and
+dependencies for cryptocurrency software change frequently. This information is
+preserved for historical context and is likely outdated. Please refer to the
+official NavCoin documentation for current instructions.

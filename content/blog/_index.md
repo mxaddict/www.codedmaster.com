@@ -4,4 +4,4 @@ paginate_by = 15
 sort_by = "date"
 +++
 
-[🔖 List](/tags)
+[🔖 Article Tags](/tags)

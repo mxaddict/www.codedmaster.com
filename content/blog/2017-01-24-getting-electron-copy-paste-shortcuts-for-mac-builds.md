@@ -69,4 +69,8 @@ menu that looks like the following image
 
 ---
 
-**_Editor's Note (2026):_** This post is from 2017 and refers to an older version of the Electron framework. APIs and best practices for Electron have evolved. While the core concepts might still be relevant, the code examples are likely outdated. Please refer to the official Electron documentation for current instructions.
+**_Editor's Note (2026):_** This post is from 2017 and refers to an older
+version of the Electron framework. APIs and best practices for Electron have
+evolved. While the core concepts might still be relevant, the code examples are
+likely outdated. Please refer to the official Electron documentation for current
+instructions.

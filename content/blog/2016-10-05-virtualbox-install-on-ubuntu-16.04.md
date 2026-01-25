@@ -37,4 +37,7 @@ I recommend watching in 1080p60 and fullscreen! `^_^`
 
 ---
 
-**_Editor's Note (2026):_** This post refers to Ubuntu 16.04 (Xenial Xerus), which reached its standard End-of-Life in April 2021. The information is preserved for historical context but is not recommended for use on a modern system.
+**_Editor's Note (2026):_** This post refers to Ubuntu 16.04 (Xenial Xerus),
+which reached its standard End-of-Life in April 2021. The information is
+preserved for historical context but is not recommended for use on a modern
+system.

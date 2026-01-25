@@ -106,4 +106,6 @@ page][electron_github]
 
 ---
 
-**_Editor's Note (2026):_** Ghetto Skype, the application mentioned in this post, is no longer actively maintained. This article is preserved for historical context.
+**_Editor's Note (2026):_** Ghetto Skype, the application mentioned in this
+post, is no longer actively maintained. This article is preserved for historical
+context.
