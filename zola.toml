@@ -16,15 +16,23 @@ external_links_target_blank = true
 theme = "catppuccin-mocha"
 
 [extra]
+
 author_name = "mxaddict"
+
 author_url = "https://www.codedmaster.com"
 
+
+
 [extra.social]
+
 github = "mxaddict"
+
 gitlab = "mxaddict"
 
-[feed]
-generate_feed = true
-feed_filename = "atom.xml"
-# You can adjust the limit, e.g., 10, 20, or null for all.
+
+
+generate_feeds = true
+
 feed_limit = 10
+
+feed_filenames = ["atom.xml"]
