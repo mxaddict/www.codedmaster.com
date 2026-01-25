@@ -12,13 +12,14 @@
    {# <email>{{ config.extra.author_email }}</email> #}
  </author>
 
- {% for page in pages | sort(by="date", order="desc") %}
+{% set section = get_section(path="_index.md") %}
+ {% for page in section.pages %}
  <entry>
    <title>{{ page.title }}</title>
    <link href="{{ page.permalink }}"/>
    <updated>{{ page.date | date(format="%Y-%m-%dT%H:%M:%SZ") }}</updated>
    <id>{{ page.permalink }}</id>
-   <content type="html">{{ page.content | xml_escape }}</content>
+   <content type="html">{{ page.content }}</content>
  </entry>
  {% endfor %}
 
