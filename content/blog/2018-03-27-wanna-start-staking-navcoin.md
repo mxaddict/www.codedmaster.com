@@ -1,8 +1,14 @@
 +++
 title = "Wanna Start Staking NAV / NAVCoin?"
-date = 2018-03-27T00:00:00Z
+date = 2018-03-27
+draft = false
 description = "Learn how to stake NAVCoin with this tutorial, covering server setup, NAVCoin Core wallet installation, and cron job configuration for continuous staking on a Linux box."
+[taxonomies]
 tags = ["NAVCoin", "Staking", "Cryptocurrency", "Linux", "Wallet", "Tutorial"]
+[extra]
+toc = true
+display_published = true
+author = "mxaddict"
 +++
 
 Wanna start staking [NAVCoin][navcoin] but don't know exactly how?

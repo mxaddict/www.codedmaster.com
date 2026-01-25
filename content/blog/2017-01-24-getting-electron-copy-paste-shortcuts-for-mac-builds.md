@@ -1,8 +1,14 @@
 +++
 title = "Getting Electron Copy/Paste shortcuts working on MAC builds"
-date = 2017-01-24T00:00:00Z
+date = 2017-01-24
+draft = false
 description = "Fix missing copy/paste shortcuts in Electron Mac builds. This tutorial shows how to implement them by setting up the application menu with Electron's Menu module."
+[taxonomies]
 tags = ["Electron", "Mac", "macOS", "Shortcuts", "Copy/Paste", "Development", "JavaScript"]
+[extra]
+toc = true
+display_published = true
+author = "mxaddict"
 +++
 
 If you are new to [Electron][electron] and have noticed that when running the
