@@ -12,16 +12,16 @@ author = "mxaddict"
 +++
 
 Wanna start Crypto Currency mining? But don't have the money to invest in an
-actual hardware solution? Then why not give [HashFlare's][hashflare] Cloud based
+actual hardware solution? Then why not give HashFlare's Cloud based
 mining a go!
 
 <!-- more -->
 
-All you have to do is sign up at [HashFlare][hashflare].
+All you have to do is sign up at HashFlare.
 
 Now, I have seen a lot of cloud based mining offers over the past 2 years that I
 have been testing out cloud mining, and most that I saw/found were SCAMS, the
-only reason I'm even referring [HashFlare][hashflare] is because I have been
+only reason I'm even referring HashFlare is because I have been
 mining with them for over a year now and have made back all my invested money
 and then some.
 
@@ -30,4 +30,6 @@ and then some.
 This is a pretty neat solution for getting started with Crypto Currency mining
 if you don't have the money to get REAL hardware.
 
-[hashflare]: https://hashflare.io/r/F2E1D038-BLOG
+---
+
+**_Editor's Note (2026):_** HashFlare, the cloud mining service mentioned in this post, was revealed to be a massive Ponzi scheme and is now defunct. This article is preserved for historical context. My original optimism was, unfortunately, misplaced. You can read my updated thoughts on the matter in my follow-up post, "[A Look Back at HashFlare: A Cloud Mining Cautionary Tale](/blog/a-look-back-at-hashflare)".
