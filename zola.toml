@@ -19,6 +19,12 @@ theme = "catppuccin-mocha"
 author_name = "mxaddict"
 author_url = "https://www.codedmaster.com"
 
+header_nav = [
+  { url = "/", name_en = "/home/" },
+  { url = "/about", name_en = "/about/" },
+  { url = "/blog", name_en = "/blog/" }
+]
+
 [extra.social]
 github = "mxaddict"
 gitlab = "mxaddict"
