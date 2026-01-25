@@ -1,6 +1,6 @@
 +++
 title = "All blog posts"
-paginate_by = 15
+paginate_by = 20
 sort_by = "date"
 +++
 
