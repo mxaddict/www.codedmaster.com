@@ -21,7 +21,5 @@ BTW I created a video version of this tutorial for a more visual feel
 I recommend watching in 1080p60 and fullscreen! `^_^`
 
 [ubuntu]: http://www.ubuntu.com/
-{:target="_blank"}
 
 [vbox]: https://www.virtualbox.org/
-{:target="_blank"}

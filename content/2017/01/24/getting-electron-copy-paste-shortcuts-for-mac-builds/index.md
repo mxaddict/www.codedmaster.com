@@ -49,7 +49,5 @@ Once you have added this code to your application code, you should see a new men
 ![Screenshot](/public/img/electron-shortcuts.png)
 
 [electron]: http://electron.atom.io/
-{:target="_blank"}
 
 [electron_menu]: https://github.com/electron/electron/blob/master/docs/api/menu.md
-{:target="_blank"}

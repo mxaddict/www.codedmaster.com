@@ -197,13 +197,9 @@ Which should look like this
 * It takes `2 hours` for any coins sent to your wallet to mature and start staking
 
 [navcoin]: https://navcoin.org/
-{:target="_blank"}
 
 [navcoin_github]: https://github.com/NAVCoin/navcoin-core
-{:target="_blank"}
 
 [navcoin_releases]: https://github.com/NAVCoin/navcoin-core/releases
-{:target="_blank"}
 
 [binance]: https://www.binance.com/?ref=12367615
-{:target="_blank"}

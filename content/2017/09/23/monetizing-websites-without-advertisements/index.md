@@ -55,10 +55,7 @@ If you need more info on the options for the JS miner, then go to the [CoinHive 
 This is a pretty neat solution for getting RID of annoying adverts and keeping the same or even better income for your content or even service related website.
 
 [coinhive]: https://cnhv.co/hro
-{:target="_blank"}
 
 [coinhive_keys]: https://cnhv.co/hrn
-{:target="_blank"}
 
 [coinhive_docs]: https://cnhv.co/hru
-{:target="_blank"}

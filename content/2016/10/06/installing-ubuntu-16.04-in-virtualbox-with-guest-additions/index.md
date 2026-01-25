@@ -11,10 +11,7 @@ To install [Ubuntu 16.04][ubuntu] in [Virtualbox][vbox] all you need to do is do
 I recommend watching in 1080p60 and fullscreen! `^_^`
 
 [ubuntu]: http://www.ubuntu.com/
-{:target="_blank"}
 
 [ubuntudl]: http://www.ubuntu.com/download
-{:target="_blank"}
 
 [vbox]: https://www.virtualbox.org/
-{:target="_blank"}

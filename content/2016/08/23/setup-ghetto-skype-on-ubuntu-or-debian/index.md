@@ -62,13 +62,9 @@ Sometimes (Most of the time) the open source community can do a lot with very li
 If you are interested in the [Electron][electron] framework for creating desktop applications with web technology, then visit their [Github page][electron_github]
 
 [skype_ghetto]: https://github.com/stanfieldr/ghetto-skype
-{:target="_blank"}
 
 [skype_web]: https://web.skype.com/
-{:target="_blank"}
 
 [electron]: http://electron.atom.io/
-{:target="_blank"}
 
 [electron_github]: https://github.com/electron/electron
-{:target="_blank"}

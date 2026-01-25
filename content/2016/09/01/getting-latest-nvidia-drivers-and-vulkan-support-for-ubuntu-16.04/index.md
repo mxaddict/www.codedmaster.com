@@ -69,19 +69,13 @@ Then run [Dota 2][dota2], if it works then you have [Vulkan][vulkan] setup corre
 As of the writing of this article, this method is the easiest way to get the latest [NVIDIA][nvidia] driver with [Vulkan][vulkan] support, so If you are reading this in the future, which I damn sure hope so, there may already be Vulkan support on the default [Ubuntu][ubuntu] package repos.
 
 [ubuntu_ppa_graphics]: https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
-{:target="_blank"}
 
 [ubuntu]: http://www.ubuntu.com/
-{:target="_blank"}
 
 [nvidia]: http://www.nvidia.com/
-{:target="_blank"}
 
 [steam]: http://store.steampowered.com/
-{:target="_blank"}
 
 [dota2]: http://blog.dota2.com/
-{:target="_blank"}
 
 [vulkan]: https://www.khronos.org/vulkan/
-{:target="_blank"}

@@ -15,4 +15,3 @@ It's an immensely useful tool and one I encourage you to use.
 Find out more by visiting the project on their [GitHub](https://github.com/jekyll/jekyll){:target="_blank"} page.
 
 [jekyll]: http://jekyllrb.com
-{:target="_blank"}

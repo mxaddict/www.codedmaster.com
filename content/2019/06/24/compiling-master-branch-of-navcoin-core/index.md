@@ -3,15 +3,17 @@ title = "Need to compile Master Branch of NavCoin-Core?"
 date = 2019-06-24T00:00:00Z
 +++
 
-<!-- more -->
 Need to compile [NavCoin-Core][navcoin_github] but don't know exactly how?
+
+<!-- more -->
 
 All you need are the following:
 
-* A linux box
-* A tutorial to teach you ( This is that tutorial, LMFAO )
+- A Linux box
+- A tutorial to teach you ( This is that tutorial, LMFAO )
 
-NOTE: For the sake of simplicity, my example will be using an `Ubuntu 18.04 Linux Box`
+NOTE: For the sake of simplicity, my example will be using an
+`Ubuntu 18.04 Linux Box`
 
 ## Step 1
 
@@ -21,7 +23,8 @@ Install things we need, mainly [Git][git_scm] and `build-essential`.
 sudo apt install git build-essential
 ```
 
-We need [Git][git_scm] to clone the source and `build-essential` alias package on `Ubuntu` to install our build toolchain.
+We need [Git][git_scm] to clone the source and `build-essential` alias package
+on `Ubuntu` to install our build toolchain.
 
 ## Step 2
 
@@ -91,13 +94,13 @@ You should also have a binary in `./src/navcoind` which is the [NavCoin-Core][na
 
 ## Things to keep in mind
 
-* You should use `./depends` DIR dependencies to have closest experience to the releases from the offical tagged versions
-* You should use `./depends` DIR dependencies if you are not sure what system packages you need
-* You can use system dependencies if you want to have less compiling, you can skip `Step 3` if you have required dependencies install system wide
-* You can run `make` commands with `-j<number of cpu threads>` ( if you have an eight thread cpu, i7-4790k, you can run `make -j8` to speed up the compile time )
+- You should use `./depends` DIR dependencies to have closest experience to the releases from the offical tagged versions
+- You should use `./depends` DIR dependencies if you are not sure what system packages you need
+- You can use system dependencies if you want to have less compiling, you can skip `Step 3` if you have required dependencies install system wide
+- You can run `make` commands with `-j<number of cpu threads>` ( if you have an eight thread cpu, i7-4790k, you can run `make -j8` to speed up the compile time )
 
 [navcoin_github]: https://github.com/navcoin/navcoin-core
-{:target="_blank"}
+
 
 [git_scm]: https://git-scm.com/
-{:target="_blank"}
+
