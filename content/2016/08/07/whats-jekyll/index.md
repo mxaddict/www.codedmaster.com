@@ -5,7 +5,7 @@ date = 2016-08-07T00:00:00Z
 
 [Jekyll][jekyll] is a static site generator, an open source tool for creating
 simple yet powerful websites of all shapes and sizes. From
-[the project's readme](https://github.com/jekyll/jekyll/blob/master/README.markdown){:target="\_blank"}:
+[the project's readme](https://github.com/jekyll/jekyll/blob/master/README.markdown):
 
 <!-- more -->
 
@@ -21,6 +21,6 @@ This very blog you are reading this very article on is powered by
 It's an immensely useful tool and one I encourage you to use.
 
 Find out more by visiting the project on their
-[GitHub](https://github.com/jekyll/jekyll){:target="\_blank"} page.
+[GitHub](https://github.com/jekyll/jekyll) page.
 
 [jekyll]: http://jekyllrb.com

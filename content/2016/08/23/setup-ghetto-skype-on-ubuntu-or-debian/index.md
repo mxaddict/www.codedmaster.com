@@ -21,8 +21,7 @@ wget https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-
 ```
 
 NOTE: You can check for the other versions of [Ghetto Skype][skype_ghetto] on
-it's
-[releases page](https://github.com/stanfieldr/ghetto-skype/releases){:target="\_blank"}
+it's [releases page](https://github.com/stanfieldr/ghetto-skype/releases)
 
 After the download has completed, we should do a checksum to make sure it's not
 corrupted or anything.

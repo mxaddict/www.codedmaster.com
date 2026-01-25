@@ -46,8 +46,7 @@ wget https://github.com/stanfieldr/ghetto-skype/archive/v1.5.0.zip
 ```
 
 NOTE: You can check what the latest versions of [Ghetto Skype][skype_ghetto] are
-on it's
-[releases page](https://github.com/stanfieldr/ghetto-skype/releases){:target="\_blank"}
+on it's [releases page](https://github.com/stanfieldr/ghetto-skype/releases)
 
 Unzip the new archive, delete the zip, and move into the unziped folder
 
