@@ -13,8 +13,6 @@ author = "mxaddict"
 
 Wanna start staking [NAVCoin][navcoin] but don't know exactly how?
 
-<!-- more -->
-
 All you need are the following:
 
 - A linux server with atleast `1GB RAM` and `1 CPU Core`

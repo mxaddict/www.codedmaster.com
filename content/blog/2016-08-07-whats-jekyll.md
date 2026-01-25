@@ -15,8 +15,6 @@ author = "mxaddict"
 simple yet powerful websites of all shapes and sizes. From
 [the project's readme](https://github.com/jekyll/jekyll/blob/master/README.markdown):
 
-<!-- more -->
-
 > Jekyll is a simple, blog aware, static site generator. It takes a template
 > directory [...] and spits out a complete, static website suitable for serving
 > with Apache or your favorite web server. This is also the engine behind GitHub

@@ -16,8 +16,6 @@ the best, sometimes they are good, but old. If you want to have access to the
 new BETA drivers plus Vulkan support on [Ubuntu][ubuntu] 16.04 this tutorial is
 for you.
 
-<!-- more -->
-
 You will need to add the PPA Repo to get access to these packages:
 
 ```bash

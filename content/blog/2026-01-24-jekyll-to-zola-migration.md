@@ -41,16 +41,16 @@ Zola seems to offer more directly:
 
 Migrating from Jekyll to Zola involved a few key steps:
 
-1.  **Content Conversion:** Jekyll uses Liquid templating and typically Markdown
-    files with TOML front matter. Zola uses Tera templating and TOML front
-    matter. The transition for most Markdown files was straightforward. The main
-    effort was ensuring front matter was correctly translated, especially for
-    tags and dates.
-2.  **Theme Adaptation:** I found a theme that fit my aesthetic – `anemone`.
-    Adapting it involved understanding its template structure and making minor
-    tweaks to fit my content organization.
-3.  **Configuration:** Translating `_config.yml` settings to `zola.toml` was
-    relatively simple, with Zola's configuration structure being quite clear.
+1. **Content Conversion:** Jekyll uses Liquid templating and typically Markdown
+   files with TOML front matter. Zola uses Tera templating and TOML front
+   matter. The transition for most Markdown files was straightforward. The main
+   effort was ensuring front matter was correctly translated, especially for
+   tags and dates.
+2. **Theme Adaptation:** I found a theme that fit my aesthetic – `anemone`.
+   Adapting it involved understanding its template structure and making minor
+   tweaks to fit my content organization.
+3. **Configuration:** Translating `_config.yml` settings to `zola.toml` was
+   relatively simple, with Zola's configuration structure being quite clear.
 
 The biggest hurdle was ensuring my content structure matched Zola's
 expectations, especially for the blog section. As we've seen, getting Zola to

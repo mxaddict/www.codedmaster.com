@@ -16,8 +16,6 @@ author = "mxaddict"
 beta that Microsoft has been working on. A quote from the [Ghetto
 Skype][skype_ghetto] README.md file:
 
-<!-- more -->
-
 > Are you tired of a buggy 32 bit official Skype client? Then Ghetto Skype is
 > for you!
 

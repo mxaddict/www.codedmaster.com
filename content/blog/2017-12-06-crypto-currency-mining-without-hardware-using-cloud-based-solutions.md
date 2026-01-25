@@ -14,8 +14,6 @@ author = "mxaddict"
 Wanna start Crypto Currency mining? But don't have the money to invest in an
 actual hardware solution? Then why not give HashFlare's Cloud based mining a go!
 
-<!-- more -->
-
 All you have to do is sign up at HashFlare.
 
 Now, I have seen a lot of cloud based mining offers over the past 2 years that I

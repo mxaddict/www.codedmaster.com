@@ -16,8 +16,6 @@ web with better anonymity, it is basically a free and open proxy type networking
 tool that will allow you to surf the web from other network nodes. From their
 [site][tor] :
 
-<!-- more -->
-
 > Tor is free software and an open network that helps you defend against traffic
 > analysis, a form of network surveillance that threatens personal freedom and
 > privacy, confidential business activities and relationships, and state

@@ -13,8 +13,6 @@ author = "mxaddict"
 
 Need to compile [NavCoin-Core][navcoin_github] but don't know exactly how?
 
-<!-- more -->
-
 All you need are the following:
 
 - A Linux box

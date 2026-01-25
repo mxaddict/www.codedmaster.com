@@ -12,8 +12,8 @@ author = "mxaddict"
 +++
 
 Back in 2017, I wrote an article about a cloud mining service called HashFlare.
-You can read my original post
-[here](/blog/crypto-currency-mining-without-hardware-using-cloud-based-solutions).
+You can read my
+[original post here](/blog/crypto-currency-mining-without-hardware-using-cloud-based-solutions).
 At the time, I was cautiously optimistic. In a space riddled with scams,
 HashFlare seemed like a legitimate operation. For several months, I used the
 service, saw decent profits, and was even able to cash out those profits. It

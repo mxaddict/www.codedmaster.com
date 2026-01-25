@@ -15,8 +15,6 @@ Have you ever wanted to make a personal website or even a business website that
 would not require the end user to be annoyed by adverts? If you have, then today
 is your day!
 
-<!-- more -->
-
 All you have to do is use a JS Miner from CoinHive.
 
 And adding it to a new or even existing website/webpage is as simple as the

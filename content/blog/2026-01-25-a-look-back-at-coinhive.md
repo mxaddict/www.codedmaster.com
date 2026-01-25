@@ -13,11 +13,11 @@ author = "mxaddict"
 
 A few years ago, I wrote an article about a service called Coinhive, framing it
 as a revolutionary way to monetize websites without resorting to annoying
-advertisements. You can read my original, optimistic take on it
-[here](/blog/monetizing-websites-without-advertisements). At the time, the idea
-seemed brilliant: use a small fraction of a visitor's CPU power to mine
-cryptocurrency, creating a passive income stream for creators while maintaining
-a clean, ad-free user experience.
+advertisements. You can read my original,
+[optimistic take on it here](/blog/monetizing-websites-without-advertisements).
+At the time, the idea seemed brilliant: use a small fraction of a visitor's CPU
+power to mine cryptocurrency, creating a passive income stream for creators
+while maintaining a clean, ad-free user experience.
 
 I genuinely believed it would be used by legitimate individuals looking for a
 fair alternative to the often-intrusive ad industry. In concept, it was a
