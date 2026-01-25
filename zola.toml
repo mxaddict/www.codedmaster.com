@@ -20,7 +20,7 @@ theme = "catppuccin-mocha"
 [extra]
 author_name = "mxaddict"
 author_url = "https://www.codedmaster.com"
-list_pages = true
+list_pages = false
 
 header_nav = [
   { url = "/", name_en = "/home/" },
