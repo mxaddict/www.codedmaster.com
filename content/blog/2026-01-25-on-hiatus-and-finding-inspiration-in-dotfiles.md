@@ -43,10 +43,10 @@ my workflow, focusing on the tools I use every single day. I poured hundreds of
 hours into configuring my `hyprland` desktop on Arch Linux, refining my `neovim`
 setup with Lua, and ensuring every tool I use—from `git` to my MySQL client—is
 perfectly tailored to my CLI-centric approach. This also extended to creating
-bespoke tools, like my [`quoty` CLI](@/blog/2026-01-25-introducing-quoty.md), designed to
-inject a bit of fun into mundane tasks like Git commits. This process of
-building and refining my own tools, documented in my dotfiles, was where all my
-creative energy was going.
+bespoke tools, like my [`quoty` CLI](@/blog/2026-01-25-introducing-quoty.md),
+designed to inject a bit of fun into mundane tasks like Git commits. This
+process of building and refining my own tools, documented in my dotfiles, was
+where all my creative energy was going.
 
 ### 3. A Simple Lack of Inspiration
 
