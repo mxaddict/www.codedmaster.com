@@ -3,81 +3,64 @@
 
 set -e
 
-echo "Initializing and updating Git submodules..."
-git submodule update --init --recursive
+echo "Updating Git submodules..."
+git submodule update --init --recursive --quiet
 
-echo "Starting Zola site deployment..."
-
-# Check if Zola is installed
+echo "Checking Zola installation..."
 if ! command -v zola &>/dev/null; then
-  echo "Zola is not installed. Please install Zola to proceed."
-  echo "See: https://www.getzola.org/documentation/getting-started/installation/"
+  echo "Error: Zola is not installed. Please install Zola to proceed." >&2
+  echo "See: https://www.getzola.org/documentation/getting-started/installation/" >&2
   exit 1
 fi
 
-# Build the Zola site
 echo "Building Zola site..."
-zola build
+# Redirect stdout to /dev/null to suppress Zola's regular build output,
+# but allow stderr (errors) to pass through.
+zola build >/dev/null
 
-# Navigate to the public directory
-pushd public
+pushd public &>/dev/null
 
-# Initialize a new git repository in the public directory if it doesn't exist
-# This is crucial for maintaining a separate gh-pages branch history.
+echo "Initializing Git repository in public/ (if not already present)..."
 if [ ! -d ".git" ]; then
-  echo "Initializing git repository in public/..."
-  git init
+  git init --quiet
 fi
 
-# --- Git Remote Origin Check and Setup ---
-echo "Checking Git remote 'origin'..."
+echo "Verifying Git remote 'origin' configuration..."
 REQUIRED_ORIGIN="git@github.com:mxaddict/www.codedmaster.com.git"
 CURRENT_ORIGIN=$(git remote get-url origin 2>/dev/null || echo "")
 
 if [ "$CURRENT_ORIGIN" != "$REQUIRED_ORIGIN" ]; then
-  echo "Remote 'origin' is not set to the required URL: $REQUIRED_ORIGIN"
+  echo "Configuring Git remote 'origin'..."
   if git remote get-url origin &>/dev/null; then
-    echo "Setting 'origin' URL to $REQUIRED_ORIGIN..."
-    git remote set-url origin "$REQUIRED_ORIGIN"
+    git remote set-url origin "$REQUIRED_ORIGIN" &>/dev/null
   else
-    echo "Adding 'origin' remote with URL $REQUIRED_ORIGIN..."
-    git remote add origin "$REQUIRED_ORIGIN"
+    git remote add origin "$REQUIRED_ORIGIN" &>/dev/null
   fi
-  echo "Git remote 'origin' updated."
 else
-  echo "Git remote 'origin' is already set correctly."
+  echo "Git remote 'origin' is correctly configured."
 fi
-# --- End Git Remote Origin Check and Setup ---
 
-# Create a .nojekyll file to prevent Jekyll processing on GitHub Pages
-echo "Creating .nojekyll file..."
+echo "Creating .nojekyll file to prevent Jekyll processing..."
 touch .nojekyll
 
-# Copy CNAME file if it exists in the root
 if [ -f "../CNAME" ]; then
   echo "Copying CNAME file..."
-  cp ../CNAME .
+  cp ../CNAME . &>/dev/null
 fi
 
-# Add all files to the git repository
-echo "Adding files to git..."
+echo "Staging changes for commit..."
 git add -A
 
-# Commit the changes
 echo "Committing changes..."
-# Check if there are any changes to commit
-if git diff --cached --exit-code; then
-  echo "No changes to commit."
+if git diff --cached --exit-code --quiet; then
+  echo "No new changes to commit."
 else
-  git commit -m "Deploy to GitHub Pages"
+  git commit -m "Deploy to GitHub Pages" --quiet
 fi
 
-# Push to the gh-pages branch
-# -f is used because gh-pages is often a generated branch and history doesn't need to be preserved strictly.
 echo "Pushing to gh-pages branch..."
-git push -f origin HEAD:gh-pages
+git push -f origin HEAD:gh-pages --quiet
 
-echo "Deployment to GitHub Pages complete!"
+echo "Deployment complete."
 
-# Navigate back to the original directory
-popd
+popd &>/dev/null
