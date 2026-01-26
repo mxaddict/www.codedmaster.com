@@ -16,7 +16,7 @@ fi
 echo "Building Zola site..."
 # Redirect stdout to /dev/null to suppress Zola's regular build output,
 # but allow stderr (errors) to pass through.
-zola build >/dev/null
+zola build &>/dev/null
 
 pushd public &>/dev/null
 
