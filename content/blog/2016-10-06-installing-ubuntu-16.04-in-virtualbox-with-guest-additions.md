@@ -1,13 +1,10 @@
 +++
 title = "Setup Ubuntu 16.04 in Virtualbox with Guest Additions"
 date = 2016-10-06
-draft = false
 description = "A video tutorial on how to install Ubuntu 16.04 in VirtualBox and set up Guest Additions, complete with ISO download links for a smooth virtual machine experience."
 [taxonomies]
 tags = ["ubuntu", "virtualbox", "guest additions", "linux", "installation", "tutorial"]
 [extra]
-toc = true
-display_published = true
 author = "mxaddict"
 +++
 

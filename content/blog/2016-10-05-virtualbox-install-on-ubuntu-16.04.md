@@ -1,13 +1,10 @@
 +++
 title = "Setup Virtualbox on Ubuntu 16.04?"
 date = 2016-10-05
-draft = false
 description = "Learn how to easily set up VirtualBox on Ubuntu 16.04 with a simple terminal command. This tutorial also includes a video guide for a visual installation experience."
 [taxonomies]
 tags = ["virtualbox", "ubuntu", "linux", "installation", "virtual machine", "tutorial"]
 [extra]
-toc = true
-display_published = true
 author = "mxaddict"
 +++
 

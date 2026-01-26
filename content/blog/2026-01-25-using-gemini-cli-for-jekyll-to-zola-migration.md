@@ -1,13 +1,10 @@
 +++
 title = "Streamlining My Jekyll to Zola Migration with Gemini CLI"
 date = 2026-01-25
-draft = false
 description = "Discover how I leveraged the Gemini CLI to automate and standardize the front matter migration from Jekyll to Zola, ensuring consistency and saving time."
 [taxonomies]
 tags = ["gemini cli", "zola", "jekyll", "migration", "automation", "cli", "ai", "llm", "workflow"]
 [extra]
-toc = true
-display_published = true
 author = "mxaddict"
 +++
 

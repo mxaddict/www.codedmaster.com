@@ -1,9 +1,10 @@
 +++
 title = "My Staking Journey: From NavCoin's Stable Profits to Navio's Private Future"
 date = 2026-01-26
-
 [taxonomies]
 tags = ["navcoin", "navio", "staking", "cryptocurrency", "privacy", "retrospective"]
+[extra]
+author = "mxaddict"
 +++
 
 Back in 2018 and 2019, I wrote a couple of posts about getting started with

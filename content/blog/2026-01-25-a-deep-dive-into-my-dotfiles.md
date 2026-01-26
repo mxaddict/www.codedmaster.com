@@ -1,13 +1,10 @@
 +++
 title = "A Deep Dive Into My Dotfiles: Crafting a CLI-First Workflow"
 date = 2026-01-25
-draft = false
 description = "A guided tour of my personal dotfiles repository, explaining the philosophy, tools, and configurations I use to create a fast, efficient, and keyboard-driven development environment on Arch Linux."
 [taxonomies]
 tags = ["dotfiles", "neovim", "hyprland", "arch linux", "cli", "workflow", "shell", "lua", "rust"]
 [extra]
-toc = true
-display_published = true
 author = "mxaddict"
 +++
 

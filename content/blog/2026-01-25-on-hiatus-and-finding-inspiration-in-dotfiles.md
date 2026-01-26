@@ -1,13 +1,10 @@
 +++
 title = "On Hiatus: Finding Inspiration in Dotfiles"
 date = 2026-01-25
-draft = false
 description = "A personal reflection on my long break from blogging, the creative burnout with a stale Jekyll workflow, and how a deep dive into creating a new dotfiles setup brought me back."
 [taxonomies]
 tags = ["reflection", "burnout", "jekyll", "dotfiles", "workflow", "rust", "neovim", "cli"]
 [extra]
-toc = true
-display_published = true
 author = "mxaddict"
 +++
 

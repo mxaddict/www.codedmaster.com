@@ -1,13 +1,10 @@
 +++
 title = "A Look Back at Coinhive: An Idea Too Good to Be True"
 date = 2026-01-25
-draft = false
 description = "A reflection on the rise and fall of Coinhive, the promise of ad-free website monetization, and how a good idea was ultimately corrupted by bad actors."
 [taxonomies]
 tags = ["coinhive", "cryptocurrency", "monetization", "web development", "ethics", "security", "reflection"]
 [extra]
-toc = true
-display_published = true
 author = "mxaddict"
 +++
 
