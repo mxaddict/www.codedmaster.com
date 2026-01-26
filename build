@@ -3,64 +3,75 @@
 
 set -e
 
-echo "⚙️ Updating Git submodules..."
+# --- Color Setup ---
+GREEN=''
+RED=''
+RESET=''
+if [[ -t 1 ]]; then # Check if stdout is a TTY (to support colors)
+  GREEN='\033[0;32m'
+  RED='\033[0;31m'
+  RESET='\033[0m'
+fi
+# --- End Color Setup ---
+
+echo -e "${GREEN}⚙️${RESET} Updating Git submodules..."
 git submodule update --init --recursive --quiet
 
-echo "🔍 Checking Zola installation..."
+echo -e "${GREEN}🔍${RESET} Checking Zola installation..."
 if ! command -v zola &>/dev/null; then
-  echo "❌ Error: Zola is not installed. Please install Zola to proceed." >&2
-  echo "📚 See: https://www.getzola.org/documentation/getting-started/installation/" >&2
+  echo -e "${RED}❌${RESET} Error: Zola is not installed. Please install Zola to proceed." >&2
+  echo -e "${RED}📚${RESET} See: https://www.getzola.org/documentation/getting-started/installation/" >&2
   exit 1
 fi
 
-echo "🏗️ Building Zola site..."
+echo -e "${GREEN}🏗️${RESET} Building Zola site..."
 # Redirect stdout to /dev/null to suppress Zola's regular build output,
 # but allow stderr (errors) to pass through.
 zola build &>/dev/null
 
 pushd public &>/dev/null
 
-echo "🌱 Initializing Git repository in public/ (if not already present)..."
+echo -e "${GREEN}🌱${RESET} Initializing Git repository in public/ (if not already present)..."
 if [ ! -d ".git" ]; then
   git init --quiet
 fi
 
-echo "🌐 Verifying Git remote 'origin' configuration..."
+echo -e "${GREEN}🌐${RESET} Verifying Git remote 'origin' configuration..."
 REQUIRED_ORIGIN="git@github.com:mxaddict/www.codedmaster.com.git"
 CURRENT_ORIGIN=$(git remote get-url origin 2>/dev/null || echo "")
 
 if [ "$CURRENT_ORIGIN" != "$REQUIRED_ORIGIN" ]; then
-  echo "🔗 Configuring Git remote 'origin'..."
+  echo -e "${GREEN}🔗${RESET} Configuring Git remote 'origin'..."
   if git remote get-url origin &>/dev/null; then
     git remote set-url origin "$REQUIRED_ORIGIN" &>/dev/null
   else
     git remote add origin "$REQUIRED_ORIGIN" &>/dev/null
   fi
 else
-  echo "✅ Git remote 'origin' is correctly configured."
+  echo -e "${GREEN}✅${RESET} Git remote 'origin' is correctly configured."
 fi
 
-echo "📄 Creating .nojekyll file to prevent Jekyll processing..."
+echo -e "${GREEN}📄${RESET} Creating .nojekyll file to prevent Jekyll processing..."
 touch .nojekyll
 
 if [ -f "../CNAME" ]; then
-  echo "📋 Copying CNAME file..."
+  echo -e "${GREEN}📋${RESET} Copying CNAME file..."
   cp ../CNAME . &>/dev/null
 fi
 
-echo "➕ Staging changes for commit..."
+echo -e "${GREEN}➕${RESET} Staging changes for commit..."
 git add -A
 
-echo "💾 Committing changes..."
+echo -e "${GREEN}💾${RESET} Committing changes..."
 if git diff --cached --exit-code --quiet; then
-  echo "➡️ No new changes to commit."
+  echo -e "${GREEN}➡️${RESET} No new changes to commit."
 else
   git commit -m "Deploy to GitHub Pages" --quiet
 fi
 
-echo "🚀 Pushing to gh-pages branch..."
+echo -e "${GREEN}🚀${RESET} Pushing to gh-pages branch..."
 git push -f origin HEAD:gh-pages --quiet
 
-echo "🎉 Deployment complete."
+echo -e "${GREEN}🎉${RESET} Deployment complete."
 
 popd &>/dev/null
