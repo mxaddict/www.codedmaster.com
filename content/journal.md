@@ -7,6 +7,15 @@ draft = false
 display_published = false
 +++
 
+### 2026-01-26: NavCoin to Navio Retrospective 🚀
+
+Today, I published a new blog post reflecting on my staking journey, specifically the transition
+from NavCoin to Navio.
+
+- **New Article:** Published
+  [From NavCoin to Navio: A Staking Retrospective](@/blog/2026-01-26-from-navcoin-to-navio-a-staking-retrospective.md),
+  a personal look back at my experiences and insights in the world of cryptocurrency staking.
+
 ### 2026-01-25: A Flurry of Activity! 🎉
 
 Today marks a significant milestone: the revival and complete overhaul of my
