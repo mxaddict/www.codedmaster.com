@@ -16,6 +16,10 @@ specifically the transition from NavCoin to Navio.
   [From NavCoin to Navio: A Staking Retrospective](@/blog/2026-01-26-from-navcoin-to-navio-a-staking-retrospective.md),
   a personal look back at my experiences and insights in the world of
   cryptocurrency staking.
+- **New Article:** Published
+  [Beyond the Dotfiles: My Ultimate CLI Productivity Stack for Developers](@/blog/2026-01-26-beyond-the-dotfiles-my-ultimate-cli-productivity-stack-for-developers.md),
+  a comprehensive guide to building a hyper-efficient, keyboard-driven
+  development environment.
 
 ### 2026-01-25: A Flurry of Activity! 🎉
 
