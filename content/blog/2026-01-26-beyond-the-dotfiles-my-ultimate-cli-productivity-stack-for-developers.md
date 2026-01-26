@@ -280,7 +280,7 @@ uses `bat` for file previews directly within `fzf`:
 ```fish
 # FZF theme
 set -gx FZF_CTRL_T_OPTS "--preview 'bat -n --color=always {}'"
-set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
+set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS" \
     --height 100%
     --info=inline-right
     --ansi
@@ -302,7 +302,6 @@ set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
     --color=scrollbar:#27a1b9
     --color=separator:#ff9e64
     --color=spinner:#ff007c
-    "
 ```
 
 This level of customization transforms `fzf` from a simple tool into a powerful,
