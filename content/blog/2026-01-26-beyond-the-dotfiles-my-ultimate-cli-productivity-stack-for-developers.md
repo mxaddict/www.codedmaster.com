@@ -209,7 +209,7 @@ Key aspects of my Hyprland configuration that enhance productivity include:
       autofill/password management (`~/.local/bin/.menu-autofill`) –
       transforming complex actions into simple key combinations.
 
-```ini
+```hyprlang
 # Excerpt from ~/.config/hypr/hyprland.conf
 
 # Browser
