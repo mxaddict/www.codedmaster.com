@@ -33,4 +33,4 @@ this post, was revealed to be a massive Ponzi scheme and is now defunct. This
 article is preserved for historical context. My original optimism was,
 unfortunately, misplaced. You can read my updated thoughts on the matter in my
 follow-up post,
-"[A Look Back at HashFlare: A Cloud Mining Cautionary Tale](/blog/a-look-back-at-hashflare)".
+"[A Look Back at HashFlare: A Cloud Mining Cautionary Tale](@/blog/2026-01-25-a-look-back-at-hashflare.md)".

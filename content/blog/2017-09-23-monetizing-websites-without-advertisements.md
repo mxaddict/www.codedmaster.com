@@ -74,4 +74,4 @@ been defunct since 2019. This article is preserved for historical context. While
 the idea of browser-based mining as an alternative to ads was intriguing, it was
 widely abused and is no longer a viable or recommended practice. You can read my
 updated thoughts on the matter in my follow-up post,
-"[A Look Back at Coinhive: An Idea Too Good to Be True](/blog/a-look-back-at-coinhive)".
+"[A Look Back at Coinhive: An Idea Too Good to Be True](@/blog/2026-01-25-a-look-back-at-coinhive.md)".
