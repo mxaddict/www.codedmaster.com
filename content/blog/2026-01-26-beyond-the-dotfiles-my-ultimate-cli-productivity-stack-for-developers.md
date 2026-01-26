@@ -277,34 +277,36 @@ My `config.fish` includes extensive `FZF_DEFAULT_OPTS` for theming and layout,
 ensuring a visually consistent and efficient fuzzy-finding experience. It also
 uses `bat` for file previews directly within `fzf`:
 
-    ```fish
-    # FZF theme
-    set -gx FZF_CTRL_T_OPTS "--preview 'bat -n --color=always {}'"
-    set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
-        --height 100%
-        --info=inline-right
-        --ansi
-        --layout=reverse
-        --border=none
-        --color=bg+:#283457
-        --color=bg:#16161e
-        --color=border:#27a1b9
-        --color=fg:#c0caf5
-        --color=gutter:#16161e
-        --color=header:#ff9e64
-        --color=hl+:#2ac3de
-        --color=hl:#2ac3de
-        --color=info:#545c7e
-        --color=marker:#ff007c
-        --color=pointer:#ff007c
-        --color=prompt:#2ac3de
-        --color=query:#c0caf5:regular
-        --color=scrollbar:#27a1b9
-        --color=separator:#ff9e64
-        --color=spinner:#ff007c
-        "
-    ```
-    This level of customization transforms `fzf` from a simple tool into a powerful, integrated navigation hub.
+```fish
+# FZF theme
+set -gx FZF_CTRL_T_OPTS "--preview 'bat -n --color=always {}'"
+set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
+    --height 100%
+    --info=inline-right
+    --ansi
+    --layout=reverse
+    --border=none
+    --color=bg+:#283457
+    --color=bg:#16161e
+    --color=border:#27a1b9
+    --color=fg:#c0caf5
+    --color=gutter:#16161e
+    --color=header:#ff9e64
+    --color=hl+:#2ac3de
+    --color=hl:#2ac3de
+    --color=info:#545c7e
+    --color=marker:#ff007c
+    --color=pointer:#ff007c
+    --color=prompt:#2ac3de
+    --color=query:#c0caf5:regular
+    --color=scrollbar:#27a1b9
+    --color=separator:#ff9e64
+    --color=spinner:#ff007c
+    "
+```
+
+This level of customization transforms `fzf` from a simple tool into a powerful,
+integrated navigation hub.
 
 ### B. Code Editing & IDE Replacement
 
