@@ -3,7 +3,7 @@ title = "mxaddict's Corner of the Internet: CLI, Code, and Crafted Insights"
 description = "Welcome to mxaddict's personal blog, a blend of deep dives into Linux (Arch, Hyprland), practical web development, privacy tools like Tor, and reflections from a Staff Engineer who lives on the command line and rides an XSR 900."
 +++
 
-## Home: Welcome to mxaddict's Corner of the Internet
+# Home: Welcome to mxaddict's Corner of the Internet
 
 Your destination for raw, unfiltered insights from a Staff Engineer who believes
 in the power of the command line and the open road.

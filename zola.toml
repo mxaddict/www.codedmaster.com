@@ -3,16 +3,12 @@ title = "mxaddict"
 description = "mxaddict's Blog"
 theme = "anemone"
 compile_sass = true
-build_search_index = true
 
 generate_feeds = true
 feed_limit = 10
 feed_filenames = ["atom.xml"]
 
 taxonomies = [{ name = "tags" }]
-
-[markdown]
-external_links_target_blank = true
 
 [markdown.highlighting]
 theme = "catppuccin-mocha"
@@ -24,11 +20,7 @@ list_pages = false
 
 header_nav = [
   { url = "/", name_en = "/home/" },
-  { url = "/about", name_en = "/about/" },
-  { url = "/journal", name_en = "/journal/" },
-  { url = "/blog", name_en = "/blog/" }
+  { url = "/about/", name_en = "/about/" },
+  { url = "/journal/", name_en = "/journal/" },
+  { url = "/blog/", name_en = "/blog/" },
 ]
-
-[extra.social]
-github = "mxaddict"
-gitlab = "mxaddict"
