@@ -1,11 +1,9 @@
 +++
-title = "Why I Switched: Migrating My Blog from Jekyll to Zola"
 date = 2026-01-24
+title = "Why I Switched: Migrating My Blog from Jekyll to Zola"
 description = "Learn about the reasons and process behind migrating a personal tech blog from Jekyll to Zola, highlighting performance gains, Rust's benefits, and Zola's features."
 [taxonomies]
 tags = ["jekyll", "zola", "static site generator", "migration", "web development", "rust"]
-[extra]
-author = "mxaddict"
 +++
 
 For a while now, my blog has been running on Jekyll, a solid static site

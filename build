@@ -29,6 +29,7 @@ echo -e "${GREEN}🏗️${RESET} Building Zola site..."
 # but allow stderr (errors) to pass through.
 zola build &>/dev/null
 
+REQUIRED_ORIGIN=$(git remote get-url origin)
 pushd public &>/dev/null
 
 echo -e "${GREEN}🌱${RESET} Initializing Git repository in public/ (if not already present)..."
@@ -37,7 +38,6 @@ if [ ! -d ".git" ]; then
 fi
 
 echo -e "${GREEN}🌐${RESET} Verifying Git remote 'origin' configuration..."
-REQUIRED_ORIGIN="git@github.com:mxaddict/www.codedmaster.com.git"
 CURRENT_ORIGIN=$(git remote get-url origin 2>/dev/null || echo "")
 
 if [ "$CURRENT_ORIGIN" != "$REQUIRED_ORIGIN" ]; then

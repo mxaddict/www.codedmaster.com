@@ -1,11 +1,9 @@
 +++
-title = "Introducing Quoty: Never Write a Boring Commit Message Again"
 date = 2026-01-25
+title = "Introducing Quoty: Never Write a Boring Commit Message Again"
 description = "A look at Quoty, a simple Rust-based CLI tool I created to solve the problem of lazy Git commit messages by providing random, insightful tech quotes."
 [taxonomies]
 tags = ["rust", "cli", "git", "development", "workflow", "productivity", "open source", "quoty"]
-[extra]
-author = "mxaddict"
 +++
 
 We've all been there. You've just finished a small batch of changes, and you're

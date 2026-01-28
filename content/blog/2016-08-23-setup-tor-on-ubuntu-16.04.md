@@ -1,11 +1,9 @@
 +++
-title = "Setup TOR on Ubuntu 16.04?"
 date = 2016-08-23
+title = "Setup TOR on Ubuntu 16.04?"
 description = "Learn how to set up Tor on Ubuntu 16.04 to enhance your online anonymity. This tutorial covers installation of Tor and Tor Browser, checking the Tor service, and using `torsocks` for anonymous terminal commands."
 [taxonomies]
 tags = ["tor", "ubuntu", "linux", "anonymity", "privacy", "security", "networking", "tor browser", "tutorial"]
-[extra]
-author = "mxaddict"
 +++
 
 [Tor][tor] is a open source, open networking tool that allows you to surf the

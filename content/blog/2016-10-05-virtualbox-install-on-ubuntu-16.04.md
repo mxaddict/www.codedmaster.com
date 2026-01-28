@@ -1,11 +1,9 @@
 +++
-title = "Setup Virtualbox on Ubuntu 16.04?"
 date = 2016-10-05
+title = "Setup Virtualbox on Ubuntu 16.04?"
 description = "Learn how to easily set up VirtualBox on Ubuntu 16.04 with a simple terminal command. This tutorial also includes a video guide for a visual installation experience."
 [taxonomies]
 tags = ["virtualbox", "ubuntu", "linux", "installation", "virtual machine", "tutorial"]
-[extra]
-author = "mxaddict"
 +++
 
 [Virtualbox][vbox] is a open source, well maintained virtual machine package

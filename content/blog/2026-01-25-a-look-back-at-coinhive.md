@@ -1,11 +1,9 @@
 +++
-title = "A Look Back at Coinhive: An Idea Too Good to Be True"
 date = 2026-01-25
+title = "A Look Back at Coinhive: An Idea Too Good to Be True"
 description = "A reflection on the rise and fall of Coinhive, the promise of ad-free website monetization, and how a good idea was ultimately corrupted by bad actors."
 [taxonomies]
 tags = ["coinhive", "cryptocurrency", "monetization", "web development", "ethics", "security", "reflection"]
-[extra]
-author = "mxaddict"
 +++
 
 A few years ago, I wrote an article about a service called Coinhive, framing it

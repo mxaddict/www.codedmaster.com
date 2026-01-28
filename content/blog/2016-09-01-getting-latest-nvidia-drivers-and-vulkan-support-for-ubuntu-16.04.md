@@ -1,11 +1,9 @@
 +++
-title = "Getting latest NVIDIA drivers and Vulkan support for Ubuntu 16.04"
 date = 2016-09-01
+title = "Getting latest NVIDIA drivers and Vulkan support for Ubuntu 16.04"
 description = "Get the latest NVIDIA drivers and Vulkan support on Ubuntu 16.04. This tutorial guides you through adding the PPA repository, installing drivers, and verifying Vulkan setup, including an optional check with Dota 2."
 [taxonomies]
 tags = ["nvidia", "vulkan", "ubuntu", "linux", "drivers", "gaming", "dota 2", "tutorial"]
-[extra]
-author = "mxaddict"
 +++
 
 Sometimes the [NVIDIA][nvidia] drivers on LTS [Ubuntu][ubuntu] Releases are not

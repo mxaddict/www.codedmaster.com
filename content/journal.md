@@ -1,10 +1,5 @@
 +++
-title = "Cap'ain's log"
-date = 2026-01-25
-draft = false
-
-[extra]
-display_published = false
+title = "Journal"
 +++
 
 ### 2026-01-26: NavCoin to Navio Retrospective 🚀
@@ -35,17 +30,17 @@ rundown of the whirlwind of changes:
   `[extra]` fields), and fixed all those pesky `/public/` image links.
 - **New Articles Galore:** Published a series of new posts reflecting on my
   journey:
-    - My personal
+  - My personal
       [Jekyll to Zola migration](@/blog/2026-01-24-jekyll-to-zola-migration.md)
       and how
       [Gemini CLI streamlined the process](@/blog/2026-01-25-using-gemini-cli-for-jekyll-to-zola-migration.md).
-    - Reflections on past tech trends with deep dives into the rise and fall of
+  - Reflections on past tech trends with deep dives into the rise and fall of
       [Coinhive](@/blog/2026-01-25-a-look-back-at-coinhive.md) and
       [HashFlare](@/blog/2026-01-25-a-look-back-at-hashflare.md).
-    - Introduced my very own
+  - Introduced my very own
       [Quoty CLI tool](@/blog/2026-01-25-introducing-quoty.md), a fun solution
       for better Git commit messages.
-    - Shared a personal reflection on my
+  - Shared a personal reflection on my
       [blogging hiatus and inspiration](@/blog/2026-01-25-on-hiatus-and-finding-inspiration-in-dotfiles.md),
       connecting it to my
       [dotfiles project](@/blog/2026-01-25-a-deep-dive-into-my-dotfiles.md).

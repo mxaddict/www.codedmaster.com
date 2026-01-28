@@ -1,11 +1,9 @@
 +++
-title = "A Look Back at HashFlare: A Cloud Mining Cautionary Tale"
 date = 2026-01-25
+title = "A Look Back at HashFlare: A Cloud Mining Cautionary Tale"
 description = "A reflection on the HashFlare cloud mining service. What started as a profitable venture turned out to be one of the largest Ponzi schemes in the crypto space. A cautionary tale for all."
 [taxonomies]
 tags = ["hashflare", "cloud mining", "cryptocurrency", "bitcoin", "scam", "ethics", "reflection"]
-[extra]
-author = "mxaddict"
 +++
 
 Back in 2017, I wrote an article about a cloud mining service called HashFlare.

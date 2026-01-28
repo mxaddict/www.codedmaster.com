@@ -1,11 +1,9 @@
 +++
-title = "Setup Ghetto Skype on Mac?"
 date = 2017-01-20
+title = "Setup Ghetto Skype on Mac?"
 description = "Tired of buggy Skype? Learn to set up Ghetto Skype, an open-source Electron wrapper for Web Skype beta, on your Mac. Includes installation steps using Homebrew, NVM, and Node.js."
 [taxonomies]
 tags = ["skype", "ghetto skype", "electron", "mac", "macos", "node.js", "homebrew", "nvm", "tutorial"]
-[extra]
-author = "mxaddict"
 +++
 
 [Ghetto Skype][skype_ghetto] is an open source desktop application powered by

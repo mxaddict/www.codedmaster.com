@@ -1,9 +1,7 @@
 +++
-title = "mxaddict's Corner of the Internet: CLI, Code, and Crafted Insights"
+title = "Home: Welcome to mxaddict's Corner of the Internet"
 description = "Welcome to mxaddict's personal blog, a blend of deep dives into Linux (Arch, Hyprland), practical web development, privacy tools like Tor, and reflections from a Staff Engineer who lives on the command line and rides an XSR 900."
 +++
-
-# Home: Welcome to mxaddict's Corner of the Internet
 
 Your destination for raw, unfiltered insights from a Staff Engineer who believes
 in the power of the command line and the open road.
@@ -30,8 +28,3 @@ of someone who types at 100 WPM, debates Vim vs. Emacs (just kidding, it's
 Neovim), and swaps code for a motorcycle helmet at the end of the day.
 
 Grab a coffee, explore the latest posts below, and join the conversation.
-
-## Latest Adventures in Code & Command
-
-Looking for the freshest tech insights and tutorials? Visit the
-[Blog](@/blog/_index.md) for all the latest posts!

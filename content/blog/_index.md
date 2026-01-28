@@ -1,7 +1,7 @@
 +++
-title = "Blog: All posts"
+title = "Blog"
 paginate_by = 20
 sort_by = "date"
 +++
 
-[🔖 Article Tags](/tags/)
+[#tags](/tags/)

@@ -1,7 +1,7 @@
 base_url = "https://www.codedmaster.com"
 title = "mxaddict"
 description = "mxaddict's Blog"
-theme = "anemone"
+theme = "zolanight"
 compile_sass = true
 
 generate_feeds = true
@@ -13,14 +13,5 @@ taxonomies = [{ name = "tags" }]
 [markdown.highlighting]
 theme = "catppuccin-mocha"
 
-[extra]
-author_name = "mxaddict"
-author_url = "https://www.codedmaster.com"
-list_pages = false
-
-header_nav = [
-  { url = "/", name_en = "/home/" },
-  { url = "/about/", name_en = "/about/" },
-  { url = "/journal/", name_en = "/journal/" },
-  { url = "/blog/", name_en = "/blog/" },
-]
+[extra.zolanight]
+theme = "tokyonight"

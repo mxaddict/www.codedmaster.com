@@ -1,11 +1,9 @@
 +++
-title = "What's Jekyll?"
 date = 2016-08-07
+title = "What's Jekyll?"
 description = "Discover Jekyll, a simple yet powerful open-source static site generator. Learn how it creates complete, static websites and powers platforms like GitHub Pages."
 [taxonomies]
 tags = ["jekyll", "static site generator", "github pages", "web development", "open source"]
-[extra]
-author = "mxaddict"
 +++
 
 [Jekyll][jekyll] is a static site generator, an open source tool for creating

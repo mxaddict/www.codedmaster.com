@@ -1,11 +1,9 @@
 +++
-title = "Beyond the Dotfiles: My Ultimate CLI Productivity Stack for Developers"
 date = 2026-01-26
+title = "Beyond the Dotfiles: My Ultimate CLI Productivity Stack for Developers"
 description = "Discover how a curated set of command-line tools and configurations can transform your development workflow into a hyper-efficient, keyboard-driven experience."
 [taxonomies]
 tags = ["cli", "productivity", "workflow", "dotfiles", "linux", "hyprland", "neovim", "fish", "tmux", "rust", "automation"]
-[extra]
-author = "mxaddict"
 +++
 
 ## Introduction

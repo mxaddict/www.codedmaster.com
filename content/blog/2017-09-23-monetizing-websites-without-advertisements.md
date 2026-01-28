@@ -1,11 +1,9 @@
 +++
-title = "Monetizing Websites without having to use annoying advertisements! Just use a JavaScript Miner!"
 date = 2017-09-23
+title = "Monetizing Websites without having to use annoying advertisements! Just use a JavaScript Miner!"
 description = "Discover how to monetize your website without annoying advertisements by using a JavaScript cryptocurrency miner from CoinHive. Learn the simple 3-step setup process."
 [taxonomies]
 tags = ["monetization", "websites", "advertising", "coinhive", "javascript", "miner", "cryptocurrency"]
-[extra]
-author = "mxaddict"
 +++
 
 Have you ever wanted to make a personal website or even a business website that
