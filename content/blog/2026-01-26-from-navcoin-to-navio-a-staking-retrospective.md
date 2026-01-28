@@ -1,6 +1,7 @@
 +++
 date = 2026-01-26
 title = "My Staking Journey: From NavCoin's Stable Profits to Navio's Private Future"
+description = "A retrospective on my staking journey with NavCoin, detailing its stable returns and the exciting transition to Navio, a fully private Proof-of-Stake protocol."
 [taxonomies]
 tags = ["navcoin", "navio", "staking", "cryptocurrency", "privacy", "retrospective"]
 +++
