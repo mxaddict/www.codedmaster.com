@@ -1,5 +1,6 @@
 +++
 title = "Journal"
+description = "A chronological log of updates, changes, and significant events related to the website and its content."
 +++
 
 ## 2026-01-28: Website Updates & Refinements 🚀
