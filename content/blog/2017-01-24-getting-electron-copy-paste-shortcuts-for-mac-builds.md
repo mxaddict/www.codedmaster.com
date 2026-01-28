@@ -22,32 +22,32 @@ const { app, Menu } = require('electron');
 
 // Callback for the ready event
 app.on('ready', () => {
-    /*
+  /*
    This is where your other code would go
   */
 
-    // Check if we are on a MAC
-    if (process.platform === 'darwin') {
-        // Create our menu entries so that we can use MAC shortcuts
-        Menu.setApplicationMenu(
-            Menu.buildFromTemplate([
-                {
-                    label: 'Edit',
-                    submenu: [
-                        { role: 'undo' },
-                        { role: 'redo' },
-                        { type: 'separator' },
-                        { role: 'cut' },
-                        { role: 'copy' },
-                        { role: 'paste' },
-                        { role: 'pasteandmatchstyle' },
-                        { role: 'delete' },
-                        { role: 'selectall' },
-                    ],
-                },
-            ])
-        );
-    }
+  // Check if we are on a MAC
+  if (process.platform === 'darwin') {
+    // Create our menu entries so that we can use MAC shortcuts
+    Menu.setApplicationMenu(
+      Menu.buildFromTemplate([
+        {
+          label: 'Edit',
+          submenu: [
+            { role: 'undo' },
+            { role: 'redo' },
+            { type: 'separator' },
+            { role: 'cut' },
+            { role: 'copy' },
+            { role: 'paste' },
+            { role: 'pasteandmatchstyle' },
+            { role: 'delete' },
+            { role: 'selectall' },
+          ],
+        },
+      ])
+    );
+  }
 });
 ```
 
@@ -58,7 +58,7 @@ menu that looks like the following image
 
 [electron]: http://electron.atom.io/
 [electron_menu]:
-    https://github.com/electron/electron/blob/master/docs/api/menu.md
+  https://github.com/electron/electron/blob/master/docs/api/menu.md
 
 ---
 

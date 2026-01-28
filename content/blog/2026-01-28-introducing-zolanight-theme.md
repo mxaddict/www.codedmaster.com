@@ -23,16 +23,16 @@ without sacrificing modern functionality.
 The core principles behind ZolaNight are:
 
 1. **Minimalism:** Focus on content. Unnecessary visual clutter is stripped
-    away, allowing your words and ideas to take center stage.
+   away, allowing your words and ideas to take center stage.
 2. **Performance:** Every line of code is optimized for speed. With ZolaNight,
-    your site will load almost instantaneously, providing an excellent user
-    experience and scoring high on Lighthouse audits.
-3. **Readability:** Thoughtful typography and a balanced layout ensure that
-    your content is easy on the eyes, encouraging longer reading sessions.
+   your site will load almost instantaneously, providing an excellent user
+   experience and scoring high on Lighthouse audits.
+3. **Readability:** Thoughtful typography and a balanced layout ensure that your
+   content is easy on the eyes, encouraging longer reading sessions.
 4. **Customization:** While minimalist by default, ZolaNight is designed to be
-    easily customizable. From color schemes (inspired by popular editor themes
-    like Tokyo Night and Catppuccin) to font choices, you have the flexibility
-    to make it your own.
+   easily customizable. From color schemes (inspired by popular editor themes
+   like Tokyo Night and Catppuccin) to font choices, you have the flexibility to
+   make it your own.
 
 ## Key Features
 

@@ -8,9 +8,9 @@ static site generator.
 - **Website URL:** <https://www.codedmaster.com>
 - **Theme:** `anemone` (located in `themes/anemone/`)
 - **Content Directory:** `content/`
-    - Blog posts are typically found in `content/blog/`.
-    - Pages like "about" and "journal" are in `content/about.md` and
-      `content/journal.md`.
+  - Blog posts are typically found in `content/blog/`.
+  - Pages like "about" and "journal" are in `content/about.md` and
+    `content/journal.md`.
 - **Static Assets:** `static/` (for images, CSS, JS not part of the theme).
 - **Zola Configuration:** `zola.toml`
 - **Taxonomies:** `tags` (used for categorizing posts).
@@ -18,18 +18,18 @@ static site generator.
 ## Common Commands
 
 - **Build the site:** `zola build`
-    - Output goes to the `public/` directory.
+  - Output goes to the `public/` directory.
 - **Build & Deploy the site:** `./build`
-    - Deploys the static code in `public/` to github pages
+  - Deploys the static code in `public/` to github pages
 - **Serve the site locally:** `zola serve`
-    - Starts a local development server, usually accessible at
-      `http://127.0.0.1:1111`.
-    - Includes live-reloading.
+  - Starts a local development server, usually accessible at
+    `http://127.0.0.1:1111`.
+  - Includes live-reloading.
 - **Create a new blog post:**
 
-    ```bash
-    touch content/blog/$(date +%Y-%m-%d)-post-title-slash-slug.md
-    ```
+  ```bash
+  touch content/blog/$(date +%Y-%m-%d)-post-title-slash-slug.md
+  ```
 
 ## Instructions for Gemini
 

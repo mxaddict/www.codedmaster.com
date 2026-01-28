@@ -83,7 +83,7 @@ reading this in the future, which I damn sure hope so, there may already be
 Vulkan support on the default [Ubuntu][ubuntu] package repos.
 
 [ubuntu_ppa_graphics]:
-    https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
+  https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
 [ubuntu]: http://www.ubuntu.com/
 [nvidia]: http://www.nvidia.com/
 [steam]: http://store.steampowered.com/

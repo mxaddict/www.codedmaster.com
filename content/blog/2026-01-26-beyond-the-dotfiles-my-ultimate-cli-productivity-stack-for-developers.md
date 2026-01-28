@@ -187,25 +187,25 @@ Key aspects of my Hyprland configuration that enhance productivity include:
   experience.
 - **Extensive Keybindings:** My `hyprland.conf` is a dense map of custom
   keybindings using the Super key (`$mod`):
-  - **Application Launching:** Single keystrokes to open `alacritty`
-      (terminal), `vieb` (browser), `nautilus` (file manager).
+  - **Application Launching:** Single keystrokes to open `alacritty` (terminal),
+    `vieb` (browser), `nautilus` (file manager).
   - **Window Management:** Easily kill active windows (`$mod, q`), toggle
-      floating mode (`$mod, v`), or fullscreen (`$mod, f`).
-  - **Window and Focus Navigation (`$mod + hjkl`):** Just like in Vim and
-      Tmux, `hjkl` are used to move focus between windows and
-      `$mod + Shift + hjkl` to move windows themselves, creating a cohesive
-      navigation experience across the entire system.
+    floating mode (`$mod, v`), or fullscreen (`$mod, f`).
+  - **Window and Focus Navigation (`$mod + hjkl`):** Just like in Vim and Tmux,
+    `hjkl` are used to move focus between windows and `$mod + Shift + hjkl` to
+    move windows themselves, creating a cohesive navigation experience across
+    the entire system.
   - **Workspace Management:** Dedicated keybindings for switching between and
-      moving windows to 10 distinct workspaces, allowing for highly organized
-      task separation (e.g., all communication apps on Workspace 2, crypto
-      wallets on Workspace 7).
+    moving windows to 10 distinct workspaces, allowing for highly organized task
+    separation (e.g., all communication apps on Workspace 2, crypto wallets on
+    Workspace 7).
   - **Integrated Utilities:** Keybindings for `hyprlock` (screen lock),
-      `grimblast` (screenshots with automatic timestamping), `hyprpicker` (color
-      picker), and `kooha` (screen recorder).
+    `grimblast` (screenshots with automatic timestamping), `hyprpicker` (color
+    picker), and `kooha` (screen recorder).
   - **Custom Menus and Scripts:** A suite of binds to `~/.local/bin/.menu-*`
-      scripts (`.menu-power`, `.menu-apps`, `.menu-calc`, etc.) and even
-      autofill/password management (`~/.local/bin/.menu-autofill`) –
-      transforming complex actions into simple key combinations.
+    scripts (`.menu-power`, `.menu-apps`, `.menu-calc`, etc.) and even
+    autofill/password management (`~/.local/bin/.menu-autofill`) – transforming
+    complex actions into simple key combinations.
 
 ```ini
 # Excerpt from ~/.config/hypr/hyprland.conf
@@ -317,23 +317,22 @@ keyboard-driven editor that can stand toe-to-toe with any graphical IDE.
   [LazyVim](https://www.lazyvim.org/) as a solid, performant foundation. LazyVim
   provides intelligent defaults and lazy-loads plugins, ensuring Neovim remains
   incredibly fast and responsive.
-  - **Language Server Protocol (LSP) Integration:** Through LazyVim's extras,
-      I have comprehensive language support for a wide array of languages
-      including Python, Rust, PHP (with Intelephense), JavaScript/TypeScript
-      (with ESLint), Docker, SQL, and more. This provides features like
-      auto-completion, go-to-definition, refactoring, and linting—all within the
-      terminal.
+  - **Language Server Protocol (LSP) Integration:** Through LazyVim's extras, I
+    have comprehensive language support for a wide array of languages including
+    Python, Rust, PHP (with Intelephense), JavaScript/TypeScript (with ESLint),
+    Docker, SQL, and more. This provides features like auto-completion,
+    go-to-definition, refactoring, and linting—all within the terminal.
   - **Keyboard-Driven Efficiency:** Neovim's modal editing paradigm, combined
-      with custom keybindings and plugins like `telescope` (for fuzzy finding
-      files, symbols, and commands) and `luasnip` (for code snippets), ensures
-      that my hands rarely leave the keyboard, maintaining peak flow state.
-  - **Tmux-Neovim Navigation:** As highlighted in the "Multiplexer" section,
-      the seamless navigation between Neovim splits and Tmux panes using
-      `Ctrl-h/j/k/l` further solidifies the keyboard-driven experience, making
-      the entire environment feel like one giant, integrated IDE.
-  - **Fine-tuned Customization:** My `nvim/lua/config/options.lua`
-      demonstrates a preference for speed and efficiency, such as disabling
-      animations (`vim.g.snacks_animate = false`).
+    with custom keybindings and plugins like `telescope` (for fuzzy finding
+    files, symbols, and commands) and `luasnip` (for code snippets), ensures
+    that my hands rarely leave the keyboard, maintaining peak flow state.
+  - **Tmux-Neovim Navigation:** As highlighted in the "Multiplexer" section, the
+    seamless navigation between Neovim splits and Tmux panes using
+    `Ctrl-h/j/k/l` further solidifies the keyboard-driven experience, making the
+    entire environment feel like one giant, integrated IDE.
+  - **Fine-tuned Customization:** My `nvim/lua/config/options.lua` demonstrates
+    a preference for speed and efficiency, such as disabling animations
+    (`vim.g.snacks_animate = false`).
 
 ### C. Git Workflow Enhancement
 
@@ -349,23 +348,22 @@ intuitive, and even more enjoyable.
   is at least memorable, if not deeply profound. My `config.fish` includes
   custom aliases that integrate `quoty` directly into my commit workflow:
 
-    ```fish
-    # Alias for quick and dirty git commit
-    function g
-        git commit -am "$(quoty)"
-        git pull --no-edit
-        git push
-    end
-    function gg
-        git add . && git commit -m "$(quoty)"
-        git pull --no-edit
-        git push
-    end
-    ```
+  ```fish
+  # Alias for quick and dirty git commit
+  function g
+      git commit -am "$(quoty)"
+      git pull --no-edit
+      git push
+  end
+  function gg
+      git add . && git commit -m "$(quoty)"
+      git pull --no-edit
+      git push
+  end
+  ```
 
-    These aliases streamline the entire commit-push cycle, reducing it to a
-    single command while ensuring commit messages are never "Updates" or "Fixes"
-    again.
+  These aliases streamline the entire commit-push cycle, reducing it to a single
+  command while ensuring commit messages are never "Updates" or "Fixes" again.
 
 - **`lazygit` (Interactive Git UI):** For more complex Git operations like
   interactive rebasing, staging specific lines, or quickly reviewing diffs,
