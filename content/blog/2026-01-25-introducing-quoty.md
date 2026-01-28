@@ -15,7 +15,7 @@ I found myself falling into this trap far too often. Tired of writing
 meaningless progress commits, I decided to build a small, fun tool to solve the
 problem: **Quoty**.
 
-### What is Quoty? 🚀
+## What is Quoty? 🚀
 
 [Quoty](https://github.com/mxaddict/quoty) is a simple, blazing-fast
 Command-Line Interface (CLI) tool written in Rust that does one thing and does
@@ -25,7 +25,7 @@ The idea was to make writing a decent commit message easier than writing a lazy
 one. Instead of having to think of something witty, I could just use a quote
 that captures the spirit of software development.
 
-### How It Works
+## How It Works
 
 The magic of `quoty` lies in its simplicity and its integration with the command
 line. To commit your changes with a random quote, you can just run:
@@ -38,7 +38,7 @@ The `$(quoty)` part executes the tool, and its output (a random quote) is used
 directly as the commit message. The result is a commit history that's a little
 more interesting and a lot less lazy. ✨
 
-### Features
+## Features
 
 Beyond just providing a random quote, `quoty` has a few other handy features:
 
@@ -47,7 +47,7 @@ Beyond just providing a random quote, `quoty` has a few other handy features:
 - `quoty --help`: Shows the standard help text.
 - `quoty --version`: Displays the current version of the tool.
 
-### The Story Behind the Quotes 🤫
+## The Story Behind the Quotes 🤫
 
 Some of the most interesting quotes in `quoty` are attributed to "Anon". These
 aren't just random internet sayings; they're a personal collection of memorable
@@ -55,7 +55,7 @@ lines from friends and previous employers who shall remain anonymous. Yes, that
 includes gems like "Pay will be on monday - Anon". It adds a little bit of
 personal history and inside jokes to my commit logs.
 
-### Why Rust?
+## Why Rust?
 
 I chose to write `quoty` in Rust for a few key reasons. First, the performance
 is fantastic, which is great for a CLI tool that needs to be snappy. Second,
@@ -63,7 +63,7 @@ Rust's ability to compile to a single, dependency-free binary is a huge plus. It
 makes distribution and installation incredibly simple – you don't have to worry
 about managing a runtime or a package manager.
 
-### How to Get It 📦
+## How to Get It 📦
 
 Since `quoty` is published on [crates.io](https://crates.io/crates/quoty), the
 easiest way to install it is with Cargo:
@@ -83,7 +83,7 @@ cargo build --release
 # The binary will be in ./target/release/quoty
 ```
 
-### Final Thoughts
+## Final Thoughts
 
 `quoty` started as a personal solution to a common problem, but it's become a
 fun little tool that I use daily. It's a great example of how a small, focused

@@ -18,7 +18,7 @@ Based on my experience, I shared it with my readers as a viable way to get into
 cryptocurrency mining without the massive upfront investment in hardware. It
 turns out, the reality was far darker than I could have imagined.
 
-### The Seductive Promise of "Easy Mining"
+## The Seductive Promise of "Easy Mining"
 
 The appeal of HashFlare was undeniable. It promised to handle all the complex,
 expensive parts of crypto mining—the hardware, the electricity, the
@@ -28,7 +28,7 @@ entry point into the world of cryptocurrency, and for a time, it worked. The
 dashboard showed profits, and withdrawals were processed. It all seemed to be
 running smoothly.
 
-### The Unraveling: A House of Cards
+## The Unraveling: A House of Cards
 
 My initial success, like that of many others, was part of a calculated
 deception. In July 2018, the first major crack appeared when HashFlare
@@ -49,7 +49,7 @@ user dashboards to the very premise of their business. In late 2022, the
 founders were arrested, and in early 2025, they pleaded guilty to wire fraud
 conspiracy.
 
-### Final Thoughts: A Hard-Learned Lesson
+## Final Thoughts: A Hard-Learned Lesson
 
 The HashFlare saga stands as one of the most significant cautionary tales in the
 cryptocurrency space. My own initial success and subsequent recommendation of

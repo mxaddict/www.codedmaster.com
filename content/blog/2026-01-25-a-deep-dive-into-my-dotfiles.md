@@ -16,7 +16,7 @@ culmination of hundreds of hours spent refining a workflow that is fast,
 keyboard-driven, and tailored to my needs as a developer who lives on the
 command line.
 
-### The Philosophy: Automation and Control
+## The Philosophy: Automation and Control
 
 The core philosophy behind my dotfiles is simple: automate everything possible
 while maintaining full control over my environment. I wanted a setup that I
@@ -25,18 +25,18 @@ saving hours of manual configuration. This is achieved through a combination of
 custom shell scripts (`.deps` for installing dependencies, `.update` for setup)
 and `GNU Stow` for elegantly managing symlinks.
 
-### A Guided Tour of Key Components
+## A Guided Tour of Key Components
 
 Let's walk through some of the most important parts of my setup.
 
-#### The Operating System: Arch Linux
+### The Operating System: Arch Linux
 
 The foundation of my setup is Arch Linux. I embrace its "do-it-yourself" ethos,
 as it forces a deeper understanding of the system and allows for a truly
 minimalist installation where I control every package. This lean and mean base
 is the perfect canvas for a custom environment.
 
-#### My Hardware: Laptops and Desktops
+### My Hardware: Laptops and Desktops
 
 My dotfiles are designed to be portable, and I use them across two main
 machines. For on-the-go work, I use a ThinkPad X13 Gen 2i. It's a fantastic,
@@ -55,7 +55,7 @@ excellent open-source driver support on Linux. There are no proprietary drivers
 to wrestle with, which makes for a stable, hassle-free experience, especially
 when running a cutting-edge setup like mine.
 
-#### The Desktop: Hyprland on Wayland
+### The Desktop: Hyprland on Wayland
 
 For my graphical environment, I've fully committed to the Wayland ecosystem with
 [Hyprland](https://hyprland.org/) as my window manager. As a dynamic tiling
@@ -102,7 +102,7 @@ craft an environment that is a true extension of my workflow, where every action
 is just a few keystrokes away. The theme is a simple `adw-gtk3-dark` with
 Papirus icons, keeping things clean and focused.
 
-#### The Editor: Neovim on a LazyVim Base
+### The Editor: Neovim on a LazyVim Base
 
 As an avid `vim` user for years, the natural evolution for me was
 [Neovim](https://neovim.io/). My configuration, which you can find in the repo,
@@ -143,7 +143,7 @@ This approach gives me the best of both worlds: a powerful, pre-configured setup
 from LazyVim that's easy to extend and personalize for my specific development
 needs, all while keeping the configuration clean and manageable.
 
-#### The Shell and CLI Tools
+### The Shell and CLI Tools
 
 The command line is my home. My shell of choice is
 [Fish](https://fishshell.com/), prized for its smart autocompletions and
@@ -194,7 +194,7 @@ These small customizations, when combined, create a development environment that
 is not only powerful but also deeply personal and efficient. This CLI-first
 approach is a recurring theme throughout the repository.
 
-#### Management with GNU Stow
+### Management with GNU Stow
 
 Instead of having symlinks scattered everywhere, I use `GNU Stow` to manage my
 dotfiles. This allows me to keep all my configurations neatly organized in a
@@ -202,14 +202,14 @@ version-controlled directory, and then "stow" them into their correct locations
 in my home directory. It makes managing and updating the configurations
 incredibly clean and simple.
 
-### Why This Matters
+## Why This Matters
 
 Investing time in your dotfiles is an investment in yourself. A well-crafted
 development environment reduces friction, automates mundane tasks, and
 ultimately makes the process of creating software more enjoyable and efficient.
 It's the digital equivalent of a perfectly organized workshop.
 
-### Final Thoughts
+## Final Thoughts
 
 This dotfiles project was the creative outlet I needed during my break from
 writing. It allowed me to focus on building and refining the very tools I use to

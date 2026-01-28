@@ -19,7 +19,7 @@ This is where the Gemini CLI, my trusty AI companion, stepped in. Leveraging its
 ability to understand and manipulate structured data, I was able to automate a
 large chunk of this tedious process.
 
-### The Challenge: Front Matter Overhaul
+## The Challenge: Front Matter Overhaul
 
 Jekyll's front matter often includes fields like `description` and `tags` at the
 top level, while Zola prefers these, along with custom data, within `[extra]` or
@@ -33,7 +33,7 @@ detail:
 - **New Fields:** Adding `draft`, `author`, `toc`, and `display_published`
   consistently.
 
-### Enter Gemini CLI: My AI Migration Assistant
+## Enter Gemini CLI: My AI Migration Assistant
 
 I often use the Gemini CLI for quick tasks, code generation, or even just
 brainstorming. For this migration, I found it particularly useful for front
@@ -64,7 +64,7 @@ automated script from start to finish (I still needed to manage file movements
 and structure), it significantly reduced the manual effort for front matter
 consistency.
 
-### Benefits: Speed and Consistency
+## Benefits: Speed and Consistency
 
 Using Gemini CLI for these repetitive tasks brought several benefits:
 
@@ -75,7 +75,7 @@ Using Gemini CLI for these repetitive tasks brought several benefits:
 - **Focus:** By offloading the tedious parts, I could focus more on the actual
   content migration and Zola-specific template adjustments.
 
-### Final Thoughts
+## Final Thoughts
 
 The Gemini CLI proved to be an invaluable tool during my Jekyll to Zola
 migration. It's a testament to how AI can augment development workflows, making

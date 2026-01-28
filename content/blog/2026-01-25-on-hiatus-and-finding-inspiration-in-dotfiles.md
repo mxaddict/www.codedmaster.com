@@ -13,7 +13,7 @@ writing here.
 
 It boiled down to a few key reasons.
 
-### 1. A Stale Workflow
+## 1. A Stale Workflow
 
 My previous blogging setup was built on Jekyll. For a long time, it worked just
 fine. But over the years, for reasons I can't quite articulate, the workflow
@@ -22,7 +22,7 @@ site, and deploying it started to feel like a chore. There was no single major
 issue, but the spark was gone. It felt like I was fighting against a current of
 minor frictions that, over time, eroded my desire to engage with the platform.
 
-### 2. "Finding Myself" in a `~/.dotfiles` Repository
+## 2. "Finding Myself" in a `~/.dotfiles` Repository
 
 During this time, I was also incredibly busy "finding myself." For me, this
 wasn't a spiritual journey in the traditional sense. It was a deep, obsessive
@@ -43,7 +43,7 @@ designed to inject a bit of fun into mundane tasks like Git commits. This
 process of building and refining my own tools, documented in my dotfiles, was
 where all my creative energy was going.
 
-### 3. A Simple Lack of Inspiration
+## 3. A Simple Lack of Inspiration
 
 Finally, and perhaps most importantly, I was just uninspired when it came to
 writing. When your daily workflow feels like a drag and your creative energy is
@@ -51,7 +51,7 @@ focused elsewhere, it's hard to find the motivation to sit down and write a
 coherent blog post. I didn't want to publish content just for the sake of it. I
 wanted it to be meaningful, and at the time, I just didn't have it in me.
 
-### The Return
+## The Return
 
 So, what changed? A few things. First, my dotfiles project reached a state of
 maturity that I'm proud of. It's now a stable, efficient foundation for all my

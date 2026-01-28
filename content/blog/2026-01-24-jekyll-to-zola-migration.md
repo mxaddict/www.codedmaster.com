@@ -13,7 +13,7 @@ the occasional motorcycle musing. But as my needs evolved and my desire for
 faster build times and a more streamlined workflow grew, I started looking for
 alternatives. That's when Zola caught my eye.
 
-### Why Migrate? The Pull Towards Zola
+## Why Migrate? The Pull Towards Zola
 
 Jekyll is fantastic, but over time, I found myself wanting a few things that
 Zola seems to offer more directly:
@@ -32,7 +32,7 @@ Zola seems to offer more directly:
   and its built-in features like shortcodes and its handling of sections and
   pages felt very intuitive.
 
-### The Migration Process: Less Painful Than Expected
+## The Migration Process: Less Painful Than Expected
 
 Migrating from Jekyll to Zola involved a few key steps:
 
@@ -51,7 +51,7 @@ The biggest hurdle was ensuring my content structure matched Zola's
 expectations, especially for the blog section. As we've seen, getting Zola to
 recognize a `blog` section and its posts correctly requires careful setup.
 
-### Zola's Benefits in Practice
+## Zola's Benefits in Practice
 
 Since switching, the difference has been noticeable:
 
@@ -61,7 +61,7 @@ Since switching, the difference has been noticeable:
   hell.
 - **Performance:** The generated static sites are incredibly performant.
 
-### Final Thoughts
+## Final Thoughts
 
 Migrating from Jekyll to Zola has been a positive experience. It aligned
 perfectly with my preference for fast, efficient tools and a CLI-centric
