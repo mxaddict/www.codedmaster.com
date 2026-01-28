@@ -2,6 +2,18 @@
 title = "Journal"
 +++
 
+### 2026-01-28: Website Updates & Refinements 🚀
+
+A day of significant aesthetic and structural changes to the website:
+
+- **Theme Migration:** Switched the Zola theme from `anemone` to `zolanight` for
+  a refreshed look.
+- **README Update:** Overhauled `README.md` to provide comprehensive project
+  information, including key details and common Zola commands, and updated the
+  main heading to reflect the base URL.
+- **Content Standardization:** Standardized heading levels (H3 to H2) across
+  numerous blog posts for improved readability and consistency.
+
 ### 2026-01-26: NavCoin to Navio Retrospective 🚀
 
 Today, I published a new blog post reflecting on my staking journey,
