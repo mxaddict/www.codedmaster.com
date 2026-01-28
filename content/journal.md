@@ -2,7 +2,7 @@
 title = "Journal"
 +++
 
-### 2026-01-28: Website Updates & Refinements 🚀
+## 2026-01-28: Website Updates & Refinements 🚀
 
 A day of significant aesthetic and structural changes to the website:
 
@@ -14,7 +14,7 @@ A day of significant aesthetic and structural changes to the website:
 - **Content Standardization:** Standardized heading levels (H3 to H2) across
   numerous blog posts for improved readability and consistency.
 
-### 2026-01-26: NavCoin to Navio Retrospective 🚀
+## 2026-01-26: NavCoin to Navio Retrospective 🚀
 
 Today, I published a new blog post reflecting on my staking journey,
 specifically the transition from NavCoin to Navio.
@@ -28,7 +28,7 @@ specifically the transition from NavCoin to Navio.
   a comprehensive guide to building a hyper-efficient, keyboard-driven
   development environment.
 
-### 2026-01-25: A Flurry of Activity! 🎉
+## 2026-01-25: A Flurry of Activity! 🎉
 
 Today marks a significant milestone: the revival and complete overhaul of my
 blog! After a long hiatus, I've embarked on a major migration from Jekyll to
