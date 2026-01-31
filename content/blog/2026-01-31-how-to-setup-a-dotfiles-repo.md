@@ -2,6 +2,7 @@
 date = 2026-01-31
 title = "Mastering Your Dotfiles: A Guide to a Cleaner Setup with Git and Stow"
 description = "Discover a simplified, yet powerful method for managing your dotfiles across multiple machines. This guide walks you through creating a clean, easy-to-maintain dotfiles repository using Git and GNU Stow, helping you keep your development environment consistent and personalized."
+[taxonomies]
 tags = ["dotfiles", "git", "stow", "linux", "developer-tools", "productivity", "neovim", "fish", "bash"]
 +++
 

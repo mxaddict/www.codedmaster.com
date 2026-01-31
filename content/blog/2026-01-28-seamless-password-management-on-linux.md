@@ -2,6 +2,7 @@
 date = 2026-01-28
 title = "Seamless Password Management: Integrating pass, pass-otp, and Dynamic Autofill on Linux"
 description = "Discover a powerful dotfiles setup for secure and efficient password management and autofill on any Linux application, leveraging pass, pass-otp, rofi, and wtype."
+[taxonomies]
 tags = ["linux", "dotfiles", "password management", "pass", "security", "autofill", "rofi", "wtype", "hyprland"]
 +++
 
