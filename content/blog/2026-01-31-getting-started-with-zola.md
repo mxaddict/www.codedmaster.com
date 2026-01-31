@@ -96,8 +96,8 @@ You can write your content using **Markdown**.
 
 ### A Second Page
 
-Now, let's add another page. Any other `.md` file in the `content` directory will
-become a separate page on your site.
+Now, let's add another page. Any other `.md` file in the `content` directory
+will become a separate page on your site.
 
 Create `content/second-page.md` with the following:
 
