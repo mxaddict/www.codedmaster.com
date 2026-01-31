@@ -24,10 +24,22 @@ installation a breeze.
 sudo pacman -S zola
 ```
 
+**For Fedora users:**
+
+```bash
+sudo dnf install zola
+```
+
 **For macOS users (using Homebrew):**
 
 ```bash
 brew install zola
+```
+
+**For Ubuntu/Debian users (using Snap):**
+
+```bash
+sudo snap install zola
 ```
 
 If you're on another operating system, check the
