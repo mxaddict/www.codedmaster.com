@@ -60,11 +60,11 @@ git init # If you haven't already
 git submodule add https://github.com/mxaddict/zolanight.git themes/zolanight
 ```
 
-Next, open your `config.toml` file (created in Step 2) and tell Zola to use the
+Next, open your `zola.toml` file (created in Step 2) and tell Zola to use the
 new theme. Add or modify the `theme` line:
 
 ```toml
-# config.toml
+# zola.toml
 base_url = "http://localhost:1111" # Or your actual site URL
 title = "My Awesome Zola Site"
 theme = "zolanight"
@@ -73,44 +73,23 @@ theme = "zolanight"
 ## Step 4: Add Your Content
 
 A website isn't much without content! Zola uses Markdown files in the `content`
-directory. Let's create a homepage and a second page.
+directory. The `ZolaNight` theme provides example content files that you can
+copy and modify.
 
-### The Homepage
+### Copying Example Content
 
-To create the content for your main landing page, you need to create a special
-file named `_index.md` inside the `content` directory.
+Navigate back to the root of your new Zola site and copy all the example content
+files and directories from the theme's `content` directory into your site's
+`content` directory:
 
-Create `content/_index.md` with the following:
-
-```markdown
-+++
-title = "Welcome to My Awesome Zola Site!"
-date = 2026-01-31
-description = "This is the homepage of my new Zola site. So easy!"
-+++
-
-Hello, world! This is my homepage. It was incredibly easy to set up!
-
-You can write your content using **Markdown**.
+```bash
+cp -r themes/zolanight/content/* content/
 ```
 
-### A Second Page
-
-Now, let's add another page. Any other `.md` file in the `content` directory
-will become a separate page on your site.
-
-Create `content/second-page.md` with the following:
-
-```markdown
-+++
-title = "This is My Second Page"
-date = 2026-01-31
-description = "Another page to show how Zola works."
-+++
-
-This is another page on the website. Zola will generate a URL for it
-automatically, something like `/second-page/`.
-```
+This command copies the example homepage (`_index.md`), a sample regular page
+(`regular-page.md`), and an entire `blog` directory containing sample blog
+posts. You can now open these files in your `content/` directory to customize
+their titles, descriptions, and main body text.
 
 ## Step 5: Run "zola serve" and See Your Website
 
