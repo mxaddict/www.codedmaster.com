@@ -70,6 +70,9 @@ base_url = "http://example.com"
 title = "My Awesome Zola Site"
 theme = "zolanight"
 taxonomies = [{ name = "tags" }]
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
 ```
 
 ## Step 4: Add Your Content
