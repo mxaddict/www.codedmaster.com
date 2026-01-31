@@ -61,13 +61,15 @@ git submodule add https://github.com/mxaddict/zolanight.git themes/zolanight
 ```
 
 Next, open your `zola.toml` file (created in Step 2) and tell Zola to use the
-new theme. Add or modify the `theme` line:
+new theme. You'll also need to define the `taxonomies` settings that the theme
+expects. Your `zola.toml` should look something like this:
 
 ```toml
 # zola.toml
-base_url = "http://localhost:1111" # Or your actual site URL
+base_url = "http://example.com"
 title = "My Awesome Zola Site"
 theme = "zolanight"
+taxonomies = [{ name = "tags" }]
 ```
 
 ## Step 4: Add Your Content
