@@ -3,6 +3,20 @@ title = "Journal"
 description = "A chronological log of updates, changes, and significant events related to the website and its content."
 +++
 
+## 2026-01-31: New Tutorials & Guides Published 📚
+
+A productive day with the release of three new in-depth articles:
+
+- **Universal Autofill System:** Published
+  [A Deep-Dive Tutorial: Building a Universal Autofill System with Rofi, Pass, and Wtype](@/blog/2026-01-31-building-a-universal-autofill-system.md),
+  detailing how to create a keyboard-driven autofill system for Linux.
+- **Getting Started with Zola:** Released
+  [From Zero to Website: How Easy It Is to Get Started with Zola](@/blog/2026-01-31-getting-started-with-zola.md),
+  a quick-start guide to building static sites with Zola.
+- **Mastering Dotfiles:** Shared
+  [Mastering Your Dotfiles: A Guide to a Cleaner Setup with Git and Stow](@/blog/2026-01-31-how-to-setup-a-dotfiles-repo.md),
+  providing a method for managing dotfiles using Git and GNU Stow.
+
 ## 2026-01-28: Website Updates & Refinements 🚀
 
 A day of significant aesthetic and structural changes to the website:
