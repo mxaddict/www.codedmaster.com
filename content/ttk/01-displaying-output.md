@@ -1,6 +1,6 @@
 +++
 date = 2026-02-09
-title = "Quest App: Showing Your Progress (Output)"
+title = "Chapter 01: Quest App: Showing Your Progress (Output)"
 description = "For young learners! Learn how to make your Rust program display text on the screen using `println!` and store multiple quests using `Vec` (Vector) for your Quest App."
 [taxonomies]
 tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]

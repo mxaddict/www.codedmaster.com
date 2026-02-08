@@ -1,6 +1,6 @@
 +++
-title = "Teach The Kids (aka TTK) Course Introduction"
-description = "Welcome to the 'Teach The Kids' Rust programming course! Embark on an exciting adventure to build your very own Quest App, learning programming fundamentals step-by-step."
+title = "Course Introduction: Teach The Kids (aka TTK) Rust Course"
+description = "Welcome to the 'Teach The Kids (aka TTK) Rust Course' introduction! Embark on an exciting adventure to build your very own Quest App, learning programming fundamentals step-by-step."
 paginate_by = 5
 sort_by = "slug"
 +++

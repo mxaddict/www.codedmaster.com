@@ -1,6 +1,6 @@
 +++
 date = 2026-02-09
-title = "Quest App: Deleting Your Quests (Removing Items)"
+title = "Chapter 05: Quest App: Deleting Your Quests (Removing Items)"
 description = "For young learners! Learn how to implement a 'remove' command in your Rust Quest App to delete completed or unwanted quests from your list and persist the changes to the file."
 [taxonomies]
 tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]

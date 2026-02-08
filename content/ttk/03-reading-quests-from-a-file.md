@@ -1,6 +1,6 @@
 +++
 date = 2026-02-09
-title = "Quest App: Saving and Loading Your Adventures (Reading from a File)"
+title = "Chapter 03: Quest App: Saving and Loading Your Adventures (Reading from a File)"
 description = "For young learners! Discover how to persist your Quest App's data by learning to save and load quests from a `quests.txt` file in Rust, ensuring your progress is never lost."
 [taxonomies]
 tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]

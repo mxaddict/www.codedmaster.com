@@ -1,6 +1,6 @@
 +++
 date = 2026-02-09
-title = "Quest App: Making Quests Permanent (Saving to a File)"
+title = "Chapter 04: Quest App: Making Quests Permanent (Saving to a File)"
 description = "For young learners! Make your Quest App quests permanent by learning to save newly added quests to a `quests.txt` file in Rust, ensuring your progress is always up-to-date."
 [taxonomies]
 tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]

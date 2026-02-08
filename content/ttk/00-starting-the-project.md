@@ -1,6 +1,6 @@
 +++
 date = 2026-02-09
-title = "Starting Your Rust Quest Project"
+title = "Chapter 00: Starting Your Rust Quest Project"
 description = "For young learners! Begin your Rust adventure by setting up your first Quest App project with `cargo new`, and learn the basics of navigating and editing code."
 [taxonomies]
 tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]

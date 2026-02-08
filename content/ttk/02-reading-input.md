@@ -1,6 +1,6 @@
 +++
 date = 2026-02-09
-title = "Quest App: Reading Your Commands (Input)"
+title = "Chapter 02: Quest App: Reading Your Commands (Input)"
 description = "For young learners! Learn how your Rust Quest App can read command-line arguments to accept new quest ideas from the user, making your program interactive."
 [taxonomies]
 tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]
