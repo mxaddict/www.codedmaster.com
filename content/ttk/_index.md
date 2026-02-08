@@ -16,6 +16,8 @@ and a desire to create!
 
 ## Our Courses
 
+- **Install Ubuntu with WSL**: Bring the power of Linux to your Windows computer
+  and set up Ubuntu for coding adventures!
 - **Install Rust**: Get your computer ready for coding! This course guides you
   through installing Rust on your Linux, Windows, or macOS computer.
 - **Install Vim & Learn the Basics**: Discover the secrets of Vim, a powerful
@@ -28,6 +30,7 @@ Choose a course below to start your coding adventure!
 
 ## Available Courses
 
+- [Install Ubuntu with WSL: Your Linux Adventure on Windows!](@/ttk/install-wsl/_index.md)
 - [Install Rust: Get Ready to Code!](@/ttk/install-rust/_index.md)
 - [Install Vim & Learn the Basics: Your Secret Editor!](@/ttk/install-vim/_index.md)
 - [Quest App (Rust)](@/ttk/quest-app/_index.md)
