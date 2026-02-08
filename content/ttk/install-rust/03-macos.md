@@ -11,7 +11,7 @@ Hello, macOS Adventurer!
 If you're using a computer with macOS, this chapter is for you! We'll use a
 special script to install Rust, which makes things very easy.
 
-### Step 1: Install Xcode Command Line Tools (If You Haven't Already)
+## Step 1: Install Xcode Command Line Tools (If You Haven't Already)
 
 Rust needs some special tools from Apple called "Xcode Command Line Tools" to
 build programs. You might already have them! If not, don't worry, it's easy to
@@ -31,7 +31,7 @@ Click "Install" and agree to the terms. This might take a little while. If you
 already have them, you'll see a message saying something like "xcode-select:
 error: command line tools are already installed". That's great!
 
-### Step 2: Install Homebrew (Optional, but Recommended for Mac Users!)
+## Step 2: Install Homebrew (Optional, but Recommended for Mac Users!)
 
 Homebrew is a "package manager" for macOS. Think of it like a super-smart app
 store for your Terminal that helps you install other tools easily. Many
@@ -51,7 +51,7 @@ After it's done, it might tell you to run a couple of commands to add Homebrew
 to your "PATH" (where your computer looks for programs). Make sure to run those
 commands!
 
-### Step 3: Install Rustup
+## Step 3: Install Rustup
 
 Rustup is the easiest way to install Rust. It's a special tool that helps manage
 different versions of Rust.
@@ -74,7 +74,7 @@ After installation, it might tell you to "source" your `~/.profile` or
 The easiest way to do this is to simply **close your Terminal window and open a
 new one.**
 
-### Step 4: Verify Your Installation
+## Step 4: Verify Your Installation
 
 Let's check if Rust and Cargo (Rust's build tool) are installed correctly!
 

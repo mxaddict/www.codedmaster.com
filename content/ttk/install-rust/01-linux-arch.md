@@ -11,7 +11,7 @@ Hello, Linux Adventurer!
 If you're using a computer with Arch Linux, this chapter is for you! We'll use
 the `pacman` command, which is like your computer's app store, to install Rust.
 
-### Step 1: Update Your System (Important First Step!)
+## Step 1: Update Your System (Important First Step!)
 
 Before installing anything new, it's always a good idea to update all the
 software on your computer. This ensures everything is fresh and ready!
@@ -27,7 +27,7 @@ Type your computer's password if it asks, and press Enter. This command tells
 `pacman` to "synchronize" (get new lists of apps) and "update" (install new
 versions of apps).
 
-### Step 2: Install Rustup
+## Step 2: Install Rustup
 
 Rustup is the easiest way to install Rust. It's a special tool that helps manage
 different versions of Rust.
@@ -40,7 +40,7 @@ sudo pacman -S rustup
 
 When it asks `(Y/n)`, type `Y` and press Enter to say "Yes, install it!"
 
-### Step 3: Install the Rust Toolchain
+## Step 3: Install the Rust Toolchain
 
 Now that `rustup` is installed, we can use it to get the main Rust tools. We'll
 install the "stable" version, which is the most reliable one.
@@ -53,7 +53,7 @@ rustup default stable
 
 You might see some messages pop up. This is Rustup doing its work!
 
-### Step 4: Update Rust (Good Practice!)
+## Step 4: Update Rust (Good Practice!)
 
 It's a good habit to keep your Rust tools updated.
 
@@ -66,7 +66,7 @@ rustup update
 This will check if there are any newer versions of Rust and install them if
 needed.
 
-### Step 5: Verify Your Installation
+## Step 5: Verify Your Installation
 
 Let's check if Rust and Cargo (Rust's build tool) are installed correctly!
 

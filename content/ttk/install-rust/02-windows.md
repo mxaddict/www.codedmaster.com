@@ -12,17 +12,17 @@ If you're using a computer with Windows, this chapter is for you! Installing
 Rust on Windows is a bit like setting up a new game – you download an installer
 and follow the instructions.
 
-### Step 1: Download the Rust Installer
+## Step 1: Download the Rust Installer
 
 Open your favorite web browser (like Chrome, Edge, or Firefox) and go to the
 official Rust website:
 
-[**https://www.rust-lang.org/tools/install**](https://www.rust-lang.org/tools/install)
+[**https://forge.rust-lang.org/infra/other-installation-methods.html**](https://forge.rust-lang.org/infra/other-installation-methods.html)
 
 Look for the big button that says **"Download rustup-init.exe"** (or something
 similar). Click it to download the installer file.
 
-### Step 2: Run the Installer
+## Step 2: Run the Installer
 
 Once the file `rustup-init.exe` has finished downloading, find it (usually in
 your "Downloads" folder) and double-click it to run it.
@@ -40,7 +40,7 @@ you need!
 The installer will then download and install Rust and its tools. This might take
 a few minutes, depending on your internet speed.
 
-### Step 3: Install Build Tools (Important!)
+## Step 3: Install Build Tools (Important!)
 
 Rust needs some extra "build tools" from Microsoft to work correctly on Windows.
 The installer will usually prompt you to install these.
@@ -58,7 +58,7 @@ simplified.
 
 This step is very important, so make sure it finishes correctly!
 
-### Step 4: Restart Your Terminal
+## Step 4: Restart Your Terminal
 
 After Rust and the build tools are installed, close the Command Prompt window
 you used for installation. You might even need to restart your computer for
@@ -67,7 +67,7 @@ everything to work perfectly.
 Then, open a **new** Command Prompt or PowerShell window. This helps your
 computer "refresh" and find the new Rust tools.
 
-### Step 5: Verify Your Installation
+## Step 5: Verify Your Installation
 
 Let's check if Rust and Cargo (Rust's build tool) are installed correctly!
 
