@@ -18,5 +18,3 @@ device. Follow the instructions for your computer, and soon you'll be ready to
 compile your first Rust program!
 
 Let's get Rust installed and unlock your coding potential!
-
-## Choose Your Operating System
