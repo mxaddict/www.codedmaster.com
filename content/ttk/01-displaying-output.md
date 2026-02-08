@@ -8,10 +8,9 @@ tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kid
 
 Hey there, Young Coder!
 
-You've learned how to get your Rust project, explore its code, and even give it
-instructions (arguments). Now, let's learn how to make your Rust program _talk
-back to you_! This is super important for our Quest App so it can show you your
-quests.
+You've started your very own Rust project and explored its first bits of code.
+Now, let's learn how to make your Rust program _talk back to you_! This is super
+important for our Quest App so it can show you your quests.
 
 ## Making Your Program Talk: `println!`
 
@@ -108,4 +107,5 @@ step for building our Quest App, as it lets you see all the quests you have to
 do! Great job!
 
 ## Navigation
+
 - Next: [Quest App: Reading Your Commands (Input)](@/ttk/02-reading-input.md)

@@ -3,8 +3,6 @@ title = "Teach The Kids (aka TTK): Quest App"
 description = "Welcome to the 'Teach The Kids' Quest App series, targeted to young learners! Learn Rust programming fundamentals by building a command-line quest manager step-by-step."
 paginate_by = 5
 sort_by = "slug"
-#[taxonomies]
-#tags = ["rust", "programming", "tutorial", "cli", "education", "kids", "children", "young", "learners"]
 +++
 
 Welcome, Young Adventurer!

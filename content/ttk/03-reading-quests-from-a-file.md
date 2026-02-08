@@ -81,7 +81,7 @@ fn main() {
     if let Some(quest_text) = new_quest_description {
         quests.push(quest_text);
         println!("Awesome! We added your new quest.");
-        // TODO: In the future, we should also save this new quest to the file!
+        // We'll learn how to save this new quest permanently in the next chapter!
     } else {
         println!("To add a new quest, type 'cargo run' followed by your quest, like:");
         println!("  cargo run find the golden apple");
@@ -164,5 +164,8 @@ fn main() {
 You're building a real app now! Keep up the amazing work!
 
 ## Navigation
-- Previous: [Quest App: Reading Your Commands (Input)](@/ttk/02-reading-input.md)
-- Next: [Quest App: Making Quests Permanent (Saving to a File)](@/ttk/04-saving-quest-to-the-quests-file.md)
+
+- Previous:
+  [Quest App: Reading Your Commands (Input)](@/ttk/02-reading-input.md)
+- Next:
+  [Quest App: Making Quests Permanent (Saving to a File)](@/ttk/04-saving-quest-to-the-quests-file.md)

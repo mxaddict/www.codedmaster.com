@@ -162,5 +162,8 @@ You've just built a basic system for saving and loading data! That's a huge step
 in programming! Keep up the incredible work!
 
 ## Navigation
-- Previous: [Quest App: Saving and Loading Your Adventures (Reading from a File)](@/ttk/03-reading-quests-from-a-file.md)
-- Next: [Quest App: Deleting Your Quests (Removing Items)](@/ttk/05-removing-quests.md)
+
+- Previous:
+  [Quest App: Saving and Loading Your Adventures (Reading from a File)](@/ttk/03-reading-quests-from-a-file.md)
+- Next:
+  [Quest App: Deleting Your Quests (Removing Items)](@/ttk/05-removing-quests.md)

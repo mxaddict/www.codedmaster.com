@@ -211,4 +211,6 @@ everything in your `quests.txt` file! This is a huge milestone! You're becoming
 a true programmer!
 
 ## Navigation
-- Previous: [Quest App: Making Quests Permanent (Saving to a File)](@/ttk/04-saving-quest-to-the-quests-file.md)
+
+- Previous:
+  [Quest App: Making Quests Permanent (Saving to a File)](@/ttk/04-saving-quest-to-the-quests-file.md)

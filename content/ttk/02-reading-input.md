@@ -142,5 +142,8 @@ You're doing great! You've just combined input (reading your command) and output
 (showing your quests)!
 
 ## Navigation
-- Previous: [Quest App: Showing Your Progress (Output)](@/ttk/01-displaying-output.md)
-- Next: [Quest App: Saving and Loading Your Adventures (Reading from a File)](@/ttk/03-reading-quests-from-a-file.md)
+
+- Previous:
+  [Quest App: Showing Your Progress (Output)](@/ttk/01-displaying-output.md)
+- Next:
+  [Quest App: Saving and Loading Your Adventures (Reading from a File)](@/ttk/03-reading-quests-from-a-file.md)
