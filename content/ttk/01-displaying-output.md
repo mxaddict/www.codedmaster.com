@@ -1,9 +1,9 @@
 +++
 date = 2026-02-09
 title = "Quest App: Showing Your Progress (Output)"
-description = "Learn how to make your Rust program display text on the screen using `println!` and store multiple quests using `Vec` (Vector) for your Quest App."
+description = "For young learners! Learn how to make your Rust program display text on the screen using `println!` and store multiple quests using `Vec` (Vector) for your Quest App."
 [taxonomies]
-tags = ["rust", "programming", "tutorial", "cli", "quest app", "education"]
+tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]
 +++
 
 Hey there, Young Coder!
@@ -106,3 +106,6 @@ cargo run
 You should see your program list out your two quests! This is a super important
 step for building our Quest App, as it lets you see all the quests you have to
 do! Great job!
+
+## Navigation
+- Next: [Quest App: Reading Your Commands (Input)](@/ttk/02-reading-input.md)

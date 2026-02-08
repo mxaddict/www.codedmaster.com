@@ -1,9 +1,9 @@
 +++
 date = 2026-02-09
 title = "Quest App: Reading Your Commands (Input)"
-description = "Learn how your Rust Quest App can read command-line arguments to accept new quest ideas from the user, making your program interactive."
+description = "For young learners! Learn how your Rust Quest App can read command-line arguments to accept new quest ideas from the user, making your program interactive."
 [taxonomies]
-tags = ["rust", "programming", "tutorial", "cli", "quest app", "education"]
+tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]
 +++
 
 Hello, Future Quest Master!
@@ -140,3 +140,7 @@ Now for the fun part!
 
 You're doing great! You've just combined input (reading your command) and output
 (showing your quests)!
+
+## Navigation
+- Previous: [Quest App: Showing Your Progress (Output)](@/ttk/01-displaying-output.md)
+- Next: [Quest App: Saving and Loading Your Adventures (Reading from a File)](@/ttk/03-reading-quests-from-a-file.md)

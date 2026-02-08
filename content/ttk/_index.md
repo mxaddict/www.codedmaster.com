@@ -1,8 +1,10 @@
 +++
 title = "Teach The Kids (aka TTK): Quest App"
-description = "Welcome to the 'Teach The Kids' Quest App series! Learn Rust programming fundamentals by building a command-line quest manager step-by-step."
+description = "Welcome to the 'Teach The Kids' Quest App series, targeted to young learners! Learn Rust programming fundamentals by building a command-line quest manager step-by-step."
 paginate_by = 5
 sort_by = "slug"
+#[taxonomies]
+#tags = ["rust", "programming", "tutorial", "cli", "education", "kids", "children", "young", "learners"]
 +++
 
 Welcome, Young Adventurer!
@@ -15,42 +17,31 @@ Rust. Think of it like building with digital LEGOs!
 
 Follow these steps to get your Rust application up and running:
 
-### Step 1: Get the Code onto Your Computer (Clone the Repository)
+### Step 1: Create a New Rust Project
 
-Imagine your computer is a magical sketchbook, and this project is a cool
-drawing on someone else's sketchbook. To get a copy of that drawing onto _your_
-sketchbook, we use a special magic word called `git clone`.
+Imagine your computer is a magical workshop, and you want to build something
+new! Rust has a special tool called `cargo` that helps you start new projects.
+We'll create a new Rust "binary" project, which means it's a program that can
+run all by itself!
 
 Open your black screen (that's your "terminal" or "command line") and carefully
-type this spell, then press the `Enter` key:
+type these spells, then press the `Enter` key after each one:
 
 ```bash
-git clone https://github.com/mxaddict/ttk.git
+cargo new quest-app --bin
+cd quest-app
 ```
 
-This command will magically copy all the project files onto your computer! When
-it's done, you'll see a new folder appear with our project's name.
+The first command, `cargo new quest-app --bin`, tells Rust to make a new folder
+called `quest-app` and set it up for our program. The second command,
+`cd quest-app`, takes you right into our new project's folder.
 
-### Step 2: Go Inside Your Project Folder
-
-Now that you have the project copied, let's go inside its special folder. It's
-like walking into your secret clubhouse!
-
-Type this command in your terminal and press `Enter`:
-
-```bash
-cd ttk
-```
-
-This command `cd` means "change directory", and it takes you right into our
-project's folder.
-
-### Step 3: Peek Inside the Code with Vim
+### Step 2: Peek Inside the Code with Vim
 
 Your parent has set up a special secret notebook for coding called `vim`! This
 is where we'll look at, read, and even change our code.
 
-Let's open our first program file, which is called `src/main.rs`. It's like
+Let's open our main program file, which is called `src/main.rs`. It's like
 opening the first page of a storybook! Type this command in your terminal and
 press `Enter`:
 
@@ -90,9 +81,9 @@ vim Cargo.toml
 ### About This Super Cool Project
 
 This is where your adventure truly begins! This project is a simple computer
-program written in Rust. Right now, it's a friendly "Hello, world!" program that
-just says hi! You'll find its main magic words in `src/main.rs`, and its
-instruction book for Rust in `Cargo.toml`.
+program written in Rust. Right now, it's a simple Quest App that just says hi!
+You'll find its main magic words in `src/main.rs`, and its instruction book for
+Rust in `Cargo.toml`.
 
 Our big goal is to turn this simple program into an amazing **quest command line
 app**! You'll be able to use it to:

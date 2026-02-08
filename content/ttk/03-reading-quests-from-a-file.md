@@ -1,9 +1,9 @@
 +++
 date = 2026-02-09
 title = "Quest App: Saving and Loading Your Adventures (Reading from a File)"
-description = "Discover how to persist your Quest App's data by learning to save and load quests from a `quests.txt` file in Rust, ensuring your progress is never lost."
+description = "For young learners! Discover how to persist your Quest App's data by learning to save and load quests from a `quests.txt` file in Rust, ensuring your progress is never lost."
 [taxonomies]
-tags = ["rust", "programming", "tutorial", "cli", "quest app", "education"]
+tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]
 +++
 
 Hi there, Super Programmer!
@@ -162,3 +162,7 @@ fn main() {
    won't save to the file yet, we'll get to that later!)
 
 You're building a real app now! Keep up the amazing work!
+
+## Navigation
+- Previous: [Quest App: Reading Your Commands (Input)](@/ttk/02-reading-input.md)
+- Next: [Quest App: Making Quests Permanent (Saving to a File)](@/ttk/04-saving-quest-to-the-quests-file.md)

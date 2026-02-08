@@ -1,9 +1,9 @@
 +++
 date = 2026-02-09
 title = "Quest App: Deleting Your Quests (Removing Items)"
-description = "Learn how to implement a 'remove' command in your Rust Quest App to delete completed or unwanted quests from your list and persist the changes to the file."
+description = "For young learners! Learn how to implement a 'remove' command in your Rust Quest App to delete completed or unwanted quests from your list and persist the changes to the file."
 [taxonomies]
-tags = ["rust", "programming", "tutorial", "cli", "quest app", "education"]
+tags = ["rust", "programming", "tutorial", "cli", "quest app", "education", "kids", "children", "young", "learners"]
 +++
 
 Great job on saving your quests! But what if you finish a quest, or decide you
@@ -209,3 +209,6 @@ fn main() {
 You now have a Quest App that can add and remove quests, and it remembers
 everything in your `quests.txt` file! This is a huge milestone! You're becoming
 a true programmer!
+
+## Navigation
+- Previous: [Quest App: Making Quests Permanent (Saving to a File)](@/ttk/04-saving-quest-to-the-quests-file.md)
