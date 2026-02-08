@@ -108,4 +108,5 @@ do! Great job!
 
 ## Navigation
 
+- Previous: [Starting Your Rust Quest Project](@/ttk/00-starting-the-project.md)
 - Next: [Quest App: Reading Your Commands (Input)](@/ttk/02-reading-input.md)

@@ -1,94 +1,27 @@
 +++
-title = "Teach The Kids (aka TTK): Quest App"
-description = "Welcome to the 'Teach The Kids' Quest App series, targeted to young learners! Learn Rust programming fundamentals by building a command-line quest manager step-by-step."
+title = "Teach The Kids (aka TTK) Course Introduction"
+description = "Welcome to the 'Teach The Kids' Rust programming course! Embark on an exciting adventure to build your very own Quest App, learning programming fundamentals step-by-step."
 paginate_by = 5
 sort_by = "slug"
 +++
 
-Welcome, Young Adventurer!
+Welcome, Young Adventurer, to the **Teach The Kids (TTK)** Rust programming
+course!
 
-Get ready for an exciting journey into the world of computer programming! You're
-about to learn how to build your very own "Quest App" using something called
-Rust. Think of it like building with digital LEGOs!
+Are you ready to embark on an epic journey to become a code wizard? In this
+course, we'll work together to build a super cool "Quest App" using a powerful
+programming language called **Rust**!
 
-## Getting Started
+Think of programming like having a superpower that lets you tell computers
+exactly what to do. With our Quest App, you'll learn how to:
 
-Follow these steps to get your Rust application up and running:
+- **Start new projects** like a pro!
+- Make your computer **talk back to you** (display output)!
+- Teach your computer to **listen to your commands** (read input)!
+- Make your projects **remember things** (save to files)!
+- And even help your computer **forget things** (remove from files)!
 
-### Step 1: Create a New Rust Project
+Each chapter is like a new level in our adventure. We'll learn one exciting new
+thing at a time, making sure you understand all the magic words and spells.
 
-Imagine your computer is a magical workshop, and you want to build something
-new! Rust has a special tool called `cargo` that helps you start new projects.
-We'll create a new Rust "binary" project, which means it's a program that can
-run all by itself!
-
-Open your black screen (that's your "terminal" or "command line") and carefully
-type these spells, then press the `Enter` key after each one:
-
-```bash
-cargo new quest-app --bin
-cd quest-app
-```
-
-The first command, `cargo new quest-app --bin`, tells Rust to make a new folder
-called `quest-app` and set it up for our program. The second command,
-`cd quest-app`, takes you right into our new project's folder.
-
-### Step 2: Peek Inside the Code with Vim
-
-Your parent has set up a special secret notebook for coding called `vim`! This
-is where we'll look at, read, and even change our code.
-
-Let's open our main program file, which is called `src/main.rs`. It's like
-opening the first page of a storybook! Type this command in your terminal and
-press `Enter`:
-
-```bash
-vim src/main.rs
-```
-
-You can also peek at another important file called `Cargo.toml`, which tells
-Rust how to build our app:
-
-```bash
-vim Cargo.toml
-```
-
-**Understanding Vim (Your Secret Notebook):**
-
-- When you first open `vim`, it's in **"Reading Mode"** (we call it `normal`
-  mode). In this mode, you can read and move around the text without
-  accidentally changing anything.
-  - To look around, use these keys like a game controller:
-    - `h`: move left
-    - `l`: move right
-    - `j`: move down
-    - `k`: move up
-- To start **"Writing Mode"** (we call it `insert` mode) and type new words or
-  change existing ones, just press the letter `i`. You'll see `-- INSERT --`
-  appear at the bottom, letting you know you can type!
-- When you're done writing and want to go back to **"Reading Mode"**, just press
-  the `Escape` key (it's usually in the top-left corner of your keyboard).
-- If you've made changes and want to save your work (like saving a drawing),
-  first go back to **"Reading Mode"** (press `Escape`), then type `:w` and press
-  `Enter`.
-- When you're finished looking at the file and want to close your secret
-  notebook, first go back to **"Reading Mode"** (press `Escape`), then type `:q`
-  and press `Enter`.
-
-### About This Super Cool Project
-
-This is where your adventure truly begins! This project is a simple computer
-program written in Rust. Right now, it's a simple Quest App that just says hi!
-You'll find its main magic words in `src/main.rs`, and its instruction book for
-Rust in `Cargo.toml`.
-
-Our big goal is to turn this simple program into an amazing **quest command line
-app**! You'll be able to use it to:
-
-- **Create** new quests for yourself (like "Learn a new Rust command!").
-- **Remove** quests that have been completed.
-
-Imagine having your very own digital quest log! Once we get this first version
-working, we'll use it to track all the cool new features we'll add to _your_
-quest app! How exciting is that?!
+Are you ready to code your first Quest? Let's go!
