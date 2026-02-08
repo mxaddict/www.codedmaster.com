@@ -213,4 +213,4 @@ a true programmer!
 ## Navigation
 
 - Previous:
-  [Quest App: Making Quests Permanent (Saving to a File)](@/ttk/04-saving-quest-to-the-quests-file.md)
+  [Chapter 04: Quest App: Making Quests Permanent (Saving to a File)](@/ttk/quest-app/04-saving-quest-to-the-quests-file.md)

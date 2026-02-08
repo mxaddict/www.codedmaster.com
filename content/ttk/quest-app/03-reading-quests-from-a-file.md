@@ -166,6 +166,6 @@ You're building a real app now! Keep up the amazing work!
 ## Navigation
 
 - Previous:
-  [Quest App: Reading Your Commands (Input)](@/ttk/02-reading-input.md)
+  [Chapter 02: Quest App: Reading Your Commands (Input)](@/ttk/quest-app/02-reading-input.md)
 - Next:
-  [Quest App: Making Quests Permanent (Saving to a File)](@/ttk/04-saving-quest-to-the-quests-file.md)
+  [Chapter 04: Quest App: Making Quests Permanent (Saving to a File)](@/ttk/quest-app/04-saving-quest-to-the-quests-file.md)

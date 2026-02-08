@@ -164,6 +164,6 @@ in programming! Keep up the incredible work!
 ## Navigation
 
 - Previous:
-  [Quest App: Saving and Loading Your Adventures (Reading from a File)](@/ttk/03-reading-quests-from-a-file.md)
+  [Chapter 03: Quest App: Saving and Loading Your Adventures (Reading from a File)](@/ttk/quest-app/03-reading-quests-from-a-file.md)
 - Next:
-  [Quest App: Deleting Your Quests (Removing Items)](@/ttk/05-removing-quests.md)
+  [Chapter 05: Quest App: Deleting Your Quests (Removing Items)](@/ttk/quest-app/05-removing-quests.md)

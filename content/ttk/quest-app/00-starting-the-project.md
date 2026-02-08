@@ -96,5 +96,7 @@ quest app! How exciting is that?!
 
 ## Navigation
 
+- Previous:
+  [Course Introduction: Teach The Kids (aka TTK) Rust Course](@/ttk/quest-app/_index.md)
 - Next:
-  [Quest App: Showing Your Progress (Output)](@/ttk/01-displaying-output.md)
+  [Chapter 01: Quest App: Showing Your Progress (Output)](@/ttk/quest-app/01-displaying-output.md)

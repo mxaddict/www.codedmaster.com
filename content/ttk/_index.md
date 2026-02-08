@@ -1,27 +1,27 @@
 +++
-title = "Course Introduction: Teach The Kids (aka TTK) Rust Course"
-description = "Welcome to the 'Teach The Kids (aka TTK) Rust Course' introduction! Embark on an exciting adventure to build your very own Quest App, learning programming fundamentals step-by-step."
+title = "Teach The Kids (TTK) Courses"
+description = "Explore a variety of programming courses for young learners under the Teach The Kids (TTK) initiative, starting with building your very own Quest App!"
 paginate_by = 5
 sort_by = "slug"
 +++
 
-Welcome, Young Adventurer, to the **Teach The Kids (TTK)** Rust programming
-course!
+Welcome to **Teach The Kids (TTK)**!
 
-Are you ready to embark on an epic journey to become a code wizard? In this
-course, we'll work together to build a super cool "Quest App" using a powerful
-programming language called **Rust**!
+This is where young adventurers come to learn the magic of computer programming.
+We believe that coding is a superpower, and we're here to help you unlock it!
 
-Think of programming like having a superpower that lets you tell computers
-exactly what to do. With our Quest App, you'll learn how to:
+Each course in TTK is designed to be a fun, hands-on journey where you'll build
+real projects step-by-step. You don't need any prior experience – just curiosity
+and a desire to create!
 
-- **Start new projects** like a pro!
-- Make your computer **talk back to you** (display output)!
-- Teach your computer to **listen to your commands** (read input)!
-- Make your projects **remember things** (save to files)!
-- And even help your computer **forget things** (remove from files)!
+## Our Courses
 
-Each chapter is like a new level in our adventure. We'll learn one exciting new
-thing at a time, making sure you understand all the magic words and spells.
+- **Quest App (Rust)**: Embark on your first coding adventure! Learn Rust by
+  building your very own command-line Quest App. You'll learn how programs talk,
+  listen, remember things, and much more!
 
-Are you ready to code your first Quest? Let's go!
+Choose a course below to start your coding adventure!
+
+## Available Courses
+
+- [Quest App (Rust)](@/ttk/quest-app/_index.md)
