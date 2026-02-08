@@ -16,6 +16,8 @@ and a desire to create!
 
 ## Our Courses
 
+- **Install Rust**: Get your computer ready for coding! This course guides you
+  through installing Rust on your Linux, Windows, or macOS computer.
 - **Quest App (Rust)**: Embark on your first coding adventure! Learn Rust by
   building your very own command-line Quest App. You'll learn how programs talk,
   listen, remember things, and much more!
@@ -24,4 +26,5 @@ Choose a course below to start your coding adventure!
 
 ## Available Courses
 
+- [Install Rust: Get Ready to Code!](@/ttk/install-rust/_index.md)
 - [Quest App (Rust)](@/ttk/quest-app/_index.md)
