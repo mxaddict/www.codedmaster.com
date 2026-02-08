@@ -35,10 +35,15 @@ The first command, `cargo new quest-app --bin`, tells Rust to make a new folder
 called `quest-app` and set it up for our program. The second command,
 `cd quest-app`, takes you right into our new project's folder.
 
-### Step 2: Peek Inside the Code with Vim
+### Step 2: Peek Inside the Code with Your Favorite Editor
 
-Your parent has set up a special secret notebook for coding called `vim`! This
-is where we'll look at, read, and even change our code.
+A "code editor" is like a special notebook where programmers write and change
+their code. While we'll explain how to use `vim` (a powerful text editor that
+lives in your terminal), you can also use other popular editors like **Visual
+Studio Code** or **Zed** if you have them installed and know how to use them.
+Just open the `quest-app` folder with your preferred editor!
+
+If you want to try `vim`, here's how to use it:
 
 Let's open our main program file, which is called `src/main.rs`. It's like
 opening the first page of a storybook! Type this command in your terminal and
