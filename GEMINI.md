@@ -6,11 +6,12 @@ static site generator.
 ## Key Information
 
 - **Website URL:** <https://www.codedmaster.com>
-- **Theme:** `anemone` (located in `themes/anemone/`)
+- **Theme:** `zolanight` (located in `themes/zolanight/`)
 - **Content Directory:** `content/`
   - Blog posts are typically found in `content/blog/`.
   - Pages like "about" and "journal" are in `content/about.md` and
     `content/journal.md`.
+  - Courses/Tutorials are located in `content/ttk/`.
 - **Static Assets:** `static/` (for images, CSS, JS not part of the theme).
 - **Zola Configuration:** `zola.toml`
 - **Taxonomies:** `tags` (used for categorizing posts).
