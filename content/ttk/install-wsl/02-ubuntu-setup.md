@@ -3,7 +3,7 @@ date = 2026-02-09
 title = "Chapter 02: Setting Up Ubuntu in WSL"
 description = "For young learners! Learn how to set up your Ubuntu Linux environment within WSL, including creating a username and password."
 [taxonomies]
-tags = ["wsl", "windows", "linux", "ubuntu", "installation", "tutorial", "education", "kids", "children", "young", "learners", "ttk", "ubuntu", "setup", "terminal"]
+tags = ["wsl", "windows", "linux", "ubuntu", "installation", "tutorial", "education", "kids", "children", "young", "learners", "ttk", "setup", "terminal"]
 +++
 
 Hello, Ubuntu Explorer!

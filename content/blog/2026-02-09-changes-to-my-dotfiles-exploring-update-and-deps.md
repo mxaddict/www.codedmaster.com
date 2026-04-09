@@ -3,7 +3,7 @@ date = 2026-02-09
 title = "Supercharging Your Dotfiles: QOL Improvements, Fedora Support, and Cleaner Updates"
 description = "Discover how recent enhancements to my dotfiles, including silent output, detailed logging, and expanded Fedora Linux support, streamline development workflows and system maintenance for a more efficient command-line experience."
 [taxonomies]
-tags = [ "automation", "bash", "customization", "devops", "dotfiles", "fedora", "linux", "linux", "scripting", "system", "tools" ]
+tags = ["automation", "bash", "customization", "devops", "dotfiles", "fedora", "linux", "scripting", "system", "tools"]
 +++
 
 ## Introduction

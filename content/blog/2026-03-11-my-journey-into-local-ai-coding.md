@@ -32,7 +32,7 @@ and privacy.
 Setting up my AI coding environment required some technical know-how. First, I
 installed Ollama on my PC by downloading the appropriate version for my system's
 architecture. Then, I pulled the Qwen3-Coder:30b model using
-`ollama pull qwen3-coder`. This was probably my most time-consuming part –
+`ollama pull qwen3-coder:30b`. This was probably my most time-consuming part –
 waiting for the large model to download.
 
 I then configured opencode (a specialized tool built for AI interactions) by
