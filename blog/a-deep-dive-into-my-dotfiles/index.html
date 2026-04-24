@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Deep Dive Into My Dotfiles: Crafting a CLI-First Workflow - mxaddict</title>
+    
+    
+    <meta name="description" content="A guided tour of my personal dotfiles repository, explaining the philosophy, tools, and configurations I use to create a fast, efficient, and keyboard-driven development environment on Arch Linux.">
+    
+    
+    <meta name="keywords" content="dotfiles, neovim, hyprland, arch linux, cli, workflow, shell, lua, rust">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;a-deep-dive-into-my-dotfiles&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>A Deep Dive Into My Dotfiles: Crafting a CLI-First Workflow</h1>
+  
+  <p>published: <time>2026-01-25</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/dotfiles/">#dotfiles</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/neovim/">#neovim</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/hyprland/">#hyprland</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/arch-linux/">#arch linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/workflow/">#workflow</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/shell/">#shell</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/lua/">#lua</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>In my last post, I mentioned that a primary reason for my blogging hiatus was a
+deep, obsessive dive into crafting my perfect development environment. Today, I
+want to take you on a guided tour of that project: my personal
+<a rel="external" href="https://github.com/mxaddict/dotfiles">dotfiles repository</a>.</p>
+<p>This repository is more than just a collection of config files; it's the
+culmination of hundreds of hours spent refining a workflow that is fast,
+keyboard-driven, and tailored to my needs as a developer who lives on the
+command line.</p>
+<h2 id="the-philosophy-automation-and-control">The Philosophy: Automation and Control</h2>
+<p>The core philosophy behind my dotfiles is simple: automate everything possible
+while maintaining full control over my environment. I wanted a setup that I
+could replicate on any machine with a single command, ensuring consistency and
+saving hours of manual configuration. This is achieved through a combination of
+custom shell scripts (<code>.deps</code> for installing dependencies, <code>.update</code> for setup)
+and <code>GNU Stow</code> for elegantly managing symlinks.</p>
+<h2 id="a-guided-tour-of-key-components">A Guided Tour of Key Components</h2>
+<p>Let's walk through some of the most important parts of my setup.</p>
+<h3 id="the-operating-system-arch-linux">The Operating System: Arch Linux</h3>
+<p>The foundation of my setup is Arch Linux. I embrace its "do-it-yourself" ethos,
+as it forces a deeper understanding of the system and allows for a truly
+minimalist installation where I control every package. This lean and mean base
+is the perfect canvas for a custom environment.</p>
+<h3 id="my-hardware-laptops-and-desktops">My Hardware: Laptops and Desktops</h3>
+<p>My dotfiles are designed to be portable, and I use them across two main
+machines. For on-the-go work, I use a ThinkPad X13 Gen 2i. It's a fantastic,
+reliable laptop that's great for travel, and surprisingly power-efficient. My
+Hyprland + Neovim workflow, even when interacting with tools like <code>gemini-cli</code>,
+typically consumes a mere 3-5 watts. With its 54Wh battery, this translates to
+excellent real-world endurance; I managed to code my entire migration from
+Jekyll to Zola and write all my new articles on a single charge. This kind of
+battery performance is a testament to the efficiency of a well-tuned Linux
+system with a minimalist setup.</p>
+<p>My main desktop PC, however, is where the real power is. It's an all-AMD build
+(X870E Nova WiFi motherboard), featuring a Ryzen 9 9950X3D CPU and a Radeon RX
+7900 XTX GPU, with 64GB of RAM. I specifically chose this all-AMD setup for its
+excellent open-source driver support on Linux. There are no proprietary drivers
+to wrestle with, which makes for a stable, hassle-free experience, especially
+when running a cutting-edge setup like mine.</p>
+<h3 id="the-desktop-hyprland-on-wayland">The Desktop: Hyprland on Wayland</h3>
+<p>For my graphical environment, I've fully committed to the Wayland ecosystem with
+<a rel="external" href="https://hyprland.org/">Hyprland</a> as my window manager. As a dynamic tiling
+Wayland compositor, it's incredibly fluid and highly customizable. My
+configuration is modular, sourcing separate files for monitors and workspaces to
+keep things organized.</p>
+<p>At launch, a suite of <code>exec-once</code> commands brings the environment to life,
+starting essentials like <code>hyprpaper</code> for wallpaper, <code>waybar</code> for my status bar,
+<code>swaync</code> for notifications, and <code>hypridle</code> for idle management. I use the
+<code>dwindle</code> layout, which provides a predictable and efficient tiling structure.</p>
+<p>The entire setup is designed to be keyboard-driven, minimizing the need to ever
+touch a mouse. I have a set of custom keybindings using <code>$mod</code> (the Super key)
+for everything from launching applications to managing windows:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Launch a browser</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, b, exec, vieb</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Launch a terminal</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, c, exec, alacritty</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Kill active window</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, q, killactive,</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Toggle floating window</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, v, togglefloating,</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Move focus with mod + hjkl keys</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, h, movefocus, l</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, l, movefocus, r</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, k, movefocus, u</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, j, movefocus, d</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Switch workspaces with mod + [0-9]</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, 1, workspace,</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, 2, workspace,</span><span style="color: #FAB387;"> 2</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bind</span><span style="color: #A6E3A1;"> =</span><span> $mod</span><span style="color: #A6E3A1;">, 3, workspace,</span><span style="color: #FAB387;"> 3</span></span></code></pre>
+<p>This level of customization is what makes Hyprland so powerful. It allows me to
+craft an environment that is a true extension of my workflow, where every action
+is just a few keystrokes away. The theme is a simple <code>adw-gtk3-dark</code> with
+Papirus icons, keeping things clean and focused.</p>
+<h3 id="the-editor-neovim-on-a-lazyvim-base">The Editor: Neovim on a LazyVim Base</h3>
+<p>As an avid <code>vim</code> user for years, the natural evolution for me was
+<a rel="external" href="https://neovim.io/">Neovim</a>. My configuration, which you can find in the repo,
+has been fully migrated to Lua. The foundation of my setup is
+<a rel="external" href="https://www.lazyvim.org/">LazyVim</a>, a fantastic Neovim distribution that
+provides a sensible, feature-rich baseline with a focus on lazy-loading plugins
+for optimal performance.</p>
+<p>On top of this solid base, I layer my own customizations. A great example of
+this is how I enable specific features and language support via my
+<code>lazyvim.json</code>. This allows me to precisely tailor the editor to the languages
+and tools I use most frequently:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="json"><span class="giallo-l"><span style="color: #9399B2;">{</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  &quot;</span><span style="color: #89B4FA;">extras</span><span style="color: #9399B2;">&quot;: [</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.coding.luasnip&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.coding.yanky&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.editor.telescope&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.formatting.prettier&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.clangd&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.docker&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.git&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.json&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.markdown&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.php&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.python&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.rust&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.sql&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.vue&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.lang.yaml&quot;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;lazyvim.plugins.extras.linting.eslint&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  ]</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre>
+<p>This approach gives me the best of both worlds: a powerful, pre-configured setup
+from LazyVim that's easy to extend and personalize for my specific development
+needs, all while keeping the configuration clean and manageable.</p>
+<h3 id="the-shell-and-cli-tools">The Shell and CLI Tools</h3>
+<p>The command line is my home. My shell of choice is
+<a rel="external" href="https://fishshell.com/">Fish</a>, prized for its smart autocompletions and
+user-friendly scripting. My setup is built around a suite of aliases and
+functions that accelerate common tasks, removing friction from my daily
+workflow. Every tool is chosen for its efficiency and command-line interface.</p>
+<p>For example, I have a set of aliases to make Git interactions faster and more
+fun. Instead of typing out a full commit command, I can just use <code>g</code> or <code>gg</code>,
+which also pipes in a random quote from my <code>quoty</code> tool:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="fish"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Alias for quick and dirty git commit</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">function</span><span> g</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    git</span><span> commit -am</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">quoty</span><span style="color: #9399B2;">)</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    git</span><span> pull --no-edit</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    git</span><span> push</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">end</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">function</span><span> gg</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    git</span><span> add . &amp;&amp; </span><span style="color: #89B4FA;font-style: italic;">git</span><span> commit -m</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">quoty</span><span style="color: #9399B2;">)</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    git</span><span> pull --no-edit</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    git</span><span> push</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">end</span></span></code></pre>
+<p>I also replace common commands with more modern, powerful alternatives. For
+instance, <code>ls</code> is replaced with <code>eza</code>, a more feature-rich file lister:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="fish"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Replace default ls command with eza</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">function</span><span> ls</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    eza</span><span> --group-directories-first $argv</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">end</span></span></code></pre>
+<p>And of course, no terminal-centric user would be complete without ensuring every
+possible editor command opens their one true editor:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="fish"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># I want v to open vi and vi to open vim</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">function</span><span> n; </span><span style="color: #89B4FA;font-style: italic;">nvim</span><span> $argv; </span><span style="color: #CBA6F7;">end</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">function</span><span> v; </span><span style="color: #89B4FA;font-style: italic;">nvim</span><span> $argv; </span><span style="color: #CBA6F7;">end</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">function</span><span> vi; </span><span style="color: #89B4FA;font-style: italic;">nvim</span><span> $argv; </span><span style="color: #CBA6F7;">end</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ...and so on</span></span></code></pre>
+<p>These small customizations, when combined, create a development environment that
+is not only powerful but also deeply personal and efficient. This CLI-first
+approach is a recurring theme throughout the repository.</p>
+<h3 id="management-with-gnu-stow">Management with GNU Stow</h3>
+<p>Instead of having symlinks scattered everywhere, I use <code>GNU Stow</code> to manage my
+dotfiles. This allows me to keep all my configurations neatly organized in a
+version-controlled directory, and then "stow" them into their correct locations
+in my home directory. It makes managing and updating the configurations
+incredibly clean and simple.</p>
+<h2 id="why-this-matters">Why This Matters</h2>
+<p>Investing time in your dotfiles is an investment in yourself. A well-crafted
+development environment reduces friction, automates mundane tasks, and
+ultimately makes the process of creating software more enjoyable and efficient.
+It's the digital equivalent of a perfectly organized workshop.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>This dotfiles project was the creative outlet I needed during my break from
+writing. It allowed me to focus on building and refining the very tools I use to
+create. I encourage you to explore my
+<a rel="external" href="https://github.com/mxaddict/dotfiles">dotfiles repository on GitHub</a>. Feel free
+to take inspiration, fork it, and start your own journey toward crafting your
+perfect development environment.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

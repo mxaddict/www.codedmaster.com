@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 05: Vim Basics: Editing Your Code (Insert Mode) - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Learn how to switch to insert mode in Vim (i, a, o) to start writing and changing your code.">
+    
+    
+    <meta name="keywords" content="vim, editor, cli, tutorial, education, kids, children, young, learners, ttk, vim basics, editing, insert mode">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-vim&#x2F;05-vim-editing&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 05: Vim Basics: Editing Your Code (Insert Mode)</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/vim/">#vim</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/editor/">#editor</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ttk/">#ttk</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/vim-basics/">#vim basics</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/editing/">#editing</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/insert-mode/">#insert mode</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Hello, Vim Editor!</p>
+<p>You've mastered moving around in Vim's Normal Mode. That's fantastic! But to
+actually change or write new code, you need to switch into a different mode
+called <strong>Insert Mode</strong>. Think of Insert Mode as your "typing mode" – this is
+where your keyboard keys actually type letters onto the screen.</p>
+<h2 id="switching-to-insert-mode-your-typing-spells">Switching to Insert Mode: Your Typing Spells</h2>
+<p>There are a few magical ways to enter Insert Mode from Normal Mode:</p>
+<ul>
+<li><strong><code>i</code></strong>: The most common spell! Press <code>i</code> to enter Insert Mode <em>before</em> your
+cursor.</li>
+<li><strong><code>a</code></strong>: Press <code>a</code> (for "append") to enter Insert Mode <em>after</em> your cursor.</li>
+<li><strong><code>o</code></strong>: Press <code>o</code> (for "open") to create a <em>new line below</em> your current line
+and enter Insert Mode there.</li>
+<li><strong><code>O</code> (capital O)</strong>: Press <code>O</code> to create a <em>new line above</em> your current line
+and enter Insert Mode there.</li>
+</ul>
+<p>When you are in Insert Mode, you will usually see <code>-- INSERT --</code> at the bottom
+of your Vim window. This is a very important sign that you can start typing!</p>
+<h2 id="going-back-to-normal-mode-the-escape-key">Going Back to Normal Mode: The Escape Key</h2>
+<p>When you're done typing and want to move around again or use other Vim commands,
+you need to go back to Normal Mode.</p>
+<ul>
+<li>Press the <strong><code>Escape</code></strong> key (usually <code>Esc</code> in the top-left corner of your
+keyboard).</li>
+</ul>
+<p>As soon as you press <code>Escape</code>, <code>-- INSERT --</code> will disappear from the bottom,
+and you'll be back in Normal Mode, ready to use your movement spells!</p>
+<h2 id="deleting-with-spells-dd-x">Deleting with Spells: <code>dd</code>, <code>x</code></h2>
+<p>You can also delete things without going into Insert Mode, directly from Normal
+Mode!</p>
+<ul>
+<li><strong><code>dd</code></strong>: This powerful spell will delete the <em>entire line</em> your cursor is on.
+(Type <code>d</code> twice quickly!)</li>
+<li><strong><code>x</code></strong>: This spell will delete the <em>single character</em> under your cursor.</li>
+</ul>
+<h2 id="copying-and-pasting-yank-and-put-yy-p">Copying and Pasting (Yank and Put!): <code>yy</code>, <code>p</code></h2>
+<p>Vim has its own special words for copy and paste!</p>
+<ul>
+<li><strong><code>yy</code></strong>: (for "yank") This spell will copy the <em>entire line</em> your cursor is
+on. (Type <code>y</code> twice quickly!)</li>
+<li><strong><code>p</code></strong>: (for "put") This spell will paste the copied line <em>below</em> your
+current line.</li>
+</ul>
+<h2 id="putting-it-together-practice-time">Putting it Together: Practice Time</h2>
+<ol>
+<li>Open a text file with Vim (<code>vim practice.txt</code>).</li>
+<li>Press <code>Escape</code> to ensure you're in Normal Mode.</li>
+<li>Use your movement spells (<code>h</code>, <code>j</code>, <code>k</code>, <code>l</code>, <code>w</code>, <code>b</code>, <code>0</code>, <code>$</code>) to move
+your cursor around.</li>
+<li>Press <code>i</code> to enter Insert Mode. Type some words!</li>
+<li>Press <code>Escape</code> to go back to Normal Mode.</li>
+<li>Move your cursor to a different spot.</li>
+<li>Press <code>a</code> to enter Insert Mode. Type some more words!</li>
+<li>Press <code>Escape</code>.</li>
+<li>Move your cursor to the middle of a line and press <code>x</code> a few times to delete
+characters.</li>
+<li>Move your cursor to a line and press <code>dd</code> to delete the whole line.</li>
+<li>Type <code>o</code>, enter Insert Mode, type a new sentence, then <code>Escape</code>.</li>
+<li>With your cursor on a line, type <code>yy</code> to copy it.</li>
+<li>Move to a new line and press <code>p</code> to paste it!</li>
+</ol>
+<p>You're now learning to both move around <em>and</em> edit your code in Vim. Awesome
+job, Code Wizard!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/install-vim/04-vim-movement/">Chapter 04: Vim Basics: Moving Around Like a Pro</a></li>
+<li>Next:
+<a href="https://www.codedmaster.com/ttk/install-vim/06-vim-saving-exiting/">Chapter 06: Vim Basics: Saving Your Work and Exiting</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

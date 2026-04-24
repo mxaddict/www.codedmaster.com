@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 02: Setting Up Ubuntu in WSL - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Learn how to set up your Ubuntu Linux environment within WSL, including creating a username and password.">
+    
+    
+    <meta name="keywords" content="wsl, windows, linux, ubuntu, installation, tutorial, education, kids, children, young, learners, ttk, setup, terminal">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-wsl&#x2F;02-ubuntu-setup&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 02: Setting Up Ubuntu in WSL</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/wsl/">#wsl</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/windows/">#windows</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ubuntu/">#ubuntu</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/installation/">#installation</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ttk/">#ttk</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/setup/">#setup</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/terminal/">#terminal</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Hello, Ubuntu Explorer!</p>
+<p>Now that WSL is installed on your Windows computer, it's time to set up your
+very own Ubuntu Linux system!</p>
+<h2 id="step-1-launch-ubuntu-for-the-first-time">Step 1: Launch Ubuntu for the First Time</h2>
+<p>If you just finished the previous chapter and restarted your computer, Ubuntu
+might have automatically started for the first time. If not, don't worry!</p>
+<p>To open your new Ubuntu Linux terminal:</p>
+<ol>
+<li>Click on the <strong>Windows Start button</strong>.</li>
+<li>Type "Ubuntu".</li>
+<li>Click on the "Ubuntu" app that appears (it might say "Ubuntu 22.04 LTS" or a
+different version number).</li>
+</ol>
+<p>A brand new black window will open. This is your Ubuntu Linux terminal!</p>
+<h2 id="step-2-create-your-linux-username-and-password">Step 2: Create Your Linux Username and Password</h2>
+<p>The first time Ubuntu runs, it will ask you to create a username and password
+for your new Linux system. This is important for security, just like your
+Windows password.</p>
+<ul>
+<li><strong>For username:</strong> Type a username you like (it can be your first name, or a
+fun code name!). Press Enter.</li>
+<li><strong>For password:</strong> Type a password. <strong>You won't see anything appear as you
+type</strong>, and that's normal for security. Just type it carefully and press
+Enter.</li>
+<li><strong>Retype password:</strong> Type the same password again to make sure you didn't make
+a mistake. Press Enter.</li>
+</ul>
+<p>Remember this username and password! You'll need it whenever you install new
+software or make important changes in your Ubuntu terminal.</p>
+<h2 id="step-3-update-ubuntu-s-software-list">Step 3: Update Ubuntu's Software List</h2>
+<p>Just like we update Windows, it's a good idea to update Ubuntu! This makes sure
+all the lists of available software are fresh and new.</p>
+<p>In your Ubuntu terminal, type these commands, pressing Enter after each:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt update</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt upgrade -y</span></span></code></pre>
+<ul>
+<li><code>sudo apt update</code>: This command asks Ubuntu to get the newest lists of
+software from the internet.</li>
+<li><code>sudo apt upgrade -y</code>: This command tells Ubuntu to install any new versions
+of software that are already on your system. The <code>-y</code> means "yes" to all
+questions, so you don't have to keep typing <code>Y</code>.</li>
+</ul>
+<p>This process might take a few minutes. If it asks for your password, type the
+Linux password you just created.</p>
+<h2 id="step-4-you-re-ready-to-go">Step 4: You're Ready to Go</h2>
+<p>Once the update is finished, you have a fully working Ubuntu Linux system right
+inside your Windows! You can now use this terminal to install Linux software,
+run commands, and begin your coding adventures.</p>
+<p>To close the Ubuntu terminal, you can just type <code>exit</code> and press Enter, or click
+the 'X' button on the window. To open it again, just find the Ubuntu app in your
+Start menu!</p>
+<p>Congratulations! You've set up Ubuntu Linux with WSL. Now you're ready to
+install Rust and Vim inside your new Linux environment!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/install-wsl/01-wsl-setup/">Chapter 01: Getting Started with WSL</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

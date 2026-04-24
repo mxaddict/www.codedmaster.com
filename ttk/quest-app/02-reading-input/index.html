@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 02: Quest App: Reading Your Commands (Input) - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Learn how your Rust Quest App can read command-line arguments to accept new quest ideas from the user, making your program interactive.">
+    
+    
+    <meta name="keywords" content="rust, programming, tutorial, cli, quest app, education, kids, children, young, learners">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;quest-app&#x2F;02-reading-input&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 02: Quest App: Reading Your Commands (Input)</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/programming/">#programming</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/quest-app/">#quest app</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Hello, Future Quest Master!</p>
+<p>Now that you know how to get your Rust project and peek at its code, let's learn
+how to tell your <code>quest</code> app what to do! When you type commands into the
+terminal, you can also give your program extra information. These are called
+"arguments."</p>
+<p>Imagine you want to create a new quest. You'd want to tell your <code>quest</code> app
+<em>what</em> the quest is, right? Like:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> run learn about Rust</span></span></code></pre>
+<p>In this command:</p>
+<ul>
+<li><code>cargo run</code> is how we tell Rust to build and run our program.</li>
+<li><code>learn about Rust</code> is the extra information, or "arguments", we're giving to
+our <code>quest</code> app. We want this to become our new quest!</li>
+</ul>
+<h2 id="how-rust-reads-your-words">How Rust Reads Your Words</h2>
+<p>Rust has a special way to listen for these arguments you type. We use something
+called <code>std::env::args()</code>. Don't worry too much about the big words right now,
+just know it's like a magical ear for your program!</p>
+<p>Here's how we can make our <code>main.rs</code> file listen for your quest description and
+add it to our list of quests:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="rust"><span class="giallo-l"><span style="color: #CBA6F7;">fn</span><span style="color: #89B4FA;font-style: italic;"> main</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Collect all the arguments you typed into a list</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    let</span><span> args</span><span style="color: #94E2D5;">:</span><span style="color: #F9E2AF;font-style: italic;"> Vec</span><span style="color: #89DCEB;">&lt;</span><span style="color: #F9E2AF;font-style: italic;">String</span><span style="color: #89DCEB;">&gt;</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;"> std</span><span style="color: #94E2D5;">::</span><span style="color: #F9E2AF;">env</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">args</span><span style="color: #9399B2;">()</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">collect</span><span style="color: #9399B2;">();</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // The first argument is always the name of our program.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // If there are arguments after the program name, it means you&#39;re</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // trying to create a new quest!</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    let mut</span><span> new_quest_description</span><span style="color: #94E2D5;">:</span><span style="color: #F9E2AF;font-style: italic;"> Option</span><span style="color: #89DCEB;">&lt;</span><span style="color: #F9E2AF;font-style: italic;">String</span><span style="color: #89DCEB;">&gt;</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;font-style: italic;"> None</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    if</span><span> args</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">len</span><span style="color: #9399B2;">()</span><span style="color: #89DCEB;"> &gt;</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">        // We join all the quest words together with spaces to make our quest description.</span></span>
+<span class="giallo-l"><span>        new_quest_description</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;font-style: italic;"> Some</span><span style="color: #9399B2;">(</span><span>args</span><span style="color: #9399B2;">[</span><span style="color: #FAB387;">1</span><span style="color: #94E2D5;">..</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">join</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot; &quot;</span><span style="color: #9399B2;">));</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Start with some quests we already know about (just like in 01-displaying-output.md!)</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    let mut</span><span> quests</span><span style="color: #94E2D5;">:</span><span style="color: #F9E2AF;font-style: italic;"> Vec</span><span style="color: #89DCEB;">&lt;</span><span style="color: #F9E2AF;font-style: italic;">String</span><span style="color: #89DCEB;">&gt;</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;font-style: italic;"> Vec</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">new</span><span style="color: #9399B2;">();</span></span>
+<span class="giallo-l"><span>    quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">push</span><span style="color: #9399B2;">(</span><span style="color: #F9E2AF;">String</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">from</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Explore the mysterious forest&quot;</span><span style="color: #9399B2;">));</span></span>
+<span class="giallo-l"><span>    quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">push</span><span style="color: #9399B2;">(</span><span style="color: #F9E2AF;">String</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">from</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Learn a new Rust command&quot;</span><span style="color: #9399B2;">));</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // If you provided a new quest, let&#39;s add it to our list!</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    if let</span><span style="color: #F9E2AF;font-style: italic;"> Some</span><span style="color: #9399B2;">(</span><span>quest_text</span><span style="color: #9399B2;">)</span><span style="color: #94E2D5;"> =</span><span> new_quest_description</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span>        quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">push</span><span style="color: #9399B2;">(</span><span>quest_text</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Awesome! We added your new quest.&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span><span style="color: #CBA6F7;"> else</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;To add a new quest, type &#39;cargo run&#39; followed by your quest, like:&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;  cargo run find the golden apple&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Now, let&#39;s make our program tell us what quests we have,</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // including any new ones!</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;--- Your Current Quests ---&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    for</span><span> quest</span><span style="color: #CBA6F7;"> in</span><span> quests</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;- </span><span style="color: #9399B2;">{}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">,</span><span> quest</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;---------------------------&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre><h2 id="what-s-happening-here-now">What's Happening Here Now?</h2>
+<p>Let's look at the new magic we added:</p>
+<ol>
+<li>
+<p><code>let mut new_quest_description: Option&lt;String&gt; = None;</code></p>
+<ul>
+<li>We created a special variable <code>new_quest_description</code>. It uses
+<code>Option&lt;String&gt;</code>, which is Rust's way of saying "this might have some text
+(<code>String</code>), or it might have nothing (<code>None</code>)". We start it with <code>None</code>
+because we don't know yet if you've given us a new quest.</li>
+</ul>
+</li>
+<li>
+<p><code>if args.len() &gt; 1 { ... }</code></p>
+<ul>
+<li>This is how we check if you actually typed something after <code>cargo run</code>.
+Remember, <code>args[0]</code> is always the program name. So if <code>args.len()</code> (the
+number of items in <code>args</code>) is greater than 1, it means you gave us more
+words for a new quest!</li>
+<li><code>new_quest_description = Some(args[1..].join(" "));</code> If you did give us
+words, we put them into our <code>new_quest_description</code> inside <code>Some()</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>let mut quests: Vec&lt;String&gt; = Vec::new();</code></p>
+<ul>
+<li>Just like in <code>01-displaying-output.md</code>, we start our list of <code>quests</code>. We
+even added the same two starting quests to it!</li>
+</ul>
+</li>
+<li>
+<p><code>if let Some(quest_text) = new_quest_description { ... }</code></p>
+<ul>
+<li>This is a clever way to say: "If <code>new_quest_description</code> actually has some
+text inside (<code>Some(quest_text)</code>), then let's take that text (which we'll
+call <code>quest_text</code> for a moment) and do something with it."</li>
+<li><code>quests.push(quest_text);</code> If there was a new quest from your command, we
+add it to our <code>quests</code> list!</li>
+<li>The <code>else</code> part tells you how to add a new quest if you didn't provide one
+this time.</li>
+</ul>
+</li>
+<li>
+<p>The final <code>println!</code> loop:</p>
+<ul>
+<li>This is the same as in <code>01-displaying-output.md</code>! It goes through our
+<code>quests</code> list (which now might include your new quest!) and prints each one
+out.</li>
+</ul>
+</li>
+</ol>
+<p>Now your Quest App can both <em>read</em> new quest ideas and <em>show</em> you all your
+quests! Fantastic progress!</p>
+<h2 id="your-turn">Your Turn</h2>
+<p>Now for the fun part!</p>
+<ol>
+<li>
+<p><strong>Update your <code>src/main.rs</code> file</strong> with the new code from above.</p>
+</li>
+<li>
+<p><strong>Run it without any extra words:</strong></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> run</span></span></code></pre>
+<p>You should see your two default quests and a message telling you how to add a
+new one.</p>
+</li>
+<li>
+<p><strong>Run it with a new quest idea:</strong></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> run find the golden apple</span></span></code></pre>
+<p>You should see all three quests (the two old ones, plus your new "find the
+golden apple" quest)! Try it with different quest ideas!</p>
+</li>
+</ol>
+<p>You're doing great! You've just combined input (reading your command) and output
+(showing your quests)!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/quest-app/01-displaying-output/">Chapter 01: Quest App: Showing Your Progress (Output)</a></li>
+<li>Next:
+<a href="https://www.codedmaster.com/ttk/quest-app/03-reading-quests-from-a-file/">Chapter 03: Quest App: Saving and Loading Your Adventures (Reading from a File)</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

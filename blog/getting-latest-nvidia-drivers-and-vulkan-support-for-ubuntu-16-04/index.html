@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Getting latest NVIDIA drivers and Vulkan support for Ubuntu 16.04 - mxaddict</title>
+    
+    
+    <meta name="description" content="Get the latest NVIDIA drivers and Vulkan support on Ubuntu 16.04. This tutorial guides you through adding the PPA repository, installing drivers, and verifying Vulkan setup, including an optional check with Dota 2.">
+    
+    
+    <meta name="keywords" content="nvidia, vulkan, ubuntu, linux, drivers, gaming, dota 2, tutorial">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;getting-latest-nvidia-drivers-and-vulkan-support-for-ubuntu-16-04&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Getting latest NVIDIA drivers and Vulkan support for Ubuntu 16.04</h1>
+  
+  <p>published: <time>2016-09-01</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/nvidia/">#nvidia</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/vulkan/">#vulkan</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ubuntu/">#ubuntu</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/drivers/">#drivers</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/gaming/">#gaming</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/dota-2/">#dota 2</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Sometimes the <a rel="external" href="http://www.nvidia.com/">NVIDIA</a> drivers on LTS <a rel="external" href="http://www.ubuntu.com/">Ubuntu</a> Releases are not
+the best, sometimes they are good, but old. If you want to have access to the
+new BETA drivers plus Vulkan support on <a rel="external" href="http://www.ubuntu.com/">Ubuntu</a> 16.04 this tutorial is
+for you.</p>
+<p>You will need to add the PPA Repo to get access to these packages:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> add-apt-repository ppa:graphics-drivers/ppa</span></span></code></pre>
+<p>Then you will need to do an update to get the latest package references in apt:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt update</span></span></code></pre>
+<p>Once done with the update, you can install the latest <a rel="external" href="http://www.nvidia.com/">NVIDIA</a> driver
+like so:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt install nvidia-370 -y</span></span></code></pre>
+<p>NOTE: At the time of writing, <code>nvidia-370</code> package is the latest BETA driver</p>
+<p>To check if you have <a rel="external" href="https://www.khronos.org/vulkan/">Vulkan</a> working correctly you will need
+<code>vulkan-utils</code> package:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt install vulkan-utils -y</span></span></code></pre>
+<p>Then run the <code>vulkaninfo</code> command to check which version is installed:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">vulkaninfo</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> grep</span><span style="color: #A6E3A1;"> &quot;Version&quot;</span></span></code></pre>
+<p>You should see something like the following:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">Vulkan</span><span style="color: #A6E3A1;"> API Version:</span><span style="color: #FAB387;"> 1.0.21</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        apiVersion</span><span style="color: #A6E3A1;">     =</span><span style="color: #FAB387;"> 0x40000d</span><span>  (1.0.13)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        driverVersion</span><span style="color: #A6E3A1;">  =</span><span style="color: #FAB387;"> 1552269312</span><span> (0x5c85c000)</span></span></code></pre>
+<p>NOTE: If <a rel="external" href="https://www.khronos.org/vulkan/">Vulkan</a> is not working after the install, you might have to do
+a simple system reboot, which you can do via the terminal with <code>sudo reboot</code></p>
+<h2 id="optional">Optional</h2>
+<p>If you have <a rel="external" href="http://blog.dota2.com/">Dota 2</a> on your machine, you can use it to check for
+<a rel="external" href="https://www.khronos.org/vulkan/">Vulkan</a>.</p>
+<p>You will need to open <a rel="external" href="http://store.steampowered.com/">Steam</a> and enable <a rel="external" href="https://www.khronos.org/vulkan/">Vulkan</a> for <a rel="external" href="http://blog.dota2.com/">Dota
+2</a></p>
+<p><img src="/img/vulkan_steam_dota2_01.png" alt="Screenshot" /></p>
+<p>Just set the following launch option value:</p>
+<p><img src="/img/vulkan_steam_dota2_02.png" alt="Screenshot" />
+<img src="/img/vulkan_steam_dota2_03.png" alt="Screenshot" />
+<img src="/img/vulkan_steam_dota2_04.png" alt="Screenshot" /></p>
+<p>Then run <a rel="external" href="http://blog.dota2.com/">Dota 2</a>, if it works then you have <a rel="external" href="https://www.khronos.org/vulkan/">Vulkan</a> setup
+correctly!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>As of the writing of this article, this method is the easiest way to get the
+latest <a rel="external" href="http://www.nvidia.com/">NVIDIA</a> driver with <a rel="external" href="https://www.khronos.org/vulkan/">Vulkan</a> support, so If you are
+reading this in the future, which I damn sure hope so, there may already be
+Vulkan support on the default <a rel="external" href="http://www.ubuntu.com/">Ubuntu</a> package repos.</p>
+<hr />
+<p><strong><em>Editor's Note (2026):</em></strong> This post refers to Ubuntu 16.04 (Xenial Xerus),
+which reached its standard End-of-Life in April 2021. The information is
+preserved for historical context but is not recommended for use on a modern
+system.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

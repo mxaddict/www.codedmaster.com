@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 01: Quest App: Showing Your Progress (Output) - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Learn how to make your Rust program display text on the screen using `println!` and store multiple quests using `Vec` (Vector) for your Quest App.">
+    
+    
+    <meta name="keywords" content="rust, programming, tutorial, cli, quest app, education, kids, children, young, learners">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;quest-app&#x2F;01-displaying-output&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 01: Quest App: Showing Your Progress (Output)</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/programming/">#programming</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/quest-app/">#quest app</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Hey there, Young Coder!</p>
+<p>You've started your very own Rust project and explored its first bits of code.
+Now, let's learn how to make your Rust program <em>talk back to you</em>! This is super
+important for our Quest App so it can show you your quests.</p>
+<h2 id="making-your-program-talk-println">Making Your Program Talk: <code>println!</code></h2>
+<p>In Rust, the easiest way to make your program display text on the screen (your
+terminal) is by using a special command called <code>println!</code>. It's like your
+program saying something out loud!</p>
+<p>Here's how it works:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="rust"><span class="giallo-l"><span style="color: #CBA6F7;">fn</span><span style="color: #89B4FA;font-style: italic;"> main</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">  // This will print &quot;Hello, Quest Master!&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Hello, Quest Master!&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">  // This will print another message</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Are you ready for an adventure?&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre>
+<p>When you run this code, you'll see both sentences appear on separate lines in
+your terminal. The <code>!</code> at the end of <code>println</code> means it's a "macro", which is a
+bit like a super-powered function in Rust.</p>
+<h2 id="storing-your-quests-the-vec-vector">Storing Your Quests: The <code>Vec</code> (Vector)</h2>
+<p>For our Quest App, we need a way to store multiple quests. Imagine a list where
+you write down all your tasks. In Rust, we have something similar called a <code>Vec</code>
+(pronounced "veck", short for Vector). It's a growable list where you can keep
+many things, like our quest descriptions!</p>
+<p>Let's make a <code>Vec</code> to hold a couple of sample quests:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="rust"><span class="giallo-l"><span style="color: #CBA6F7;">fn</span><span style="color: #89B4FA;font-style: italic;"> main</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Create an empty list (Vec) where we&#39;ll store our quests.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // We tell Rust it will hold words (Strings).</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    let mut</span><span> quests</span><span style="color: #94E2D5;">:</span><span style="color: #F9E2AF;font-style: italic;"> Vec</span><span style="color: #89DCEB;">&lt;</span><span style="color: #F9E2AF;font-style: italic;">String</span><span style="color: #89DCEB;">&gt;</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;font-style: italic;"> Vec</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">new</span><span style="color: #9399B2;">();</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Add our first quest to the list</span></span>
+<span class="giallo-l"><span>    quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">push</span><span style="color: #9399B2;">(</span><span style="color: #F9E2AF;">String</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">from</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Explore the mysterious forest&quot;</span><span style="color: #9399B2;">));</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Add another quest to the list</span></span>
+<span class="giallo-l"><span>    quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">push</span><span style="color: #9399B2;">(</span><span style="color: #F9E2AF;">String</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">from</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Learn a new Rust command&quot;</span><span style="color: #9399B2;">));</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Now, let&#39;s make our program tell us what quests we have!</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;--- Your Current Quests ---&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // This special loop will go through each quest in our &#39;quests&#39; list</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    for</span><span> quest</span><span style="color: #CBA6F7;"> in</span><span> quests</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;- </span><span style="color: #9399B2;">{}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">,</span><span> quest</span><span style="color: #9399B2;">);</span><span style="color: #9399B2;font-style: italic;"> // And print each one!</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;---------------------------&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre><h2 id="what-s-happening-here">What's Happening Here?</h2>
+<ol>
+<li>
+<p><code>let mut quests: Vec&lt;String&gt; = Vec::new();</code></p>
+<ul>
+<li><code>let mut</code> means we're creating a new variable named <code>quests</code> that <em>can be
+changed</em> (<code>mut</code> for mutable).</li>
+<li><code>Vec&lt;String&gt;</code> tells Rust that <code>quests</code> will be a list (<code>Vec</code>) containing
+text (<code>String</code>).</li>
+<li><code>Vec::new()</code> creates an empty list for us to start with.</li>
+</ul>
+</li>
+<li>
+<p><code>quests.push(String::from("..."));</code></p>
+<ul>
+<li>The <code>.push()</code> command is how we add new items to our <code>quests</code> list.</li>
+<li><code>String::from("...")</code> turns our simple text into a <code>String</code> that can be
+stored in our <code>Vec</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>for quest in quests { ... }</code></p>
+<ul>
+<li>This is a <code>for</code> loop! It's a way to do something for <em>each</em> item in a list.</li>
+<li>For every <code>quest</code> (which is what we call each item temporarily) in our
+<code>quests</code> list, it will run the code inside the <code>{}</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>println!("- {}", quest);</code></p>
+<ul>
+<li>Inside the loop, <code>println!</code> is used again.</li>
+<li>The <code>{}</code> is a special placeholder. Rust will replace <code>{}</code> with the value of
+the <code>quest</code> variable for each item in the list. So, it will print "-
+Explore the mysterious forest", then "- Learn a new Rust command".</li>
+</ul>
+</li>
+</ol>
+<h2 id="your-turn">Your Turn</h2>
+<p>Try changing your <code>src/main.rs</code> file to match the code above.</p>
+<p>Then, run your program from the terminal:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> run</span></span></code></pre>
+<p>You should see your program list out your two quests! This is a super important
+step for building our Quest App, as it lets you see all the quests you have to
+do! Great job!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/quest-app/00-starting-the-project/">Chapter 00: Starting Your Rust Quest Project</a></li>
+<li>Next:
+<a href="https://www.codedmaster.com/ttk/quest-app/02-reading-input/">Chapter 02: Quest App: Reading Your Commands (Input)</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

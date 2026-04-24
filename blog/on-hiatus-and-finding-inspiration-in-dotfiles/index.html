@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>On Hiatus: Finding Inspiration in Dotfiles - mxaddict</title>
+    
+    
+    <meta name="description" content="A personal reflection on my long break from blogging, the creative burnout with a stale Jekyll workflow, and how a deep dive into creating a new dotfiles setup brought me back.">
+    
+    
+    <meta name="keywords" content="reflection, burnout, jekyll, dotfiles, workflow, rust, neovim, cli">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;on-hiatus-and-finding-inspiration-in-dotfiles&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>On Hiatus: Finding Inspiration in Dotfiles</h1>
+  
+  <p>published: <time>2026-01-25</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/reflection/">#reflection</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/burnout/">#burnout</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/jekyll/">#jekyll</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/dotfiles/">#dotfiles</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/workflow/">#workflow</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/neovim/">#neovim</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>If you've followed this blog over the years, you've likely noticed the long
+period of silence. It wasn't intentional, but it was necessary. I've decided to
+write this post to share a bit about where I've been and what led me back to
+writing here.</p>
+<p>It boiled down to a few key reasons.</p>
+<h2 id="1-a-stale-workflow">1. A Stale Workflow</h2>
+<p>My previous blogging setup was built on Jekyll. For a long time, it worked just
+fine. But over the years, for reasons I can't quite articulate, the workflow
+just began to feel... stale. The process of creating a new post, building the
+site, and deploying it started to feel like a chore. There was no single major
+issue, but the spark was gone. It felt like I was fighting against a current of
+minor frictions that, over time, eroded my desire to engage with the platform.</p>
+<h2 id="2-finding-myself-in-a-dotfiles-repository">2. "Finding Myself" in a <code>~/.dotfiles</code> Repository</h2>
+<p>During this time, I was also incredibly busy "finding myself." For me, this
+wasn't a spiritual journey in the traditional sense. It was a deep, obsessive
+dive into crafting the perfect development environment. I decided to migrate
+away from my old, scattered, bash-based configurations and build a new, cohesive
+setup from scratch.</p>
+<p>This project became my new creative outlet. It's a living repository that you
+can find on GitHub: <a rel="external" href="https://github.com/mxaddict/dotfiles">mxaddict/dotfiles</a>.</p>
+<p>This wasn't just about changing my shell prompt. It was a complete overhaul of
+my workflow, focusing on the tools I use every single day. I poured hundreds of
+hours into configuring my <code>hyprland</code> desktop on Arch Linux, refining my <code>neovim</code>
+setup with Lua, and ensuring every tool I use—from <code>git</code> to my MySQL client—is
+perfectly tailored to my CLI-centric approach. This also extended to creating
+bespoke tools, like my <a href="https://www.codedmaster.com/blog/introducing-quoty/"><code>quoty</code> CLI</a>,
+designed to inject a bit of fun into mundane tasks like Git commits. This
+process of building and refining my own tools, documented in my dotfiles, was
+where all my creative energy was going.</p>
+<h2 id="3-a-simple-lack-of-inspiration">3. A Simple Lack of Inspiration</h2>
+<p>Finally, and perhaps most importantly, I was just uninspired when it came to
+writing. When your daily workflow feels like a drag and your creative energy is
+focused elsewhere, it's hard to find the motivation to sit down and write a
+coherent blog post. I didn't want to publish content just for the sake of it. I
+wanted it to be meaningful, and at the time, I just didn't have it in me.</p>
+<h2 id="the-return">The Return</h2>
+<p>So, what changed? A few things. First, my dotfiles project reached a state of
+maturity that I'm proud of. It's now a stable, efficient foundation for all my
+work. Second, the very process of building that foundation led me to new tools
+and ideas I'm excited to write about, including my recent migration of this blog
+from Jekyll to Zola. The new workflow with Zola feels fresh, fast, and aligns
+perfectly with my love for single-binary, Rust-based tools.</p>
+<p>The inspiration is back. It's time to start sharing again. Thanks for sticking
+around.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

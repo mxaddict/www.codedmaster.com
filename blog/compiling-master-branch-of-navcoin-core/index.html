@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Need to compile Master Branch of NavCoin-Core? - mxaddict</title>
+    
+    
+    <meta name="description" content="A comprehensive guide on compiling the master branch of NavCoin-Core, including steps for installing dependencies, cloning the repository, and building the wallet and daemon clients on an Ubuntu 18.04 Linux box.">
+    
+    
+    <meta name="keywords" content="navcoin, cryptocurrency, linux, ubuntu, compile, development, navcoin-core">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;compiling-master-branch-of-navcoin-core&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Need to compile Master Branch of NavCoin-Core?</h1>
+  
+  <p>published: <time>2019-06-24</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/navcoin/">#navcoin</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cryptocurrency/">#cryptocurrency</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ubuntu/">#ubuntu</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/compile/">#compile</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/development/">#development</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/navcoin-core/">#navcoin-core</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Need to compile <a rel="external" href="https://github.com/navcoin/navcoin-core">NavCoin-Core</a> but don't know exactly how?</p>
+<p>All you need are the following:</p>
+<ul>
+<li>A Linux box</li>
+<li>A tutorial to teach you ( This is that tutorial, LMFAO )</li>
+</ul>
+<p>NOTE: For the sake of simplicity, my example will be using an
+<code>Ubuntu 18.04 Linux Box</code></p>
+<h2 id="step-1">Step 1</h2>
+<p>Install things we need, mainly <a rel="external" href="https://git-scm.com/">Git</a> and <code>build-essential</code>.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt install git build-essential</span></span></code></pre>
+<p>We need <a rel="external" href="https://git-scm.com/">Git</a> to clone the source and <code>build-essential</code> alias package
+on <code>Ubuntu</code> to install our build toolchain.</p>
+<h2 id="step-2">Step 2</h2>
+<p>Clone the code from <a rel="external" href="https://github.com/navcoin/navcoin-core">NavCoin-Core github repository</a>.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Clone the repo</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clone https://github.com/navcoin/navcoin-core.git</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Move your working directory to the cloned dir</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> navcoin-core</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Checkout the branch/tag/commit you wanna build</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> checkout master</span></span></code></pre>
+<p>OR you can update the code if you already have it cloned.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Move your working directory to an existing clone</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> navcoin-core</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Checkout the branch/tag/commit you wanna build</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> checkout master</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Just pull the code changes</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> pull</span></span></code></pre><h2 id="step-3">Step 3</h2>
+<p>Compile required dependencies.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> ./depends</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">make</span></span></code></pre><h2 id="step-4">Step 4</h2>
+<p>Create and run the <code>./configure</code> script.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Assuming your working directory is still in `./depends` from last commands</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> ..</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Create the `./configure` script</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">./autogen.sh</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Run the `./configure` script and use the dependencies from Step 3</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">./configure</span><span style="color: #A6E3A1;"> --prefix=</span><span style="color: #94E2D5;">`</span><span style="color: #F38BA8;font-style: italic;">pwd</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">/depends/</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">uname</span><span style="color: #A6E3A1;"> -m</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">-pc-linux-gnu</span></span></code></pre><h2 id="step-5">Step 5</h2>
+<p>Compile <a rel="external" href="https://github.com/navcoin/navcoin-core">NavCoin-Core</a> itself.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">make</span></span></code></pre><h2 id="conclusion">Conclusion</h2>
+<p>Once you have followed this tutorial, you should have a binary in
+<code>./src/qt/navcoin-qt</code> that is the <a rel="external" href="https://github.com/navcoin/navcoin-core">NavCoin-Core</a> <code>QT</code>
+wallet/client.</p>
+<p>You should also have a binary in <code>./src/navcoind</code> which is the
+<a rel="external" href="https://github.com/navcoin/navcoin-core">NavCoin-Core</a> <code>daemon</code> wallet/client.</p>
+<h2 id="things-to-keep-in-mind">Things to keep in mind</h2>
+<ul>
+<li>You should use <code>./depends</code> DIR dependencies to have closest experience to the
+releases from the offical tagged versions</li>
+<li>You should use <code>./depends</code> DIR dependencies if you are not sure what system
+packages you need</li>
+<li>You can use system dependencies if you want to have less compiling, you can
+skip <code>Step 3</code> if you have required dependencies install system wide</li>
+<li>You can run <code>make</code> commands with <code>-j&lt;number of cpu threads&gt;</code> ( if you have an
+eight thread cpu, i7-4790k, you can run <code>make -j8</code> to speed up the compile
+time )</li>
+</ul>
+<hr />
+<p><strong><em>Editor's Note (2026):</em></strong> This post is from 2019 and describes the process for
+compiling the master branch of NavCoin-Core at that time. Build processes and
+dependencies for cryptocurrency software change frequently. This information is
+preserved for historical context and is likely outdated. Please refer to the
+official NavCoin documentation for current instructions.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

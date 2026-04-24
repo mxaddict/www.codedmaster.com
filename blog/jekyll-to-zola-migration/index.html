@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Why I Switched: Migrating My Blog from Jekyll to Zola - mxaddict</title>
+    
+    
+    <meta name="description" content="Learn about the reasons and process behind migrating a personal tech blog from Jekyll to Zola, highlighting performance gains, Rust&#x27;s benefits, and Zola&#x27;s features.">
+    
+    
+    <meta name="keywords" content="jekyll, zola, static site generator, migration, web development, rust">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;jekyll-to-zola-migration&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Why I Switched: Migrating My Blog from Jekyll to Zola</h1>
+  
+  <p>published: <time>2026-01-24</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/jekyll/">#jekyll</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/zola/">#zola</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/static-site-generator/">#static site generator</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/migration/">#migration</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/web-development/">#web development</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>For a while now, my blog has been running on Jekyll, a solid static site
+generator that's been around for ages. It served me well, powering this corner
+of the internet where I share thoughts on Linux, CLI tools, web development, and
+the occasional motorcycle musing. But as my needs evolved and my desire for
+faster build times and a more streamlined workflow grew, I started looking for
+alternatives. That's when Zola caught my eye.</p>
+<h2 id="why-migrate-the-pull-towards-zola">Why Migrate? The Pull Towards Zola</h2>
+<p>Jekyll is fantastic, but over time, I found myself wanting a few things that
+Zola seems to offer more directly:</p>
+<ul>
+<li><strong>Build Speed:</strong> As my content grew, Jekyll's build times started to creep up.
+I wanted something snappier, something that felt more responsive even when
+generating a hundred pages.</li>
+<li><strong>Single Binary:</strong> The idea of a single executable for a static site generator
+is incredibly appealing. No complex Ruby environment to manage, no version
+conflicts. Just download, run, and go. This resonates heavily with my
+CLI-first workflow.</li>
+<li><strong>Rust Ecosystem:</strong> I'm increasingly drawn to Rust's performance, safety, and
+concurrency guarantees. Zola being built in Rust meant it likely offered
+excellent performance and reliability.</li>
+<li><strong>Simplicity and Features:</strong> Zola's templating language (Tera) is powerful,
+and its built-in features like shortcodes and its handling of sections and
+pages felt very intuitive.</li>
+</ul>
+<h2 id="the-migration-process-less-painful-than-expected">The Migration Process: Less Painful Than Expected</h2>
+<p>Migrating from Jekyll to Zola involved a few key steps:</p>
+<ol>
+<li><strong>Content Conversion:</strong> Jekyll uses Liquid templating and typically Markdown
+files with TOML front matter. Zola uses Tera templating and TOML front
+matter. The transition for most Markdown files was straightforward. The main
+effort was ensuring front matter was correctly translated, especially for
+tags and dates.</li>
+<li><strong>Theme Adaptation:</strong> I found a theme that fit my aesthetic – <code>anemone</code>.
+Adapting it involved understanding its template structure and making minor
+tweaks to fit my content organization.</li>
+<li><strong>Configuration:</strong> Translating <code>_config.yml</code> settings to <code>zola.toml</code> was
+relatively simple, with Zola's configuration structure being quite clear.</li>
+</ol>
+<p>The biggest hurdle was ensuring my content structure matched Zola's
+expectations, especially for the blog section. As we've seen, getting Zola to
+recognize a <code>blog</code> section and its posts correctly requires careful setup.</p>
+<h2 id="zola-s-benefits-in-practice">Zola's Benefits in Practice</h2>
+<p>Since switching, the difference has been noticeable:</p>
+<ul>
+<li><strong>Build Times:</strong> Zola's build times are blazingly fast. Whether I'm making a
+small change or a large update, the site regenerates in seconds.</li>
+<li><strong>Simplicity:</strong> Managing Zola is a breeze. A single binary means no dependency
+hell.</li>
+<li><strong>Performance:</strong> The generated static sites are incredibly performant.</li>
+</ul>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>Migrating from Jekyll to Zola has been a positive experience. It aligned
+perfectly with my preference for fast, efficient tools and a CLI-centric
+workflow. If you're looking for a modern, high-performance static site
+generator, Zola is definitely worth considering.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

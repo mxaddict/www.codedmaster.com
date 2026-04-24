@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introducing SQEEL: A Fast, Vim-Native SQL Client in Rust - mxaddict</title>
+    
+    
+    <meta name="description" content="SQEEL is a blazing-fast SQL client written in Rust — vim bindings first, no Electron, no JVM. Terminal UI and native GUI, MySQL&#x2F;Postgres&#x2F;SQLite support, and LSP-powered completions.">
+    
+    
+    <meta name="keywords" content="rust, cli, sql, vim, tui, gui, database, open source, sqeel">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;introducing-sqeel&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Introducing SQEEL: A Fast, Vim-Native SQL Client in Rust</h1>
+  
+  <p>published: <time>2026-04-24</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/sql/">#sql</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/vim/">#vim</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tui/">#tui</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/gui/">#gui</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/database/">#database</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/open-source/">#open source</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/sqeel/">#sqeel</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Every SQL client I tried eventually annoyed me. DBeaver hauls a JVM. TablePlus
+is closed-source. The Electron crowd burns 500MB of RAM to show a grid. I wanted
+something that starts instantly, lives in the terminal, and respects my muscle
+memory. So I built one.</p>
+<p>Meet <strong>SQEEL</strong>.</p>
+<h2 id="what-is-sqeel-zap">What is SQEEL? ⚡</h2>
+<p><a rel="external" href="https://github.com/sqeel-sql/sqeel">SQEEL</a> is a fast, vim-native SQL client
+written in Rust. No Electron. No JVM. It ships two binaries from one workspace:</p>
+<ul>
+<li><code>sqeel</code> — a terminal UI built on ratatui</li>
+<li><code>sqeel-gui</code> — a native GUI built on iced</li>
+</ul>
+<p>Same core, same keybindings, same config. Pick the one your mood wants today.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Native Rust</strong> — instant startup, single binary</li>
+<li><strong>Vim bindings</strong> first class, not an afterthought</li>
+<li><strong>Mouse support</strong> in every pane (even in the TUI)</li>
+<li><strong>MySQL, PostgreSQL, SQLite</strong> via <code>sqlx</code></li>
+<li><strong>tree-sitter</strong> SQL syntax highlighting, dialect-aware</li>
+<li><strong>LSP integration</strong> with <a rel="external" href="https://github.com/sqls-server/sqls"><code>sqls</code></a> for
+completions and inline diagnostic underlines</li>
+<li><strong>Schema browser</strong> — click or <code>hjkl</code> to expand/collapse</li>
+<li><strong>Editor tabs</strong> with lazy loading and 5-minute RAM eviction</li>
+<li><strong>Auto-save</strong> SQL buffers, result history, query history</li>
+<li><strong>tmux-aware</strong> pane navigation — <code>Ctrl+HJKL</code> crosses tmux panes cleanly</li>
+<li><strong>Vim status bar</strong> and command mode (<code>:q</code>, <code>:w</code>, all the muscle memory)</li>
+</ul>
+<h2 id="layout">Layout</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="plain"><span class="giallo-l"><span>┌──────────┬─────────────────────────────┐</span></span>
+<span class="giallo-l"><span>│          │  [tab1] [tab2]              │</span></span>
+<span class="giallo-l"><span>│  Schema  │         Editor              │</span></span>
+<span class="giallo-l"><span>│  (15%)   │         (85%)               │</span></span>
+<span class="giallo-l"><span>│          │                             │</span></span>
+<span class="giallo-l"><span>│          ├─────────────────────────────┤</span></span>
+<span class="giallo-l"><span>│          │         Results             │</span></span>
+<span class="giallo-l"><span>│          │      (shows on query)       │</span></span>
+<span class="giallo-l"><span>└──────────┴─────────────────────────────┘</span></span></code></pre>
+<p>Results hide when empty so the editor fills the right pane. Run a query and the
+results pane expands to 50%. Dismiss with <code>q</code> and you're back to full-size
+editing. No wasted pixels.</p>
+<h2 id="connections-as-files">Connections as Files</h2>
+<p>Every connection is one TOML file in <code>~/.config/sqeel/conns/</code>. Filename becomes
+the display name.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="toml"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ~/.config/sqeel/conns/prod.toml</span></span>
+<span class="giallo-l"><span>url</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;postgres://user:pass@host/db&quot;</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="toml"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ~/.config/sqeel/conns/local.toml</span></span>
+<span class="giallo-l"><span>url</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;mysql://localhost/mydb&quot;</span></span></code></pre>
+<p>Drop a file in, it shows up in the connection switcher (<code>&lt;leader&gt;c</code>). Version
+control it, symlink it, rsync it between machines. No proprietary blob.</p>
+<h2 id="the-vim-bit">The Vim Bit</h2>
+<p>If you already live in vim, you already know how to drive SQEEL. <code>i</code> to insert,
+<code>Esc</code> to normal, <code>v</code> for visual, <code>:</code> for command mode, <code>/</code> to search. Leader key
+(default <code>Space</code>) opens the fun stuff:</p>
+<table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody>
+<tr><td><code>&lt;leader&gt;c</code></td><td>Connection switcher</td></tr>
+<tr><td><code>&lt;leader&gt;n</code></td><td>New scratch tab</td></tr>
+<tr><td><code>&lt;leader&gt;r</code></td><td>Rename current tab</td></tr>
+<tr><td><code>&lt;leader&gt;d</code></td><td>Delete tab (confirm)</td></tr>
+<tr><td><code>&lt;leader&gt;&lt;leader&gt;</code></td><td>Fuzzy file picker</td></tr>
+</tbody></table>
+<p>Running a query is <code>Ctrl+Enter</code> for the statement under the cursor, or
+<code>Ctrl+Shift+Enter</code> to run every statement in the buffer.</p>
+<h2 id="lsp-powered-autocomplete">LSP-Powered Autocomplete</h2>
+<p>Point <code>editor.lsp_binary</code> at <a rel="external" href="https://github.com/sqls-server/sqls"><code>sqls</code></a> and
+you get schema-aware completions, hover docs, and inline diagnostic underlines —
+the same machinery your editor already uses, wired into the SQL editor pane. No
+bespoke completion engine to maintain, no magic.</p>
+<h2 id="two-uis-one-core">Two UIs, One Core</h2>
+<p>The workspace splits cleanly:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="plain"><span class="giallo-l"><span>sqeel-core/   # state, DB, query runner, schema, config</span></span>
+<span class="giallo-l"><span>sqeel-tui/    # ratatui terminal provider</span></span>
+<span class="giallo-l"><span>sqeel-gui/    # iced native GUI provider</span></span>
+<span class="giallo-l"><span>sqeel/        # binaries: sqeel + sqeel-gui</span></span></code></pre>
+<p>All the logic — connections, schema, query execution, history, eviction — lives
+in <code>sqeel-core</code>. The TUI and GUI are thin providers that render the same state.
+Fix a bug in the core, both UIs benefit. Want a web provider next? Drop in
+another crate.</p>
+<h2 id="why-rust">Why Rust?</h2>
+<p>Same reasons as always: performance, single-binary distribution, and <code>sqlx</code>.
+SQEEL opens instantly, connects to a real production database without a JVM
+warming up, and fits in a <code>cargo install</code> one-liner. No runtime to manage, no
+package manager to fight.</p>
+<h2 id="how-to-get-it-package">How to Get It 📦</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> install --git https://github.com/sqeel-sql/sqeel --bin sqeel</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> install --git https://github.com/sqeel-sql/sqeel --bin sqeel-gui</span></span></code></pre>
+<p>Or clone and build:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clone https://github.com/sqeel-sql/sqeel</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> sqeel</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> build --release</span></span></code></pre>
+<p>Binaries land in <code>target/release/sqeel</code> and <code>target/release/sqeel-gui</code>.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>SQEEL started the way most of my tools do — I was annoyed at something, and a
+weekend later there was a prototype. It's now my daily driver for every database
+I touch. If you live in vim, write a lot of SQL, and resent every Electron SQL
+client you've ever opened, give it a spin. Issues and PRs welcome at
+<a rel="external" href="https://github.com/sqeel-sql/sqeel">github.com/sqeel-sql/sqeel</a>. 🍻</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

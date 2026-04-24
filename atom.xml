@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>mxaddict</title>
+    <subtitle>mxaddict&#x27;s Blog</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://www.codedmaster.com/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.codedmaster.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-04-24T00:00:00+00:00</updated>
+    <id>https://www.codedmaster.com/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Introducing SQEEL: A Fast, Vim-Native SQL Client in Rust</title>
+        <published>2026-04-24T00:00:00+00:00</published>
+        <updated>2026-04-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/introducing-sqeel/"/>
+        <id>https://www.codedmaster.com/blog/introducing-sqeel/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/introducing-sqeel/">&lt;p&gt;Every SQL client I tried eventually annoyed me. DBeaver hauls a JVM. TablePlus
+is closed-source. The Electron crowd burns 500MB of RAM to show a grid. I wanted
+something that starts instantly, lives in the terminal, and respects my muscle
+memory. So I built one.&lt;&#x2F;p&gt;
+&lt;p&gt;Meet &lt;strong&gt;SQEEL&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-is-sqeel-zap&quot;&gt;What is SQEEL? ⚡&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sqeel-sql&#x2F;sqeel&quot;&gt;SQEEL&lt;&#x2F;a&gt; is a fast, vim-native SQL client
+written in Rust. No Electron. No JVM. It ships two binaries from one workspace:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sqeel&lt;&#x2F;code&gt; — a terminal UI built on ratatui&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;sqeel-gui&lt;&#x2F;code&gt; — a native GUI built on iced&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Same core, same keybindings, same config. Pick the one your mood wants today.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;features&quot;&gt;Features&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Native Rust&lt;&#x2F;strong&gt; — instant startup, single binary&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Vim bindings&lt;&#x2F;strong&gt; first class, not an afterthought&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Mouse support&lt;&#x2F;strong&gt; in every pane (even in the TUI)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;MySQL, PostgreSQL, SQLite&lt;&#x2F;strong&gt; via &lt;code&gt;sqlx&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;tree-sitter&lt;&#x2F;strong&gt; SQL syntax highlighting, dialect-aware&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;LSP integration&lt;&#x2F;strong&gt; with &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sqls-server&#x2F;sqls&quot;&gt;&lt;code&gt;sqls&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; for
+completions and inline diagnostic underlines&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Schema browser&lt;&#x2F;strong&gt; — click or &lt;code&gt;hjkl&lt;&#x2F;code&gt; to expand&#x2F;collapse&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Editor tabs&lt;&#x2F;strong&gt; with lazy loading and 5-minute RAM eviction&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Auto-save&lt;&#x2F;strong&gt; SQL buffers, result history, query history&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;tmux-aware&lt;&#x2F;strong&gt; pane navigation — &lt;code&gt;Ctrl+HJKL&lt;&#x2F;code&gt; crosses tmux panes cleanly&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Vim status bar&lt;&#x2F;strong&gt; and command mode (&lt;code&gt;:q&lt;&#x2F;code&gt;, &lt;code&gt;:w&lt;&#x2F;code&gt;, all the muscle memory)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;layout&quot;&gt;Layout&lt;&#x2F;h2&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;plain&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;┌──────────┬─────────────────────────────┐&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          │  [tab1] [tab2]              │&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│  Schema  │         Editor              │&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│  (15%)   │         (85%)               │&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          │                             │&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          ├─────────────────────────────┤&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          │         Results             │&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          │      (shows on query)       │&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;└──────────┴─────────────────────────────┘&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Results hide when empty so the editor fills the right pane. Run a query and the
+results pane expands to 50%. Dismiss with &lt;code&gt;q&lt;&#x2F;code&gt; and you&#x27;re back to full-size
+editing. No wasted pixels.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;connections-as-files&quot;&gt;Connections as Files&lt;&#x2F;h2&gt;
+&lt;p&gt;Every connection is one TOML file in &lt;code&gt;~&#x2F;.config&#x2F;sqeel&#x2F;conns&#x2F;&lt;&#x2F;code&gt;. Filename becomes
+the display name.&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;toml&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;# ~&#x2F;.config&#x2F;sqeel&#x2F;conns&#x2F;prod.toml&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;url&lt;&#x2F;span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; =&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; &amp;quot;postgres:&#x2F;&#x2F;user:pass@host&#x2F;db&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;toml&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;# ~&#x2F;.config&#x2F;sqeel&#x2F;conns&#x2F;local.toml&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;url&lt;&#x2F;span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; =&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; &amp;quot;mysql:&#x2F;&#x2F;localhost&#x2F;mydb&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Drop a file in, it shows up in the connection switcher (&lt;code&gt;&amp;lt;leader&amp;gt;c&lt;&#x2F;code&gt;). Version
+control it, symlink it, rsync it between machines. No proprietary blob.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-vim-bit&quot;&gt;The Vim Bit&lt;&#x2F;h2&gt;
+&lt;p&gt;If you already live in vim, you already know how to drive SQEEL. &lt;code&gt;i&lt;&#x2F;code&gt; to insert,
+&lt;code&gt;Esc&lt;&#x2F;code&gt; to normal, &lt;code&gt;v&lt;&#x2F;code&gt; for visual, &lt;code&gt;:&lt;&#x2F;code&gt; for command mode, &lt;code&gt;&#x2F;&lt;&#x2F;code&gt; to search. Leader key
+(default &lt;code&gt;Space&lt;&#x2F;code&gt;) opens the fun stuff:&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Key&lt;&#x2F;th&gt;&lt;th&gt;Action&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;c&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Connection switcher&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;n&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;New scratch tab&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;r&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Rename current tab&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;d&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Delete tab (confirm)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;&amp;lt;leader&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Fuzzy file picker&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;Running a query is &lt;code&gt;Ctrl+Enter&lt;&#x2F;code&gt; for the statement under the cursor, or
+&lt;code&gt;Ctrl+Shift+Enter&lt;&#x2F;code&gt; to run every statement in the buffer.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;lsp-powered-autocomplete&quot;&gt;LSP-Powered Autocomplete&lt;&#x2F;h2&gt;
+&lt;p&gt;Point &lt;code&gt;editor.lsp_binary&lt;&#x2F;code&gt; at &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sqls-server&#x2F;sqls&quot;&gt;&lt;code&gt;sqls&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; and
+you get schema-aware completions, hover docs, and inline diagnostic underlines —
+the same machinery your editor already uses, wired into the SQL editor pane. No
+bespoke completion engine to maintain, no magic.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;two-uis-one-core&quot;&gt;Two UIs, One Core&lt;&#x2F;h2&gt;
+&lt;p&gt;The workspace splits cleanly:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;plain&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;sqeel-core&#x2F;   # state, DB, query runner, schema, config&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;sqeel-tui&#x2F;    # ratatui terminal provider&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;sqeel-gui&#x2F;    # iced native GUI provider&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;sqeel&#x2F;        # binaries: sqeel + sqeel-gui&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;All the logic — connections, schema, query execution, history, eviction — lives
+in &lt;code&gt;sqeel-core&lt;&#x2F;code&gt;. The TUI and GUI are thin providers that render the same state.
+Fix a bug in the core, both UIs benefit. Want a web provider next? Drop in
+another crate.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;why-rust&quot;&gt;Why Rust?&lt;&#x2F;h2&gt;
+&lt;p&gt;Same reasons as always: performance, single-binary distribution, and &lt;code&gt;sqlx&lt;&#x2F;code&gt;.
+SQEEL opens instantly, connects to a real production database without a JVM
+warming up, and fits in a &lt;code&gt;cargo install&lt;&#x2F;code&gt; one-liner. No runtime to manage, no
+package manager to fight.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how-to-get-it-package&quot;&gt;How to Get It 📦&lt;&#x2F;h2&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; install --git https:&#x2F;&#x2F;github.com&#x2F;sqeel-sql&#x2F;sqeel --bin sqeel&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; install --git https:&#x2F;&#x2F;github.com&#x2F;sqeel-sql&#x2F;sqeel --bin sqeel-gui&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Or clone and build:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; clone https:&#x2F;&#x2F;github.com&#x2F;sqeel-sql&#x2F;sqeel&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #F38BA8;font-style: italic;&quot;&gt;cd&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; sqeel&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; build --release&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Binaries land in &lt;code&gt;target&#x2F;release&#x2F;sqeel&lt;&#x2F;code&gt; and &lt;code&gt;target&#x2F;release&#x2F;sqeel-gui&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;&#x2F;h2&gt;
+&lt;p&gt;SQEEL started the way most of my tools do — I was annoyed at something, and a
+weekend later there was a prototype. It&#x27;s now my daily driver for every database
+I touch. If you live in vim, write a lot of SQL, and resent every Electron SQL
+client you&#x27;ve ever opened, give it a spin. Issues and PRs welcome at
+&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sqeel-sql&#x2F;sqeel&quot;&gt;github.com&#x2F;sqeel-sql&#x2F;sqeel&lt;&#x2F;a&gt;. 🍻&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Why opencode Is My Favorite CLI Coding Agent</title>
+        <published>2026-04-09T00:00:00+00:00</published>
+        <updated>2026-04-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/why-opencode-is-my-favorite-cli-coding-agent/"/>
+        <id>https://www.codedmaster.com/blog/why-opencode-is-my-favorite-cli-coding-agent/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/why-opencode-is-my-favorite-cli-coding-agent/">&lt;p&gt;Of all the CLI coding agent clients I&#x27;ve used, &lt;code&gt;opencode&lt;&#x2F;code&gt; is the one I like the
+most.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve spent 100+ hours using it, and in that time it has felt less buggy, less
+resource intensive, and more reliable than &lt;code&gt;claude&lt;&#x2F;code&gt;, &lt;code&gt;codex&lt;&#x2F;code&gt;, and &lt;code&gt;gemini&lt;&#x2F;code&gt;.
+Just as important, it also feels like the best-looking client. The design is
+clean, focused, and it fits the way I already like to work.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;why-it-clicks-for-me&quot;&gt;Why It Clicks For Me&lt;&#x2F;h2&gt;
+&lt;p&gt;I&#x27;m an avid &lt;code&gt;neovim&lt;&#x2F;code&gt; and &lt;code&gt;tmux&lt;&#x2F;code&gt; user, so I care a lot about tools that stay out
+of the way. &lt;code&gt;opencode&lt;&#x2F;code&gt; feels intuitive in that environment. I do not have to
+fight the client to get things done, and that matters more than most people
+realize.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;tokyonight&lt;&#x2F;code&gt; theme is a bonus that I genuinely appreciate. It matches my
+&lt;code&gt;alacritty&lt;&#x2F;code&gt; and &lt;code&gt;neovim&lt;&#x2F;code&gt; setup perfectly, which makes the whole experience feel
+cohesive instead of bolted together.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;zen-service-and-bigpickle&quot;&gt;Zen Service And Bigpickle&lt;&#x2F;h2&gt;
+&lt;p&gt;I also use &lt;code&gt;opencode zen&lt;&#x2F;code&gt; service, including the &lt;code&gt;bigpickle&lt;&#x2F;code&gt; model there. So far
+I&#x27;ve spent about $100 USD on the platform, and it has already paid for itself
+many times over in saved time and finished work.&lt;&#x2F;p&gt;
+&lt;p&gt;That matters because AI tools are only worth it when they help me ship. In this
+case, &lt;code&gt;opencode zen&lt;&#x2F;code&gt; has been a practical investment, not just a novelty.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how-i-actually-use-ai&quot;&gt;How I Actually Use AI&lt;&#x2F;h2&gt;
+&lt;p&gt;I think of AI as another tool, not a replacement for thinking. If all you have
+is a hammer, everything starts looking like a nail. I try not to fall into that
+trap.&lt;&#x2F;p&gt;
+&lt;p&gt;Most of the time, I use my AI agent for:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;planning&lt;&#x2F;li&gt;
+&lt;li&gt;research&lt;&#x2F;li&gt;
+&lt;li&gt;documentation&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;I do occasionally let it write code for me when the task is simple enough.
+But most of the time I still end up doing the coding myself.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;final-take&quot;&gt;Final Take&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;opencode&lt;&#x2F;code&gt; is the best CLI coding agent client I&#x27;ve used so far. It is the most
+intuitive, the best looking, and the most dependable fit for how I work.&lt;&#x2F;p&gt;
+&lt;p&gt;For me, that combination is what makes it stand out.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My Journey into Local AI Coding: From Zero to Using Ollama Qwen3-Coder:30b via Opencode on Home Hardware</title>
+        <published>2026-03-11T00:00:00+00:00</published>
+        <updated>2026-03-11T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/my-journey-into-local-ai-coding/"/>
+        <id>https://www.codedmaster.com/blog/my-journey-into-local-ai-coding/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/my-journey-into-local-ai-coding/">&lt;p&gt;The world of AI coding assistants has evolved rapidly, but I&#x27;ve always been
+drawn to the idea of having complete control over my development environment.
+Recently, I embarked on a journey to install and configure Ollama&#x27;s
+Qwen3-Coder:30b model using opencode as the client on my home PC – a setup that
+allows me to enjoy powerful AI assistance while maintaining full privacy and
+offline functionality.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-spark-that-started-it-all&quot;&gt;The Spark That Started It All&lt;&#x2F;h2&gt;
+&lt;p&gt;I&#x27;ve been working with various coding tools throughout my career, but I&#x27;ve
+always felt a bit uneasy about cloud-based solutions. The concerns were twofold:
+first, the latency when using AI assistants in a network-connected environment,
+and second, privacy considerations around sending code snippets to external
+services.&lt;&#x2F;p&gt;
+&lt;p&gt;A few weeks ago, while browsing about local AI models, I discovered Ollama – a
+tool that makes running large language models locally incredibly simple.
+Combined with Qwen3-Coder:30b (which boasts impressive performance) and opencode
+as the client interface, this combination promised an optimal balance of power
+and privacy.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-setup-process&quot;&gt;The Setup Process&lt;&#x2F;h2&gt;
+&lt;p&gt;Setting up my AI coding environment required some technical know-how. First, I
+installed Ollama on my PC by downloading the appropriate version for my system&#x27;s
+architecture. Then, I pulled the Qwen3-Coder:30b model using
+&lt;code&gt;ollama pull qwen3-coder:30b&lt;&#x2F;code&gt;. This was probably my most time-consuming part –
+waiting for the large model to download.&lt;&#x2F;p&gt;
+&lt;p&gt;I then configured opencode (a specialized tool built for AI interactions) by
+adjusting its settings to point towards my local Ollama instance. The
+configuration steps were intuitive, and I quickly got it working with my local
+setup.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-experience&quot;&gt;The Experience&lt;&#x2F;h2&gt;
+&lt;p&gt;The difference between online and local AI assistance is immediate and
+noticeable. My response times are consistently under a second – much faster than
+cloud versions of these models. Additionally, I no longer worry about sending
+sensitive code to unknown external services.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve found this setup particularly beneficial for tasks like:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Code generation from natural language descriptions&lt;&#x2F;li&gt;
+&lt;li&gt;Understanding complex existing codebases&lt;&#x2F;li&gt;
+&lt;li&gt;Explaining technical concepts I&#x27;m unfamiliar with&lt;&#x2F;li&gt;
+&lt;li&gt;Helping debug difficult issues in my projects&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;What&#x27;s also refreshing is having a consistent, fast experience without worrying
+about internet connectivity. Even when traveling or working in areas with poor
+network connections, I can continue coding with full AI assistance.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-verdict&quot;&gt;The Verdict&lt;&#x2F;h2&gt;
+&lt;p&gt;I&#x27;ve genuinely enjoyed the transition to this local AI development environment.
+It&#x27;s not just about privacy and speed – it&#x27;s also about having complete control
+over my development stack. Whether you have a high-end gaming PC or a modest
+home computer, there&#x27;s something appealing about having an on-demand, powerful
+AI assistant close at hand.&lt;&#x2F;p&gt;
+&lt;p&gt;This setup has become a core part of my workflow, and I find myself using it
+daily for tasks that would previously have required extensive online research.
+It represents the next step in bringing the power of AI to the development
+process – without compromising on privacy or performance.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Supercharging Your Dotfiles: QOL Improvements, Fedora Support, and Cleaner Updates</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/changes-to-my-dotfiles-exploring-update-and-deps/"/>
+        <id>https://www.codedmaster.com/blog/changes-to-my-dotfiles-exploring-update-and-deps/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/changes-to-my-dotfiles-exploring-update-and-deps/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
+&lt;p&gt;This article details the recent updates and modifications to my personal
+dotfiles, with a particular focus on the &lt;code&gt;~&#x2F;.local&#x2F;bin&#x2F;.update&lt;&#x2F;code&gt; and
+&lt;code&gt;~&#x2F;.local&#x2F;bin&#x2F;.deps&lt;&#x2F;code&gt; scripts. These changes aim to streamline my development
+workflow, enhance system maintenance, and improve overall efficiency.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-update-script&quot;&gt;The &lt;code&gt;.update&lt;&#x2F;code&gt; Script&lt;&#x2F;h2&gt;
+&lt;p&gt;The &lt;code&gt;.update&lt;&#x2F;code&gt; script is designed to automate the process of updating various
+components of my system. It now includes enhanced functionalities for:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;System package management:&lt;&#x2F;strong&gt; (e.g., &lt;code&gt;paru -Syu&lt;&#x2F;code&gt; on Arch Linux,
+&lt;code&gt;apt update &amp;amp;&amp;amp; apt upgrade&lt;&#x2F;code&gt; on Debian&#x2F;Ubuntu).&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Dotfile synchronization:&lt;&#x2F;strong&gt; Pulling the latest changes from my dotfiles
+repository.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Application-specific updates:&lt;&#x2F;strong&gt; (e.g., &lt;code&gt;nvim&lt;&#x2F;code&gt; plugin updates, &lt;code&gt;tldr&lt;&#x2F;code&gt; cache
+updates, &lt;code&gt;tmux&lt;&#x2F;code&gt; plugin updates).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;quality-of-life-improvements-in-update&quot;&gt;Quality of Life Improvements in &lt;code&gt;.update&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Significant quality of life improvements have been integrated into the &lt;code&gt;.update&lt;&#x2F;code&gt;
+script to enhance its user experience and reliability:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Robust Error Handling:&lt;&#x2F;strong&gt; The script now utilizes &lt;code&gt;set -euo pipefail&lt;&#x2F;code&gt; to
+ensure immediate exits on errors, unset variables, or failed commands within a
+pipeline. This drastically improves the script&#x27;s reliability and prevents
+unexpected behavior.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Silent Execution:&lt;&#x2F;strong&gt; Most commands executed by the script now pipe their
+output to &lt;code&gt;&amp;gt;&#x2F;dev&#x2F;null 2&amp;gt;&amp;amp;1&lt;&#x2F;code&gt;. This keeps the terminal clean and focused,
+preventing a flood of command-line output and allowing the user to concentrate
+on essential updates.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Clear, Step-by-Step Logging:&lt;&#x2F;strong&gt; Instead of raw command output, the script
+provides concise and visually appealing feedback using
+&lt;code&gt;echo -e &quot;$GREEN_CHECK ...&quot;&lt;&#x2F;code&gt;. Each major step of the update process is clearly
+indicated with a green checkmark, making it easy to track progress and
+identify the current operation at a glance.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Automated Dotfiles Stashing and Reapplication:&lt;&#x2F;strong&gt; Before pulling updates, the
+script now intelligently stashes any local, uncommitted changes to the
+dotfiles repository. After a successful pull, these changes are automatically
+reapplied, ensuring that personal modifications are preserved across updates.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Self-Correction for Updates:&lt;&#x2F;strong&gt; If the dotfiles repository itself updates the
+&lt;code&gt;.update&lt;&#x2F;code&gt; script, the script is designed to re-execute itself with the new
+version, ensuring that the latest logic and features are always in use.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;the-deps-script&quot;&gt;The &lt;code&gt;.deps&lt;&#x2F;code&gt; Script&lt;&#x2F;h2&gt;
+&lt;p&gt;The &lt;code&gt;.deps&lt;&#x2F;code&gt; script is responsible for managing and installing project
+dependencies across different operating systems. Recent changes have focused on:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Cross-platform compatibility:&lt;&#x2F;strong&gt; Ensuring dependencies can be easily set up
+on different operating systems (e.g., Linux distributions like Arch, Fedora,
+Debian&#x2F;Ubuntu, as well as macOS&#x2F;Homebrew), including essential tools and
+libraries.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;enhanced-cross-platform-dependency-management-with-fedora-support&quot;&gt;Enhanced Cross-Platform Dependency Management with Fedora Support&lt;&#x2F;h3&gt;
+&lt;p&gt;The &lt;code&gt;.deps&lt;&#x2F;code&gt; script has been significantly enhanced to provide robust
+cross-platform dependency management. A key addition is the explicit support for
+&lt;strong&gt;Fedora&lt;&#x2F;strong&gt;, which is now detected via the &lt;code&gt;dnf&lt;&#x2F;code&gt; package manager. This means
+users on Fedora can now seamlessly install core system packages with a simple
+execution of the &lt;code&gt;.deps&lt;&#x2F;code&gt; script.&lt;&#x2F;p&gt;
+&lt;p&gt;Similar to the &lt;code&gt;.update&lt;&#x2F;code&gt; script, &lt;code&gt;.deps&lt;&#x2F;code&gt; also benefits from:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Robust Error Handling:&lt;&#x2F;strong&gt; Employing &lt;code&gt;set -euo pipefail&lt;&#x2F;code&gt; for safer and more
+predictable execution.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Silent Execution:&lt;&#x2F;strong&gt; Most package installation commands are run with output
+redirection (&lt;code&gt;&amp;gt;&#x2F;dev&#x2F;null 2&amp;gt;&amp;amp;1&lt;&#x2F;code&gt;) to maintain a clean and uncluttered terminal.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Clear, Step-by-Step Logging:&lt;&#x2F;strong&gt; Progress is communicated through clear
+&lt;code&gt;echo -e &quot;$GREEN_CHECK ...&quot;&lt;&#x2F;code&gt; messages, making it easy to understand which
+dependencies are being addressed for a particular operating system.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The script intelligently identifies the operating system&#x27;s package manager
+(e.g., &lt;code&gt;pacman&lt;&#x2F;code&gt; for Arch, &lt;code&gt;dnf&lt;&#x2F;code&gt; for Fedora, &lt;code&gt;apt-get&lt;&#x2F;code&gt; for Debian&#x2F;Ubuntu, &lt;code&gt;brew&lt;&#x2F;code&gt;
+for macOS) and executes the appropriate installation commands. This ensures that
+the correct development environment is set up with minimal manual intervention.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;future-plans&quot;&gt;Future Plans&lt;&#x2F;h2&gt;
+&lt;p&gt;I plan on updating my &lt;strong&gt;hyprland&lt;&#x2F;strong&gt;, &lt;strong&gt;waybar&lt;&#x2F;strong&gt;, &lt;strong&gt;swaync&lt;&#x2F;strong&gt;, &lt;strong&gt;gnome&lt;&#x2F;strong&gt;, &lt;strong&gt;qt&lt;&#x2F;strong&gt;,
+etc. configurations to use &lt;strong&gt;matugen&lt;&#x2F;strong&gt; for the color scheme and base the colors
+on the currently set wallpaper in &lt;strong&gt;hyprpaper&lt;&#x2F;strong&gt;. This will be major change to my
+current dotfiles theme setup which is completely static and set to a
+&lt;strong&gt;tokyonight&lt;&#x2F;strong&gt; inspired color palette&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;These updates to my dotfiles, particularly the &lt;code&gt;.update&lt;&#x2F;code&gt; and &lt;code&gt;.deps&lt;&#x2F;code&gt; scripts,
+represent a significant step towards a more automated, efficient, and robust
+development environment.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Introducing &#x27;Teach The Kids&#x27;: A New Rust Course for Young Learners!</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/introducing-ttk-course-for-young-learners/"/>
+        <id>https://www.codedmaster.com/blog/introducing-ttk-course-for-young-learners/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/introducing-ttk-course-for-young-learners/">&lt;p&gt;Hello, Young Adventurers and Parents!&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m incredibly excited to announce the launch of a brand new initiative here at
+codedmaster.com: &lt;strong&gt;&quot;Teach The Kids&quot; (TTK)!&lt;&#x2F;strong&gt; This project is born from a passion
+to introduce the magic of computer programming to young minds, making learning
+to code fun, engaging, and incredibly rewarding.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-is-teach-the-kids&quot;&gt;What is &quot;Teach The Kids&quot;?&lt;&#x2F;h2&gt;
+&lt;p&gt;TTK is a series of interactive courses designed specifically for young learners
+who are curious about how computers work and want to create their own digital
+worlds. We believe that coding is a superpower, and every child deserves the
+chance to discover it.&lt;&#x2F;p&gt;
+&lt;p&gt;Our first course is:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-quest-app-your-first-rust-adventure&quot;&gt;The Quest App: Your First Rust Adventure&lt;&#x2F;h3&gt;
+&lt;p&gt;In this hands-on course, young programmers will embark on an epic quest to build
+their very own &lt;strong&gt;command-line Quest App&lt;&#x2F;strong&gt; using &lt;strong&gt;Rust&lt;&#x2F;strong&gt;, a powerful and
+exciting programming language. Through a series of easy-to-follow chapters,
+children will learn fundamental coding concepts by:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Starting new projects&lt;&#x2F;strong&gt; like a pro!&lt;&#x2F;li&gt;
+&lt;li&gt;Making their computer &lt;strong&gt;talk back to them&lt;&#x2F;strong&gt; (display output)!&lt;&#x2F;li&gt;
+&lt;li&gt;Teaching their computer to &lt;strong&gt;listen to their commands&lt;&#x2F;strong&gt; (read input)!&lt;&#x2F;li&gt;
+&lt;li&gt;Making their projects &lt;strong&gt;remember things&lt;&#x2F;strong&gt; (save to files)!&lt;&#x2F;li&gt;
+&lt;li&gt;And even helping their computer &lt;strong&gt;forget things&lt;&#x2F;strong&gt; (remove from files)!&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Each lesson is crafted to be like a new level in a game, building skills
+step-by-step with clear explanations and fun analogies.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;why-rust-for-kids&quot;&gt;Why Rust for Kids?&lt;&#x2F;h2&gt;
+&lt;p&gt;Rust is known for being a powerful and safe language, but it&#x27;s also a fantastic
+choice for learning programming fundamentals. Its clear structure helps instill
+good coding habits from an early age, and the feeling of building something real
+and functional is incredibly motivating.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ready-to-code-your-first-quest&quot;&gt;Ready to Code Your First Quest?&lt;&#x2F;h2&gt;
+&lt;p&gt;Parents, if your child (or you!) is ready to dive into the world of programming,
+our &quot;Teach The Kids&quot; Quest App course is the perfect starting point. No prior
+experience is needed – just curiosity and a desire to create!&lt;&#x2F;p&gt;
+&lt;p&gt;Visit the new TTK Courses page to begin this exciting journey:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;&quot;&gt;Explore the Teach The Kids Courses&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Let&#x27;s empower the next generation of coders, one quest at a time!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Top Terminals for Fast, Keyboard-Driven Development: Featuring Alacritty</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/top-terminals-for-keyboard-driven-development/"/>
+        <id>https://www.codedmaster.com/blog/top-terminals-for-keyboard-driven-development/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/top-terminals-for-keyboard-driven-development/">&lt;p&gt;For developers who spend most of their day in the command line, the terminal
+emulator isn&#x27;t just a window; it&#x27;s a home. A fast, efficient, and highly
+customizable terminal can significantly boost productivity, especially for those
+of us who live by keyboard shortcuts and hate reaching for the mouse. Today, I
+want to shine a light on one of my top choices for keyboard-driven development:
+&lt;strong&gt;Alacritty&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;why-your-terminal-matters&quot;&gt;Why Your Terminal Matters&lt;&#x2F;h2&gt;
+&lt;p&gt;A good terminal emulator should offer:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Speed&lt;&#x2F;strong&gt;: Low latency and high throughput are crucial. You want your
+commands to appear instantly, without any lag.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Efficiency&lt;&#x2F;strong&gt;: It should be lightweight, consuming minimal system resources.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Customization&lt;&#x2F;strong&gt;: The ability to tweak fonts, colors, keybindings, and
+behavior to match your workflow and aesthetic.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Keyboard-Driven Design&lt;&#x2F;strong&gt;: Ideally, it should encourage (or even enforce)
+keyboard-only interaction, helping you keep your hands on the home row.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;While there are many excellent terminal emulators out there—like iTerm2 for
+macOS, Terminator for Linux, and the new Windows Terminal—Alacritty stands out
+for its uncompromising focus on a few core principles.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;alacritty-the-blazing-fast-gpu-accelerated-choice&quot;&gt;Alacritty: The Blazing Fast, GPU-Accelerated Choice&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;alacritty&#x2F;alacritty&quot;&gt;Alacritty&lt;&#x2F;a&gt; is a free and open-source,
+GPU-accelerated terminal emulator written in &lt;strong&gt;Rust&lt;&#x2F;strong&gt;. It&#x27;s designed for
+simplicity and performance, aiming to be the fastest terminal emulator
+available.&lt;&#x2F;p&gt;
+&lt;p&gt;Here&#x27;s why Alacritty is a fantastic choice for keyboard-driven development:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPU Acceleration&lt;&#x2F;strong&gt;: Unlike many traditional terminals that rely on the CPU
+for rendering, Alacritty offloads this work to your graphics card. This
+results in incredibly smooth scrolling, instant text rendering, and a
+noticeable reduction in input lag. For a truly &quot;instant&quot; feel, GPU
+acceleration is a game-changer.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Minimalism by Design&lt;&#x2F;strong&gt;: Alacritty is deliberately minimalist. It doesn&#x27;t
+come packed with tabs, split panes, or a GUI configuration editor
+out-of-the-box. This focus on core functionality keeps it lean and mean,
+allowing other tools (like &lt;code&gt;tmux&lt;&#x2F;code&gt; for session management) to handle more
+complex layouts. This approach reinforces a keyboard-centric workflow, as
+everything is configured via a simple YAML file.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Rust-Powered Performance&lt;&#x2F;strong&gt;: Being written in Rust, Alacritty benefits from
+Rust&#x27;s focus on safety and performance. This translates to a terminal that is
+not only fast but also highly reliable.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Cross-Platform&lt;&#x2F;strong&gt;: Alacritty is available on Linux, macOS, and Windows,
+meaning you can enjoy a consistent, high-performance terminal experience
+across all your development machines.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;configuration-the-alacritty-yml&quot;&gt;Configuration: The &lt;code&gt;alacritty.yml&lt;&#x2F;code&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Customizing Alacritty involves editing a &lt;code&gt;alacritty.yml&lt;&#x2F;code&gt; configuration file.
+While this might seem daunting to some, it&#x27;s incredibly powerful and encourages
+a deeper understanding of your terminal setup. You can define your preferred
+fonts, color schemes (like Dracula, Nord, or Catppuccin), keybindings, and much
+more, all in a plain text file that can be easily version-controlled with your
+dotfiles.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;If you&#x27;re a developer who values speed, efficiency, and a purely keyboard-driven
+workflow, Alacritty is definitely worth exploring. Its GPU acceleration and
+minimalist design provide an incredibly responsive and distraction-free
+environment, allowing you to focus on what matters most: writing code. Give it a
+try, and you might just find your new favorite terminal!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Chapter 01: Installing Rust on Linux (Arch)</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/ttk/install-rust/01-linux-arch/"/>
+        <id>https://www.codedmaster.com/ttk/install-rust/01-linux-arch/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/ttk/install-rust/01-linux-arch/">&lt;p&gt;Hello, Linux Adventurer!&lt;&#x2F;p&gt;
+&lt;p&gt;If you&#x27;re using a computer with Arch Linux, this chapter is for you! We&#x27;ll use
+the &lt;code&gt;pacman&lt;&#x2F;code&gt; command, which is like your computer&#x27;s app store, to install Rust.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-1-update-your-system-important-first-step&quot;&gt;Step 1: Update Your System (Important First Step!)&lt;&#x2F;h2&gt;
+&lt;p&gt;Before installing anything new, it&#x27;s always a good idea to update all the
+software on your computer. This ensures everything is fresh and ready!&lt;&#x2F;p&gt;
+&lt;p&gt;Open your &lt;strong&gt;terminal&lt;&#x2F;strong&gt; (the black screen where you type commands) and type this,
+then press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; pacman -Syu&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Type your computer&#x27;s password if it asks, and press Enter. This command tells
+&lt;code&gt;pacman&lt;&#x2F;code&gt; to &quot;synchronize&quot; (get new lists of apps) and &quot;update&quot; (install new
+versions of apps).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-2-install-rustup&quot;&gt;Step 2: Install Rustup&lt;&#x2F;h2&gt;
+&lt;p&gt;Rustup is the easiest way to install Rust. It&#x27;s a special tool that helps manage
+different versions of Rust.&lt;&#x2F;p&gt;
+&lt;p&gt;In your terminal, type this command and press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; pacman -S rustup&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When it asks &lt;code&gt;(Y&#x2F;n)&lt;&#x2F;code&gt;, type &lt;code&gt;Y&lt;&#x2F;code&gt; and press Enter to say &quot;Yes, install it!&quot;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-3-install-the-rust-toolchain&quot;&gt;Step 3: Install the Rust Toolchain&lt;&#x2F;h2&gt;
+&lt;p&gt;Now that &lt;code&gt;rustup&lt;&#x2F;code&gt; is installed, we can use it to get the main Rust tools. We&#x27;ll
+install the &quot;stable&quot; version, which is the most reliable one.&lt;&#x2F;p&gt;
+&lt;p&gt;Type this command and press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; default stable&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You might see some messages pop up. This is Rustup doing its work!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-4-update-rust-good-practice&quot;&gt;Step 4: Update Rust (Good Practice!)&lt;&#x2F;h2&gt;
+&lt;p&gt;It&#x27;s a good habit to keep your Rust tools updated.&lt;&#x2F;p&gt;
+&lt;p&gt;Type this command and press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; update&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This will check if there are any newer versions of Rust and install them if
+needed.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-5-verify-your-installation&quot;&gt;Step 5: Verify Your Installation&lt;&#x2F;h2&gt;
+&lt;p&gt;Let&#x27;s check if Rust and Cargo (Rust&#x27;s build tool) are installed correctly!&lt;&#x2F;p&gt;
+&lt;p&gt;Type these commands, one by one, and press Enter after each:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustc&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You should see something like: &lt;code&gt;rustc 1.XX.X (YYYY-MM-DD)&lt;&#x2F;code&gt;
+&lt;code&gt;cargo 1.XX.X (YYYY-MM-DD)&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;1.XX.X&lt;&#x2F;code&gt; part will be the version number, which might be different from this
+example, and that&#x27;s perfectly fine! As long as you see version numbers, Rust is
+installed!&lt;&#x2F;p&gt;
+&lt;p&gt;Congratulations! Rust is now installed on your Arch Linux computer. You&#x27;re ready
+to start coding your Quest App!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;navigation&quot;&gt;Navigation&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous: &lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-rust&#x2F;&quot;&gt;Install Rust: Get Ready to Code!&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Next:
+&lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-rust&#x2F;02-windows&#x2F;&quot;&gt;Chapter 02: Installing Rust on Windows&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Chapter 02: Installing Rust on Windows (using WSL&#x2F;Ubuntu)</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/ttk/install-rust/02-windows/"/>
+        <id>https://www.codedmaster.com/ttk/install-rust/02-windows/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/ttk/install-rust/02-windows/">&lt;p&gt;Hello, Windows Adventurer!&lt;&#x2F;p&gt;
+&lt;p&gt;If you&#x27;re using a computer with Windows, this chapter is for you! We&#x27;re going to
+install Rust inside your &lt;strong&gt;Ubuntu Linux&lt;&#x2F;strong&gt; system that you set up using &lt;strong&gt;WSL
+(Windows Subsystem for Linux)&lt;&#x2F;strong&gt;. This is the best way to code with Rust on
+Windows!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;prerequisite-install-ubuntu-with-wsl-first&quot;&gt;Prerequisite: Install Ubuntu with WSL first&lt;&#x2F;h2&gt;
+&lt;p&gt;Before you can install Rust with these instructions, you need to have &lt;strong&gt;Ubuntu
+Linux&lt;&#x2F;strong&gt; set up on your Windows computer using WSL. If you haven&#x27;t done that yet,
+please go to this course first:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-wsl&#x2F;&quot;&gt;Install Ubuntu with WSL: Your Linux Adventure on Windows!&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Once you have Ubuntu running with WSL, come back here!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-1-open-your-ubuntu-terminal&quot;&gt;Step 1: Open Your Ubuntu Terminal&lt;&#x2F;h2&gt;
+&lt;p&gt;First, open your &lt;strong&gt;Ubuntu terminal&lt;&#x2F;strong&gt;. You can do this by searching for &quot;Ubuntu&quot;
+in your Windows Start menu and clicking the app. It&#x27;s the black window where you
+type Linux commands!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-2-update-your-ubuntu-system-important-first-step&quot;&gt;Step 2: Update Your Ubuntu System (Important First Step!)&lt;&#x2F;h2&gt;
+&lt;p&gt;Before installing anything new, it&#x27;s always a good idea to update all the
+software on your Ubuntu system. This ensures everything is fresh and ready!&lt;&#x2F;p&gt;
+&lt;p&gt;In your Ubuntu terminal, type this, then press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; apt update&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; apt upgrade -y&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Type your Linux password if it asks, and press Enter. This command tells Ubuntu
+to get the newest lists of apps and then install new versions of apps.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-3-install-rustup&quot;&gt;Step 3: Install Rustup&lt;&#x2F;h2&gt;
+&lt;p&gt;Rustup is the easiest way to install Rust. It&#x27;s a special tool that helps manage
+different versions of Rust.&lt;&#x2F;p&gt;
+&lt;p&gt;In your Ubuntu terminal, type this command and press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;curl&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --proto &amp;#39;=https&amp;#39; --tlsv1.2 -sSf https:&#x2F;&#x2F;sh.rustup.rs&lt;&#x2F;span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; |&lt;&#x2F;span&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt; sh&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You&#x27;ll see some messages. When it asks:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;1) Proceed with installation (default)&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Just press &lt;strong&gt;Enter&lt;&#x2F;strong&gt; to choose the default option. This will download and
+install Rust!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-4-restart-your-ubuntu-terminal&quot;&gt;Step 4: Restart Your Ubuntu Terminal&lt;&#x2F;h2&gt;
+&lt;p&gt;After Rust is installed, it&#x27;s a good idea to close your Ubuntu terminal window
+and open a new one. This helps your Ubuntu system &quot;refresh&quot; and find the new
+Rust tools.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-5-verify-your-installation&quot;&gt;Step 5: Verify Your Installation&lt;&#x2F;h2&gt;
+&lt;p&gt;Let&#x27;s check if Rust and Cargo (Rust&#x27;s build tool) are installed correctly!&lt;&#x2F;p&gt;
+&lt;p&gt;In your &lt;strong&gt;new&lt;&#x2F;strong&gt; Ubuntu terminal window, type these commands, one by one, and
+press Enter after each:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustc&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You should see something like: &lt;code&gt;rustc 1.XX.X (YYYY-MM-DD)&lt;&#x2F;code&gt;
+&lt;code&gt;cargo 1.XX.X (YYYY-MM-DD)&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;1.XX.X&lt;&#x2F;code&gt; part will be the version number, which might be different from this
+example, and that&#x27;s perfectly fine! As long as you see version numbers, Rust is
+installed!&lt;&#x2F;p&gt;
+&lt;p&gt;Congratulations! Rust is now installed on your Windows computer, inside your
+Ubuntu Linux system. You&#x27;re ready to start coding your Quest App!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;navigation&quot;&gt;Navigation&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous:
+&lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-rust&#x2F;01-linux-arch&#x2F;&quot;&gt;Chapter 01: Installing Rust on Linux (Arch)&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Next: &lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-rust&#x2F;03-macos&#x2F;&quot;&gt;Chapter 03: Installing Rust on macOS&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Chapter 03: Installing Rust on macOS</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/ttk/install-rust/03-macos/"/>
+        <id>https://www.codedmaster.com/ttk/install-rust/03-macos/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/ttk/install-rust/03-macos/">&lt;p&gt;Hello, macOS Adventurer!&lt;&#x2F;p&gt;
+&lt;p&gt;If you&#x27;re using a computer with macOS, this chapter is for you! We&#x27;ll use a
+special script to install Rust, which makes things very easy.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-1-install-xcode-command-line-tools-if-you-haven-t-already&quot;&gt;Step 1: Install Xcode Command Line Tools (If You Haven&#x27;t Already)&lt;&#x2F;h2&gt;
+&lt;p&gt;Rust needs some special tools from Apple called &quot;Xcode Command Line Tools&quot; to
+build programs. You might already have them! If not, don&#x27;t worry, it&#x27;s easy to
+get.&lt;&#x2F;p&gt;
+&lt;p&gt;Open your &lt;strong&gt;Terminal&lt;&#x2F;strong&gt; (you can find it in Applications &amp;gt; Utilities, or by
+searching with Spotlight).&lt;&#x2F;p&gt;
+&lt;p&gt;Type this command and press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;xcode-select&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --install&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If the tools are not installed, a window will pop up asking you to install them.
+Click &quot;Install&quot; and agree to the terms. This might take a little while. If you
+already have them, you&#x27;ll see a message saying something like &quot;xcode-select:
+error: command line tools are already installed&quot;. That&#x27;s great!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-2-install-homebrew-optional-but-recommended-for-mac-users&quot;&gt;Step 2: Install Homebrew (Optional, but Recommended for Mac Users!)&lt;&#x2F;h2&gt;
+&lt;p&gt;Homebrew is a &quot;package manager&quot; for macOS. Think of it like a super-smart app
+store for your Terminal that helps you install other tools easily. Many
+developers use it! If you already have Homebrew, you can skip this step.&lt;&#x2F;p&gt;
+&lt;p&gt;To install Homebrew, copy and paste this command into your Terminal and press
+Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;&#x2F;bin&#x2F;bash&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; -c &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color: #9399B2;&quot;&gt;$(&lt;&#x2F;span&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;curl&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;HEAD&#x2F;install.sh&lt;&#x2F;span&gt;&lt;span style=&quot;color: #9399B2;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Follow the instructions in the Terminal. It might ask for your computer&#x27;s
+password. Press Enter when it asks you to.&lt;&#x2F;p&gt;
+&lt;p&gt;After it&#x27;s done, it might tell you to run a couple of commands to add Homebrew
+to your &quot;PATH&quot; (where your computer looks for programs). Make sure to run those
+commands!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-3-install-rustup&quot;&gt;Step 3: Install Rustup&lt;&#x2F;h2&gt;
+&lt;p&gt;Rustup is the easiest way to install Rust. It&#x27;s a special tool that helps manage
+different versions of Rust.&lt;&#x2F;p&gt;
+&lt;p&gt;In your Terminal, copy and paste this command and press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;curl&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --proto &amp;#39;=https&amp;#39; --tlsv1.2 -sSf https:&#x2F;&#x2F;sh.rustup.rs&lt;&#x2F;span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; |&lt;&#x2F;span&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt; sh&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You&#x27;ll see some messages. When it asks:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;1) Proceed with installation (default)&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Just press &lt;strong&gt;Enter&lt;&#x2F;strong&gt; to choose the default option. This will download and
+install Rust!&lt;&#x2F;p&gt;
+&lt;p&gt;After installation, it might tell you to &quot;source&quot; your &lt;code&gt;~&#x2F;.profile&lt;&#x2F;code&gt; or
+&lt;code&gt;~&#x2F;.bashrc&lt;&#x2F;code&gt; or &lt;code&gt;~&#x2F;.zshrc&lt;&#x2F;code&gt; file. This means reloading your Terminal&#x27;s settings.
+The easiest way to do this is to simply &lt;strong&gt;close your Terminal window and open a
+new one.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-4-verify-your-installation&quot;&gt;Step 4: Verify Your Installation&lt;&#x2F;h2&gt;
+&lt;p&gt;Let&#x27;s check if Rust and Cargo (Rust&#x27;s build tool) are installed correctly!&lt;&#x2F;p&gt;
+&lt;p&gt;In your &lt;strong&gt;new&lt;&#x2F;strong&gt; Terminal window, type these commands, one by one, and press
+Enter after each:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustc&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You should see something like: &lt;code&gt;rustc 1.XX.X (YYYY-MM-DD)&lt;&#x2F;code&gt;
+&lt;code&gt;cargo 1.XX.X (YYYY-MM-DD)&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;1.XX.X&lt;&#x2F;code&gt; part will be the version number, which might be different from this
+example, and that&#x27;s perfectly fine! As long as you see version numbers, Rust is
+installed!&lt;&#x2F;p&gt;
+&lt;p&gt;Congratulations! Rust is now installed on your macOS computer. You&#x27;re ready to
+start coding your Quest App!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;navigation&quot;&gt;Navigation&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous:
+&lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-rust&#x2F;02-windows&#x2F;&quot;&gt;Chapter 02: Installing Rust on Windows&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Chapter 01: Installing Vim on Linux (Arch)</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/ttk/install-vim/01-linux-arch/"/>
+        <id>https://www.codedmaster.com/ttk/install-vim/01-linux-arch/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/ttk/install-vim/01-linux-arch/">&lt;p&gt;Hello, Linux Adventurer!&lt;&#x2F;p&gt;
+&lt;p&gt;If you&#x27;re using an Arch Linux computer, this chapter will show you how to
+install Vim, your secret code-editing notebook!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-1-open-your-terminal&quot;&gt;Step 1: Open Your Terminal&lt;&#x2F;h2&gt;
+&lt;p&gt;First, open your &lt;strong&gt;terminal&lt;&#x2F;strong&gt; (the black screen where you type commands).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-2-install-vim&quot;&gt;Step 2: Install Vim&lt;&#x2F;h2&gt;
+&lt;p&gt;Vim is usually found in your system&#x27;s &quot;app store&quot; for commands, called &lt;code&gt;pacman&lt;&#x2F;code&gt;.
+We&#x27;ll use the &lt;code&gt;sudo&lt;&#x2F;code&gt; command to tell your computer you have permission to
+install new software.&lt;&#x2F;p&gt;
+&lt;p&gt;Type this command into your terminal and press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; pacman -S vim&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If your computer asks for your password, type it in and press Enter. You might
+not see the letters as you type your password, and that&#x27;s normal for security!&lt;&#x2F;p&gt;
+&lt;p&gt;When it asks &lt;code&gt;(Y&#x2F;n)&lt;&#x2F;code&gt;, type &lt;code&gt;Y&lt;&#x2F;code&gt; and press Enter to say &quot;Yes, install it!&quot;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;step-3-verify-your-installation&quot;&gt;Step 3: Verify Your Installation&lt;&#x2F;h2&gt;
+&lt;p&gt;Let&#x27;s make sure Vim is ready to go!&lt;&#x2F;p&gt;
+&lt;p&gt;Type this command in your terminal and press Enter:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;vim&lt;&#x2F;span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You should see lots of information about Vim, including its version number. As
+long as you see some text and a version, Vim is installed correctly!&lt;&#x2F;p&gt;
+&lt;p&gt;Congratulations! Vim is now installed on your Arch Linux computer. Get ready to
+learn its secrets!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;navigation&quot;&gt;Navigation&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous:
+&lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-vim&#x2F;&quot;&gt;Install Vim &amp;amp; Learn the Basics: Your Secret Editor!&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Next: &lt;a href=&quot;https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-vim&#x2F;02-windows&#x2F;&quot;&gt;Chapter 02: Installing Vim on Windows&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

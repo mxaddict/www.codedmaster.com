@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Setup TOR on Ubuntu 16.04? - mxaddict</title>
+    
+    
+    <meta name="description" content="Learn how to set up Tor on Ubuntu 16.04 to enhance your online anonymity. This tutorial covers installation of Tor and Tor Browser, checking the Tor service, and using `torsocks` for anonymous terminal commands.">
+    
+    
+    <meta name="keywords" content="tor, ubuntu, linux, anonymity, privacy, security, networking, tor browser, tutorial">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;setup-tor-on-ubuntu-16-04&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Setup TOR on Ubuntu 16.04?</h1>
+  
+  <p>published: <time>2016-08-23</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/tor/">#tor</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ubuntu/">#ubuntu</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/anonymity/">#anonymity</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/privacy/">#privacy</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/security/">#security</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/networking/">#networking</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tor-browser/">#tor browser</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p><a rel="external" href="https://www.torproject.org/">Tor</a> is a open source, open networking tool that allows you to surf the
+web with better anonymity, it is basically a free and open proxy type networking
+tool that will allow you to surf the web from other network nodes. From their
+<a rel="external" href="https://www.torproject.org/">site</a> :</p>
+<blockquote>
+<p>Tor is free software and an open network that helps you defend against traffic
+analysis, a form of network surveillance that threatens personal freedom and
+privacy, confidential business activities and relationships, and state
+security.</p>
+</blockquote>
+<p>It's an immensely useful tool and one we encourage you to use if you want to be
+safer on the web.</p>
+<p>Basic install for <a rel="external" href="http://www.ubuntu.com/">Ubuntu</a> is as follows:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt install tor torbrowser-launcher -y</span></span></code></pre>
+<p>After installing it, the tor service should be up and running, which you can
+check with:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> service tor status</span></span></code></pre>
+<p>That should give you a similar output to the following:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">●</span><span style="color: #A6E3A1;"> tor.service - Anonymizing overlay network for TCP</span><span> (multi-instance-master)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">   Loaded:</span><span style="color: #A6E3A1;"> loaded</span><span> (/lib/systemd/system/tor.service</span><span style="color: #9399B2;">;</span><span style="color: #89B4FA;font-style: italic;"> enabled</span><span style="color: #9399B2;">;</span><span style="color: #89B4FA;font-style: italic;"> vendor</span><span style="color: #A6E3A1;"> preset: enabled</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">   Active:</span><span style="color: #A6E3A1;"> active</span><span> (exited) since Mon 2016-08-22 20:58:25 PHT</span><span style="color: #9399B2;">;</span><span style="color: #89B4FA;font-style: italic;"> 4h</span><span style="color: #A6E3A1;"> 25min ago</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  Process:</span><span style="color: #FAB387;"> 3129</span><span style="color: #A6E3A1;"> ExecStart=/bin/</span><span style="color: #FAB387;">true</span><span> (code=exited,</span><span style="color: #A6E3A1;"> status=0/SUCCESS</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;"> Main</span><span style="color: #A6E3A1;"> PID:</span><span style="color: #FAB387;"> 3129</span><span> (code=exited,</span><span style="color: #A6E3A1;"> status=0/SUCCESS</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    Tasks:</span><span style="color: #FAB387;"> 0</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">   Memory:</span><span style="color: #A6E3A1;"> 0B</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">      CPU:</span><span style="color: #FAB387;"> 0</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">   CGroup:</span><span style="color: #A6E3A1;"> /system.slice/tor.service</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">Aug</span><span style="color: #FAB387;"> 22</span><span style="color: #A6E3A1;"> 20:58:25 system-hostname systemd[1]: Starting Anonymizing overlay network for TCP</span><span> (multi-instance-master)...</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">Aug</span><span style="color: #FAB387;"> 22</span><span style="color: #A6E3A1;"> 20:58:25 system-hostname systemd[1]: Started Anonymizing overlay network for TCP</span><span> (multi-instance-master).</span></span></code></pre>
+<p>Now if for some weird reason the service is not started, just run this:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> service tor start</span></span></code></pre>
+<p>Once you know you have the service running, run the torbrowser-launcher to
+download and install the <a rel="external" href="https://www.torproject.org/">Tor</a> Browser. Either open it from your
+application launcher, or run it from a terminal:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">torbrowser-launcher</span></span></code></pre>
+<p>After running that command you should get output that is similar to the
+following before the browser actually loads up:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">Tor</span><span style="color: #A6E3A1;"> Browser Launcher</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">By</span><span style="color: #A6E3A1;"> Micah Lee, licensed under MIT</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">version</span><span style="color: #FAB387;"> 0.2.4</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">https://github.com/micahflee/torbrowser-launcher</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">Launching</span><span style="color: #A6E3A1;"> &#39;./Browser/start-tor-browser --detach&#39;...</span></span></code></pre>
+<p>Using the tor browser is the fastest way to get HTTP(S) access using the
+<a rel="external" href="https://www.torproject.org/">Tor</a> Network.</p>
+<p>If you want, you can run most terminal commands using <a rel="external" href="https://www.torproject.org/">Tor</a> to anonymize
+it's traffic, for example, you could run something as simple as an ssh
+connection using <a rel="external" href="https://www.torproject.org/">Tor</a> with the <code>torsocks</code> command:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">torsocks</span><span style="color: #A6E3A1;"> ssh someone@somewhere.tld -p</span><span style="color: #FAB387;"> 2222</span></span></code></pre><h2 id="conclusion">Conclusion</h2>
+<p><a rel="external" href="https://www.torproject.org/">Tor</a> might sound scary, but I assure you, it's much simpler than you might
+think, I hope you can use this info as a starting point to your <a rel="external" href="https://www.torproject.org/">Tor</a>
+powered adventure browsing, good luck and have fun. Peace!</p>
+<hr />
+<p><strong><em>Editor's Note (2026):</em></strong> This post refers to Ubuntu 16.04 (Xenial Xerus),
+which reached its standard End-of-Life in April 2021. The information is
+preserved for historical context but is not recommended for use on a modern
+system.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

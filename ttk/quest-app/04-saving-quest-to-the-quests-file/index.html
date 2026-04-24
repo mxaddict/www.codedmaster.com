@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 04: Quest App: Making Quests Permanent (Saving to a File) - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Make your Quest App quests permanent by learning to save newly added quests to a `quests.txt` file in Rust, ensuring your progress is always up-to-date.">
+    
+    
+    <meta name="keywords" content="rust, programming, tutorial, cli, quest app, education, kids, children, young, learners">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;quest-app&#x2F;04-saving-quest-to-the-quests-file&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 04: Quest App: Making Quests Permanent (Saving to a File)</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/programming/">#programming</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/quest-app/">#quest app</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Fantastic work, Adventurer!</p>
+<p>Your Quest App can now read quests from a file and even add new ones from your
+commands. But there's still one tiny step missing: when you add a <em>new</em> quest
+using <code>cargo run</code>, it doesn't stay in <code>quests.txt</code> when you close the program.
+Let's fix that so your quest log is always up-to-date!</p>
+<h2 id="the-magic-of-writing-to-a-file">The Magic of Writing to a File</h2>
+<p>To make our new quests permanent, we need to write them into our <code>quests.txt</code>
+file. We'll use some special tools in Rust that let us open the file and add new
+lines to it.</p>
+<p>Here's how we'll update our <code>main.rs</code> file to save new quests:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="rust"><span class="giallo-l"><span style="color: #CBA6F7;">use</span><span style="color: #F9E2AF;"> std</span><span style="color: #94E2D5;">::</span><span>fs</span><span style="color: #9399B2;">;</span><span style="color: #9399B2;font-style: italic;">        // For reading and writing files</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">use</span><span style="color: #F9E2AF;"> std</span><span style="color: #94E2D5;">::</span><span style="color: #F9E2AF;">io</span><span style="color: #94E2D5;">::</span><span style="color: #F9E2AF;font-style: italic;">Write</span><span style="color: #9399B2;">;</span><span style="color: #9399B2;font-style: italic;"> // We need this to use the &#39;write_all&#39; function</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fn</span><span style="color: #89B4FA;font-style: italic;"> main</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">  // --- Part 1: Load Quests from quests.txt ---</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  let mut</span><span> quests</span><span style="color: #94E2D5;">:</span><span style="color: #F9E2AF;font-style: italic;"> Vec</span><span style="color: #89DCEB;">&lt;</span><span style="color: #F9E2AF;font-style: italic;">String</span><span style="color: #89DCEB;">&gt;</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;font-style: italic;"> Vec</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">new</span><span style="color: #9399B2;">();</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  let</span><span> quests_file_content</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;"> fs</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">read_to_string</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;quests.txt&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  match</span><span> quests_file_content</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #F9E2AF;font-style: italic;">    Ok</span><span style="color: #9399B2;">(</span><span>content</span><span style="color: #9399B2;">)</span><span style="color: #94E2D5;"> =&gt;</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">      for</span><span> line</span><span style="color: #CBA6F7;"> in</span><span> content</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">lines</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">        if</span><span style="color: #94E2D5;"> !</span><span>line</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">trim</span><span style="color: #9399B2;">()</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">is_empty</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span>          quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">push</span><span style="color: #9399B2;">(</span><span>line</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">to_string</span><span style="color: #9399B2;">());</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        }</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">      }</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">      println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Loaded </span><span style="color: #9399B2;">{}</span><span style="color: #A6E3A1;"> quests from quests.txt!&quot;</span><span style="color: #9399B2;">,</span><span> quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">len</span><span style="color: #9399B2;">());</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    },</span></span>
+<span class="giallo-l"><span style="color: #F9E2AF;font-style: italic;">    Err</span><span style="color: #9399B2;">(</span><span>error</span><span style="color: #9399B2;">)</span><span style="color: #94E2D5;"> =&gt;</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">      println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Could not read quests.txt: </span><span style="color: #9399B2;">{}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">,</span><span> error</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">      println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Starting with an empty quest list. Make sure quests.txt exists!&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">      // We&#39;ll create the file if it doesn&#39;t exist</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">      // to avoid future errors when writing</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">      let</span><span> _</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;"> fs</span><span style="color: #94E2D5;">::</span><span style="color: #F9E2AF;font-style: italic;">File</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">create</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;quests.txt&quot;</span><span style="color: #9399B2;">)</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">expect</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Could not create quests.txt!&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">  // --- Part 2: (Optional) Add a New Quest from Command-Line Arguments ---</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  let</span><span> args</span><span style="color: #94E2D5;">:</span><span style="color: #F9E2AF;font-style: italic;"> Vec</span><span style="color: #89DCEB;">&lt;</span><span style="color: #F9E2AF;font-style: italic;">String</span><span style="color: #89DCEB;">&gt;</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;"> std</span><span style="color: #94E2D5;">::</span><span style="color: #F9E2AF;">env</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">args</span><span style="color: #9399B2;">()</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">collect</span><span style="color: #9399B2;">();</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  let mut</span><span> new_quest_description</span><span style="color: #94E2D5;">:</span><span style="color: #F9E2AF;font-style: italic;"> Option</span><span style="color: #89DCEB;">&lt;</span><span style="color: #F9E2AF;font-style: italic;">String</span><span style="color: #89DCEB;">&gt;</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;font-style: italic;"> None</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  if</span><span> args</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">len</span><span style="color: #9399B2;">()</span><span style="color: #89DCEB;"> &gt;</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span>    new_quest_description</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;font-style: italic;"> Some</span><span style="color: #9399B2;">(</span><span>args</span><span style="color: #9399B2;">[</span><span style="color: #FAB387;">1</span><span style="color: #94E2D5;">..</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">join</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot; &quot;</span><span style="color: #9399B2;">));</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  if let</span><span style="color: #F9E2AF;font-style: italic;"> Some</span><span style="color: #9399B2;">(</span><span>quest_text</span><span style="color: #9399B2;">)</span><span style="color: #94E2D5;"> =</span><span> new_quest_description</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Add the new quest to our list in memory</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // We use .clone() because we need quest_text twice</span></span>
+<span class="giallo-l"><span>    quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">push</span><span style="color: #9399B2;">(</span><span>quest_text</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">clone</span><span style="color: #9399B2;">());</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // --- NEW PART: Save the new quest to the quests.txt file! ---</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    let mut</span><span> file</span><span style="color: #94E2D5;"> =</span><span style="color: #F9E2AF;"> fs</span><span style="color: #94E2D5;">::</span><span style="color: #F9E2AF;font-style: italic;">OpenOptions</span><span style="color: #94E2D5;">::</span><span style="color: #89B4FA;font-style: italic;">new</span><span style="color: #9399B2;">()</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">      // This means &quot;add to the end of the file&quot;</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">      .</span><span style="color: #89B4FA;font-style: italic;">append</span><span style="color: #9399B2;">(</span><span style="color: #F38BA8;">true</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">      // This means &quot;create the file if it doesn&#39;t exist&quot;</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">      .</span><span style="color: #89B4FA;font-style: italic;">create</span><span style="color: #9399B2;">(</span><span style="color: #F38BA8;">true</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">      // Try to open our quest file</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">      .</span><span style="color: #89B4FA;font-style: italic;">open</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;quests.txt&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">      // If it fails, stop and tell us why</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">      .</span><span style="color: #89B4FA;font-style: italic;">expect</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Could not open quests.txt for writing!&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Write the new quest followed by a new line character</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    if let</span><span style="color: #F9E2AF;font-style: italic;"> Err</span><span style="color: #9399B2;">(</span><span>e</span><span style="color: #9399B2;">)</span><span style="color: #94E2D5;"> =</span><span style="color: #89B4FA;font-style: italic;"> writeln!</span><span style="color: #9399B2;">(</span><span>file</span><span style="color: #9399B2;">,</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #9399B2;">{}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">,</span><span> quest_text</span><span style="color: #9399B2;">) {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">      eprintln!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Couldn&#39;t write to file: </span><span style="color: #9399B2;">{}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">,</span><span> e</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;Awesome! We added your new quest and saved it!&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span><span style="color: #CBA6F7;"> else</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;To add a new quest, type &#39;cargo run&#39; followed by your quest, like:&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;  cargo run find the golden apple&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">  // --- Part 3: Display All Quests ---</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;--- Your Current Quests ---&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  if</span><span> quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">is_empty</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;No quests found! Time to add some new adventures!&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span><span style="color: #CBA6F7;"> else</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    for</span><span style="color: #9399B2;"> (</span><span>index</span><span style="color: #9399B2;">,</span><span> quest</span><span style="color: #9399B2;">)</span><span style="color: #CBA6F7;"> in</span><span> quests</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">iter</span><span style="color: #9399B2;">()</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">enumerate</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">      println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">{}</span><span style="color: #A6E3A1;">. </span><span style="color: #9399B2;">{}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">,</span><span> index</span><span style="color: #94E2D5;"> +</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">,</span><span> quest</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  println!</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;---------------------------&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre><h2 id="what-s-changed-and-new-here">What's Changed and New Here?</h2>
+<ol>
+<li>
+<p><code>use std::io::Write;</code></p>
+<ul>
+<li>We added this new <code>use</code> line because the <code>writeln!</code> function we're using
+comes from this part of Rust's tools.</li>
+</ul>
+</li>
+<li>
+<p><code>let _ = fs::File::create("quests.txt").expect("Could not create quests.txt!");</code></p>
+<ul>
+<li>In the <code>Err</code> part when loading quests, we added this line. If <code>quests.txt</code>
+doesn't exist, this will create an empty one so we can write to it later
+without problems. The <code>let _ =</code> means we don't care about the result, we
+just want it to happen.</li>
+</ul>
+</li>
+<li>
+<p><code>quests.push(quest_text.clone());</code></p>
+<ul>
+<li>You might notice <code>.clone()</code> here. Because we're using <code>quest_text</code> to add
+to our <code>quests</code> list <em>and</em> to write to the file, Rust needs two separate
+copies of it. <code>clone()</code> makes a copy!</li>
+</ul>
+</li>
+<li>
+<p><code>let mut file = fs::OpenOptions::new()...</code></p>
+<ul>
+<li>This is the super important new part for saving!</li>
+<li><code>fs::OpenOptions::new()</code>: We're telling Rust we want to open a file with
+some special rules.</li>
+<li><code>.append(true)</code>: This is the key! It means "don't erase the file, just add
+new stuff to the very end."</li>
+<li><code>.create(true)</code>: This means "if <code>quests.txt</code> doesn't exist yet, please make
+it for me!"</li>
+<li><code>.open("quests.txt")</code>: Finally, try to open the file with these rules.</li>
+<li><code>.expect(...)</code>: If anything goes wrong (like your computer doesn't let us
+open the file), this will stop the program and show our message.</li>
+</ul>
+</li>
+<li>
+<p><code>if let Err(e) = writeln!(file, "{}", quest_text) { ... }</code></p>
+<ul>
+<li><code>writeln!(file, "{}", quest_text)</code>: This is like <code>println!</code>, but instead of
+printing to the screen, it <code>write</code>s the <code>quest_text</code> to our <code>file</code>
+variable, and then adds a new line (<code>ln!</code>) at the end.</li>
+<li><code>if let Err(e) = ...</code>: Just like when we read the file, writing can
+sometimes have errors. This checks if there was an <code>Err</code>or <code>e</code> and prints
+it if something went wrong while writing.</li>
+</ul>
+</li>
+</ol>
+<p>Now, whenever you add a new quest using <code>cargo run</code>, it will be added to your
+<code>quests.txt</code> file permanently!</p>
+<h2 id="your-turn">Your Turn</h2>
+<ol>
+<li>
+<p><strong>Update your <code>src/main.rs</code> file</strong> with the complete code example from above.</p>
+</li>
+<li>
+<p><strong>Make sure your <code>quests.txt</code> file exists</strong> (even if it's empty).</p>
+</li>
+<li>
+<p><strong>Run your program with a new quest:</strong></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> run defeat the evil robot</span></span></code></pre>
+<p>You should see the message "Awesome! We added your new quest and saved it!".</p>
+</li>
+<li>
+<p><strong>Run your program again, but without adding a new quest:</strong></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> run</span></span></code></pre>
+<p><strong>MAGIC!</strong> You should now see "defeat the evil robot" in your list of quests,
+even though you didn't type it this time! It was loaded from <code>quests.txt</code>!</p>
+</li>
+</ol>
+<p>You've just built a basic system for saving and loading data! That's a huge step
+in programming! Keep up the incredible work!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/quest-app/03-reading-quests-from-a-file/">Chapter 03: Quest App: Saving and Loading Your Adventures (Reading from a File)</a></li>
+<li>Next:
+<a href="https://www.codedmaster.com/ttk/quest-app/05-removing-quests/">Chapter 05: Quest App: Deleting Your Quests (Removing Items)</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

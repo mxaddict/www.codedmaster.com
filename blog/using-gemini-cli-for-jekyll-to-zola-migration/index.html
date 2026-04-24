@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Streamlining My Jekyll to Zola Migration with Gemini CLI - mxaddict</title>
+    
+    
+    <meta name="description" content="Discover how I leveraged the Gemini CLI to automate and standardize the front matter migration from Jekyll to Zola, ensuring consistency and saving time.">
+    
+    
+    <meta name="keywords" content="gemini cli, zola, jekyll, migration, automation, cli, ai, llm, workflow">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;using-gemini-cli-for-jekyll-to-zola-migration&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Streamlining My Jekyll to Zola Migration with Gemini CLI</h1>
+  
+  <p>published: <time>2026-01-25</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/gemini-cli/">#gemini cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/zola/">#zola</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/jekyll/">#jekyll</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/migration/">#migration</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/automation/">#automation</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ai/">#ai</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/llm/">#llm</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/workflow/">#workflow</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Migrating a blog from one platform to another can feel like a monumental task,
+especially when dealing with content restructuring and front matter
+standardization. When I recently moved my site from Jekyll to Zola, I faced the
+challenge of updating dozens of posts: ensuring consistent dates, correctly
+structuring tags into Zola's <code>[taxonomies]</code>, adding new <code>[extra]</code> fields like
+<code>author</code>, <code>toc</code>, and <code>display_published</code>, and cleaning up old fields like
+<code>description</code>. Doing this manually for each file would have been a significant
+time sink.</p>
+<p>This is where the Gemini CLI, my trusty AI companion, stepped in. Leveraging its
+ability to understand and manipulate structured data, I was able to automate a
+large chunk of this tedious process.</p>
+<h2 id="the-challenge-front-matter-overhaul">The Challenge: Front Matter Overhaul</h2>
+<p>Jekyll's front matter often includes fields like <code>description</code> and <code>tags</code> at the
+top level, while Zola prefers these, along with custom data, within <code>[extra]</code> or
+<code>[taxonomies]</code>. Standardizing this across numerous posts requires attention to
+detail:</p>
+<ul>
+<li><strong>Dates:</strong> Jekyll dates are often in a YYYY-MM-DD format, while Zola might
+prefer ISO 8601 or just <code>YYYY-MM-DD</code>.</li>
+<li><strong>Tags:</strong> Jekyll's top-level <code>tags</code> array needs to become
+<code>[taxonomies]\ntags = [...]</code> in Zola.</li>
+<li><strong>New Fields:</strong> Adding <code>draft</code>, <code>author</code>, <code>toc</code>, and <code>display_published</code>
+consistently.</li>
+</ul>
+<h2 id="enter-gemini-cli-my-ai-migration-assistant">Enter Gemini CLI: My AI Migration Assistant</h2>
+<p>I often use the Gemini CLI for quick tasks, code generation, or even just
+brainstorming. For this migration, I found it particularly useful for front
+matter transformations. My workflow involved a series of targeted prompts to
+help standardize the TOML front matter across my Jekyll posts.</p>
+<p>For instance, I might have used a prompt like this (simulated):</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Imagine a hypothetical prompt to Gemini CLI:</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">gemini</span><span style="color: #A6E3A1;"> prompt &quot;Convert the following Jekyll front matter to Zola TOML format.</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">Ensure date is YYYY-MM-DD, move tags to [taxonomies], add draft=false,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">and include [extra] fields: toc=true, display_published=true, author=&#39;mxaddict&#39;.</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">Remove the top-level &#39;description&#39; field, but include it within [extra] if present.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">Jekyll Front Matter:</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">---</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">title: </span><span style="color: #F5C2E7;">\&quot;</span><span style="color: #A6E3A1;">My Post Title</span><span style="color: #F5C2E7;">\&quot;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">date: 2016-08-07T00:00:00Z</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">description: </span><span style="color: #F5C2E7;">\&quot;</span><span style="color: #A6E3A1;">A sample description.</span><span style="color: #F5C2E7;">\&quot;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">tags: [</span><span style="color: #F5C2E7;">\&quot;</span><span style="color: #A6E3A1;">tag1</span><span style="color: #F5C2E7;">\&quot;</span><span style="color: #A6E3A1;">, </span><span style="color: #F5C2E7;">\&quot;</span><span style="color: #A6E3A1;">tag2</span><span style="color: #F5C2E7;">\&quot;</span><span style="color: #A6E3A1;">]</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">---&quot;</span></span></code></pre>
+<p>Gemini CLI would then process this, providing the standardized TOML block, which
+I could then integrate into my Zola Markdown files. While it wasn't a fully
+automated script from start to finish (I still needed to manage file movements
+and structure), it significantly reduced the manual effort for front matter
+consistency.</p>
+<h2 id="benefits-speed-and-consistency">Benefits: Speed and Consistency</h2>
+<p>Using Gemini CLI for these repetitive tasks brought several benefits:</p>
+<ul>
+<li><strong>Speed:</strong> What would have taken hours of copy-pasting and manual editing was
+reduced to minutes of prompt engineering and verification.</li>
+<li><strong>Consistency:</strong> AI-driven standardization ensures uniformity across all
+posts, reducing potential errors and making the site more robust.</li>
+<li><strong>Focus:</strong> By offloading the tedious parts, I could focus more on the actual
+content migration and Zola-specific template adjustments.</li>
+</ul>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>The Gemini CLI proved to be an invaluable tool during my Jekyll to Zola
+migration. It's a testament to how AI can augment development workflows, making
+complex tasks more manageable and allowing us to focus on the creative and
+architectural aspects of our projects. If you're facing a similar content
+migration, don't underestimate the power of an LLM assistant for automating
+front matter and repetitive tasks!</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

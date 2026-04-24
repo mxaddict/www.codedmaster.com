@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 03: Installing Rust on macOS - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Learn how to install Rust on your macOS computer using the terminal, step-by-step.">
+    
+    
+    <meta name="keywords" content="rust, installation, tutorial, cli, education, kids, children, young, learners, ttk, macos, homebrew, xcode">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-rust&#x2F;03-macos&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 03: Installing Rust on macOS</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/installation/">#installation</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ttk/">#ttk</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/macos/">#macos</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/homebrew/">#homebrew</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/xcode/">#xcode</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Hello, macOS Adventurer!</p>
+<p>If you're using a computer with macOS, this chapter is for you! We'll use a
+special script to install Rust, which makes things very easy.</p>
+<h2 id="step-1-install-xcode-command-line-tools-if-you-haven-t-already">Step 1: Install Xcode Command Line Tools (If You Haven't Already)</h2>
+<p>Rust needs some special tools from Apple called "Xcode Command Line Tools" to
+build programs. You might already have them! If not, don't worry, it's easy to
+get.</p>
+<p>Open your <strong>Terminal</strong> (you can find it in Applications &gt; Utilities, or by
+searching with Spotlight).</p>
+<p>Type this command and press Enter:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">xcode-select</span><span style="color: #A6E3A1;"> --install</span></span></code></pre>
+<p>If the tools are not installed, a window will pop up asking you to install them.
+Click "Install" and agree to the terms. This might take a little while. If you
+already have them, you'll see a message saying something like "xcode-select:
+error: command line tools are already installed". That's great!</p>
+<h2 id="step-2-install-homebrew-optional-but-recommended-for-mac-users">Step 2: Install Homebrew (Optional, but Recommended for Mac Users!)</h2>
+<p>Homebrew is a "package manager" for macOS. Think of it like a super-smart app
+store for your Terminal that helps you install other tools easily. Many
+developers use it! If you already have Homebrew, you can skip this step.</p>
+<p>To install Homebrew, copy and paste this command into your Terminal and press
+Enter:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">/bin/bash</span><span style="color: #A6E3A1;"> -c &quot;</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">curl</span><span style="color: #A6E3A1;"> -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</span><span style="color: #9399B2;">)</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre>
+<p>Follow the instructions in the Terminal. It might ask for your computer's
+password. Press Enter when it asks you to.</p>
+<p>After it's done, it might tell you to run a couple of commands to add Homebrew
+to your "PATH" (where your computer looks for programs). Make sure to run those
+commands!</p>
+<h2 id="step-3-install-rustup">Step 3: Install Rustup</h2>
+<p>Rustup is the easiest way to install Rust. It's a special tool that helps manage
+different versions of Rust.</p>
+<p>In your Terminal, copy and paste this command and press Enter:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">curl</span><span style="color: #A6E3A1;"> --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> sh</span></span></code></pre>
+<p>You'll see some messages. When it asks:</p>
+<p><code>1) Proceed with installation (default)</code></p>
+<p>Just press <strong>Enter</strong> to choose the default option. This will download and
+install Rust!</p>
+<p>After installation, it might tell you to "source" your <code>~/.profile</code> or
+<code>~/.bashrc</code> or <code>~/.zshrc</code> file. This means reloading your Terminal's settings.
+The easiest way to do this is to simply <strong>close your Terminal window and open a
+new one.</strong></p>
+<h2 id="step-4-verify-your-installation">Step 4: Verify Your Installation</h2>
+<p>Let's check if Rust and Cargo (Rust's build tool) are installed correctly!</p>
+<p>In your <strong>new</strong> Terminal window, type these commands, one by one, and press
+Enter after each:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">rustc</span><span style="color: #A6E3A1;"> --version</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> --version</span></span></code></pre>
+<p>You should see something like: <code>rustc 1.XX.X (YYYY-MM-DD)</code>
+<code>cargo 1.XX.X (YYYY-MM-DD)</code></p>
+<p>The <code>1.XX.X</code> part will be the version number, which might be different from this
+example, and that's perfectly fine! As long as you see version numbers, Rust is
+installed!</p>
+<p>Congratulations! Rust is now installed on your macOS computer. You're ready to
+start coding your Quest App!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/install-rust/02-windows/">Chapter 02: Installing Rust on Windows</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

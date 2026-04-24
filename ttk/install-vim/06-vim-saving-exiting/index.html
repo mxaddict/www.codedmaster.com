@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 06: Vim Basics: Saving Your Work and Exiting - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Learn the essential commands to save your changes (`:w`) and exit Vim (`:q`, `:wq`, `:q!`).">
+    
+    
+    <meta name="keywords" content="vim, editor, cli, tutorial, education, kids, children, young, learners, ttk, vim basics, saving, exiting">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-vim&#x2F;06-vim-saving-exiting&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 06: Vim Basics: Saving Your Work and Exiting</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/vim/">#vim</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/editor/">#editor</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ttk/">#ttk</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/vim-basics/">#vim basics</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/saving/">#saving</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/exiting/">#exiting</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Hello, Vim Finisher!</p>
+<p>You've learned how to move and edit in Vim. That's super important! But what's
+just as important is knowing how to <strong>save your changes</strong> and <strong>leave Vim</strong> when
+you're done. Otherwise, all your hard work might disappear!</p>
+<h2 id="command-mode-your-saving-spells">Command Mode: Your Saving Spells</h2>
+<p>To save and exit in Vim, you need to be in a special mode called <strong>Command
+Mode</strong>. You get there from <strong>Normal Mode</strong> by typing a colon (<code>:</code>). When you
+type <code>:</code>, you'll see it appear at the bottom of your Vim window. This means Vim
+is waiting for a command!</p>
+<p>Remember: Always press <code>Escape</code> first to make sure you are in Normal Mode before
+trying to enter Command Mode with <code>:</code>.</p>
+<h2 id="saving-your-changes-w">Saving Your Changes: <code>:w</code></h2>
+<ul>
+<li><strong><code>:w</code></strong>: (for "write") This spell tells Vim to save all the changes you've
+made to your file.
+<ul>
+<li>Type <strong><code>:</code></strong></li>
+<li>Then type <strong><code>w</code></strong></li>
+<li>Then press <strong><code>Enter</code></strong></li>
+</ul>
+</li>
+</ul>
+<p>You'll see a message at the bottom, usually saying something like <code>filename.txt</code>
+written, and how many lines and characters were saved.</p>
+<h2 id="exiting-vim-q-wq-q">Exiting Vim: <code>:q</code>, <code>:wq</code>, <code>:q!</code></h2>
+<p>Once you've saved your work, you'll want to close Vim.</p>
+<ul>
+<li>
+<p><strong><code>:q</code></strong>: (for "quit") This spell tells Vim to close the file.</p>
+<ul>
+<li>Type <strong><code>:</code></strong></li>
+<li>Then type <strong><code>q</code></strong></li>
+<li>Then press <strong><code>Enter</code></strong></li>
+</ul>
+<p><strong>Important:</strong> This only works if you haven't made any changes since your last
+save. If you try to quit without saving, Vim will tell you:
+<code>No write since last change (add ! to override)</code>.</p>
+</li>
+<li>
+<p><strong><code>:wq</code></strong>: (for "write and quit") This is a super handy spell! It saves your
+changes <em>and</em> then quits Vim, all in one go!</p>
+<ul>
+<li>Type <strong><code>:</code></strong></li>
+<li>Then type <strong><code>wq</code></strong></li>
+<li>Then press <strong><code>Enter</code></strong></li>
+</ul>
+</li>
+<li>
+<p><strong><code>:q!</code></strong>: (for "quit, forcefully") This spell is for when you want to quit
+Vim <em>without saving any changes you made</em> since the last time you saved. Be
+careful with this one, as it will throw away unsaved work!</p>
+<ul>
+<li>Type <strong><code>:</code></strong></li>
+<li>Then type <strong><code>q!</code></strong></li>
+<li>Then press <strong><code>Enter</code></strong></li>
+</ul>
+<p>You might use this if you made a lot of mistakes and just want to start over
+from the last saved version.</p>
+</li>
+</ul>
+<h2 id="putting-it-together-practice-time">Putting it Together: Practice Time</h2>
+<ol>
+<li>Open a text file with Vim (<code>vim practice.txt</code>).</li>
+<li>Add some new words (by pressing <code>i</code> to enter Insert Mode, typing, then
+<code>Escape</code> to go back to Normal Mode).</li>
+<li>Now, try to quit without saving:
+<ul>
+<li>Press <strong><code>:</code></strong></li>
+<li>Type <strong><code>q</code></strong></li>
+<li>Press <strong><code>Enter</code></strong></li>
+<li>Vim will probably stop you and say <code>No write since last change</code>.</li>
+</ul>
+</li>
+<li>Now, save your changes:
+<ul>
+<li>Press <strong><code>:</code></strong></li>
+<li>Type <strong><code>w</code></strong></li>
+<li>Press <strong><code>Enter</code></strong></li>
+</ul>
+</li>
+<li>Now that you've saved, you can quit:
+<ul>
+<li>Press <strong><code>:</code></strong></li>
+<li>Type <strong><code>q</code></strong></li>
+<li>Press <strong><code>Enter</code></strong></li>
+</ul>
+</li>
+<li>Open the file again (<code>vim practice.txt</code>). You should see all your saved
+changes!</li>
+<li>Make some new changes, but this time, save and quit all at once:
+<ul>
+<li>Press <strong><code>:</code></strong></li>
+<li>Type <strong><code>wq</code></strong></li>
+<li>Press <strong><code>Enter</code></strong></li>
+</ul>
+</li>
+</ol>
+<p>Fantastic! You've learned the most important basic spells for using Vim. You can
+now open files, move around, make changes, save your work, and exit. You're well
+on your way to becoming a Vim master!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/install-vim/05-vim-editing/">Chapter 05: Vim Basics: Editing Your Code (Insert Mode)</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

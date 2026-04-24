@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Deep-Dive Tutorial: Building a Universal Autofill System with Rofi, Pass, and Wtype - mxaddict</title>
+    
+    
+    <meta name="description" content="A step-by-step guide to creating a universal, keyboard-driven autofill system for any application on Linux using pass, rofi, and wtype, based on my personal dotfiles setup.">
+    
+    
+    <meta name="keywords" content="linux, dotfiles, password-management, pass, rofi, wtype, hyprland, automation, security, tutorial">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;building-a-universal-autofill-system&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>A Deep-Dive Tutorial: Building a Universal Autofill System with Rofi, Pass, and Wtype</h1>
+  
+  <p>published: <time>2026-01-31</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/dotfiles/">#dotfiles</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/password-management/">#password-management</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/pass/">#pass</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/rofi/">#rofi</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/wtype/">#wtype</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/hyprland/">#hyprland</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/automation/">#automation</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/security/">#security</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>In a previous article, I introduced my
+<a href="https://www.codedmaster.com/blog/seamless-password-management-on-linux/">seamless password management setup</a>.
+It's one of the most powerful and unique parts of my dotfiles, providing a
+universal, keyboard-driven autofill system that works on any application. Today,
+we're going to build it from the ground up.</p>
+<p>This tutorial will walk you through creating the scripts and configuration
+needed to replicate this system, using your <code>pass</code> password store, <code>rofi</code> for an
+interactive menu, and <code>wtype</code> to simulate keyboard input.</p>
+<h2 id="the-goal-frictionless-universal-autofill">The Goal: Frictionless &amp; Universal Autofill</h2>
+<p>The goal is simple: press a hotkey, get a fuzzy-searchable list of your
+passwords, select one, and have it automatically typed into whatever application
+is currently active—be it a browser, a terminal, or a native GUI application.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before we start, you'll need a few tools. This guide is based on my setup, which
+uses a Wayland compositor (Hyprland), but I'll provide notes for X11 users where
+applicable.</p>
+<ul>
+<li><strong><code>pass</code>:</strong>
+<a rel="external" href="https://www.passwordstore.org/">The standard Unix password manager</a>. Your
+password store should be initialized and populated.</li>
+<li><strong><code>pass-otp</code>:</strong> The
+<a rel="external" href="https://github.com/tadfisher/pass-otp">pass extension for TOTP</a>.</li>
+<li><strong><code>rofi</code>:</strong> A versatile window switcher and application launcher. We'll use it
+as a dynamic menu.</li>
+<li><strong><code>wtype</code>:</strong> A Wayland tool to simulate keyboard input. For X11 users,
+<strong><code>xdotool</code></strong> is the equivalent.</li>
+<li><strong><code>jq</code>:</strong> A command-line JSON processor, used to parse window information.</li>
+<li><strong>(Optional but recommended) <code>hyprctl</code>:</strong> The command-line utility for
+Hyprland, used to get the active window title. X11 users can use <code>xdotool</code>.</li>
+</ul>
+<h2 id="step-1-the-core-script-menu-pass">Step 1: The Core Script (<code>.menu-pass</code>)</h2>
+<p>This is the engine of our autofill system. It's responsible for displaying the
+menu, retrieving the selected credential from <code>pass</code>, and "typing" it into the
+active window.</p>
+<p>Create a script named <code>.menu-pass</code> in your local bin directory (e.g.,
+<code>~/.local/bin/.menu-pass</code>) and make it executable
+(<code>chmod +x ~/.local/bin/.menu-pass</code>).</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/env bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># A script to provide a rofi-based pass-menu, with automatic typing.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Dependencies: pass, pass-otp, rofi, wtype (for Wayland) or xdotool (for X11)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># --- Configuration ---</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Use wtype for Wayland, xdotool for X11</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Wayland</span></span>
+<span class="giallo-l"><span>WTYPE_CMD</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;wtype&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># X11</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># XDO_CMD=&quot;xdotool type --clearmodifiers&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># --- Script Logic ---</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">shopt</span><span style="color: #A6E3A1;"> -s nullglob globstar</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Get the directory of the password store</span></span>
+<span class="giallo-l"><span>PASSWORD_STORE_DIR</span><span style="color: #94E2D5;">=</span><span>${PASSWORD_STORE_DIR-~</span><span style="color: #94E2D5;">/</span><span>.password-store}</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> &quot;</span><span>$PASSWORD_STORE_DIR</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> ||</span><span style="color: #F38BA8;font-style: italic;"> exit</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Get all password files</span></span>
+<span class="giallo-l"><span>password_files</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">(</span><span style="color: #94E2D5;">**</span><span style="color: #A6E3A1;">/</span><span style="color: #94E2D5;">*</span><span style="color: #A6E3A1;">.gpg</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span>passwords</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;</span><span>${password_files</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">%</span><span style="color: #A6E3A1;">.</span><span>gpg}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Determine the mode from the first argument (auth, user, pass, otp)</span></span>
+<span class="giallo-l"><span>MODE</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">${1</span><span style="color: #94E2D5;">:-</span><span>pass</span><span style="color: #EBA0AC;font-style: italic;">}</span><span style="color: #9399B2;font-style: italic;"> # Default to &#39;pass&#39; mode if no argument is given</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">shift</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># If there&#39;s a second argument, use it to filter the password list</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [</span><span style="color: #94E2D5;"> -n</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #EBA0AC;font-style: italic;">$1</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;"> ];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span>    passwords</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">($(</span><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &quot;%s\n&quot; &quot;</span><span>${passwords</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> grep</span><span style="color: #A6E3A1;"> -i &quot;</span><span style="color: #EBA0AC;font-style: italic;">$1</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">))</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Present the password list to rofi for selection</span></span>
+<span class="giallo-l"><span>selection</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &quot;%s\n&quot; &quot;</span><span>${passwords</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> rofi</span><span style="color: #A6E3A1;"> -dmenu -p &quot;Pass [</span><span>${MODE}</span><span style="color: #A6E3A1;">]&quot; -i</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[[</span><span style="color: #94E2D5;"> -z</span><span style="color: #A6E3A1;"> &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;"> ]] &amp;&amp;</span><span style="color: #F38BA8;font-style: italic;"> exit</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># --- Handle Selection Based on Mode ---</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">case</span><span style="color: #A6E3A1;"> &quot;</span><span>$MODE</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #CBA6F7;"> in</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;auth&quot;</span><span style="color: #94E2D5;">)</span></span>
+<span class="giallo-l"><span>        user</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">basename</span><span style="color: #A6E3A1;"> &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span>        pass</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">pass</span><span style="color: #A6E3A1;"> show &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> head</span><span style="color: #A6E3A1;"> -n</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">        # Type username, Tab, then password</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> &quot;</span><span>$user</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> -k tab</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> &quot;</span><span>$pass</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> -k return</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;user&quot;</span><span style="color: #94E2D5;">)</span></span>
+<span class="giallo-l"><span>        token</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">basename</span><span style="color: #A6E3A1;"> &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> &quot;</span><span>$token</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> -k return</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;pass&quot;</span><span style="color: #94E2D5;">)</span></span>
+<span class="giallo-l"><span>        token</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">pass</span><span style="color: #A6E3A1;"> show &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> head</span><span style="color: #A6E3A1;"> -n</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> &quot;</span><span>$token</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> -k return</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;otp&quot;</span><span style="color: #94E2D5;">)</span></span>
+<span class="giallo-l"><span>        token</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">pass</span><span style="color: #A6E3A1;"> otp &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> &quot;</span><span>$token</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>        $WTYPE_CMD</span><span style="color: #A6E3A1;"> -k return</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">    *)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">        echo</span><span style="color: #A6E3A1;"> &quot;Invalid mode: </span><span>$MODE</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> &gt;&amp;2</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">        exit</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">esac</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">exit</span><span style="color: #FAB387;"> 0</span></span></code></pre><h3 id="how-it-works">How It Works</h3>
+<ol>
+<li><strong>Configuration:</strong> It sets the command for typing. If you're on X11, you
+would comment out <code>WTYPE_CMD</code> and uncomment <code>XDO_CMD</code>.</li>
+<li><strong>Password Discovery:</strong> It finds all your encrypted password files (<code>.gpg</code>)
+within your password store.</li>
+<li><strong>Mode Handling:</strong> It checks the first argument (<code>$1</code>) to determine what you
+want to do:
+<ul>
+<li><code>auth</code>: Type username, a Tab, and then the password (great for web logins).</li>
+<li><code>user</code>: Type only the username.</li>
+<li><code>pass</code>: Type only the password.</li>
+<li><code>otp</code>: Generate and type a one-time password.</li>
+</ul>
+</li>
+<li><strong>Filtering:</strong> If a second argument is provided, it filters the password list
+using <code>grep</code>. This is key for our context-aware functionality.</li>
+<li><strong>Rofi Menu:</strong> It pipes the list of passwords into <code>rofi -dmenu</code>, which
+displays an interactive, searchable menu.</li>
+<li><strong>Typing:</strong> Based on the selected mode, it retrieves the appropriate
+information using <code>pass</code> and then uses <code>wtype</code> to simulate key presses for
+the active window.</li>
+</ol>
+<h2 id="step-2-the-context-aware-wrapper-menu-autofill">Step 2: The Context-Aware Wrapper (<code>.menu-autofill</code>)</h2>
+<p>This script is the "smart" layer. It figures out what application you're using
+and provides a relevant filter to <code>.menu-pass</code>. This is what makes the system
+feel so magical.</p>
+<p>Create a script named <code>.menu-autofill</code> in the same directory
+(<code>~/.local/bin/.menu-autofill</code>) and make it executable.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/env bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># A wrapper script that determines the active window and calls .menu-pass with a filter.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># This version is for Hyprland (Wayland).</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># --- Script Logic ---</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Get the title of the active window using hyprctl and parse it with jq</span></span>
+<span class="giallo-l"><span>TITLE</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">hyprctl</span><span style="color: #A6E3A1;"> activewindow -j</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> jq</span><span style="color: #A6E3A1;"> -r &#39;.title&#39;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Determine the mode from the first argument (e.g., &#39;auth&#39;, &#39;pass&#39;)</span></span>
+<span class="giallo-l"><span>MODE</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">${1</span><span style="color: #94E2D5;">:-</span><span>pass</span><span style="color: #EBA0AC;font-style: italic;">}</span><span style="color: #9399B2;font-style: italic;"> # Default to &#39;pass&#39;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Extract a domain-like string from the window title to use as a filter</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># This regex looks for patterns like &#39;sub.domain.com&#39;</span></span>
+<span class="giallo-l"><span>DOMAIN</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$TITLE</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> grep</span><span style="color: #A6E3A1;"> -oP &#39;(?&lt;=[-—_.\s\[\(])\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b&#39;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> head</span><span style="color: #A6E3A1;"> -n</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Call the core script with the determined mode and the domain filter</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># The trailing &#39;/&#39; helps match directory-based password entries in &#39;pass&#39;</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">~</span><span>/.local/bin/.menu-pass </span><span style="color: #A6E3A1;">&quot;</span><span>$MODE</span><span style="color: #A6E3A1;">&quot; &quot;</span><span>$DOMAIN</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre><h3 id="how-it-works-1">How It Works</h3>
+<ol>
+<li><strong>Get Active Window Title:</strong> It uses <code>hyprctl activewindow -j</code> to get a JSON
+output describing the active window and <code>jq</code> to parse out the <code>.title</code> field.
+(For X11, you could use something like
+<code>xdotool getactivewindow getwindowname</code>).</li>
+<li><strong>Extract Domain:</strong> It uses a regular expression to find a domain name within
+the window title. This is surprisingly effective for web browsers, SSH
+sessions, and many other applications.</li>
+<li><strong>Call <code>.menu-pass</code>:</strong> It executes our core script, passing the desired
+<code>MODE</code> (defaulting to <code>pass</code>) and the extracted <code>DOMAIN</code> as a filter.</li>
+</ol>
+<h2 id="step-3-tying-it-all-together-with-a-hotkey">Step 3: Tying It All Together with a Hotkey</h2>
+<p>The final step is to bind our <code>.menu-autofill</code> script to a keyboard shortcut in
+your window manager's configuration. Here's how I do it in my
+<code>~/.config/hypr/hyprland.conf</code>:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="ini"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ~/.config/hypr/hyprland.conf</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ... other binds ...</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Password Management / Autofill</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">bind</span><span style="color: #94E2D5;"> =</span><span> $mod ctrl, j,         exec, ~/.local/bin/.menu-autofill auth</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">bind</span><span style="color: #94E2D5;"> =</span><span> $mod ctrl, k,         exec, ~/.local/bin/.menu-autofill user</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">bind</span><span style="color: #94E2D5;"> =</span><span> $mod ctrl, l,         exec, ~/.local/bin/.menu-autofill pass</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">bind</span><span style="color: #94E2D5;"> =</span><span> $mod ctrl, semicolon, exec, ~/.local/bin/.menu-autofill otp</span></span></code></pre>
+<p>With these bindings:</p>
+<ul>
+<li><code>Super + Ctrl + J</code> will show a filtered list and type <code>username</code>, <code>Tab</code>, then
+<code>password</code> (for authentication).</li>
+<li><code>Super + Ctrl + K</code> will show a filtered list and type only the <code>username</code>.</li>
+<li><code>Super + Ctrl + L</code> will show a filtered list and type only the <code>password</code>.</li>
+<li><code>Super + Ctrl + Semicolon</code> will show a filtered list and type the selected
+One-Time Password (OTP).</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>You now have a complete, universal autofill system that is secure, incredibly
+efficient, and works across your entire Linux desktop. It's a perfect example of
+the power of composing simple, effective CLI tools to create a workflow that is
+tailored precisely to your needs.</p>
+<p>This system is fully customizable. You can tweak the regular expression in
+<code>.menu-autofill</code>, change the <code>rofi</code> theme, or add new modes to <code>.menu-pass</code>. I
+encourage you to take this foundation and adapt it to make it truly your own.
+Happy hacking!</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

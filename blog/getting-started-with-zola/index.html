@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>From Zero to Website: How Easy It Is to Get Started with Zola - mxaddict</title>
+    
+    
+    <meta name="description" content="A quick-start guide to building your first static website with Zola, covering installation, project setup, theme integration (featuring ZolaNight), adding content, and local serving.">
+    
+    
+    <meta name="keywords" content="zola, static site generator, web development, tutorial, getting-started, zolanight">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;getting-started-with-zola&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>From Zero to Website: How Easy It Is to Get Started with Zola</h1>
+  
+  <p>published: <time>2026-01-31</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/zola/">#zola</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/static-site-generator/">#static site generator</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/web-development/">#web development</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/getting-started/">#getting-started</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/zolanight/">#zolanight</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Dreaming of a fast, secure, and easy-to-manage website or blog? Look no further
+than <a rel="external" href="https://www.getzola.org/">Zola</a>, a blazing-fast static site generator
+built with Rust. In this tutorial, I'll show you just how simple it is to go
+from zero to a fully functional website in minutes.</p>
+<p>Let's dive in!</p>
+<h2 id="step-1-install-zola">Step 1: Install Zola</h2>
+<p>First things first, you need Zola itself. It's a single binary, making
+installation a breeze.</p>
+<p><strong>For Arch Linux users:</strong></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> pacman -S zola</span></span></code></pre>
+<p><strong>For macOS users (using Homebrew):</strong></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">brew</span><span style="color: #A6E3A1;"> install zola</span></span></code></pre>
+<p>If you're on another operating system, check the
+<a rel="external" href="https://www.getzola.org/documentation/getting-started/installation/">official Zola documentation</a>
+for detailed installation instructions.</p>
+<h2 id="step-2-create-a-new-website">Step 2: Create a New Website</h2>
+<p>Once Zola is installed, you can create a new site project with a single command:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">zola</span><span style="color: #A6E3A1;"> init my-new-website</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> my-new-website</span></span></code></pre>
+<p>Zola will ask you a few questions, like your site's URL and whether you want a
+<code>config.toml</code> file (just hit Enter for the defaults for now). This command sets
+up the basic directory structure for your new site.</p>
+<h2 id="step-3-add-a-zola-theme-self-plug-zolanight">Step 3: Add a Zola Theme (Self-Plug: ZolaNight!)</h2>
+<p>A theme gives your Zola site its look and feel. There are many great themes
+available, but since you're here, why not try my very own minimalist and fast
+theme, <a rel="external" href="https://zolanight.codedmaster.com/">ZolaNight</a>?</p>
+<p>First, add the theme to your project:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> init</span><span style="color: #9399B2;font-style: italic;"> # If you haven&#39;t already</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> submodule add https://github.com/mxaddict/zolanight.git themes/zolanight</span></span></code></pre>
+<p>Next, open your <code>zola.toml</code> file (created in Step 2) and tell Zola to use the
+new theme. You'll also need to define the <code>taxonomies</code> settings that the theme
+expects. Your <code>zola.toml</code> should look something like this:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="toml"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># zola.toml</span></span>
+<span class="giallo-l"><span>base_url</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;http://example.com&quot;</span></span>
+<span class="giallo-l"><span>title</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;My Awesome Zola Site&quot;</span></span>
+<span class="giallo-l"><span>theme</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;zolanight&quot;</span></span>
+<span class="giallo-l"><span>taxonomies</span><span style="color: #94E2D5;"> =</span><span style="color: #9399B2;"> [{</span><span> name</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;tags&quot;</span><span style="color: #9399B2;"> }]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>markdown.highlighting</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>theme</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;catppuccin-mocha&quot;</span></span></code></pre><h2 id="step-4-add-your-content">Step 4: Add Your Content</h2>
+<p>A website isn't much without content! Zola uses Markdown files in the <code>content</code>
+directory. The <code>ZolaNight</code> theme provides example content files that you can
+copy and modify.</p>
+<h3 id="copying-example-content">Copying Example Content</h3>
+<p>Navigate back to the root of your new Zola site and copy all the example content
+files and directories from the theme's <code>content</code> directory into your site's
+<code>content</code> directory:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cp</span><span style="color: #A6E3A1;"> -r themes/zolanight/content/</span><span>*</span><span style="color: #A6E3A1;"> content/</span></span></code></pre>
+<p>This command copies the example homepage (<code>_index.md</code>), a sample regular page
+(<code>regular-page.md</code>), and an entire <code>blog</code> directory containing sample blog
+posts. You can now open these files in your <code>content/</code> directory to customize
+their titles, descriptions, and main body text.</p>
+<h2 id="step-5-run-zola-serve-and-see-your-website">Step 5: Run "zola serve" and See Your Website</h2>
+<p>Now for the magic moment! To see your website locally, simply run:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">zola</span><span style="color: #A6E3A1;"> serve</span></span></code></pre>
+<p>This command will start a local development server, usually accessible at
+<code>http://127.0.0.1:1111</code>. Open your web browser to this address, and you'll see
+your brand new Zola site, complete with the ZolaNight theme and your first
+content page!</p>
+<p>Zola also includes live-reloading, so any changes you make to your content or
+configuration files will automatically update in your browser.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In just a few simple steps, you've installed Zola, set up a new project,
+integrated a theme, added content, and viewed it all locally. Zola's speed,
+simplicity, and powerful features make it an excellent choice for anyone looking
+to build a modern static website.</p>
+<p>Happy Zola-ing!</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

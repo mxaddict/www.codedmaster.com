@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Setup Ghetto Skype on Mac? - mxaddict</title>
+    
+    
+    <meta name="description" content="Tired of buggy Skype? Learn to set up Ghetto Skype, an open-source Electron wrapper for Web Skype beta, on your Mac. Includes installation steps using Homebrew, NVM, and Node.js.">
+    
+    
+    <meta name="keywords" content="skype, ghetto skype, electron, mac, macos, node.js, homebrew, nvm, tutorial">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;setup-ghetto-skype-on-mac&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Setup Ghetto Skype on Mac?</h1>
+  
+  <p>published: <time>2017-01-20</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/skype/">#skype</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ghetto-skype/">#ghetto skype</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/electron/">#electron</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/mac/">#mac</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/macos/">#macos</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/node-js/">#node.js</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/homebrew/">#homebrew</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/nvm/">#nvm</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p><a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Ghetto Skype</a> is an open source desktop application powered by
+<a rel="external" href="http://electron.atom.io/">Electron</a> which acts as the wrapper for the <a rel="external" href="https://web.skype.com/">Web Skype</a>
+beta that Microsoft has been working on. A quote from the <a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Ghetto
+Skype</a> README.md file:</p>
+<blockquote>
+<p>Are you tired of a buggy 32 bit official Skype client? Then Ghetto Skype is
+for you!</p>
+</blockquote>
+<p>Install <a rel="external" href="http://brew.sh/">Homebrew</a> if you don't have it already</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">/usr/bin/ruby</span><span style="color: #A6E3A1;"> -e &quot;</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">curl</span><span style="color: #A6E3A1;"> -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install</span><span style="color: #9399B2;">)</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre>
+<p>Once <a rel="external" href="http://brew.sh/">Homebrew</a> is done installing, you will need wget (Will need this
+CLI tool later)</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">brew</span><span style="color: #A6E3A1;"> install wget</span></span></code></pre>
+<p>Now install <a rel="external" href="https://github.com/creationix/nvm">NVM</a> so that we can install <a rel="external" href="https://nodejs.org/">Node.js</a></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">curl</span><span style="color: #A6E3A1;"> -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> bash</span></span></code></pre>
+<p>You will need to install the stable version of <a rel="external" href="https://nodejs.org/">Node.js</a> via <a rel="external" href="https://github.com/creationix/nvm">NVM</a></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">nvm</span><span style="color: #A6E3A1;"> install stable</span></span></code></pre>
+<p>We need to download the latest version source code from the <a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Github
+Repo</a> of <a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Ghetto Skype</a></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">wget</span><span style="color: #A6E3A1;"> https://github.com/stanfieldr/ghetto-skype/archive/v1.5.0.zip</span></span></code></pre>
+<p>NOTE: You can check what the latest versions of <a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Ghetto Skype</a> are
+on it's <a rel="external" href="https://github.com/stanfieldr/ghetto-skype/releases">releases page</a></p>
+<p>Unzip the new archive, delete the zip, and move into the unziped folder</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">unzip</span><span style="color: #A6E3A1;"> v1.5.0.zip</span><span style="color: #9399B2;"> &amp;&amp;</span><span style="color: #89B4FA;font-style: italic;"> rm</span><span style="color: #A6E3A1;"> v1.5.0.zip</span><span style="color: #9399B2;"> &amp;&amp;</span><span style="color: #F38BA8;font-style: italic;"> cd</span><span style="color: #A6E3A1;"> ghetto-skype-1.5.0</span></span></code></pre>
+<p>Install all required <a rel="external" href="https://nodejs.org/">Node.js</a> modules</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">npm</span><span style="color: #A6E3A1;"> install</span></span></code></pre>
+<p>Build the package</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">npm</span><span style="color: #A6E3A1;"> run dist</span></span></code></pre>
+<p>Open up the <code>dist/mac</code> dir in finder</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">open</span><span style="color: #A6E3A1;"> dist/mac</span></span></code></pre>
+<p>Now, you should see a <code>.app</code> and a <code>.dmg</code> for <a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Ghetto Skype</a></p>
+<p><img src="/img/ghetto-skype-finder.png" alt="Screenshot" /></p>
+<p>You can either drag the <code>.app</code> file to your <code>Applications</code> folder, or open the
+<code>.dmg</code> file and do as you would with any other <code>.dmg</code> installer</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Sometimes (Most of the time) the open source community can do a lot with very
+limited resources</p>
+<p>If you are interested in the <a rel="external" href="http://electron.atom.io/">Electron</a> framework for creating desktop
+applications with web technology, then visit their <a rel="external" href="https://github.com/electron/electron">Github
+page</a></p>
+<hr />
+<p><strong><em>Editor's Note (2026):</em></strong> Ghetto Skype, the application mentioned in this
+post, is no longer actively maintained. This article is preserved for historical
+context.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

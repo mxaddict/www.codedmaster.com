@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Getting Electron Copy&#x2F;Paste shortcuts working on MAC builds - mxaddict</title>
+    
+    
+    <meta name="description" content="Fix missing copy&#x2F;paste shortcuts in Electron Mac builds. This tutorial shows how to implement them by setting up the application menu with Electron&#x27;s Menu module.">
+    
+    
+    <meta name="keywords" content="electron, mac, macos, shortcuts, copy&#x2F;paste, development, javascript">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;getting-electron-copy-paste-shortcuts-for-mac-builds&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Getting Electron Copy&#x2F;Paste shortcuts working on MAC builds</h1>
+  
+  <p>published: <time>2017-01-24</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/electron/">#electron</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/mac/">#mac</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/macos/">#macos</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/shortcuts/">#shortcuts</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/copy-paste/">#copy&#x2F;paste</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/development/">#development</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/javascript/">#javascript</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>If you are new to <a rel="external" href="http://electron.atom.io/">Electron</a> and have noticed that when running the
+Mac/OSX builds there is no copy/paste shortcut support, don't be alarmed.</p>
+<p>The reason for this is that MAC/OSX requires you to have those shortcuts
+declared/setup in the application menu, or one of it's sub menus.</p>
+<p>You can do a simple fix by loading the <a rel="external" href="https://github.com/electron/electron/blob/master/docs/api/menu.md">Electron Menu</a> module in
+your application's code and setting these shortcuts</p>
+<p>Sample Code:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="javascript"><span class="giallo-l"><span style="color: #CBA6F7;">const</span><span style="color: #9399B2;"> {</span><span> app</span><span style="color: #9399B2;">,</span><span> Menu</span><span style="color: #9399B2;"> }</span><span style="color: #94E2D5;"> =</span><span style="color: #89B4FA;font-style: italic;"> require</span><span>(</span><span style="color: #A6E3A1;">&#39;electron&#39;</span><span>)</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">// Callback for the ready event</span></span>
+<span class="giallo-l"><span>app</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">on</span><span>(</span><span style="color: #A6E3A1;">&#39;ready&#39;</span><span style="color: #9399B2;">, ()</span><span style="color: #CBA6F7;"> =&gt;</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">  /*</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">   This is where your other code would go</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">  */</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">  // Check if we are on a MAC</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">  if</span><span> (process</span><span style="color: #94E2D5;">.</span><span>platform</span><span style="color: #94E2D5;"> ===</span><span style="color: #A6E3A1;"> &#39;darwin&#39;</span><span>)</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    // Create our menu entries so that we can use MAC shortcuts</span></span>
+<span class="giallo-l"><span>    Menu</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">setApplicationMenu</span><span>(</span></span>
+<span class="giallo-l"><span>      Menu</span><span style="color: #94E2D5;">.</span><span style="color: #89B4FA;font-style: italic;">buildFromTemplate</span><span>([</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        {</span></span>
+<span class="giallo-l"><span>          label</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;Edit&#39;</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span>          submenu</span><span style="color: #94E2D5;">:</span><span> [</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> role</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;undo&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> role</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;redo&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> type</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;separator&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> role</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;cut&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> role</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;copy&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> role</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;paste&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> role</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;pasteandmatchstyle&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> role</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;delete&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">            {</span><span> role</span><span style="color: #94E2D5;">:</span><span style="color: #A6E3A1;"> &#39;selectall&#39;</span><span style="color: #9399B2;"> },</span></span>
+<span class="giallo-l"><span>          ]</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        },</span></span>
+<span class="giallo-l"><span>      ])</span></span>
+<span class="giallo-l"><span>    )</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span><span>)</span><span style="color: #9399B2;">;</span></span></code></pre>
+<p>Once you have added this code to your application code, you should see a new
+menu that looks like the following image</p>
+<p><img src="/img/electron-shortcuts.png" alt="Screenshot" /></p>
+<hr />
+<p><strong><em>Editor's Note (2026):</em></strong> This post is from 2017 and refers to an older
+version of the Electron framework. APIs and best practices for Electron have
+evolved. While the core concepts might still be relevant, the code examples are
+likely outdated. Please refer to the official Electron documentation for current
+instructions.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 00: Starting Your Rust Quest Project - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Begin your Rust adventure by setting up your first Quest App project with `cargo new`, and learn the basics of navigating and editing code.">
+    
+    
+    <meta name="keywords" content="rust, programming, tutorial, cli, quest app, education, kids, children, young, learners">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;quest-app&#x2F;00-starting-the-project&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 00: Starting Your Rust Quest Project</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/programming/">#programming</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/quest-app/">#quest app</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Welcome, Young Adventurer!</p>
+<p>Get ready for an exciting journey into the world of computer programming! You're
+about to learn how to build your very own "Quest App" using something called
+Rust. Think of it like building with digital LEGOs!</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>Follow these steps to get your Rust application up and running:</p>
+<h3 id="step-1-create-a-new-rust-project">Step 1: Create a New Rust Project</h3>
+<p>Imagine your computer is a magical workshop, and you want to build something
+new! Rust has a special tool called <code>cargo</code> that helps you start new projects.
+We'll create a new Rust "binary" project, which means it's a program that can
+run all by itself!</p>
+<p>Open your black screen (that's your "terminal" or "command line") and carefully
+type these spells, then press the <code>Enter</code> key after each one:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> new quest-app --bin</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> quest-app</span></span></code></pre>
+<p>The first command, <code>cargo new quest-app --bin</code>, tells Rust to make a new folder
+called <code>quest-app</code> and set it up for our program. The second command,
+<code>cd quest-app</code>, takes you right into our new project's folder.</p>
+<h3 id="step-2-peek-inside-the-code-with-your-favorite-editor">Step 2: Peek Inside the Code with Your Favorite Editor</h3>
+<p>A "code editor" is like a special notebook where programmers write and change
+their code. While we'll explain how to use <code>vim</code> (a powerful text editor that
+lives in your terminal), you can also use other popular editors like <strong>Visual
+Studio Code</strong> or <strong>Zed</strong> if you have them installed and know how to use them.
+Just open the <code>quest-app</code> folder with your preferred editor!</p>
+<p>If you want to try <code>vim</code>, here's how to use it:</p>
+<p>Let's open our main program file, which is called <code>src/main.rs</code>. It's like
+opening the first page of a storybook! Type this command in your terminal and
+press <code>Enter</code>:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">vim</span><span style="color: #A6E3A1;"> src/main.rs</span></span></code></pre>
+<p>You can also peek at another important file called <code>Cargo.toml</code>, which tells
+Rust how to build our app:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">vim</span><span style="color: #A6E3A1;"> Cargo.toml</span></span></code></pre>
+<p><strong>Understanding Vim (Your Secret Notebook):</strong></p>
+<ul>
+<li>When you first open <code>vim</code>, it's in <strong>"Reading Mode"</strong> (we call it <code>normal</code>
+mode). In this mode, you can read and move around the text without
+accidentally changing anything.
+<ul>
+<li>To look around, use these keys like a game controller:
+<ul>
+<li><code>h</code>: move left</li>
+<li><code>l</code>: move right</li>
+<li><code>j</code>: move down</li>
+<li><code>k</code>: move up</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>To start <strong>"Writing Mode"</strong> (we call it <code>insert</code> mode) and type new words or
+change existing ones, just press the letter <code>i</code>. You'll see <code>-- INSERT --</code>
+appear at the bottom, letting you know you can type!</li>
+<li>When you're done writing and want to go back to <strong>"Reading Mode"</strong>, just press
+the <code>Escape</code> key (it's usually in the top-left corner of your keyboard).</li>
+<li>If you've made changes and want to save your work (like saving a drawing),
+first go back to <strong>"Reading Mode"</strong> (press <code>Escape</code>), then type <code>:w</code> and press
+<code>Enter</code>.</li>
+<li>When you're finished looking at the file and want to close your secret
+notebook, first go back to <strong>"Reading Mode"</strong> (press <code>Escape</code>), then type <code>:q</code>
+and press <code>Enter</code>.</li>
+</ul>
+<h3 id="about-this-super-cool-project">About This Super Cool Project</h3>
+<p>This is where your adventure truly begins! This project is a simple computer
+program written in Rust. Right now, it's a simple Quest App that just says hi!
+You'll find its main magic words in <code>src/main.rs</code>, and its instruction book for
+Rust in <code>Cargo.toml</code>.</p>
+<p>Our big goal is to turn this simple program into an amazing <strong>quest command line
+app</strong>! You'll be able to use it to:</p>
+<ul>
+<li><strong>Create</strong> new quests for yourself (like "Learn a new Rust command!").</li>
+<li><strong>Remove</strong> quests that have been completed.</li>
+</ul>
+<p>Imagine having your very own digital quest log! Once we get this first version
+working, we'll use it to track all the cool new features we'll add to <em>your</em>
+quest app! How exciting is that?!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/quest-app/">Course Introduction: Teach The Kids (aka TTK) Rust Course</a></li>
+<li>Next:
+<a href="https://www.codedmaster.com/ttk/quest-app/01-displaying-output/">Chapter 01: Quest App: Showing Your Progress (Output)</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

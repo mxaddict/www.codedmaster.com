@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chapter 03: Installing Vim on macOS - mxaddict</title>
+    
+    
+    <meta name="description" content="For young learners! Learn how to install Vim, your powerful text editor, on your macOS computer using Homebrew.">
+    
+    
+    <meta name="keywords" content="vim, editor, cli, installation, tutorial, education, kids, children, young, learners, ttk, macos, homebrew">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;install-vim&#x2F;03-macos&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Chapter 03: Installing Vim on macOS</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/vim/">#vim</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/editor/">#editor</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cli/">#cli</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/installation/">#installation</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/education/">#education</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/kids/">#kids</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/children/">#children</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/young/">#young</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/learners/">#learners</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ttk/">#ttk</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/macos/">#macos</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/homebrew/">#homebrew</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Hello, macOS Adventurer!</p>
+<p>If you're using a computer with macOS, this chapter will show you how to install
+Vim, your powerful text editor!</p>
+<h2 id="step-1-open-your-terminal">Step 1: Open Your Terminal</h2>
+<p>First, open your <strong>Terminal</strong> application (you can find it in Applications &gt;
+Utilities, or by searching with Spotlight).</p>
+<h2 id="step-2-install-homebrew-if-you-haven-t-already">Step 2: Install Homebrew (If You Haven't Already)</h2>
+<p>Homebrew is like an app store for your Terminal on macOS. Many developers use it
+to easily install tools. If you already have Homebrew installed, you can skip
+this step!</p>
+<p>To install Homebrew, copy and paste this command into your Terminal and press
+Enter:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">/bin/bash</span><span style="color: #A6E3A1;"> -c &quot;</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">curl</span><span style="color: #A6E3A1;"> -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</span><span style="color: #9399B2;">)</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre>
+<p>Follow the instructions in the Terminal. It might ask for your computer's
+password. Press Enter when it asks you to. It will also tell you if you need to
+run some extra commands after installation to make sure Homebrew works
+perfectly. Make sure to run those commands!</p>
+<h2 id="step-3-install-vim-with-homebrew">Step 3: Install Vim with Homebrew</h2>
+<p>Now that Homebrew is ready, installing Vim is super easy!</p>
+<p>Type this command into your Terminal and press Enter:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">brew</span><span style="color: #A6E3A1;"> install vim</span></span></code></pre>
+<p>Homebrew will download and install the latest version of Vim for you.</p>
+<h2 id="step-4-verify-your-installation">Step 4: Verify Your Installation</h2>
+<p>Let's make sure Vim is ready to go!</p>
+<p>Type this command in your Terminal and press Enter:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">vim</span><span style="color: #A6E3A1;"> --version</span></span></code></pre>
+<p>You should see lots of information about Vim, including its version number. As
+long as you see some text and a version, Vim is installed correctly!</p>
+<p>Congratulations! Vim is now installed on your macOS computer. Get ready to learn
+its secrets!</p>
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li>Previous:
+<a href="https://www.codedmaster.com/ttk/install-vim/02-windows/">Chapter 02: Installing Vim on Windows</a></li>
+<li>Next:
+<a href="https://www.codedmaster.com/ttk/install-vim/04-vim-movement/">Chapter 04: Vim Basics: Moving Around Like a Pro</a></li>
+</ul>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

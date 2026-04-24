@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Setup Ghetto Skype on Ubuntu&#x2F;Debian? - mxaddict</title>
+    
+    
+    <meta name="description" content="Set up Ghetto Skype, an open-source Electron wrapper for Web Skype beta, on Ubuntu or Debian. This tutorial covers downloading, checksum verification, and installation steps for a lightweight Skype client.">
+    
+    
+    <meta name="keywords" content="skype, ghetto skype, electron, ubuntu, debian, linux, installation, tutorial">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;setup-ghetto-skype-on-ubuntu-or-debian&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Setup Ghetto Skype on Ubuntu&#x2F;Debian?</h1>
+  
+  <p>published: <time>2016-08-23</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/skype/">#skype</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ghetto-skype/">#ghetto skype</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/electron/">#electron</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ubuntu/">#ubuntu</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/debian/">#debian</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/installation/">#installation</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p><a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Ghetto Skype</a> is an open source desktop application powered by
+<a rel="external" href="http://electron.atom.io/">Electron</a> which acts as the wrapper for the <a rel="external" href="https://web.skype.com/">Web Skype</a>
+beta that Microsoft has been working on. A quote from the <a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Ghetto
+Skype</a> README.md file:</p>
+<blockquote>
+<p>Are you tired of a buggy 32 bit official Skype client? Then Ghetto Skype is
+for you!</p>
+</blockquote>
+<p>Setup is easy, basically we need to download it like so:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Assuming you are using 64 bit Ubuntu/Debian</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">wget</span><span style="color: #A6E3A1;"> https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-skype_1.4.1_amd64.deb</span></span></code></pre>
+<p>NOTE: You can check for the other versions of <a rel="external" href="https://github.com/stanfieldr/ghetto-skype">Ghetto Skype</a> on
+it's <a rel="external" href="https://github.com/stanfieldr/ghetto-skype/releases">releases page</a></p>
+<p>After the download has completed, we should do a checksum to make sure it's not
+corrupted or anything.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">md5sum</span><span style="color: #A6E3A1;"> ghetto-skype_1.4.1_amd64.deb</span></span></code></pre>
+<p>And you should get this checksum:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">a18ca8f2e525a01f80c6c011a3480c1b</span><span style="color: #A6E3A1;">  ghetto-skype_1.4.1_amd64.deb</span></span></code></pre>
+<p>After that, it's as simple as this to install it:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># You only need sudo if you are not using ROOT</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> dpkg -i ghetto-skype_1.4.1_amd64.deb</span></span></code></pre>
+<p>Once installation is done, you should be able to launch it from your application
+launcher or from a terminal like so:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ghetto-skype</span></span></code></pre>
+<p>Now you should have something like this once you have logged in</p>
+<p><img src="/img/ghetto-skype.png" alt="Screenshot" /></p>
+<h2 id="for-lazy-people">For lazy people</h2>
+<p>This will do all of the mentioned in 1 command</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># I&#39;m talking to you `John Fiel` (Easier to install on Windows my ass)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">wget</span><span style="color: #A6E3A1;"> https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-skype_1.4.1_amd64.deb</span><span style="color: #9399B2;"> &amp;&amp;</span><span style="color: #89B4FA;font-style: italic;"> sudo</span><span style="color: #A6E3A1;"> dpkg -i ghetto-skype_1.4.1_amd64.deb</span></span></code></pre><h2 id="conclusion">Conclusion</h2>
+<p>Sometimes (Most of the time) the open source community can do a lot with very
+limited resources</p>
+<p>If you are interested in the <a rel="external" href="http://electron.atom.io/">Electron</a> framework for creating desktop
+applications with web technology, then visit their <a rel="external" href="https://github.com/electron/electron">Github
+page</a></p>
+<hr />
+<p><strong><em>Editor's Note (2026):</em></strong> Ghetto Skype, the application mentioned in this
+post, is no longer actively maintained. This article is preserved for historical
+context.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

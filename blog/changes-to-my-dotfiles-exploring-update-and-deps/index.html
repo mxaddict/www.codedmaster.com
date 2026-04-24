@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Supercharging Your Dotfiles: QOL Improvements, Fedora Support, and Cleaner Updates - mxaddict</title>
+    
+    
+    <meta name="description" content="Discover how recent enhancements to my dotfiles, including silent output, detailed logging, and expanded Fedora Linux support, streamline development workflows and system maintenance for a more efficient command-line experience.">
+    
+    
+    <meta name="keywords" content="automation, bash, customization, devops, dotfiles, fedora, linux, scripting, system, tools">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;changes-to-my-dotfiles-exploring-update-and-deps&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Supercharging Your Dotfiles: QOL Improvements, Fedora Support, and Cleaner Updates</h1>
+  
+  <p>published: <time>2026-02-09</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/automation/">#automation</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/bash/">#bash</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/customization/">#customization</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/devops/">#devops</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/dotfiles/">#dotfiles</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/fedora/">#fedora</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/scripting/">#scripting</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/system/">#system</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tools/">#tools</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <h2 id="introduction">Introduction</h2>
+<p>This article details the recent updates and modifications to my personal
+dotfiles, with a particular focus on the <code>~/.local/bin/.update</code> and
+<code>~/.local/bin/.deps</code> scripts. These changes aim to streamline my development
+workflow, enhance system maintenance, and improve overall efficiency.</p>
+<h2 id="the-update-script">The <code>.update</code> Script</h2>
+<p>The <code>.update</code> script is designed to automate the process of updating various
+components of my system. It now includes enhanced functionalities for:</p>
+<ul>
+<li><strong>System package management:</strong> (e.g., <code>paru -Syu</code> on Arch Linux,
+<code>apt update &amp;&amp; apt upgrade</code> on Debian/Ubuntu).</li>
+<li><strong>Dotfile synchronization:</strong> Pulling the latest changes from my dotfiles
+repository.</li>
+<li><strong>Application-specific updates:</strong> (e.g., <code>nvim</code> plugin updates, <code>tldr</code> cache
+updates, <code>tmux</code> plugin updates).</li>
+</ul>
+<h3 id="quality-of-life-improvements-in-update">Quality of Life Improvements in <code>.update</code></h3>
+<p>Significant quality of life improvements have been integrated into the <code>.update</code>
+script to enhance its user experience and reliability:</p>
+<ul>
+<li><strong>Robust Error Handling:</strong> The script now utilizes <code>set -euo pipefail</code> to
+ensure immediate exits on errors, unset variables, or failed commands within a
+pipeline. This drastically improves the script's reliability and prevents
+unexpected behavior.</li>
+<li><strong>Silent Execution:</strong> Most commands executed by the script now pipe their
+output to <code>&gt;/dev/null 2&gt;&amp;1</code>. This keeps the terminal clean and focused,
+preventing a flood of command-line output and allowing the user to concentrate
+on essential updates.</li>
+<li><strong>Clear, Step-by-Step Logging:</strong> Instead of raw command output, the script
+provides concise and visually appealing feedback using
+<code>echo -e "$GREEN_CHECK ..."</code>. Each major step of the update process is clearly
+indicated with a green checkmark, making it easy to track progress and
+identify the current operation at a glance.</li>
+<li><strong>Automated Dotfiles Stashing and Reapplication:</strong> Before pulling updates, the
+script now intelligently stashes any local, uncommitted changes to the
+dotfiles repository. After a successful pull, these changes are automatically
+reapplied, ensuring that personal modifications are preserved across updates.</li>
+<li><strong>Self-Correction for Updates:</strong> If the dotfiles repository itself updates the
+<code>.update</code> script, the script is designed to re-execute itself with the new
+version, ensuring that the latest logic and features are always in use.</li>
+</ul>
+<h2 id="the-deps-script">The <code>.deps</code> Script</h2>
+<p>The <code>.deps</code> script is responsible for managing and installing project
+dependencies across different operating systems. Recent changes have focused on:</p>
+<ul>
+<li><strong>Cross-platform compatibility:</strong> Ensuring dependencies can be easily set up
+on different operating systems (e.g., Linux distributions like Arch, Fedora,
+Debian/Ubuntu, as well as macOS/Homebrew), including essential tools and
+libraries.</li>
+</ul>
+<h3 id="enhanced-cross-platform-dependency-management-with-fedora-support">Enhanced Cross-Platform Dependency Management with Fedora Support</h3>
+<p>The <code>.deps</code> script has been significantly enhanced to provide robust
+cross-platform dependency management. A key addition is the explicit support for
+<strong>Fedora</strong>, which is now detected via the <code>dnf</code> package manager. This means
+users on Fedora can now seamlessly install core system packages with a simple
+execution of the <code>.deps</code> script.</p>
+<p>Similar to the <code>.update</code> script, <code>.deps</code> also benefits from:</p>
+<ul>
+<li><strong>Robust Error Handling:</strong> Employing <code>set -euo pipefail</code> for safer and more
+predictable execution.</li>
+<li><strong>Silent Execution:</strong> Most package installation commands are run with output
+redirection (<code>&gt;/dev/null 2&gt;&amp;1</code>) to maintain a clean and uncluttered terminal.</li>
+<li><strong>Clear, Step-by-Step Logging:</strong> Progress is communicated through clear
+<code>echo -e "$GREEN_CHECK ..."</code> messages, making it easy to understand which
+dependencies are being addressed for a particular operating system.</li>
+</ul>
+<p>The script intelligently identifies the operating system's package manager
+(e.g., <code>pacman</code> for Arch, <code>dnf</code> for Fedora, <code>apt-get</code> for Debian/Ubuntu, <code>brew</code>
+for macOS) and executes the appropriate installation commands. This ensures that
+the correct development environment is set up with minimal manual intervention.</p>
+<h2 id="future-plans">Future Plans</h2>
+<p>I plan on updating my <strong>hyprland</strong>, <strong>waybar</strong>, <strong>swaync</strong>, <strong>gnome</strong>, <strong>qt</strong>,
+etc. configurations to use <strong>matugen</strong> for the color scheme and base the colors
+on the currently set wallpaper in <strong>hyprpaper</strong>. This will be major change to my
+current dotfiles theme setup which is completely static and set to a
+<strong>tokyonight</strong> inspired color palette</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>These updates to my dotfiles, particularly the <code>.update</code> and <code>.deps</code> scripts,
+represent a significant step towards a more automated, efficient, and robust
+development environment.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

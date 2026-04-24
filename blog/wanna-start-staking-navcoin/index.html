@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wanna Start Staking NAV &#x2F; NAVCoin? - mxaddict</title>
+    
+    
+    <meta name="description" content="Learn how to stake NAVCoin with this tutorial, covering server setup, NAVCoin Core wallet installation, and cron job configuration for continuous staking on a Linux box.">
+    
+    
+    <meta name="keywords" content="navcoin, staking, cryptocurrency, linux, wallet, tutorial">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;wanna-start-staking-navcoin&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Wanna Start Staking NAV &#x2F; NAVCoin?</h1>
+  
+  <p>published: <time>2018-03-27</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/navcoin/">#navcoin</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/staking/">#staking</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cryptocurrency/">#cryptocurrency</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/wallet/">#wallet</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/tutorial/">#tutorial</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Wanna start staking <a rel="external" href="https://navcoin.org/">NAVCoin</a> but don't know exactly how?</p>
+<p>All you need are the following:</p>
+<ul>
+<li>A linux server with atleast <code>1GB RAM</code> and <code>1 CPU Core</code></li>
+<li>A <a rel="external" href="https://github.com/NAVCoin/navcoin-core">NAVCoin Core</a> wallet</li>
+<li>SOME <a rel="external" href="https://www.binance.com/?ref=12367615">NAVCoin</a> ( Buy some at binance to give me a kick back :D )</li>
+<li>A tutorial to teach you ( This is that tutorial, LMFAO )</li>
+</ul>
+<p>NOTE: For the sake of simplicity, my example will be using an
+<code>Ubuntu 16.04 Linux Box</code></p>
+<h2 id="step-1">Step 1</h2>
+<p>Login to your linux box</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ssh</span><span style="color: #A6E3A1;"> root@server</span></span></code></pre><h2 id="step-2">Step 2</h2>
+<p>Get the latest NAVCoin Core wallet download link from <a rel="external" href="https://github.com/NAVCoin/navcoin-core/releases">navcoin_releases</a></p>
+<p>Then download via <code>wget</code> on the server</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">wget</span><span style="color: #A6E3A1;"> https://github.com/NAVCoin/navcoin-core/releases/download/4.1.1/navcoin-4.1.1-x86_64-linux-gnu.tar.gz</span></span></code></pre><h2 id="step-3">Step 3</h2>
+<p>Now extract the files with <code>tar</code> command</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">tar</span><span style="color: #A6E3A1;"> xvf navcoin-4.1.1-x86_64-linux-gnu.tar.gz</span></span></code></pre>
+<p>You should see output like the following</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navcoin-4.1.1/</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navcoin-4.1.1/bin/</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navcoin-4.1.1/bin/navcoin-cli</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navcoin-4.1.1/bin/navcoind</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navcoin-4.1.1/bin/navcoin-qt</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navcoin-4.1.1/bin/navcoin-tx</span></span></code></pre><h2 id="step-4">Step 4</h2>
+<p>Move the binary files into the <code>/usr/bin</code> for system wide access</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ROOT</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">mv</span><span style="color: #A6E3A1;"> navcoin-4.1.1/bin/</span><span>*</span><span style="color: #A6E3A1;"> /usr/bin</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># NON-ROOT</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mv navcoin-4.1.1/bin/</span><span>*</span><span style="color: #A6E3A1;"> /usr/bin</span></span></code></pre><h2 id="step-5">Step 5</h2>
+<p>Add <code>navcoind</code> to the <code>crontab</code></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Open crontab editor</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">crontab</span><span style="color: #A6E3A1;"> -e</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Once open add the following entry</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">@reboot</span><span style="color: #A6E3A1;"> navcoind</span></span></code></pre><h2 id="step-6">Step 6</h2>
+<p>Reboot the server</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ROOT</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">reboot</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># NON-ROOT</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> reboot</span></span></code></pre><h2 id="step-7">Step 7</h2>
+<p>Re loggin after reboot</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ssh</span><span style="color: #A6E3A1;"> root@server</span></span></code></pre><h2 id="step-8">Step 8</h2>
+<p>Get the main address for your new wallet</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navcoin-cli</span><span style="color: #A6E3A1;"> getaddressesbyaccount &quot;&quot;</span></span></code></pre>
+<p>Should give output like the following</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;">[</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">  &quot;NSUvvL1siPM9LQdqYhJSwfzoKMH67eQo2W&quot;</span><span>,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">  &quot;NVb3mSb7vPsNTZtCvM31cLwRErcQxzv1X8&quot;</span><span>,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">  &quot;NdvjJWEFVkyBfZEFDssUhdToSYah7vq6Fg&quot;</span><span>,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">  &quot;NcYzVrq3H75ooLDJm5M4CXnZxeRbxWs5fR&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">]</span></span></code></pre><h2 id="step-9">Step 9</h2>
+<p>Pick an address and send some <a rel="external" href="https://www.binance.com/?ref=12367615">NAVCoin</a> to it!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Once you have followed this tutorial, your wallet should be staking</p>
+<p>You can check the status with <code>navcoin-cli getstakinginfo</code></p>
+<p>Sample output</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;">{</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;enabled&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #FAB387;"> true</span><span style="color: #A6E3A1;">,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;staking&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #FAB387;"> true</span><span style="color: #A6E3A1;">,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;errors&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;currentblocksize&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> 1000,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;currentblocktx&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> 0,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;difficulty&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> 670086.1947336281,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;search-interval&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> 16,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;weight&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> 204495135273,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;netstakeweight&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> 1592159691069937,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;expectedtime&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #FAB387;"> 233574</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre>
+<p>And you can check your staking report with <code>navcoin-cli getstakereport</code></p>
+<p>Which should look like this</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;">{</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-27 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-26 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-25 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-24 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-23 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-22 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-21 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-20 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-19 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-18 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-17 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-16 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.03136986&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-15 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.08342465&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-14 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-13 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.35438356&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-12 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-11 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-10 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.35547945&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-09 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-08 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.67471494&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-07 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-06 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-05 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-04 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-03 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.28657534&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-02 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-03-01 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.35301369&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-02-28 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-02-27 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;2018-02-26 00:00:00&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.19369863&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;Last 24H&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;Last 7 Days&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.00&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;Last 30 Days&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;2.33266012&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;Last 365 Days&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;4.00405874&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;Latest Stake&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;0.03136986&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;Latest Time&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> &quot;2018-03-16 00:26:24&quot;,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;Stake counted&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #A6E3A1;"> 12,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  &quot;time took (ms)&quot;</span><span style="color: #F38BA8;font-style: italic;">:</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre><h2 id="things-to-keep-in-mind">Things to keep in mind</h2>
+<ul>
+<li>Your server should be
+<strong><code>SECURE AND NOT ACCESSIBLE BY ANYONE YOU DON'T TRUST</code></strong> with your coins</li>
+<li>Your wallet keys <strong><code>MUST BE BACKED UP</code></strong> in case your server gets corrupted</li>
+<li>When you first start reboot your server after <code>Step 6</code>, it can take a while
+for the <code>navcoind</code> wallet to sync all the block from the network (A few hours
+on a Gigabit Network)</li>
+<li>It takes <code>2 hours</code> for any coins sent to your wallet to mature and start
+staking</li>
+</ul>
+<hr />
+<p><strong><em>Editor's Note (2026):</em></strong> This post refers to Ubuntu 16.04 (Xenial Xerus),
+which reached its standard End-of-Life in April 2021. The information is
+preserved for historical context but is not recommended for use on a modern
+system.</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

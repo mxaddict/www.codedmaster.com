@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seamless Password Management: Integrating pass, pass-otp, and Dynamic Autofill on Linux - mxaddict</title>
+    
+    
+    <meta name="description" content="Discover a powerful dotfiles setup for secure and efficient password management and autofill on any Linux application, leveraging pass, pass-otp, rofi, and wtype.">
+    
+    
+    <meta name="keywords" content="linux, dotfiles, password management, pass, security, autofill, rofi, wtype, hyprland">
+    
+    
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;seamless-password-management-on-linux&#x2F;" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="/">/home/</a>
+
+        
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;ttk&#x2F;">&#x2F;ttk&#x2F;</a>
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;blog&#x2F;">&#x2F;blog&#x2F;</a>
+        
+
+        
+        
+        <a href="https:&#x2F;&#x2F;www.codedmaster.com&#x2F;about&#x2F;">&#x2F;about&#x2F;</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Seamless Password Management: Integrating pass, pass-otp, and Dynamic Autofill on Linux</h1>
+  
+  <p>published: <time>2026-01-28</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/linux/">#linux</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/dotfiles/">#dotfiles</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/password-management/">#password management</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/pass/">#pass</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/security/">#security</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/autofill/">#autofill</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/rofi/">#rofi</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/wtype/">#wtype</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/hyprland/">#hyprland</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>In today's digital landscape, robust password management is non-negotiable.
+While many solutions exist, they often come with tradeoffs between security,
+convenience, and platform compatibility. For Linux users, especially those who
+prefer a keyboard-driven workflow, traditional browser extensions or standalone
+password managers might feel clunky or restrictive.</p>
+<p>This article dives into a custom dotfiles solution that leverages the power of
+<code>pass</code> (the Unix password manager), <code>pass-otp</code> for two-factor authentication,
+and a pair of clever scripts—<code>.menu-pass</code> and <code>.menu-autofill</code>—to provide
+dynamic autofill capabilities for <em>any</em> application on your Linux machine.</p>
+<h2 id="the-core-pass-and-pass-otp">The Core: <code>pass</code> and <code>pass-otp</code></h2>
+<p>At the heart of this system is <code>pass</code>, a simple yet incredibly powerful password
+manager. <code>pass</code> stores each password in a GPG-encrypted file, typically within a
+git repository. This approach offers several compelling benefits:</p>
+<ul>
+<li><strong>Simplicity:</strong> Passwords are plain text files, easily viewable once
+decrypted.</li>
+<li><strong>Security:</strong> GPG encryption ensures your secrets are protected at rest.</li>
+<li><strong>Version Control:</strong> Storing your password store in Git means you have a full
+history of changes, easy synchronization across devices, and robust backups.</li>
+<li><strong>Extensibility:</strong> <code>pass</code> has a rich ecosystem of extensions, including
+<code>pass-otp</code>, which generates time-based one-time passwords (TOTP) directly from
+your password store, eliminating the need for a separate authenticator app.</li>
+</ul>
+<h2 id="interactive-selection-with-menu-pass">Interactive Selection with <code>.menu-pass</code></h2>
+<p>The <code>.menu-pass</code> script acts as the intelligent interface between your desire
+for a password and the <code>pass</code> utility. It provides an interactive menu and
+handles the "typing" of credentials into your active application.</p>
+<p>Here's a breakdown of its functionality:</p>
+<ul>
+<li><strong>Versatile Modes:</strong> <code>.menu-pass</code> supports multiple modes, specified as an
+argument:
+<ul>
+<li><code>auth</code>: Ideal for login forms. It types the username, presses <code>Tab</code>, types
+the password, and then presses <code>Return</code>.</li>
+<li><code>user</code>: Types only the username associated with a password entry.</li>
+<li><code>pass</code>: Types only the password (the first line of the <code>pass</code> entry).</li>
+<li><code>otp</code>: Generates and types a one-time password using <code>pass otp</code>.</li>
+</ul>
+</li>
+<li><strong><code>rofi</code> for Selection:</strong> The script uses <code>rofi -dmenu</code> to present an
+interactive, searchable menu of your <code>pass</code> entries. This allows for quick
+filtering and selection of the correct credential, even if you have hundreds
+of entries.</li>
+<li><strong><code>wtype</code> for Input Simulation:</strong> The magic ingredient that makes this system
+universal is <code>wtype</code>. This utility simulates keyboard input directly into the
+active window. This means whether you're in a web browser, a terminal, or a
+desktop application, <code>.menu-pass</code> can "type" your sensitive information
+without needing application-specific integrations.</li>
+</ul>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/env bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ... (variable definitions and mode checks) ...</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>selection</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$entries</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> rofi</span><span style="color: #A6E3A1;"> -dmenu -p &quot;[</span><span>$MODE</span><span style="color: #A6E3A1;">]&quot; -i</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[[</span><span style="color: #94E2D5;"> -z</span><span style="color: #A6E3A1;"> &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;"> ]] &amp;&amp;</span><span style="color: #F38BA8;font-style: italic;"> exit</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [[</span><span style="color: #A6E3A1;"> &quot;</span><span>$MODE</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> ==</span><span style="color: #A6E3A1;"> &quot;auth&quot;</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span>    user</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">basename</span><span style="color: #A6E3A1;"> &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span>    pass</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">pass</span><span style="color: #A6E3A1;"> show &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> head</span><span style="color: #A6E3A1;"> -n</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    # Using wtype to simulate key presses</span></span>
+<span class="giallo-l"><span>    $WTYPE</span><span style="color: #A6E3A1;"> &quot;</span><span>$user</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>    $WTYPE</span><span style="color: #A6E3A1;"> -k Tab</span></span>
+<span class="giallo-l"><span>    $WTYPE</span><span style="color: #A6E3A1;"> &quot;</span><span>$pass</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>    $WTYPE</span><span style="color: #A6E3A1;"> -k Return</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    exit</span><span style="color: #FAB387;"> 0</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">elif</span><span style="color: #9399B2;"> [[</span><span style="color: #A6E3A1;"> &quot;</span><span>$MODE</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> ==</span><span style="color: #A6E3A1;"> &quot;user&quot;</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span>    token</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">basename</span><span style="color: #A6E3A1;"> &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">elif</span><span style="color: #9399B2;"> [[</span><span style="color: #A6E3A1;"> &quot;</span><span>$MODE</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> ==</span><span style="color: #A6E3A1;"> &quot;pass&quot;</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span>    token</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">pass</span><span style="color: #A6E3A1;"> show &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> head</span><span style="color: #A6E3A1;"> -n</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">elif</span><span style="color: #9399B2;"> [[</span><span style="color: #A6E3A1;"> &quot;</span><span>$MODE</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> ==</span><span style="color: #A6E3A1;"> &quot;otp&quot;</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span>    token</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">pass</span><span style="color: #A6E3A1;"> otp &quot;</span><span>$selection</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>$WTYPE</span><span style="color: #A6E3A1;"> &quot;</span><span>$token</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>$WTYPE -k Return</span></span></code></pre><h2 id="dynamic-context-with-menu-autofill">Dynamic Context with <code>.menu-autofill</code></h2>
+<p>While <code>.menu-pass</code> handles the retrieval and typing, <code>.menu-autofill</code> provides
+the context. Its primary job is to intelligently determine what password entry
+you likely need based on your active application.</p>
+<ul>
+<li><strong>Active Window Inspection:</strong> This script is designed for Wayland
+environments, specifically leveraging <code>hyprctl</code> (from Hyprland) and <code>jq</code> to
+fetch the title of the currently focused window.</li>
+<li><strong>Domain Extraction:</strong> From the window title, it uses a regular expression to
+extract a domain name. For example, if your browser title is "Sign in -
+GitHub", it will attempt to extract "github.com". This domain is then used to
+pre-filter the <code>pass</code> entries, significantly speeding up your selection.</li>
+<li><strong>Delegation:</strong> Finally, <code>.menu-autofill</code> calls <code>.menu-pass</code>, passing along
+the determined mode (e.g., <code>pass</code>, <code>auth</code>) and the extracted domain as a
+filter.</li>
+</ul>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/env bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>TITLE</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">hyprctl</span><span style="color: #A6E3A1;"> activewindow -j</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> jq</span><span style="color: #A6E3A1;"> -r &#39;.title&#39;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>MODE</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">${1</span><span style="color: #94E2D5;">:-</span><span>pass</span><span style="color: #EBA0AC;font-style: italic;">}</span><span style="color: #9399B2;font-style: italic;"> # Default to &#39;pass&#39; mode if not specified</span></span>
+<span class="giallo-l"><span>DOMAIN</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$TITLE</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> grep</span><span style="color: #A6E3A1;"> -oP &#39;(?&lt;=//)[a-z0-9.-]+\.[a-z]{2,}&#39;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> head</span><span style="color: #A6E3A1;"> -n</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Calls .menu-pass with the inferred domain</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">.menu-pass</span><span style="color: #A6E3A1;"> &quot;</span><span>$MODE</span><span style="color: #A6E3A1;">&quot; &quot;</span><span>$DOMAIN</span><span style="color: #A6E3A1;">/&quot;</span></span></code></pre><h2 id="putting-it-all-together-the-workflow">Putting It All Together: The Workflow</h2>
+<p>Imagine you're browsing the web and land on a login page. Here's how this
+integrated system streamlines your workflow:</p>
+<ol>
+<li><strong>Hotkey Activation:</strong> You press a predefined hotkey (e.g., <code>Super + P</code>).
+This hotkey is configured in your window manager (like Hyprland) to execute
+<code>.menu-autofill</code>.</li>
+<li><strong>Contextual Awareness:</strong> <code>.menu-autofill</code> quickly queries your active
+window, extracts the relevant domain (e.g., <code>example.com</code>), and passes this
+to <code>.menu-pass</code>.</li>
+<li><strong>Filtered Selection:</strong> <code>.menu-pass</code> launches <code>rofi</code>, presenting you with a
+list of <code>pass</code> entries already filtered to <code>example.com</code>.</li>
+<li><strong>Credential Input:</strong> You select the desired entry, and <code>.menu-pass</code> uses
+<code>wtype</code> to flawlessly type your username, password, or OTP directly into the
+active input fields.</li>
+</ol>
+<p>This entire process takes mere seconds, providing a frictionless and secure
+login experience across all your applications.</p>
+<h2 id="benefits-of-this-approach">Benefits of This Approach</h2>
+<ul>
+<li><strong>Enhanced Security:</strong> Your passwords remain GPG-encrypted. There's no
+reliance on browser-specific password managers that can be vulnerable to
+certain attacks.</li>
+<li><strong>Universal Compatibility:</strong> Because it uses <code>wtype</code> to simulate keyboard
+input, this solution works with virtually any application that accepts text
+input, from web browsers to command-line interfaces to native desktop apps.</li>
+<li><strong>Total Control &amp; Customization:</strong> As these are simple shell scripts in your
+dotfiles, you have complete control to modify, extend, or adapt them to your
+specific needs and preferences.</li>
+<li><strong>Efficiency:</strong> The combination of <code>rofi</code>'s fast selection and <code>wtype</code>'s rapid
+input makes password entry incredibly quick.</li>
+<li><strong>Privacy:</strong> All operations occur locally on your machine; no third-party
+services are involved in the autofill process.</li>
+</ul>
+<h2 id="customization-and-further-improvements">Customization and Further Improvements</h2>
+<ul>
+<li><strong>X11 Support:</strong> For X11 users, <code>xdotool</code> can replace <code>wtype</code> for input
+simulation and <code>xdotool getactivewindow getwindowname</code> can replace <code>hyprctl</code>
+for window title retrieval.</li>
+<li><strong>Alternative Fuzzy Finders:</strong> While <code>rofi</code> is excellent, you could substitute
+it with <code>fzf</code>, <code>dmenu</code>, or any other interactive selection tool.</li>
+<li><strong>More Advanced Logic:</strong> Extend <code>.menu-autofill</code> to handle different window
+title patterns or integrate with other context-aware tools.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>By combining the simplicity and security of <code>pass</code> with the scripting power of
+the Linux ecosystem, these dotfiles provide a sophisticated yet highly adaptable
+password management solution. It's a testament to the flexibility of Linux that
+such a seamless, secure, and universal autofill experience can be crafted with
+just a few lines of shell script. Embrace the power of your dotfiles and elevate
+your password game!</p>
+
+  </div>
+</section>
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https:&#x2F;&#x2F;ko-fi.com&#x2F;mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>
