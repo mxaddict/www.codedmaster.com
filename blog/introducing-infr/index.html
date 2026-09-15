@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introducing infr: A Pure-Rust, Vulkan-First LLM Inference Engine - mxaddict</title>
+    
+    
+    <meta name="description" content="infr is a from-the-metal LLM inference engine written in Rust. It runs Llama, Qwen, Gemma and more on any Vulkan GPU, has native Metal and CPU backends, speaks the OpenAI API, and holds its own against llama.cpp.">
+    
+    
+    <meta name="keywords" content="rust, ai, local-ai, llm, vulkan, gpu, inference, open source, infr">
+    
+    
+    <link rel="canonical" href="https://www.codedmaster.com/blog/introducing-infr/" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="https://www.codedmaster.com">/home/</a>
+
+        
+        
+        
+        <a href="https://www.codedmaster.com/blog/">/blog/</a>
+        
+        
+        <a href="https://www.codedmaster.com/ttk/">/ttk/</a>
+        
+
+        
+        
+        <a href="https://www.codedmaster.com/about/">/about/</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Introducing infr: A Pure-Rust, Vulkan-First LLM Inference Engine</h1>
+  
+  <p>published: <time>2026-09-15</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/rust/">#rust</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/ai/">#ai</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/local-ai/">#local-ai</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/llm/">#llm</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/vulkan/">#vulkan</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/gpu/">#gpu</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/inference/">#inference</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/open-source/">#open source</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/infr/">#infr</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Back in March, I wrote about
+<a href="https://www.codedmaster.com/blog/my-journey-into-local-ai-coding/">my journey into local AI coding</a>
+with Ollama and <code>qwen3-coder:30b</code>. That setup worked, but it left me with an
+itch I couldn't stop scratching: what is actually happening between my prompt
+and my GPU, and how fast could it go if I wrote every layer myself?</p>
+<p>So I built one. Meet <strong>infr</strong>.</p>
+<h2 id="what-is-infr">What is infr?</h2>
+<p><a rel="external" href="https://github.com/kryptic-sh/infr">infr</a> is a pure-Rust LLM inference engine
+that is <strong>Vulkan-first</strong>, built to run on any mainstream GPU. The only parts
+that aren't Rust are the GPU driver calls (Vulkan through the <code>ash</code> crate,
+called via thin Rust FFI) and the compute shaders themselves (GLSL compiled to
+SPIR-V, plus MSL for Apple).</p>
+<p>The goal is a from-the-metal inference server where the model and server code
+never know which GPU API is running underneath. Three backends sit behind one
+<code>Backend</code> trait:</p>
+<ul>
+<li><strong>Vulkan</strong> for AMD, NVIDIA and Intel GPUs, including integrated graphics.</li>
+<li><strong>Metal</strong> for Apple Silicon, written natively rather than through a
+translation layer.</li>
+<li><strong>CPU</strong>, a reference implementation that every GPU path is tested against.</li>
+</ul>
+<p>I started the repository on June 26, 2026, and it has grown fast: over 1,500
+commits and around 175,000 lines of Rust, with a handful of contributors joining
+along the way.</p>
+<h2 id="using-it">Using It</h2>
+<p>The CLI is intentionally small:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">infr</span><span style="color: #A6E3A1;"> pull</span><span style="color: #94E2D5;">   &lt;</span><span style="color: #A6E3A1;">model-re</span><span>f</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">        # download a model</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">infr</span><span style="color: #A6E3A1;"> run</span><span style="color: #94E2D5;">    &lt;</span><span style="color: #A6E3A1;">model-re</span><span>f</span><span style="color: #94E2D5;">&gt;</span><span> [msg]</span><span style="color: #9399B2;font-style: italic;">  # chat in the terminal (pulls automatically)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">infr</span><span style="color: #A6E3A1;"> serve</span><span style="color: #94E2D5;">  &lt;</span><span style="color: #A6E3A1;">model-re</span><span>f</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">        # OpenAI-compatible HTTP API</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">infr</span><span style="color: #A6E3A1;"> bench / infr compare</span><span style="color: #9399B2;font-style: italic;">      # benchmarks, including against llama.cpp</span></span></code></pre>
+<p>Model references work just like llama.cpp's <code>-hf</code> flag: <code>org/repo[:quant]</code>, with
+<code>Q4_K_M</code> as the default quant. Even better, infr uses the standard <strong>Hugging
+Face Hub cache</strong> (<code>~/.cache/huggingface/hub</code>), so a model you already downloaded
+with llama.cpp or <code>huggingface_hub</code> doesn't get downloaded twice.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">infr</span><span style="color: #A6E3A1;"> run unsloth/Qwen3-1.7B-GGUF:Q4_K_M &quot;What is the capital of France?&quot;</span></span></code></pre><h2 id="what-it-runs">What It Runs</h2>
+<p>infr loads GGUF files and supports a wide spread of model families:</p>
+<ul>
+<li><strong>Llama</strong> and <strong>Llama 4</strong> (including Scout's mixture-of-experts)</li>
+<li><strong>Qwen2 / Qwen2.5</strong>, <strong>Qwen3</strong> (dense and MoE)</li>
+<li><strong>Qwen3.5 / Qwen3.6</strong>, with their hybrid gated-DeltaNet plus attention layers</li>
+<li><strong>Gemma 3</strong> and <strong>Gemma 4</strong> (dense, the E2B variant, and the 26B-A4B MoE)</li>
+<li><strong>DiffusionGemma</strong>, a block text-diffusion model that was the project's
+original target</li>
+<li><strong>BitNet b1.58</strong>, with ternary weights</li>
+</ul>
+<p>Fine-tunes built on any of those backbones run with no code changes. The chat
+template is read straight from each GGUF file, so prompts are formatted the way
+the model expects.</p>
+<h2 id="performance-honest-numbers">Performance: Honest Numbers</h2>
+<p>I didn't want to write "blazing fast" without receipts, so infr ships its own
+benchmarking against llama.cpp (<code>infr compare</code>). The
+<a rel="external" href="https://github.com/kryptic-sh/infr/blob/main/docs/perf/results.md">published results</a>
+come from an <strong>AMD Radeon RX 7900 XTX</strong> (24 GB, Vulkan on Mesa RADV), comparing
+35 model and quant combinations against a llama.cpp release build, in a snapshot
+taken on August 3, 2026.</p>
+<p>Here's how often infr came out <strong>faster</strong> than llama.cpp, per benchmark:</p>
+<table><thead><tr><th>Benchmark</th><th>infr faster in</th><th>Best ratio</th></tr></thead><tbody>
+<tr><td><code>pp512</code> (prompt processing)</td><td>34 of 35 rows</td><td>1.43×</td></tr>
+<tr><td><code>tg128</code> (token generation)</td><td>29 of 35 rows</td><td>1.51×</td></tr>
+<tr><td><code>tg64@d4096</code> (generation, 4K context)</td><td>24 of 35 rows</td><td>1.27×</td></tr>
+<tr><td><code>pp4@d4096</code> (short turns, 4K context)</td><td>33 of 35 rows</td><td>2.19×</td></tr>
+</tbody></table>
+<p>That last row is the one I care about most. A coding agent sends lots of short
+turns on top of a long, growing context, and that is exactly where infr is
+strongest.</p>
+<p>It isn't a clean sweep, and the results document says so. The losses cluster
+around <strong>Qwen3-14B and the larger MoE models</strong>, mostly when generating at depth,
+and that is where the remaining work is. Speed also means nothing if the output
+is wrong, so correctness is checked separately: tests generate text token for
+token on both the GPU and the CPU reference implementation and compare them.</p>
+<p>On Apple Silicon, the Metal backend is newer and currently trails llama.cpp's
+Metal backend slightly on an M3 Pro, with most rows between 0.8× and 1.0×.</p>
+<h2 id="two-standout-tricks">Two Standout Tricks</h2>
+<h3 id="ternary-models-on-the-gpu">Ternary Models on the GPU</h3>
+<p>llama.cpp added the <strong>Q2_0</strong> weight type used by Prism ML's Ternary-Bonsai
+models (weights trained to just -1, 0 and +1), but only for the CPU. infr runs
+them natively on Vulkan, which makes it the only engine that runs these files on
+a GPU. On the 7900 XTX, Bonsai-8B generates about <strong>212 tokens per second</strong>. For
+context, llama.cpp manages 18.6 on my Ryzen 9 9950X3D, though that is a GPU
+against a CPU rather than a like-for-like race.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">infr</span><span style="color: #A6E3A1;"> run prism-ml/Ternary-Bonsai-8B-gguf:Q2_0_g64 &quot;What is the capital of France?&quot;</span></span></code></pre><h3 id="models-bigger-than-your-vram">Models Bigger Than Your VRAM</h3>
+<p>Llama 4 Scout at <code>Q2_K</code> is a 37 GB file, far more than a 24 GB card can hold.
+infr's <strong>paged expert cache</strong> keeps recently used experts in VRAM and pages the
+rest in as needed. On the 7900 XTX that gives roughly <strong>404 tokens per second</strong>
+of prompt processing and <strong>~17 tokens per second</strong> of generation, compared with
+136 and 6.55 for llama.cpp's CPU offload.</p>
+<h2 id="serving-point-your-tools-at-it">Serving: Point Your Tools at It</h2>
+<p><code>infr serve</code> exposes an OpenAI-compatible HTTP API with streaming:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">infr</span><span style="color: #A6E3A1;"> serve unsloth/Qwen3-14B-GGUF:Q4_K_M</span><span style="color: #9399B2;font-style: italic;">   # listens on 127.0.0.1:8080</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">curl</span><span style="color: #A6E3A1;"> -s localhost:8080/v1/chat/completions -d &#39;{</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">  &quot;model&quot;: &quot;qwen3&quot;,</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">  &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;What is the capital of France?&quot;}],</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">  &quot;stream&quot;: true</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">}&#39;</span></span></code></pre>
+<p>It keeps a persistent KV cache across requests, so a follow-up message that
+shares a prefix with the previous one doesn't reprocess the whole conversation.
+Tool calling uses the model's own chat template, which means it works as a
+drop-in backend for OpenAI-API clients like
+<a href="https://www.codedmaster.com/blog/why-opencode-is-my-favorite-cli-coding-agent/">opencode</a>.
+It's also the natural backend for <a rel="external" href="https://github.com/kryptic-sh/hrdr">hrdr</a>,
+the agentic coding harness I'm building alongside it.</p>
+<h2 id="configuration-without-surprises">Configuration Without Surprises</h2>
+<p>Every setting (device, context size, sampling, KV cache format, paging budgets,
+individual kernel switches) resolves once at startup from four layers, where
+later layers win:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="plain"><span class="giallo-l"><span>defaults  &lt;  config file (TOML)  &lt;  INFR_* environment  &lt;  CLI flags / --set</span></span></code></pre>
+<p>The config file is the first one found out of <code>--config &lt;path&gt;</code>, <code>./infr.toml</code>,
+and <code>~/.config/infr/config.toml</code>:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="toml"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ./infr.toml</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>device</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>ctx</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;32k&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>kv</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>type_k</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;q8_0&quot;</span></span></code></pre>
+<p>Anything without a dedicated flag can still be set from the command line with
+<code>--set</code>, for example <code>--set kernels.vulkan.flash_splits=2</code>.</p>
+<h2 id="try-it-yourself">Try It Yourself</h2>
+<p>infr is still an <strong>early work in progress</strong> with no tagged releases yet, so for
+now you build it from source. You'll need a Rust toolchain, a working Vulkan
+driver, and <code>glslc</code> (from the <code>shaderc</code> package), which compiles the compute
+shaders during the build:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clone https://github.com/kryptic-sh/infr.git</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> infr</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cargo</span><span style="color: #A6E3A1;"> build --release -p infr-cli</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">./target/release/infr</span><span style="color: #A6E3A1;"> run unsloth/Qwen3-1.7B-GGUF:Q4_K_M &quot;Hello!&quot;</span></span></code></pre>
+<p>A few things are deliberately parked for now, like MTP speculative decoding (the
+reasoning is documented in the repo), and safetensors loading isn't built yet.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>infr started as curiosity about what happens under the hood of local AI, and
+turned into a deep dive all the way down to the GPU. Writing GPU kernels,
+chasing down a few percent of throughput, and then proving the output is still
+token-for-token correct is a very different kind of fun from building a CLI
+tool.</p>
+<p>If you have a Vulkan-capable GPU and a spare evening, give it a spin and see how
+it compares with your current setup. Benchmarks, bug reports and PRs are all
+welcome at <a rel="external" href="https://github.com/kryptic-sh/infr">github.com/kryptic-sh/infr</a>. 🍻</p>
+
+  </div>
+</section>
+
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https://ko-fi.com/mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

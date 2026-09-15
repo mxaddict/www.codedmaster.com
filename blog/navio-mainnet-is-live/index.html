@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Navio Mainnet Is Live: Private Proof-of-Stake Is Finally Here - mxaddict</title>
+    
+    
+    <meta name="description" content="Navio, the successor to NavCoin, launched its mainnet in the summer of 2026. Here&#39;s what shipped, how Proof-of-Private-Stake works, how to move your old NAV over, and how to start staking.">
+    
+    
+    <meta name="keywords" content="navio, navcoin, staking, cryptocurrency, privacy, blsct, proof of stake">
+    
+    
+    <link rel="canonical" href="https://www.codedmaster.com/blog/navio-mainnet-is-live/" />
+    
+    <link rel="stylesheet" href="https://www.codedmaster.com/style.css">
+    
+    <!-- Delayed Google Analytics loading -->
+    <script>
+      const loadGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2S08BKPGVS');
+
+        const script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-2S08BKPGVS";
+        script.defer = true;
+        document.head.appendChild(script);
+      };
+
+      window.addEventListener('scroll', loadGtag, { once: true });
+      window.addEventListener('mousemove', loadGtag, { once: true });
+      window.addEventListener('touchstart', loadGtag, { once: true });
+    </script>
+    
+    
+  </head>
+  <body class="theme-tokyonight">
+    
+    <header>
+      <nav>
+        <a href="https://www.codedmaster.com">/home/</a>
+
+        
+        
+        
+        <a href="https://www.codedmaster.com/blog/">/blog/</a>
+        
+        
+        <a href="https://www.codedmaster.com/ttk/">/ttk/</a>
+        
+
+        
+        
+        <a href="https://www.codedmaster.com/about/">/about/</a>
+        
+      </nav>
+    </header>
+    <hr>
+    <main>
+      
+<section>
+  <h1>Navio Mainnet Is Live: Private Proof-of-Stake Is Finally Here</h1>
+  
+  <p>published: <time>2026-09-15</time></p>
+  
+  
+  <p class="tags">
+  tags: [
+  
+  <a href="https://www.codedmaster.com/tags/navio/">#navio</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/navcoin/">#navcoin</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/staking/">#staking</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/cryptocurrency/">#cryptocurrency</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/privacy/">#privacy</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/blsct/">#blsct</a>, 
+  
+  <a href="https://www.codedmaster.com/tags/proof-of-stake/">#proof of stake</a>
+  
+  ]
+  </p>
+  
+  <div>
+    <p>Back in January, I wrote a
+<a href="https://www.codedmaster.com/blog/from-navcoin-to-navio-a-staking-retrospective/">retrospective on my NavCoin staking journey</a>
+and said I was eagerly anticipating the launch of Navio. Well, the wait is over.
+<strong>The Navio mainnet is live</strong>, and it has been running since the start of July.</p>
+<p>I've been staking NAV since 2018, and over the last few years I've also been
+contributing to <a rel="external" href="https://github.com/nav-io/navio-core">navio-core</a> itself, with
+more than 500 commits to the codebase. So this launch is personal. Let's walk
+through what actually shipped.</p>
+<h2 id="the-launch">The Launch</h2>
+<p><a rel="external" href="https://github.com/nav-io/navio-core/releases/tag/v0.1.0">Navio Core v0.1.0</a>
+was published on June 28, 2026, as the first stable release of Navio Core and
+the launch of the Navio mainnet. The genesis block carries a timestamp of <strong>July
+1, 2026, 13:00 UTC</strong>.</p>
+<p>Under the hood, Navio Core is built on the Bitcoin Core codebase, with BLSCT
+(Boneh-Lynn-Shacham Confidential Transactions) added at the base layer. Binaries
+were released for Linux (x86_64, ARM, RISC-V and PowerPC), macOS (Intel and
+Apple Silicon) and Windows, with signed <code>SHA256SUMS</code> so you can verify your
+download before running it.</p>
+<h2 id="what-makes-navio-different">What Makes Navio Different</h2>
+<p>In that retrospective I explained that NavCoin only offered private transactions
+through its <code>xNAV</code> token. Navio flips that around: privacy is the default, not
+an add-on.</p>
+<h3 id="confidential-transactions-everywhere">Confidential Transactions Everywhere</h3>
+<p>Every shielded output hides both the amount and the parties involved, using
+Pedersen commitments and BLS12-381 range proofs. The chain stays publicly
+verifiable (anyone can check that no coins were created out of thin air) without
+anyone learning who sent what to whom. Addresses are bech32m stealth addresses
+that start with <code>nav1</code>.</p>
+<h3 id="proof-of-private-stake-pops">Proof-of-Private-Stake (PoPS)</h3>
+<p>This is the part I've been most excited about. On a normal Proof-of-Stake chain,
+everyone can see which address produced a block and how much it had staked. With
+PoPS, a staker proves two things with zero-knowledge proofs:</p>
+<ol>
+<li>A <strong>set-membership proof</strong> showing it controls <em>one</em> of the staked
+commitments, without revealing which one.</li>
+<li>A <strong>range proof</strong> showing the hidden amount in that commitment is enough to
+win this particular block.</li>
+</ol>
+<p>The result is that the validator's identity, the amount staked, and even the
+link between two blocks produced by the same staker never appear on-chain. You
+help secure the network without putting a target on your wallet.</p>
+<h3 id="mainnet-parameters">Mainnet Parameters</h3>
+<p>According to the
+<a rel="external" href="https://docs.nav.io/concepts/consensus/">Navio consensus documentation</a>, the
+key mainnet numbers are:</p>
+<table><thead><tr><th>Parameter</th><th>Mainnet value</th></tr></thead><tbody>
+<tr><td>Target block time</td><td>120 seconds</td></tr>
+<tr><td>Block reward</td><td>8 NAV</td></tr>
+<tr><td>Minimum stake</td><td>10,000 NAV</td></tr>
+<tr><td>Consensus</td><td>Short PoW bootstrap, then PoPS</td></tr>
+<tr><td>P2P / RPC ports</td><td>48470 / 48471</td></tr>
+<tr><td>Address format</td><td>bech32m, <code>nav1...</code></td></tr>
+</tbody></table>
+<h2 id="moving-your-old-nav-to-navio">Moving Your Old NAV to Navio</h2>
+<p>If you're still holding legacy NavCoin, the migration goes through the official
+bridge at <a rel="external" href="https://bridge.nav.io">bridge.nav.io</a>. It's a two-step process:</p>
+<ol>
+<li><strong>NAV to wNAV:</strong> Connect a BNB Smart Chain wallet on the bridge, register
+once, and send your legacy NAV to the deposit address the bridge gives you.
+The equivalent amount of wrapped NAV (wNAV) is minted to your BSC wallet,
+usually within a few minutes.</li>
+<li><strong>wNAV to native NAV:</strong> On the bridge's Withdraw page, enter a Navio address
+(starting with <code>nav1</code>). The bridge burns your wNAV and sends native NAV to
+that address on the new chain.</li>
+</ol>
+<p><strong>Be careful here.</strong> The bridge only accepts mainnet <code>nav1...</code> addresses. Old
+NavCoin (<code>N...</code>) addresses and testnet (<code>tnv1...</code>) addresses are rejected, and
+the official guide warns that burning with a wrongly formatted address destroys
+the wNAV with no refund. <strong>Send a small test amount first</strong>, and follow the
+<a rel="external" href="https://docs.nav.io/guides/coin-swap/">official coin swap guide</a> step by step
+rather than a summary like this one.</p>
+<h2 id="staking-on-navio">Staking on Navio</h2>
+<p>Staking works a little differently from the old <code>navcoind</code> setup I described
+<a href="https://www.codedmaster.com/blog/wanna-start-staking-navcoin/">back in 2018</a>. Instead of the
+wallet staking on its own, you lock coins into a stake and run a separate staker
+process.</p>
+<p>First, download Navio Core from the
+<a rel="external" href="https://github.com/nav-io/navio-core/releases">releases page</a>, start <code>naviod</code>,
+and let it sync. Then create a wallet (BLSCT is the default wallet type) and
+grab a <code>nav1</code> address to receive your coins:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navio-cli</span><span style="color: #A6E3A1;"> createwallet &quot;staking&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navio-cli</span><span style="color: #A6E3A1;"> -rpcwallet=staking getnewaddress &quot;Staking&quot; &quot;blsct&quot;</span></span></code></pre>
+<p>Once your NAV has arrived, lock at least the 10,000 NAV minimum into a stake:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navio-cli</span><span style="color: #A6E3A1;"> -rpcwallet=staking stakelock</span><span style="color: #FAB387;"> 10000</span></span></code></pre>
+<p>Finally, run the staker against your wallet. It connects to your node over RPC,
+builds the Proof-of-Private-Stake proofs, and submits blocks when you win:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">navio-staker</span><span style="color: #A6E3A1;"> -wallet=staking</span></span></code></pre>
+<p>When you want your coins back, <code>stakeunlock</code> releases them from the stake into
+your regular spendable balance.</p>
+<h3 id="cold-staking">Cold Staking</h3>
+<p>If you'd rather not keep your spending keys on an always-online server, Navio
+Core v0.1.7 added <strong>delegated cold staking</strong>. You hand an operator the ability
+to produce blocks with your stake, while only your offline key can spend or
+unstake the coins, and you can revoke the delegation at any time with
+<code>stakeunlock</code>. The details are in the
+<a rel="external" href="https://github.com/nav-io/navio-core/blob/master/doc/cold-staking.md">cold staking documentation</a>.</p>
+<h2 id="life-after-launch">Life After Launch</h2>
+<p>A mainnet launch is the start of the work, not the end. The releases have kept
+coming at a fast pace, up to
+<a rel="external" href="https://github.com/nav-io/navio-core/releases/tag/v0.2.1">v0.2.1</a> at the time
+of writing. The biggest one so far is
+<a rel="external" href="https://github.com/nav-io/navio-core/releases/tag/v0.2.0">v0.2.0</a>, which:</p>
+<ul>
+<li>Moved the BLSCT cryptography from the herumi/mcl library to
+supranational/blst, while staying byte-compatible with the existing chain.</li>
+<li>Brought in a hardened "v2" proof transcript that activates at <strong>mainnet height
+42,500</strong>, so every node needs to be on v0.2.0 or later.</li>
+<li>Introduced an encrypted peer-to-peer messaging layer, with aggregated sends
+that hide which outputs belong to the sender, and atomic swaps between tokens
+and NAV.</li>
+<li>Fixed a block production stall that hit mainnet on September 5, 2026.</li>
+</ul>
+<p>That last point is worth being honest about: a brand-new chain running brand-new
+cryptography will have rough edges, and it did. What matters to me is that it
+was diagnosed and fixed in the open within days. If you run a node, <strong>keep it up
+to date</strong>.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>When I first set up a NavCoin staking box on an Ubuntu 16.04 server in 2018, a
+fully private Proof-of-Stake chain felt like a far-off research idea. Now it's
+running, and I get to help build it.</p>
+<p>If you want to dig deeper, start with the
+<a rel="external" href="https://docs.nav.io/">Navio documentation</a> and the
+<a rel="external" href="https://github.com/nav-io/navio-core">navio-core repository</a>. And if you're
+still sitting on legacy NAV, now is a good time to make the move.</p>
+
+  </div>
+</section>
+
+
+    </main>
+    <hr>
+    <footer>
+      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/mxaddict/zolanight">ZolaNight Theme</a></p>
+      
+      <p>Support this content on <a href="https://ko-fi.com/mxaddict">Ko-fi</a>.</p>
+      
+    </footer>
+  </body>
+</html>

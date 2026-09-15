@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>mxaddict</title>
+    <subtitle>mxaddict&#39;s Blog</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://www.codedmaster.com/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.codedmaster.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-09-15T00:00:00+00:00</updated>
+    <id>https://www.codedmaster.com/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Introducing infr: A Pure-Rust, Vulkan-First LLM Inference Engine</title>
+        <published>2026-09-15T00:00:00+00:00</published>
+        <updated>2026-09-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/introducing-infr/"/>
+        <id>https://www.codedmaster.com/blog/introducing-infr/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/introducing-infr/">&lt;p&gt;Back in March, I wrote about
+&lt;a href=&quot;https://www.codedmaster.com/blog/my-journey-into-local-ai-coding/&quot;&gt;my journey into local AI coding&lt;/a&gt;
+with Ollama and &lt;code&gt;qwen3-coder:30b&lt;/code&gt;. That setup worked, but it left me with an
+itch I couldn&#39;t stop scratching: what is actually happening between my prompt
+and my GPU, and how fast could it go if I wrote every layer myself?&lt;/p&gt;
+&lt;p&gt;So I built one. Meet &lt;strong&gt;infr&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-infr&quot;&gt;What is infr?&lt;/h2&gt;
+&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https://github.com/kryptic-sh/infr&quot;&gt;infr&lt;/a&gt; is a pure-Rust LLM inference engine
+that is &lt;strong&gt;Vulkan-first&lt;/strong&gt;, built to run on any mainstream GPU. The only parts
+that aren&#39;t Rust are the GPU driver calls (Vulkan through the &lt;code&gt;ash&lt;/code&gt; crate,
+called via thin Rust FFI) and the compute shaders themselves (GLSL compiled to
+SPIR-V, plus MSL for Apple).&lt;/p&gt;
+&lt;p&gt;The goal is a from-the-metal inference server where the model and server code
+never know which GPU API is running underneath. Three backends sit behind one
+&lt;code&gt;Backend&lt;/code&gt; trait:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Vulkan&lt;/strong&gt; for AMD, NVIDIA and Intel GPUs, including integrated graphics.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Metal&lt;/strong&gt; for Apple Silicon, written natively rather than through a
+translation layer.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt;, a reference implementation that every GPU path is tested against.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I started the repository on June 26, 2026, and it has grown fast: over 1,500
+commits and around 175,000 lines of Rust, with a handful of contributors joining
+along the way.&lt;/p&gt;
+&lt;h2 id=&quot;using-it&quot;&gt;Using It&lt;/h2&gt;
+&lt;p&gt;The CLI is intentionally small:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;infr&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; pull&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt;   &amp;lt;&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt;model-re&lt;/span&gt;&lt;span&gt;f&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;        # download a model&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;infr&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; run&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt;    &amp;lt;&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt;model-re&lt;/span&gt;&lt;span&gt;f&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span&gt; [msg]&lt;/span&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;  # chat in the terminal (pulls automatically)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;infr&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; serve&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt;  &amp;lt;&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt;model-re&lt;/span&gt;&lt;span&gt;f&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;        # OpenAI-compatible HTTP API&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;infr&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; bench / infr compare&lt;/span&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;      # benchmarks, including against llama.cpp&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Model references work just like llama.cpp&#39;s &lt;code&gt;-hf&lt;/code&gt; flag: &lt;code&gt;org/repo[:quant]&lt;/code&gt;, with
+&lt;code&gt;Q4_K_M&lt;/code&gt; as the default quant. Even better, infr uses the standard &lt;strong&gt;Hugging
+Face Hub cache&lt;/strong&gt; (&lt;code&gt;~/.cache/huggingface/hub&lt;/code&gt;), so a model you already downloaded
+with llama.cpp or &lt;code&gt;huggingface_hub&lt;/code&gt; doesn&#39;t get downloaded twice.&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;infr&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; run unsloth/Qwen3-1.7B-GGUF:Q4_K_M &amp;quot;What is the capital of France?&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;what-it-runs&quot;&gt;What It Runs&lt;/h2&gt;
+&lt;p&gt;infr loads GGUF files and supports a wide spread of model families:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Llama&lt;/strong&gt; and &lt;strong&gt;Llama 4&lt;/strong&gt; (including Scout&#39;s mixture-of-experts)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Qwen2 / Qwen2.5&lt;/strong&gt;, &lt;strong&gt;Qwen3&lt;/strong&gt; (dense and MoE)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Qwen3.5 / Qwen3.6&lt;/strong&gt;, with their hybrid gated-DeltaNet plus attention layers&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gemma 3&lt;/strong&gt; and &lt;strong&gt;Gemma 4&lt;/strong&gt; (dense, the E2B variant, and the 26B-A4B MoE)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DiffusionGemma&lt;/strong&gt;, a block text-diffusion model that was the project&#39;s
+original target&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BitNet b1.58&lt;/strong&gt;, with ternary weights&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Fine-tunes built on any of those backbones run with no code changes. The chat
+template is read straight from each GGUF file, so prompts are formatted the way
+the model expects.&lt;/p&gt;
+&lt;h2 id=&quot;performance-honest-numbers&quot;&gt;Performance: Honest Numbers&lt;/h2&gt;
+&lt;p&gt;I didn&#39;t want to write &quot;blazing fast&quot; without receipts, so infr ships its own
+benchmarking against llama.cpp (&lt;code&gt;infr compare&lt;/code&gt;). The
+&lt;a rel=&quot;external&quot; href=&quot;https://github.com/kryptic-sh/infr/blob/main/docs/perf/results.md&quot;&gt;published results&lt;/a&gt;
+come from an &lt;strong&gt;AMD Radeon RX 7900 XTX&lt;/strong&gt; (24 GB, Vulkan on Mesa RADV), comparing
+35 model and quant combinations against a llama.cpp release build, in a snapshot
+taken on August 3, 2026.&lt;/p&gt;
+&lt;p&gt;Here&#39;s how often infr came out &lt;strong&gt;faster&lt;/strong&gt; than llama.cpp, per benchmark:&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Benchmark&lt;/th&gt;&lt;th&gt;infr faster in&lt;/th&gt;&lt;th&gt;Best ratio&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;pp512&lt;/code&gt; (prompt processing)&lt;/td&gt;&lt;td&gt;34 of 35 rows&lt;/td&gt;&lt;td&gt;1.43×&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;tg128&lt;/code&gt; (token generation)&lt;/td&gt;&lt;td&gt;29 of 35 rows&lt;/td&gt;&lt;td&gt;1.51×&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;tg64@d4096&lt;/code&gt; (generation, 4K context)&lt;/td&gt;&lt;td&gt;24 of 35 rows&lt;/td&gt;&lt;td&gt;1.27×&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;pp4@d4096&lt;/code&gt; (short turns, 4K context)&lt;/td&gt;&lt;td&gt;33 of 35 rows&lt;/td&gt;&lt;td&gt;2.19×&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;That last row is the one I care about most. A coding agent sends lots of short
+turns on top of a long, growing context, and that is exactly where infr is
+strongest.&lt;/p&gt;
+&lt;p&gt;It isn&#39;t a clean sweep, and the results document says so. The losses cluster
+around &lt;strong&gt;Qwen3-14B and the larger MoE models&lt;/strong&gt;, mostly when generating at depth,
+and that is where the remaining work is. Speed also means nothing if the output
+is wrong, so correctness is checked separately: tests generate text token for
+token on both the GPU and the CPU reference implementation and compare them.&lt;/p&gt;
+&lt;p&gt;On Apple Silicon, the Metal backend is newer and currently trails llama.cpp&#39;s
+Metal backend slightly on an M3 Pro, with most rows between 0.8× and 1.0×.&lt;/p&gt;
+&lt;h2 id=&quot;two-standout-tricks&quot;&gt;Two Standout Tricks&lt;/h2&gt;
+&lt;h3 id=&quot;ternary-models-on-the-gpu&quot;&gt;Ternary Models on the GPU&lt;/h3&gt;
+&lt;p&gt;llama.cpp added the &lt;strong&gt;Q2_0&lt;/strong&gt; weight type used by Prism ML&#39;s Ternary-Bonsai
+models (weights trained to just -1, 0 and +1), but only for the CPU. infr runs
+them natively on Vulkan, which makes it the only engine that runs these files on
+a GPU. On the 7900 XTX, Bonsai-8B generates about &lt;strong&gt;212 tokens per second&lt;/strong&gt;. For
+context, llama.cpp manages 18.6 on my Ryzen 9 9950X3D, though that is a GPU
+against a CPU rather than a like-for-like race.&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;infr&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; run prism-ml/Ternary-Bonsai-8B-gguf:Q2_0_g64 &amp;quot;What is the capital of France?&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;models-bigger-than-your-vram&quot;&gt;Models Bigger Than Your VRAM&lt;/h3&gt;
+&lt;p&gt;Llama 4 Scout at &lt;code&gt;Q2_K&lt;/code&gt; is a 37 GB file, far more than a 24 GB card can hold.
+infr&#39;s &lt;strong&gt;paged expert cache&lt;/strong&gt; keeps recently used experts in VRAM and pages the
+rest in as needed. On the 7900 XTX that gives roughly &lt;strong&gt;404 tokens per second&lt;/strong&gt;
+of prompt processing and &lt;strong&gt;~17 tokens per second&lt;/strong&gt; of generation, compared with
+136 and 6.55 for llama.cpp&#39;s CPU offload.&lt;/p&gt;
+&lt;h2 id=&quot;serving-point-your-tools-at-it&quot;&gt;Serving: Point Your Tools at It&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;infr serve&lt;/code&gt; exposes an OpenAI-compatible HTTP API with streaming:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;infr&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; serve unsloth/Qwen3-14B-GGUF:Q4_K_M&lt;/span&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;   # listens on 127.0.0.1:8080&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;curl&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; -s localhost:8080/v1/chat/completions -d &amp;#39;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt;  &amp;quot;model&amp;quot;: &amp;quot;qwen3&amp;quot;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt;  &amp;quot;messages&amp;quot;: [{&amp;quot;role&amp;quot;: &amp;quot;user&amp;quot;, &amp;quot;content&amp;quot;: &amp;quot;What is the capital of France?&amp;quot;}],&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt;  &amp;quot;stream&amp;quot;: true&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt;}&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It keeps a persistent KV cache across requests, so a follow-up message that
+shares a prefix with the previous one doesn&#39;t reprocess the whole conversation.
+Tool calling uses the model&#39;s own chat template, which means it works as a
+drop-in backend for OpenAI-API clients like
+&lt;a href=&quot;https://www.codedmaster.com/blog/why-opencode-is-my-favorite-cli-coding-agent/&quot;&gt;opencode&lt;/a&gt;.
+It&#39;s also the natural backend for &lt;a rel=&quot;external&quot; href=&quot;https://github.com/kryptic-sh/hrdr&quot;&gt;hrdr&lt;/a&gt;,
+the agentic coding harness I&#39;m building alongside it.&lt;/p&gt;
+&lt;h2 id=&quot;configuration-without-surprises&quot;&gt;Configuration Without Surprises&lt;/h2&gt;
+&lt;p&gt;Every setting (device, context size, sampling, KV cache format, paging budgets,
+individual kernel switches) resolves once at startup from four layers, where
+later layers win:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;plain&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;defaults  &amp;lt;  config file (TOML)  &amp;lt;  INFR_* environment  &amp;lt;  CLI flags / --set&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The config file is the first one found out of &lt;code&gt;--config &amp;lt;path&amp;gt;&lt;/code&gt;, &lt;code&gt;./infr.toml&lt;/code&gt;,
+and &lt;code&gt;~/.config/infr/config.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;toml&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;# ./infr.toml&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #9399B2;&quot;&gt;[&lt;/span&gt;&lt;span&gt;device&lt;/span&gt;&lt;span style=&quot;color: #9399B2;&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;ctx&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; =&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; &amp;quot;32k&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #9399B2;&quot;&gt;[&lt;/span&gt;&lt;span&gt;kv&lt;/span&gt;&lt;span style=&quot;color: #9399B2;&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;type_k&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; =&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; &amp;quot;q8_0&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Anything without a dedicated flag can still be set from the command line with
+&lt;code&gt;--set&lt;/code&gt;, for example &lt;code&gt;--set kernels.vulkan.flash_splits=2&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;try-it-yourself&quot;&gt;Try It Yourself&lt;/h2&gt;
+&lt;p&gt;infr is still an &lt;strong&gt;early work in progress&lt;/strong&gt; with no tagged releases yet, so for
+now you build it from source. You&#39;ll need a Rust toolchain, a working Vulkan
+driver, and &lt;code&gt;glslc&lt;/code&gt; (from the &lt;code&gt;shaderc&lt;/code&gt; package), which compiles the compute
+shaders during the build:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;git&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; clone https://github.com/kryptic-sh/infr.git&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #F38BA8;font-style: italic;&quot;&gt;cd&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; infr&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; build --release -p infr-cli&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;./target/release/infr&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; run unsloth/Qwen3-1.7B-GGUF:Q4_K_M &amp;quot;Hello!&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A few things are deliberately parked for now, like MTP speculative decoding (the
+reasoning is documented in the repo), and safetensors loading isn&#39;t built yet.&lt;/p&gt;
+&lt;h2 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h2&gt;
+&lt;p&gt;infr started as curiosity about what happens under the hood of local AI, and
+turned into a deep dive all the way down to the GPU. Writing GPU kernels,
+chasing down a few percent of throughput, and then proving the output is still
+token-for-token correct is a very different kind of fun from building a CLI
+tool.&lt;/p&gt;
+&lt;p&gt;If you have a Vulkan-capable GPU and a spare evening, give it a spin and see how
+it compares with your current setup. Benchmarks, bug reports and PRs are all
+welcome at &lt;a rel=&quot;external&quot; href=&quot;https://github.com/kryptic-sh/infr&quot;&gt;github.com/kryptic-sh/infr&lt;/a&gt;. 🍻&lt;/p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Navio Mainnet Is Live: Private Proof-of-Stake Is Finally Here</title>
+        <published>2026-09-15T00:00:00+00:00</published>
+        <updated>2026-09-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/navio-mainnet-is-live/"/>
+        <id>https://www.codedmaster.com/blog/navio-mainnet-is-live/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/navio-mainnet-is-live/">&lt;p&gt;Back in January, I wrote a
+&lt;a href=&quot;https://www.codedmaster.com/blog/from-navcoin-to-navio-a-staking-retrospective/&quot;&gt;retrospective on my NavCoin staking journey&lt;/a&gt;
+and said I was eagerly anticipating the launch of Navio. Well, the wait is over.
+&lt;strong&gt;The Navio mainnet is live&lt;/strong&gt;, and it has been running since the start of July.&lt;/p&gt;
+&lt;p&gt;I&#39;ve been staking NAV since 2018, and over the last few years I&#39;ve also been
+contributing to &lt;a rel=&quot;external&quot; href=&quot;https://github.com/nav-io/navio-core&quot;&gt;navio-core&lt;/a&gt; itself, with
+more than 500 commits to the codebase. So this launch is personal. Let&#39;s walk
+through what actually shipped.&lt;/p&gt;
+&lt;h2 id=&quot;the-launch&quot;&gt;The Launch&lt;/h2&gt;
+&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https://github.com/nav-io/navio-core/releases/tag/v0.1.0&quot;&gt;Navio Core v0.1.0&lt;/a&gt;
+was published on June 28, 2026, as the first stable release of Navio Core and
+the launch of the Navio mainnet. The genesis block carries a timestamp of &lt;strong&gt;July
+1, 2026, 13:00 UTC&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Under the hood, Navio Core is built on the Bitcoin Core codebase, with BLSCT
+(Boneh-Lynn-Shacham Confidential Transactions) added at the base layer. Binaries
+were released for Linux (x86_64, ARM, RISC-V and PowerPC), macOS (Intel and
+Apple Silicon) and Windows, with signed &lt;code&gt;SHA256SUMS&lt;/code&gt; so you can verify your
+download before running it.&lt;/p&gt;
+&lt;h2 id=&quot;what-makes-navio-different&quot;&gt;What Makes Navio Different&lt;/h2&gt;
+&lt;p&gt;In that retrospective I explained that NavCoin only offered private transactions
+through its &lt;code&gt;xNAV&lt;/code&gt; token. Navio flips that around: privacy is the default, not
+an add-on.&lt;/p&gt;
+&lt;h3 id=&quot;confidential-transactions-everywhere&quot;&gt;Confidential Transactions Everywhere&lt;/h3&gt;
+&lt;p&gt;Every shielded output hides both the amount and the parties involved, using
+Pedersen commitments and BLS12-381 range proofs. The chain stays publicly
+verifiable (anyone can check that no coins were created out of thin air) without
+anyone learning who sent what to whom. Addresses are bech32m stealth addresses
+that start with &lt;code&gt;nav1&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;proof-of-private-stake-pops&quot;&gt;Proof-of-Private-Stake (PoPS)&lt;/h3&gt;
+&lt;p&gt;This is the part I&#39;ve been most excited about. On a normal Proof-of-Stake chain,
+everyone can see which address produced a block and how much it had staked. With
+PoPS, a staker proves two things with zero-knowledge proofs:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A &lt;strong&gt;set-membership proof&lt;/strong&gt; showing it controls &lt;em&gt;one&lt;/em&gt; of the staked
+commitments, without revealing which one.&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;range proof&lt;/strong&gt; showing the hidden amount in that commitment is enough to
+win this particular block.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The result is that the validator&#39;s identity, the amount staked, and even the
+link between two blocks produced by the same staker never appear on-chain. You
+help secure the network without putting a target on your wallet.&lt;/p&gt;
+&lt;h3 id=&quot;mainnet-parameters&quot;&gt;Mainnet Parameters&lt;/h3&gt;
+&lt;p&gt;According to the
+&lt;a rel=&quot;external&quot; href=&quot;https://docs.nav.io/concepts/consensus/&quot;&gt;Navio consensus documentation&lt;/a&gt;, the
+key mainnet numbers are:&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Parameter&lt;/th&gt;&lt;th&gt;Mainnet value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Target block time&lt;/td&gt;&lt;td&gt;120 seconds&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Block reward&lt;/td&gt;&lt;td&gt;8 NAV&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Minimum stake&lt;/td&gt;&lt;td&gt;10,000 NAV&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Consensus&lt;/td&gt;&lt;td&gt;Short PoW bootstrap, then PoPS&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;P2P / RPC ports&lt;/td&gt;&lt;td&gt;48470 / 48471&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Address format&lt;/td&gt;&lt;td&gt;bech32m, &lt;code&gt;nav1...&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id=&quot;moving-your-old-nav-to-navio&quot;&gt;Moving Your Old NAV to Navio&lt;/h2&gt;
+&lt;p&gt;If you&#39;re still holding legacy NavCoin, the migration goes through the official
+bridge at &lt;a rel=&quot;external&quot; href=&quot;https://bridge.nav.io&quot;&gt;bridge.nav.io&lt;/a&gt;. It&#39;s a two-step process:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;NAV to wNAV:&lt;/strong&gt; Connect a BNB Smart Chain wallet on the bridge, register
+once, and send your legacy NAV to the deposit address the bridge gives you.
+The equivalent amount of wrapped NAV (wNAV) is minted to your BSC wallet,
+usually within a few minutes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;wNAV to native NAV:&lt;/strong&gt; On the bridge&#39;s Withdraw page, enter a Navio address
+(starting with &lt;code&gt;nav1&lt;/code&gt;). The bridge burns your wNAV and sends native NAV to
+that address on the new chain.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Be careful here.&lt;/strong&gt; The bridge only accepts mainnet &lt;code&gt;nav1...&lt;/code&gt; addresses. Old
+NavCoin (&lt;code&gt;N...&lt;/code&gt;) addresses and testnet (&lt;code&gt;tnv1...&lt;/code&gt;) addresses are rejected, and
+the official guide warns that burning with a wrongly formatted address destroys
+the wNAV with no refund. &lt;strong&gt;Send a small test amount first&lt;/strong&gt;, and follow the
+&lt;a rel=&quot;external&quot; href=&quot;https://docs.nav.io/guides/coin-swap/&quot;&gt;official coin swap guide&lt;/a&gt; step by step
+rather than a summary like this one.&lt;/p&gt;
+&lt;h2 id=&quot;staking-on-navio&quot;&gt;Staking on Navio&lt;/h2&gt;
+&lt;p&gt;Staking works a little differently from the old &lt;code&gt;navcoind&lt;/code&gt; setup I described
+&lt;a href=&quot;https://www.codedmaster.com/blog/wanna-start-staking-navcoin/&quot;&gt;back in 2018&lt;/a&gt;. Instead of the
+wallet staking on its own, you lock coins into a stake and run a separate staker
+process.&lt;/p&gt;
+&lt;p&gt;First, download Navio Core from the
+&lt;a rel=&quot;external&quot; href=&quot;https://github.com/nav-io/navio-core/releases&quot;&gt;releases page&lt;/a&gt;, start &lt;code&gt;naviod&lt;/code&gt;,
+and let it sync. Then create a wallet (BLSCT is the default wallet type) and
+grab a &lt;code&gt;nav1&lt;/code&gt; address to receive your coins:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;navio-cli&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; createwallet &amp;quot;staking&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;navio-cli&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; -rpcwallet=staking getnewaddress &amp;quot;Staking&amp;quot; &amp;quot;blsct&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once your NAV has arrived, lock at least the 10,000 NAV minimum into a stake:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;navio-cli&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; -rpcwallet=staking stakelock&lt;/span&gt;&lt;span style=&quot;color: #FAB387;&quot;&gt; 10000&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, run the staker against your wallet. It connects to your node over RPC,
+builds the Proof-of-Private-Stake proofs, and submits blocks when you win:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;navio-staker&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; -wallet=staking&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you want your coins back, &lt;code&gt;stakeunlock&lt;/code&gt; releases them from the stake into
+your regular spendable balance.&lt;/p&gt;
+&lt;h3 id=&quot;cold-staking&quot;&gt;Cold Staking&lt;/h3&gt;
+&lt;p&gt;If you&#39;d rather not keep your spending keys on an always-online server, Navio
+Core v0.1.7 added &lt;strong&gt;delegated cold staking&lt;/strong&gt;. You hand an operator the ability
+to produce blocks with your stake, while only your offline key can spend or
+unstake the coins, and you can revoke the delegation at any time with
+&lt;code&gt;stakeunlock&lt;/code&gt;. The details are in the
+&lt;a rel=&quot;external&quot; href=&quot;https://github.com/nav-io/navio-core/blob/master/doc/cold-staking.md&quot;&gt;cold staking documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;life-after-launch&quot;&gt;Life After Launch&lt;/h2&gt;
+&lt;p&gt;A mainnet launch is the start of the work, not the end. The releases have kept
+coming at a fast pace, up to
+&lt;a rel=&quot;external&quot; href=&quot;https://github.com/nav-io/navio-core/releases/tag/v0.2.1&quot;&gt;v0.2.1&lt;/a&gt; at the time
+of writing. The biggest one so far is
+&lt;a rel=&quot;external&quot; href=&quot;https://github.com/nav-io/navio-core/releases/tag/v0.2.0&quot;&gt;v0.2.0&lt;/a&gt;, which:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Moved the BLSCT cryptography from the herumi/mcl library to
+supranational/blst, while staying byte-compatible with the existing chain.&lt;/li&gt;
+&lt;li&gt;Brought in a hardened &quot;v2&quot; proof transcript that activates at &lt;strong&gt;mainnet height
+42,500&lt;/strong&gt;, so every node needs to be on v0.2.0 or later.&lt;/li&gt;
+&lt;li&gt;Introduced an encrypted peer-to-peer messaging layer, with aggregated sends
+that hide which outputs belong to the sender, and atomic swaps between tokens
+and NAV.&lt;/li&gt;
+&lt;li&gt;Fixed a block production stall that hit mainnet on September 5, 2026.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That last point is worth being honest about: a brand-new chain running brand-new
+cryptography will have rough edges, and it did. What matters to me is that it
+was diagnosed and fixed in the open within days. If you run a node, &lt;strong&gt;keep it up
+to date&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h2&gt;
+&lt;p&gt;When I first set up a NavCoin staking box on an Ubuntu 16.04 server in 2018, a
+fully private Proof-of-Stake chain felt like a far-off research idea. Now it&#39;s
+running, and I get to help build it.&lt;/p&gt;
+&lt;p&gt;If you want to dig deeper, start with the
+&lt;a rel=&quot;external&quot; href=&quot;https://docs.nav.io/&quot;&gt;Navio documentation&lt;/a&gt; and the
+&lt;a rel=&quot;external&quot; href=&quot;https://github.com/nav-io/navio-core&quot;&gt;navio-core repository&lt;/a&gt;. And if you&#39;re
+still sitting on legacy NAV, now is a good time to make the move.&lt;/p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Introducing SQEEL: A Fast, Vim-Native SQL Client in Rust</title>
+        <published>2026-04-24T00:00:00+00:00</published>
+        <updated>2026-04-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/introducing-sqeel/"/>
+        <id>https://www.codedmaster.com/blog/introducing-sqeel/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/introducing-sqeel/">&lt;p&gt;Every SQL client I tried eventually annoyed me. DBeaver hauls a JVM. TablePlus
+is closed-source. The Electron crowd burns 500MB of RAM to show a grid. I wanted
+something that starts instantly, lives in the terminal, and respects my muscle
+memory. So I built one.&lt;/p&gt;
+&lt;p&gt;Meet &lt;strong&gt;SQEEL&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-sqeel-zap&quot;&gt;What is SQEEL? ⚡&lt;/h2&gt;
+&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https://github.com/sqeel-sql/sqeel&quot;&gt;SQEEL&lt;/a&gt; is a fast, vim-native SQL client
+written in Rust. No Electron. No JVM. It ships two binaries from one workspace:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sqeel&lt;/code&gt;: a terminal UI built on ratatui&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sqeel-gui&lt;/code&gt;: a native GUI built on iced&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Same core, same keybindings, same config. Pick the one your mood wants today.&lt;/p&gt;
+&lt;h2 id=&quot;features&quot;&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Native Rust&lt;/strong&gt;: instant startup, single binary&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Vim bindings&lt;/strong&gt; first class, not an afterthought&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mouse support&lt;/strong&gt; in every pane (even in the TUI)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MySQL, PostgreSQL, SQLite&lt;/strong&gt; via &lt;code&gt;sqlx&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;tree-sitter&lt;/strong&gt; SQL syntax highlighting, dialect-aware&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LSP integration&lt;/strong&gt; with &lt;a rel=&quot;external&quot; href=&quot;https://github.com/sqls-server/sqls&quot;&gt;&lt;code&gt;sqls&lt;/code&gt;&lt;/a&gt; for
+completions and inline diagnostic underlines&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Schema browser&lt;/strong&gt;: click or &lt;code&gt;hjkl&lt;/code&gt; to expand/collapse&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Editor tabs&lt;/strong&gt; with lazy loading and 5-minute RAM eviction&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Auto-save&lt;/strong&gt; SQL buffers, result history, query history&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;tmux-aware&lt;/strong&gt; pane navigation: &lt;code&gt;Ctrl+HJKL&lt;/code&gt; crosses tmux panes cleanly&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Vim status bar&lt;/strong&gt; and command mode (&lt;code&gt;:q&lt;/code&gt;, &lt;code&gt;:w&lt;/code&gt;, all the muscle memory)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;layout&quot;&gt;Layout&lt;/h2&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;plain&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;┌──────────┬─────────────────────────────┐&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          │  [tab1] [tab2]              │&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│  Schema  │         Editor              │&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│  (15%)   │         (85%)               │&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          │                             │&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          ├─────────────────────────────┤&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          │         Results             │&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;│          │      (shows on query)       │&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;└──────────┴─────────────────────────────┘&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Results hide when empty so the editor fills the right pane. Run a query and the
+results pane expands to 50%. Dismiss with &lt;code&gt;q&lt;/code&gt; and you&#39;re back to full-size
+editing. No wasted pixels.&lt;/p&gt;
+&lt;h2 id=&quot;connections-as-files&quot;&gt;Connections as Files&lt;/h2&gt;
+&lt;p&gt;Every connection is one TOML file in &lt;code&gt;~/.config/sqeel/conns/&lt;/code&gt;. Filename becomes
+the display name.&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;toml&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;# ~/.config/sqeel/conns/prod.toml&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;url&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; =&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; &amp;quot;postgres://user:pass@host/db&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;toml&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #9399B2;font-style: italic;&quot;&gt;# ~/.config/sqeel/conns/local.toml&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;url&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; =&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; &amp;quot;mysql://localhost/mydb&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Drop a file in, it shows up in the connection switcher (&lt;code&gt;&amp;lt;leader&amp;gt;c&lt;/code&gt;). Version
+control it, symlink it, rsync it between machines. No proprietary blob.&lt;/p&gt;
+&lt;h2 id=&quot;the-vim-bit&quot;&gt;The Vim Bit&lt;/h2&gt;
+&lt;p&gt;If you already live in vim, you already know how to drive SQEEL. &lt;code&gt;i&lt;/code&gt; to insert,
+&lt;code&gt;Esc&lt;/code&gt; to normal, &lt;code&gt;v&lt;/code&gt; for visual, &lt;code&gt;:&lt;/code&gt; for command mode, &lt;code&gt;/&lt;/code&gt; to search. Leader key
+(default &lt;code&gt;Space&lt;/code&gt;) opens the fun stuff:&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Key&lt;/th&gt;&lt;th&gt;Action&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;c&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Connection switcher&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;n&lt;/code&gt;&lt;/td&gt;&lt;td&gt;New scratch tab&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;r&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Rename current tab&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;d&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Delete tab (confirm)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;&amp;lt;leader&amp;gt;&amp;lt;leader&amp;gt;&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Fuzzy file picker&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Running a query is &lt;code&gt;Ctrl+Enter&lt;/code&gt; for the statement under the cursor, or
+&lt;code&gt;Ctrl+Shift+Enter&lt;/code&gt; to run every statement in the buffer.&lt;/p&gt;
+&lt;h2 id=&quot;lsp-powered-autocomplete&quot;&gt;LSP-Powered Autocomplete&lt;/h2&gt;
+&lt;p&gt;Point &lt;code&gt;editor.lsp_binary&lt;/code&gt; at &lt;a rel=&quot;external&quot; href=&quot;https://github.com/sqls-server/sqls&quot;&gt;&lt;code&gt;sqls&lt;/code&gt;&lt;/a&gt; and
+you get schema-aware completions, hover docs, and inline diagnostic underlines,
+using the same machinery your editor already uses, wired into the SQL editor
+pane. No bespoke completion engine to maintain, no magic.&lt;/p&gt;
+&lt;h2 id=&quot;two-uis-one-core&quot;&gt;Two UIs, One Core&lt;/h2&gt;
+&lt;p&gt;The workspace splits cleanly:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;plain&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;sqeel-core/   # state, DB, query runner, schema, config&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;sqeel-tui/    # ratatui terminal provider&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;sqeel-gui/    # iced native GUI provider&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;sqeel/        # binaries: sqeel + sqeel-gui&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;All the logic (connections, schema, query execution, history, eviction) lives in
+&lt;code&gt;sqeel-core&lt;/code&gt;. The TUI and GUI are thin providers that render the same state. Fix
+a bug in the core, both UIs benefit. Want a web provider next? Drop in another
+crate.&lt;/p&gt;
+&lt;h2 id=&quot;why-rust&quot;&gt;Why Rust?&lt;/h2&gt;
+&lt;p&gt;Same reasons as always: performance, single-binary distribution, and &lt;code&gt;sqlx&lt;/code&gt;.
+SQEEL opens instantly, connects to a real production database without a JVM
+warming up, and fits in a &lt;code&gt;cargo install&lt;/code&gt; one-liner. No runtime to manage, no
+package manager to fight.&lt;/p&gt;
+&lt;h2 id=&quot;how-to-get-it-package&quot;&gt;How to Get It 📦&lt;/h2&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; install --git https://github.com/sqeel-sql/sqeel --bin sqeel&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; install --git https://github.com/sqeel-sql/sqeel --bin sqeel-gui&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or clone and build:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;git&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; clone https://github.com/sqeel-sql/sqeel&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #F38BA8;font-style: italic;&quot;&gt;cd&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; sqeel&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; build --release&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Binaries land in &lt;code&gt;target/release/sqeel&lt;/code&gt; and &lt;code&gt;target/release/sqeel-gui&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h2&gt;
+&lt;p&gt;SQEEL started the way most of my tools do: I was annoyed at something, and a
+weekend later there was a prototype. It&#39;s now my daily driver for every database
+I touch. If you live in vim, write a lot of SQL, and resent every Electron SQL
+client you&#39;ve ever opened, give it a spin. Issues and PRs welcome at
+&lt;a rel=&quot;external&quot; href=&quot;https://github.com/sqeel-sql/sqeel&quot;&gt;github.com/sqeel-sql/sqeel&lt;/a&gt;. 🍻&lt;/p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Why opencode Is My Favorite CLI Coding Agent</title>
+        <published>2026-04-09T00:00:00+00:00</published>
+        <updated>2026-04-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/why-opencode-is-my-favorite-cli-coding-agent/"/>
+        <id>https://www.codedmaster.com/blog/why-opencode-is-my-favorite-cli-coding-agent/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/why-opencode-is-my-favorite-cli-coding-agent/">&lt;p&gt;Of all the CLI coding agent clients I&#39;ve used, &lt;code&gt;opencode&lt;/code&gt; is the one I like the
+most.&lt;/p&gt;
+&lt;p&gt;I&#39;ve spent 100+ hours using it, and in that time it has felt less buggy, less
+resource-intensive, and more reliable than &lt;code&gt;claude&lt;/code&gt;, &lt;code&gt;codex&lt;/code&gt;, and &lt;code&gt;gemini&lt;/code&gt;. Just
+as important, it also feels like the best-looking client. The design is clean,
+focused, and it fits the way I already like to work.&lt;/p&gt;
+&lt;h2 id=&quot;why-it-clicks-for-me&quot;&gt;Why It Clicks For Me&lt;/h2&gt;
+&lt;p&gt;I&#39;m an avid &lt;code&gt;neovim&lt;/code&gt; and &lt;code&gt;tmux&lt;/code&gt; user, so I care a lot about tools that stay out
+of the way. &lt;code&gt;opencode&lt;/code&gt; feels intuitive in that environment. I do not have to
+fight the client to get things done, and that matters more than most people
+realize.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;tokyonight&lt;/code&gt; theme is a bonus that I genuinely appreciate. It matches my
+&lt;code&gt;alacritty&lt;/code&gt; and &lt;code&gt;neovim&lt;/code&gt; setup perfectly, which makes the whole experience feel
+cohesive instead of bolted together.&lt;/p&gt;
+&lt;h2 id=&quot;opencode-zen-and-big-pickle&quot;&gt;OpenCode Zen And Big Pickle&lt;/h2&gt;
+&lt;p&gt;I also use the OpenCode Zen service, including its &lt;code&gt;big-pickle&lt;/code&gt; model. So far
+I&#39;ve spent about $100 on the platform, and it has already paid for itself many
+times over in saved time and finished work.&lt;/p&gt;
+&lt;p&gt;That matters because AI tools are only worth it when they help me ship. In this
+case, OpenCode Zen has been a practical investment, not just a novelty.&lt;/p&gt;
+&lt;h2 id=&quot;how-i-actually-use-ai&quot;&gt;How I Actually Use AI&lt;/h2&gt;
+&lt;p&gt;I think of AI as another tool, not a replacement for thinking. If all you have
+is a hammer, everything starts looking like a nail. I try not to fall into that
+trap.&lt;/p&gt;
+&lt;p&gt;Most of the time, I use my AI agent for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;planning&lt;/li&gt;
+&lt;li&gt;research&lt;/li&gt;
+&lt;li&gt;documentation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I do occasionally let it write code for me when the task is simple enough. But
+most of the time I still end up doing the coding myself.&lt;/p&gt;
+&lt;h2 id=&quot;final-take&quot;&gt;Final Take&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;opencode&lt;/code&gt; is the best CLI coding agent client I&#39;ve used so far. It is the most
+intuitive, the best looking, and the most dependable fit for how I work.&lt;/p&gt;
+&lt;p&gt;For me, that combination is what makes it stand out.&lt;/p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My Journey into Local AI Coding: From Zero to Using Ollama Qwen3-Coder:30b via Opencode on Home Hardware</title>
+        <published>2026-03-11T00:00:00+00:00</published>
+        <updated>2026-03-11T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/my-journey-into-local-ai-coding/"/>
+        <id>https://www.codedmaster.com/blog/my-journey-into-local-ai-coding/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/my-journey-into-local-ai-coding/">&lt;p&gt;The world of AI coding assistants has evolved rapidly, but I&#39;ve always been
+drawn to the idea of having complete control over my development environment.
+Recently, I embarked on a journey to install and configure Ollama&#39;s
+Qwen3-Coder:30b model using opencode as the client on my home PC: a setup that
+allows me to enjoy powerful AI assistance while maintaining full privacy and
+offline functionality.&lt;/p&gt;
+&lt;h2 id=&quot;the-spark-that-started-it-all&quot;&gt;The Spark That Started It All&lt;/h2&gt;
+&lt;p&gt;I&#39;ve been working with various coding tools throughout my career, but I&#39;ve
+always felt a bit uneasy about cloud-based solutions. The concerns were twofold:
+first, the latency when using AI assistants in a network-connected environment,
+and second, privacy considerations around sending code snippets to external
+services.&lt;/p&gt;
+&lt;p&gt;A few weeks ago, while browsing about local AI models, I discovered Ollama, a
+tool that makes running large language models locally incredibly simple.
+Combined with Qwen3-Coder:30b (which boasts impressive performance) and opencode
+as the client interface, this combination promised an optimal balance of power
+and privacy.&lt;/p&gt;
+&lt;h2 id=&quot;the-setup-process&quot;&gt;The Setup Process&lt;/h2&gt;
+&lt;p&gt;Setting up my AI coding environment required some technical know-how. First, I
+installed Ollama on my PC by downloading the appropriate version for my system&#39;s
+architecture. Then, I pulled the Qwen3-Coder:30b model using
+&lt;code&gt;ollama pull qwen3-coder:30b&lt;/code&gt;. This was probably my most time-consuming part:
+waiting for the large model to download.&lt;/p&gt;
+&lt;p&gt;I then configured opencode (an open source AI coding agent for the terminal) by
+adjusting its settings to point towards my local Ollama instance. The
+configuration steps were intuitive, and I quickly got it working with my local
+setup.&lt;/p&gt;
+&lt;h2 id=&quot;the-experience&quot;&gt;The Experience&lt;/h2&gt;
+&lt;p&gt;The difference between online and local AI assistance is immediate and
+noticeable. My response times are consistently under a second, much faster than
+cloud versions of these models. Additionally, I no longer worry about sending
+sensitive code to unknown external services.&lt;/p&gt;
+&lt;p&gt;I&#39;ve found this setup particularly beneficial for tasks like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Code generation from natural language descriptions&lt;/li&gt;
+&lt;li&gt;Understanding complex existing codebases&lt;/li&gt;
+&lt;li&gt;Explaining technical concepts I&#39;m unfamiliar with&lt;/li&gt;
+&lt;li&gt;Helping debug difficult issues in my projects&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;What&#39;s also refreshing is having a consistent, fast experience without worrying
+about internet connectivity. Even when traveling or working in areas with poor
+network connections, I can continue coding with full AI assistance.&lt;/p&gt;
+&lt;h2 id=&quot;the-verdict&quot;&gt;The Verdict&lt;/h2&gt;
+&lt;p&gt;I&#39;ve genuinely enjoyed the transition to this local AI development environment.
+It&#39;s not just about privacy and speed; it&#39;s also about having complete control
+over my development stack. Whether you have a high-end gaming PC or a modest
+home computer, there&#39;s something appealing about having an on-demand, powerful
+AI assistant close at hand.&lt;/p&gt;
+&lt;p&gt;This setup has become a core part of my workflow, and I find myself using it
+daily for tasks that would previously have required extensive online research.
+It represents the next step in bringing the power of AI to the development
+process, without compromising on privacy or performance.&lt;/p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Supercharging Your Dotfiles: QOL Improvements, Fedora Support, and Cleaner Updates</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/changes-to-my-dotfiles-exploring-update-and-deps/"/>
+        <id>https://www.codedmaster.com/blog/changes-to-my-dotfiles-exploring-update-and-deps/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/changes-to-my-dotfiles-exploring-update-and-deps/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This article details the recent updates and modifications to my personal
+dotfiles, with a particular focus on the &lt;code&gt;~/.local/bin/.update&lt;/code&gt; and
+&lt;code&gt;~/.local/bin/.deps&lt;/code&gt; scripts. These changes aim to streamline my development
+workflow, enhance system maintenance, and improve overall efficiency.&lt;/p&gt;
+&lt;h2 id=&quot;the-update-script&quot;&gt;The &lt;code&gt;.update&lt;/code&gt; Script&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;.update&lt;/code&gt; script is designed to automate the process of updating various
+components of my system. It now includes enhanced functionalities for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;System package management:&lt;/strong&gt; (e.g., &lt;code&gt;paru -Syu&lt;/code&gt; on Arch Linux,
+&lt;code&gt;apt update &amp;amp;&amp;amp; apt upgrade&lt;/code&gt; on Debian/Ubuntu).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dotfile synchronization:&lt;/strong&gt; Pulling the latest changes from my dotfiles
+repository.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Application-specific updates:&lt;/strong&gt; (e.g., &lt;code&gt;nvim&lt;/code&gt; plugin updates, &lt;code&gt;tldr&lt;/code&gt; cache
+updates, &lt;code&gt;tmux&lt;/code&gt; plugin updates).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;quality-of-life-improvements-in-update&quot;&gt;Quality of Life Improvements in &lt;code&gt;.update&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Significant quality of life improvements have been integrated into the &lt;code&gt;.update&lt;/code&gt;
+script to enhance its user experience and reliability:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Robust Error Handling:&lt;/strong&gt; The script now utilizes &lt;code&gt;set -euo pipefail&lt;/code&gt; to
+ensure immediate exits on errors, unset variables, or failed commands within a
+pipeline. This drastically improves the script&#39;s reliability and prevents
+unexpected behavior.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Silent Execution:&lt;/strong&gt; Most commands executed by the script now redirect their
+output with &lt;code&gt;&amp;gt;/dev/null 2&amp;gt;&amp;amp;1&lt;/code&gt;. This keeps the terminal clean and focused,
+preventing a flood of command-line output and allowing the user to concentrate
+on essential updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Clear, Step-by-Step Logging:&lt;/strong&gt; Instead of raw command output, the script
+provides concise and visually appealing feedback using
+&lt;code&gt;echo -e &quot;$GREEN_CHECK ...&quot;&lt;/code&gt;. Each major step of the update process is clearly
+indicated with a green checkmark, making it easy to track progress and
+identify the current operation at a glance.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automated Dotfiles Stashing and Reapplication:&lt;/strong&gt; Before pulling updates, the
+script now intelligently stashes any local, uncommitted changes to the
+dotfiles repository. After a successful pull, these changes are automatically
+reapplied, ensuring that personal modifications are preserved across updates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Self-Correction for Updates:&lt;/strong&gt; If the dotfiles repository itself updates the
+&lt;code&gt;.update&lt;/code&gt; script, the script is designed to re-execute itself with the new
+version, ensuring that the latest logic and features are always in use.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;the-deps-script&quot;&gt;The &lt;code&gt;.deps&lt;/code&gt; Script&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;.deps&lt;/code&gt; script is responsible for managing and installing project
+dependencies across different operating systems. Recent changes have focused on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Cross-platform compatibility:&lt;/strong&gt; Ensuring dependencies can be easily set up
+on different operating systems (e.g., Linux distributions like Arch, Fedora,
+Debian/Ubuntu, as well as macOS/Homebrew), including essential tools and
+libraries.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;enhanced-cross-platform-dependency-management-with-fedora-support&quot;&gt;Enhanced Cross-Platform Dependency Management with Fedora Support&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;.deps&lt;/code&gt; script has been significantly enhanced to provide robust
+cross-platform dependency management. A key addition is the explicit support for
+&lt;strong&gt;Fedora&lt;/strong&gt;, which is now detected via the &lt;code&gt;dnf&lt;/code&gt; package manager. This means
+users on Fedora can now seamlessly install core system packages with a simple
+execution of the &lt;code&gt;.deps&lt;/code&gt; script.&lt;/p&gt;
+&lt;p&gt;Similar to the &lt;code&gt;.update&lt;/code&gt; script, &lt;code&gt;.deps&lt;/code&gt; also benefits from:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Robust Error Handling:&lt;/strong&gt; Employing &lt;code&gt;set -euo pipefail&lt;/code&gt; for safer and more
+predictable execution.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Silent Execution:&lt;/strong&gt; Most package installation commands are run with output
+redirection (&lt;code&gt;&amp;gt;/dev/null 2&amp;gt;&amp;amp;1&lt;/code&gt;) to maintain a clean and uncluttered terminal.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Clear, Step-by-Step Logging:&lt;/strong&gt; Progress is communicated through clear
+&lt;code&gt;echo -e &quot;$GREEN_CHECK ...&quot;&lt;/code&gt; messages, making it easy to understand which
+dependencies are being addressed for a particular operating system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The script intelligently identifies the operating system&#39;s package manager
+(e.g., &lt;code&gt;pacman&lt;/code&gt; for Arch, &lt;code&gt;dnf&lt;/code&gt; for Fedora, &lt;code&gt;apt-get&lt;/code&gt; for Debian/Ubuntu, &lt;code&gt;brew&lt;/code&gt;
+for macOS) and executes the appropriate installation commands. This ensures that
+the correct development environment is set up with minimal manual intervention.&lt;/p&gt;
+&lt;h2 id=&quot;future-plans&quot;&gt;Future Plans&lt;/h2&gt;
+&lt;p&gt;I plan on updating my &lt;strong&gt;hyprland&lt;/strong&gt;, &lt;strong&gt;waybar&lt;/strong&gt;, &lt;strong&gt;swaync&lt;/strong&gt;, &lt;strong&gt;gnome&lt;/strong&gt;, &lt;strong&gt;qt&lt;/strong&gt;,
+etc. configurations to use &lt;strong&gt;matugen&lt;/strong&gt; for the color scheme and base the colors
+on the currently set wallpaper in &lt;strong&gt;hyprpaper&lt;/strong&gt;. This will be a major change to
+my current dotfiles theme setup, which is completely static and set to a
+&lt;strong&gt;tokyonight&lt;/strong&gt; inspired color palette.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;These updates to my dotfiles, particularly the &lt;code&gt;.update&lt;/code&gt; and &lt;code&gt;.deps&lt;/code&gt; scripts,
+represent a significant step towards a more automated, efficient, and robust
+development environment.&lt;/p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Introducing &#39;Teach The Kids&#39;: A New Rust Course for Young Learners!</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/introducing-ttk-course-for-young-learners/"/>
+        <id>https://www.codedmaster.com/blog/introducing-ttk-course-for-young-learners/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/introducing-ttk-course-for-young-learners/">&lt;p&gt;Hello, Young Adventurers and Parents!&lt;/p&gt;
+&lt;p&gt;I&#39;m incredibly excited to announce the launch of a brand new initiative here at
+codedmaster.com: &lt;strong&gt;&quot;Teach The Kids&quot; (TTK)!&lt;/strong&gt; This project is born from a passion
+to introduce the magic of computer programming to young minds, making learning
+to code fun, engaging, and incredibly rewarding.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-teach-the-kids&quot;&gt;What is &quot;Teach The Kids&quot;?&lt;/h2&gt;
+&lt;p&gt;TTK is a series of interactive courses designed specifically for young learners
+who are curious about how computers work and want to create their own digital
+worlds. We believe that coding is a superpower, and every child deserves the
+chance to discover it.&lt;/p&gt;
+&lt;p&gt;Our first course is:&lt;/p&gt;
+&lt;h3 id=&quot;the-quest-app-your-first-rust-adventure&quot;&gt;The Quest App: Your First Rust Adventure&lt;/h3&gt;
+&lt;p&gt;In this hands-on course, young programmers will embark on an epic quest to build
+their very own &lt;strong&gt;command-line Quest App&lt;/strong&gt; using &lt;strong&gt;Rust&lt;/strong&gt;, a powerful and
+exciting programming language. Through a series of easy-to-follow chapters,
+children will learn fundamental coding concepts by:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Starting new projects&lt;/strong&gt; like a pro!&lt;/li&gt;
+&lt;li&gt;Making their computer &lt;strong&gt;talk back to them&lt;/strong&gt; (display output)!&lt;/li&gt;
+&lt;li&gt;Teaching their computer to &lt;strong&gt;listen to their commands&lt;/strong&gt; (read input)!&lt;/li&gt;
+&lt;li&gt;Making their projects &lt;strong&gt;remember things&lt;/strong&gt; (save to files)!&lt;/li&gt;
+&lt;li&gt;And even helping their computer &lt;strong&gt;forget things&lt;/strong&gt; (remove from files)!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each lesson is crafted to be like a new level in a game, building skills
+step-by-step with clear explanations and fun analogies.&lt;/p&gt;
+&lt;h2 id=&quot;why-rust-for-kids&quot;&gt;Why Rust for Kids?&lt;/h2&gt;
+&lt;p&gt;Rust is known for being a powerful and safe language, but it&#39;s also a fantastic
+choice for learning programming fundamentals. Its clear structure helps instill
+good coding habits from an early age, and the feeling of building something real
+and functional is incredibly motivating.&lt;/p&gt;
+&lt;h2 id=&quot;ready-to-code-your-first-quest&quot;&gt;Ready to Code Your First Quest?&lt;/h2&gt;
+&lt;p&gt;Parents, if your child (or you!) is ready to dive into the world of programming,
+our &quot;Teach The Kids&quot; Quest App course is the perfect starting point. No prior
+experience is needed, just curiosity and a desire to create!&lt;/p&gt;
+&lt;p&gt;Visit the new TTK Courses page to begin this exciting journey:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://www.codedmaster.com/ttk/&quot;&gt;Explore the Teach The Kids Courses&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let&#39;s empower the next generation of coders, one quest at a time!&lt;/p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Top Terminals for Fast, Keyboard-Driven Development: Featuring Alacritty</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/blog/top-terminals-for-keyboard-driven-development/"/>
+        <id>https://www.codedmaster.com/blog/top-terminals-for-keyboard-driven-development/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/blog/top-terminals-for-keyboard-driven-development/">&lt;p&gt;For developers who spend most of their day in the command line, the terminal
+emulator isn&#39;t just a window; it&#39;s a home. A fast, efficient, and highly
+customizable terminal can significantly boost productivity, especially for those
+of us who live by keyboard shortcuts and hate reaching for the mouse. Today, I
+want to shine a light on one of my top choices for keyboard-driven development:
+&lt;strong&gt;Alacritty&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;why-your-terminal-matters&quot;&gt;Why Your Terminal Matters&lt;/h2&gt;
+&lt;p&gt;A good terminal emulator should offer:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Speed&lt;/strong&gt;: Low latency and high throughput are crucial. You want your
+commands to appear instantly, without any lag.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Efficiency&lt;/strong&gt;: It should be lightweight, consuming minimal system resources.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Customization&lt;/strong&gt;: The ability to tweak fonts, colors, keybindings, and
+behavior to match your workflow and aesthetic.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Keyboard-Driven Design&lt;/strong&gt;: Ideally, it should encourage (or even enforce)
+keyboard-only interaction, helping you keep your hands on the home row.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;While there are many excellent terminal emulators out there, like iTerm2 for
+macOS, Terminator for Linux, and Windows Terminal, Alacritty stands out for its
+uncompromising focus on a few core principles.&lt;/p&gt;
+&lt;h2 id=&quot;alacritty-the-blazing-fast-gpu-accelerated-choice&quot;&gt;Alacritty: The Blazing Fast, GPU-Accelerated Choice&lt;/h2&gt;
+&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https://github.com/alacritty/alacritty&quot;&gt;Alacritty&lt;/a&gt; is a free and open-source,
+GPU-accelerated terminal emulator written in &lt;strong&gt;Rust&lt;/strong&gt;. It&#39;s designed for
+simplicity and performance, aiming to be the fastest terminal emulator
+available.&lt;/p&gt;
+&lt;p&gt;Here&#39;s why Alacritty is a fantastic choice for keyboard-driven development:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GPU Acceleration&lt;/strong&gt;: Unlike many traditional terminals that rely on the CPU
+for rendering, Alacritty offloads this work to your graphics card. This
+results in incredibly smooth scrolling, instant text rendering, and a
+noticeable reduction in input lag. For a truly &quot;instant&quot; feel, GPU
+acceleration is a game-changer.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Minimalism by Design&lt;/strong&gt;: Alacritty is deliberately minimalist. It doesn&#39;t
+come packed with tabs, split panes, or a GUI configuration editor
+out-of-the-box. This focus on core functionality keeps it lean and mean,
+allowing other tools (like &lt;code&gt;tmux&lt;/code&gt; for session management) to handle more
+complex layouts. This approach reinforces a keyboard-centric workflow, as
+everything is configured via a simple TOML file.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rust-Powered Performance&lt;/strong&gt;: Being written in Rust, Alacritty benefits from
+Rust&#39;s focus on safety and performance. This translates to a terminal that is
+not only fast but also highly reliable.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cross-Platform&lt;/strong&gt;: Alacritty is available on Linux, macOS, and Windows,
+meaning you can enjoy a consistent, high-performance terminal experience
+across all your development machines.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;configuration-the-alacritty-toml&quot;&gt;Configuration: The &lt;code&gt;alacritty.toml&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Customizing Alacritty involves editing an &lt;code&gt;alacritty.toml&lt;/code&gt; configuration file
+(older releases used &lt;code&gt;alacritty.yml&lt;/code&gt;, but TOML has been the format since version
+0.13). While this might seem daunting to some, it&#39;s incredibly powerful and
+encourages a deeper understanding of your terminal setup. You can define your
+preferred fonts, color schemes (like Dracula, Nord, or Catppuccin), keybindings,
+and much more, all in a plain text file that can be easily version-controlled
+with your dotfiles.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;If you&#39;re a developer who values speed, efficiency, and a purely keyboard-driven
+workflow, Alacritty is definitely worth exploring. Its GPU acceleration and
+minimalist design provide an incredibly responsive and distraction-free
+environment, allowing you to focus on what matters most: writing code. Give it a
+try, and you might just find your new favorite terminal!&lt;/p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Chapter 01: Installing Rust on Linux (Arch)</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/ttk/install-rust/01-linux-arch/"/>
+        <id>https://www.codedmaster.com/ttk/install-rust/01-linux-arch/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/ttk/install-rust/01-linux-arch/">&lt;p&gt;Hello, Linux Adventurer!&lt;/p&gt;
+&lt;p&gt;If you&#39;re using a computer with Arch Linux, this chapter is for you! We&#39;ll use
+the &lt;code&gt;pacman&lt;/code&gt; command, which is like your computer&#39;s app store, to install Rust.&lt;/p&gt;
+&lt;h2 id=&quot;step-1-update-your-system-important-first-step&quot;&gt;Step 1: Update Your System (Important First Step!)&lt;/h2&gt;
+&lt;p&gt;Before installing anything new, it&#39;s always a good idea to update all the
+software on your computer. This ensures everything is fresh and ready!&lt;/p&gt;
+&lt;p&gt;Open your &lt;strong&gt;terminal&lt;/strong&gt; (the black screen where you type commands) and type this,
+then press Enter:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; pacman -Syu&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Type your computer&#39;s password if it asks, and press Enter. This command tells
+&lt;code&gt;pacman&lt;/code&gt; to &quot;synchronize&quot; (get new lists of apps) and &quot;update&quot; (install new
+versions of apps).&lt;/p&gt;
+&lt;h2 id=&quot;step-2-install-rustup&quot;&gt;Step 2: Install Rustup&lt;/h2&gt;
+&lt;p&gt;Rustup is the easiest way to install Rust. It&#39;s a special tool that helps manage
+different versions of Rust. We&#39;ll also install &lt;code&gt;base-devel&lt;/code&gt;, a bundle of
+building tools that Rust needs to turn your code into a program you can run.&lt;/p&gt;
+&lt;p&gt;In your terminal, type this command and press Enter:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; pacman -S --needed rustup base-devel&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When it asks &lt;code&gt;[Y/n]&lt;/code&gt;, type &lt;code&gt;Y&lt;/code&gt; and press Enter to say &quot;Yes, install it!&quot;&lt;/p&gt;
+&lt;h2 id=&quot;step-3-install-the-rust-toolchain&quot;&gt;Step 3: Install the Rust Toolchain&lt;/h2&gt;
+&lt;p&gt;Now that &lt;code&gt;rustup&lt;/code&gt; is installed, we can use it to get the main Rust tools. We&#39;ll
+install the &quot;stable&quot; version, which is the most reliable one.&lt;/p&gt;
+&lt;p&gt;Type this command and press Enter:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustup&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; default stable&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You might see some messages pop up. This is Rustup doing its work!&lt;/p&gt;
+&lt;h2 id=&quot;step-4-update-rust-good-practice&quot;&gt;Step 4: Update Rust (Good Practice!)&lt;/h2&gt;
+&lt;p&gt;It&#39;s a good habit to keep your Rust tools updated.&lt;/p&gt;
+&lt;p&gt;Type this command and press Enter:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustup&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; update&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will check if there are any newer versions of Rust and install them if
+needed.&lt;/p&gt;
+&lt;h2 id=&quot;step-5-verify-your-installation&quot;&gt;Step 5: Verify Your Installation&lt;/h2&gt;
+&lt;p&gt;Let&#39;s check if Rust and Cargo (Rust&#39;s build tool) are installed correctly!&lt;/p&gt;
+&lt;p&gt;Type these commands, one by one, and press Enter after each:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustc&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should see something like:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;plain&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;rustc 1.XX.X (abc123def YYYY-MM-DD)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;cargo 1.XX.X (abc123def YYYY-MM-DD)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;1.XX.X&lt;/code&gt; part will be the version number, which might be different from this
+example, and that&#39;s perfectly fine! As long as you see version numbers, Rust is
+installed!&lt;/p&gt;
+&lt;p&gt;Congratulations! Rust is now installed on your Arch Linux computer. You&#39;re ready
+to start coding your Quest App!&lt;/p&gt;
+&lt;h2 id=&quot;navigation&quot;&gt;Navigation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous: &lt;a href=&quot;https://www.codedmaster.com/ttk/install-rust/&quot;&gt;Install Rust: Get Ready to Code!&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Next:
+&lt;a href=&quot;https://www.codedmaster.com/ttk/install-rust/02-windows/&quot;&gt;Chapter 02: Installing Rust on Windows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Chapter 02: Installing Rust on Windows (using WSL/Ubuntu)</title>
+        <published>2026-02-09T00:00:00+00:00</published>
+        <updated>2026-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.codedmaster.com/ttk/install-rust/02-windows/"/>
+        <id>https://www.codedmaster.com/ttk/install-rust/02-windows/</id>
+        
+        <content type="html" xml:base="https://www.codedmaster.com/ttk/install-rust/02-windows/">&lt;p&gt;Hello, Windows Adventurer!&lt;/p&gt;
+&lt;p&gt;If you&#39;re using a computer with Windows, this chapter is for you! We&#39;re going to
+install Rust inside your &lt;strong&gt;Ubuntu Linux&lt;/strong&gt; system that you set up using &lt;strong&gt;WSL
+(Windows Subsystem for Linux)&lt;/strong&gt;. This is the best way to code with Rust on
+Windows!&lt;/p&gt;
+&lt;h2 id=&quot;prerequisite-install-ubuntu-with-wsl-first&quot;&gt;Prerequisite: Install Ubuntu with WSL first&lt;/h2&gt;
+&lt;p&gt;Before you can install Rust with these instructions, you need to have &lt;strong&gt;Ubuntu
+Linux&lt;/strong&gt; set up on your Windows computer using WSL. If you haven&#39;t done that yet,
+please go to this course first:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.codedmaster.com/ttk/install-wsl/&quot;&gt;Install Ubuntu with WSL: Your Linux Adventure on Windows!&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once you have Ubuntu running with WSL, come back here!&lt;/p&gt;
+&lt;h2 id=&quot;step-1-open-your-ubuntu-terminal&quot;&gt;Step 1: Open Your Ubuntu Terminal&lt;/h2&gt;
+&lt;p&gt;First, open your &lt;strong&gt;Ubuntu terminal&lt;/strong&gt;. You can do this by searching for &quot;Ubuntu&quot;
+in your Windows Start menu and clicking the app. It&#39;s the black window where you
+type Linux commands!&lt;/p&gt;
+&lt;h2 id=&quot;step-2-update-your-ubuntu-system-important-first-step&quot;&gt;Step 2: Update Your Ubuntu System (Important First Step!)&lt;/h2&gt;
+&lt;p&gt;Before installing anything new, it&#39;s always a good idea to update all the
+software on your Ubuntu system. This ensures everything is fresh and ready!&lt;/p&gt;
+&lt;p&gt;In your Ubuntu terminal, type this, then press Enter:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; apt update&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; apt upgrade -y&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Type your Linux password if it asks, and press Enter. This command tells Ubuntu
+to get the newest lists of apps and then install new versions of apps.&lt;/p&gt;
+&lt;h2 id=&quot;step-3-install-building-tools&quot;&gt;Step 3: Install Building Tools&lt;/h2&gt;
+&lt;p&gt;Rust needs a few helper tools (like a &quot;linker&quot;, which glues your code together
+into a program) that Ubuntu doesn&#39;t include by default. Without them, running
+your Quest App later will fail with an error like &lt;code&gt;linker &#39;cc&#39; not found&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In your Ubuntu terminal, type this command and press Enter:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;sudo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; apt install build-essential -y&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;step-4-install-rustup&quot;&gt;Step 4: Install Rustup&lt;/h2&gt;
+&lt;p&gt;Rustup is the easiest way to install Rust. It&#39;s a special tool that helps manage
+different versions of Rust.&lt;/p&gt;
+&lt;p&gt;In your Ubuntu terminal, type this command and press Enter:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;curl&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --proto &amp;#39;=https&amp;#39; --tlsv1.2 -sSf https://sh.rustup.rs&lt;/span&gt;&lt;span style=&quot;color: #94E2D5;&quot;&gt; |&lt;/span&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt; sh&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You&#39;ll see some messages. When it asks:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;1) Proceed with installation (default)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Just press &lt;strong&gt;Enter&lt;/strong&gt; to choose the default option. This will download and
+install Rust!&lt;/p&gt;
+&lt;h2 id=&quot;step-5-restart-your-ubuntu-terminal&quot;&gt;Step 5: Restart Your Ubuntu Terminal&lt;/h2&gt;
+&lt;p&gt;After Rust is installed, it&#39;s a good idea to close your Ubuntu terminal window
+and open a new one. This helps your Ubuntu system &quot;refresh&quot; and find the new
+Rust tools.&lt;/p&gt;
+&lt;h2 id=&quot;step-6-verify-your-installation&quot;&gt;Step 6: Verify Your Installation&lt;/h2&gt;
+&lt;p&gt;Let&#39;s check if Rust and Cargo (Rust&#39;s build tool) are installed correctly!&lt;/p&gt;
+&lt;p&gt;In your &lt;strong&gt;new&lt;/strong&gt; Ubuntu terminal window, type these commands, one by one, and
+press Enter after each:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;rustc&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89B4FA;font-style: italic;&quot;&gt;cargo&lt;/span&gt;&lt;span style=&quot;color: #A6E3A1;&quot;&gt; --version&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should see something like:&lt;/p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #CDD6F4; background-color: #1E1E2E;&quot; &gt;&lt;code data-lang=&quot;plain&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;rustc 1.XX.X (abc123def YYYY-MM-DD)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;cargo 1.XX.X (abc123def YYYY-MM-DD)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;1.XX.X&lt;/code&gt; part will be the version number, which might be different from this
+example, and that&#39;s perfectly fine! As long as you see version numbers, Rust is
+installed!&lt;/p&gt;
+&lt;p&gt;Congratulations! Rust is now installed on your Windows computer, inside your
+Ubuntu Linux system. You&#39;re ready to start coding your Quest App!&lt;/p&gt;
+&lt;h2 id=&quot;navigation&quot;&gt;Navigation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous:
+&lt;a href=&quot;https://www.codedmaster.com/ttk/install-rust/01-linux-arch/&quot;&gt;Chapter 01: Installing Rust on Linux (Arch)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Next: &lt;a href=&quot;https://www.codedmaster.com/ttk/install-rust/03-macos/&quot;&gt;Chapter 03: Installing Rust on macOS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        
+    </entry>
+</feed>
