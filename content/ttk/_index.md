@@ -11,7 +11,7 @@ This is where young adventurers come to learn the magic of computer programming.
 We believe that coding is a superpower, and we're here to help you unlock it!
 
 Each course in TTK is designed to be a fun, hands-on journey where you'll build
-real projects step-by-step. You don't need any prior experience – just curiosity
+real projects step-by-step. You don't need any prior experience, just curiosity
 and a desire to create!
 
 ## Our Courses

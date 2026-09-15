@@ -1,12 +1,12 @@
 +++
 date = 2016-08-23
-title = "Setup TOR on Ubuntu 16.04?"
+title = "Setup Tor on Ubuntu 16.04?"
 description = "Learn how to set up Tor on Ubuntu 16.04 to enhance your online anonymity. This tutorial covers installation of Tor and Tor Browser, checking the Tor service, and using `torsocks` for anonymous terminal commands."
 [taxonomies]
 tags = ["tor", "ubuntu", "linux", "anonymity", "privacy", "security", "networking", "tor browser", "tutorial"]
 +++
 
-[Tor][tor] is a open source, open networking tool that allows you to surf the
+[Tor][tor] is an open source, open networking tool that allows you to surf the
 web with better anonymity, it is basically a free and open proxy type networking
 tool that will allow you to surf the web from other network nodes. From their
 [site][tor] :
@@ -78,8 +78,8 @@ Using the tor browser is the fastest way to get HTTP(S) access using the
 [Tor][tor] Network.
 
 If you want, you can run most terminal commands using [Tor][tor] to anonymize
-it's traffic, for example, you could run something as simple as an ssh
-connection using [Tor][tor] with the `torsocks` command:
+its traffic, for example, you could run something as simple as an ssh connection
+using [Tor][tor] with the `torsocks` command:
 
 ```bash
 torsocks ssh someone@somewhere.tld -p 2222
@@ -92,7 +92,7 @@ think, I hope you can use this info as a starting point to your [Tor][tor]
 powered adventure browsing, good luck and have fun. Peace!
 
 [tor]: https://www.torproject.org/
-[ubuntu]: http://www.ubuntu.com/
+[ubuntu]: https://ubuntu.com/
 
 ---
 

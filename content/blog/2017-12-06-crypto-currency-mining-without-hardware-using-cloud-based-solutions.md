@@ -13,8 +13,8 @@ All you have to do is sign up at HashFlare.
 
 Now, I have seen a lot of cloud based mining offers over the past 2 years that I
 have been testing out cloud mining, and most that I saw/found were SCAMS, the
-only reason I'm even referring HashFlare is because I have been mining with them
-for over a year now and have made back all my invested money and then some.
+only reason I'm even recommending HashFlare is because I have been mining with
+them for over a year now and have made back all my invested money and then some.
 
 ## Conclusion
 

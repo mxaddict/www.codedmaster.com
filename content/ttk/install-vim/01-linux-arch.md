@@ -30,7 +30,7 @@ sudo pacman -S vim
 If your computer asks for your password, type it in and press Enter. You might
 not see the letters as you type your password, and that's normal for security!
 
-When it asks `(Y/n)`, type `Y` and press Enter to say "Yes, install it!"
+When it asks `[Y/n]`, type `Y` and press Enter to say "Yes, install it!"
 
 ## Step 3: Verify Your Installation
 

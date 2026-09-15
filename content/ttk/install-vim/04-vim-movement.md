@@ -51,7 +51,7 @@ to jump backward.
 What if you want to go to the very beginning or very end of a line of code?
 
 - **`0` (zero)**: Go to the very beginning of the current line.
-- **`$`**: Go to the very **E**nd of the current line.
+- **`$`**: Go to the very end of the current line.
 
 These are super handy for quick fixes!
 

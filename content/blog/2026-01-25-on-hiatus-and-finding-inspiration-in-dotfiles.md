@@ -36,7 +36,7 @@ can find on GitHub: [mxaddict/dotfiles](https://github.com/mxaddict/dotfiles).
 This wasn't just about changing my shell prompt. It was a complete overhaul of
 my workflow, focusing on the tools I use every single day. I poured hundreds of
 hours into configuring my `hyprland` desktop on Arch Linux, refining my `neovim`
-setup with Lua, and ensuring every tool I use—from `git` to my MySQL client—is
+setup with Lua, and ensuring every tool I use, from `git` to my MySQL client, is
 perfectly tailored to my CLI-centric approach. This also extended to creating
 bespoke tools, like my [`quoty` CLI](@/blog/2026-01-25-introducing-quoty.md),
 designed to inject a bit of fun into mundane tasks like Git commits. This

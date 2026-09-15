@@ -30,9 +30,10 @@ The core principles behind ZolaNight are:
 3. **Readability:** Thoughtful typography and a balanced layout ensure that your
    content is easy on the eyes, encouraging longer reading sessions.
 4. **Customization:** While minimalist by default, ZolaNight is designed to be
-   easily customizable. From color schemes (inspired by popular editor themes
-   like Tokyo Night and Catppuccin) to font choices, you have the flexibility to
-   make it your own.
+   easily customizable. It ships four color schemes inspired by the Tokyo Night
+   editor theme (`tokyonight`, `tokyostorm`, `tokyomoon`, and `tokyoday`), pairs
+   nicely with Zola's `catppuccin-mocha` code highlighting, and gives you the
+   flexibility to make it your own.
 
 ## Key Features
 
@@ -63,7 +64,8 @@ git submodule add https://github.com/mxaddict/zolanight.git themes/zolanight
 
 Then, configure your `zola.toml` to use `theme = "zolanight"`. You can also
 customize its appearance further by setting parameters under the
-`[extra.zolanight]` section.
+`[extra.zolanight]` section, such as `theme = "tokyostorm"` to pick a different
+color scheme.
 
 ## Conclusion
 

@@ -43,9 +43,10 @@ zola init my-new-website
 cd my-new-website
 ```
 
-Zola will ask you a few questions, like your site's URL and whether you want a
-`config.toml` file (just hit Enter for the defaults for now). This command sets
-up the basic directory structure for your new site.
+Zola will ask you a few questions, like your site's URL and whether to enable
+Sass compilation (just hit Enter for the defaults for now). This command sets up
+the basic directory structure for your new site, including a `zola.toml`
+configuration file.
 
 ## Step 3: Add a Zola Theme (Self-Plug: ZolaNight!)
 
@@ -61,14 +62,16 @@ git submodule add https://github.com/mxaddict/zolanight.git themes/zolanight
 ```
 
 Next, open your `zola.toml` file (created in Step 2) and tell Zola to use the
-new theme. You'll also need to define the `taxonomies` settings that the theme
-expects. Your `zola.toml` should look something like this:
+new theme. You'll also need Sass compilation turned on and the `taxonomies`
+settings that the theme expects. Your `zola.toml` should look something like
+this:
 
 ```toml
 # zola.toml
-base_url = "http://example.com"
+base_url = "https://example.com"
 title = "My Awesome Zola Site"
 theme = "zolanight"
+compile_sass = true # ZolaNight's styles are written in Sass
 taxonomies = [{ name = "tags" }]
 
 [markdown.highlighting]

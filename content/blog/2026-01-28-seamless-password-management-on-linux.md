@@ -14,7 +14,7 @@ password managers might feel clunky or restrictive.
 
 This article dives into a custom dotfiles solution that leverages the power of
 `pass` (the Unix password manager), `pass-otp` for two-factor authentication,
-and a pair of clever scripts—`.menu-pass` and `.menu-autofill`—to provide
+and a pair of clever scripts, `.menu-pass` and `.menu-autofill`, to provide
 dynamic autofill capabilities for _any_ application on your Linux machine.
 
 ## The Core: `pass` and `pass-otp`
@@ -96,9 +96,10 @@ you likely need based on your active application.
   environments, specifically leveraging `hyprctl` (from Hyprland) and `jq` to
   fetch the title of the currently focused window.
 - **Domain Extraction:** From the window title, it uses a regular expression to
-  extract a domain name. For example, if your browser title is "Sign in -
-  GitHub", it will attempt to extract "github.com". This domain is then used to
-  pre-filter the `pass` entries, significantly speeding up your selection.
+  extract a domain name. For example, if your browser shows the page URL in its
+  title, like "Sign in - https://github.com/login", it will extract
+  "github.com". This domain is then used to pre-filter the `pass` entries,
+  significantly speeding up your selection.
 - **Delegation:** Finally, `.menu-autofill` calls `.menu-pass`, passing along
   the determined mode (e.g., `pass`, `auth`) and the extracted domain as a
   filter.
@@ -120,9 +121,9 @@ DOMAIN=$(echo "$TITLE" | grep -oP '(?<=//)[a-z0-9.-]+\.[a-z]{2,}' | head -n 1)
 Imagine you're browsing the web and land on a login page. Here's how this
 integrated system streamlines your workflow:
 
-1. **Hotkey Activation:** You press a predefined hotkey (e.g., `Super + P`).
-   This hotkey is configured in your window manager (like Hyprland) to execute
-   `.menu-autofill`.
+1. **Hotkey Activation:** You press a predefined hotkey (e.g.,
+   `Super + Ctrl + L`). This hotkey is configured in your window manager (like
+   Hyprland) to execute `.menu-autofill`.
 2. **Contextual Awareness:** `.menu-autofill` quickly queries your active
    window, extracts the relevant domain (e.g., `example.com`), and passes this
    to `.menu-pass`.

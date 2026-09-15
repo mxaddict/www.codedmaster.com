@@ -10,7 +10,7 @@ Welcome, aspiring Rustaceans!
 Are you excited to start building amazing things with Rust? Before we can create
 our own Quest Apps or other cool programs, we need to make sure Rust is properly
 installed on your computer. Don't worry, it's like setting up your tools in a
-workshop – once it's done, you're ready for any project!
+workshop: once it's done, you're ready for any project!
 
 This course will guide you through installing Rust, step-by-step, no matter if
 you're using a Linux computer (like Arch Linux), a Windows PC, or a macOS

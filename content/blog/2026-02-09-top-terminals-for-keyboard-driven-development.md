@@ -25,9 +25,9 @@ A good terminal emulator should offer:
 4. **Keyboard-Driven Design**: Ideally, it should encourage (or even enforce)
    keyboard-only interaction, helping you keep your hands on the home row.
 
-While there are many excellent terminal emulators out there—like iTerm2 for
-macOS, Terminator for Linux, and the new Windows Terminal—Alacritty stands out
-for its uncompromising focus on a few core principles.
+While there are many excellent terminal emulators out there, like iTerm2 for
+macOS, Terminator for Linux, and Windows Terminal, Alacritty stands out for its
+uncompromising focus on a few core principles.
 
 ## Alacritty: The Blazing Fast, GPU-Accelerated Choice
 
@@ -48,7 +48,7 @@ Here's why Alacritty is a fantastic choice for keyboard-driven development:
   out-of-the-box. This focus on core functionality keeps it lean and mean,
   allowing other tools (like `tmux` for session management) to handle more
   complex layouts. This approach reinforces a keyboard-centric workflow, as
-  everything is configured via a simple YAML file.
+  everything is configured via a simple TOML file.
 - **Rust-Powered Performance**: Being written in Rust, Alacritty benefits from
   Rust's focus on safety and performance. This translates to a terminal that is
   not only fast but also highly reliable.
@@ -56,14 +56,15 @@ Here's why Alacritty is a fantastic choice for keyboard-driven development:
   meaning you can enjoy a consistent, high-performance terminal experience
   across all your development machines.
 
-## Configuration: The `alacritty.yml`
+## Configuration: The `alacritty.toml`
 
-Customizing Alacritty involves editing a `alacritty.yml` configuration file.
-While this might seem daunting to some, it's incredibly powerful and encourages
-a deeper understanding of your terminal setup. You can define your preferred
-fonts, color schemes (like Dracula, Nord, or Catppuccin), keybindings, and much
-more, all in a plain text file that can be easily version-controlled with your
-dotfiles.
+Customizing Alacritty involves editing an `alacritty.toml` configuration file
+(older releases used `alacritty.yml`, but TOML has been the format since version
+0.13). While this might seem daunting to some, it's incredibly powerful and
+encourages a deeper understanding of your terminal setup. You can define your
+preferred fonts, color schemes (like Dracula, Nord, or Catppuccin), keybindings,
+and much more, all in a plain text file that can be easily version-controlled
+with your dotfiles.
 
 ## Conclusion
 

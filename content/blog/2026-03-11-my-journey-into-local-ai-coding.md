@@ -9,7 +9,7 @@ tags = ["ai", "local-ai", "ollama", "qwen3-coder", "opencode", "coding-tools", "
 The world of AI coding assistants has evolved rapidly, but I've always been
 drawn to the idea of having complete control over my development environment.
 Recently, I embarked on a journey to install and configure Ollama's
-Qwen3-Coder:30b model using opencode as the client on my home PC – a setup that
+Qwen3-Coder:30b model using opencode as the client on my home PC: a setup that
 allows me to enjoy powerful AI assistance while maintaining full privacy and
 offline functionality.
 
@@ -21,7 +21,7 @@ first, the latency when using AI assistants in a network-connected environment,
 and second, privacy considerations around sending code snippets to external
 services.
 
-A few weeks ago, while browsing about local AI models, I discovered Ollama – a
+A few weeks ago, while browsing about local AI models, I discovered Ollama, a
 tool that makes running large language models locally incredibly simple.
 Combined with Qwen3-Coder:30b (which boasts impressive performance) and opencode
 as the client interface, this combination promised an optimal balance of power
@@ -32,10 +32,10 @@ and privacy.
 Setting up my AI coding environment required some technical know-how. First, I
 installed Ollama on my PC by downloading the appropriate version for my system's
 architecture. Then, I pulled the Qwen3-Coder:30b model using
-`ollama pull qwen3-coder:30b`. This was probably my most time-consuming part –
+`ollama pull qwen3-coder:30b`. This was probably my most time-consuming part:
 waiting for the large model to download.
 
-I then configured opencode (a specialized tool built for AI interactions) by
+I then configured opencode (an open source AI coding agent for the terminal) by
 adjusting its settings to point towards my local Ollama instance. The
 configuration steps were intuitive, and I quickly got it working with my local
 setup.
@@ -43,7 +43,7 @@ setup.
 ## The Experience
 
 The difference between online and local AI assistance is immediate and
-noticeable. My response times are consistently under a second – much faster than
+noticeable. My response times are consistently under a second, much faster than
 cloud versions of these models. Additionally, I no longer worry about sending
 sensitive code to unknown external services.
 
@@ -61,7 +61,7 @@ network connections, I can continue coding with full AI assistance.
 ## The Verdict
 
 I've genuinely enjoyed the transition to this local AI development environment.
-It's not just about privacy and speed – it's also about having complete control
+It's not just about privacy and speed; it's also about having complete control
 over my development stack. Whether you have a high-end gaming PC or a modest
 home computer, there's something appealing about having an on-demand, powerful
 AI assistant close at hand.
@@ -69,4 +69,4 @@ AI assistant close at hand.
 This setup has become a core part of my workflow, and I find myself using it
 daily for tasks that would previously have required extensive online research.
 It represents the next step in bringing the power of AI to the development
-process – without compromising on privacy or performance.
+process, without compromising on privacy or performance.

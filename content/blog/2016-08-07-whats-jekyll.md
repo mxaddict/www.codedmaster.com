@@ -16,12 +16,17 @@ simple yet powerful websites of all shapes and sizes. From
 > Pages, which you can use to host your project’s page or blog right here from
 > GitHub.
 
-This very blog you are reading this very article on is powered by
-[Jekyll][jekyll]
+This very blog you are reading this article on was powered by [Jekyll][jekyll].
 
 It's an immensely useful tool and one I encourage you to use.
 
 Find out more by visiting the project on their
 [GitHub](https://github.com/jekyll/jekyll) page.
 
-[jekyll]: http://jekyllrb.com
+---
+
+**_Editor's Note (2026):_** This blog has since moved from Jekyll to Zola. You
+can read about why in
+"[Why I Switched: Migrating My Blog from Jekyll to Zola](@/blog/2026-01-24-jekyll-to-zola-migration.md)".
+
+[jekyll]: https://jekyllrb.com

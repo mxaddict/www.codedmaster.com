@@ -18,8 +18,8 @@ task.
 This article isn't just about my personal `.files` repository (though you can
 explore it [on GitHub](https://github.com/mxaddict/dotfiles) if you're curious).
 Instead, it's about the philosophy and practical application of a "CLI
-Productivity Stack" – a meticulously curated collection of command-line tools
-and configurations that transforms the humble terminal into a hyper-efficient,
+Productivity Stack": a meticulously curated collection of command-line tools and
+configurations that transforms the humble terminal into a hyper-efficient,
 keyboard-driven development hub.
 
 My journey to this setup was born out of a desire to eliminate friction,
@@ -49,7 +49,7 @@ components that dictate how you interact with your system: your terminal
 emulator, your shell, and your window manager. Each choice here significantly
 impacts speed, comfort, and overall productivity.
 
-### Terminal Emulator: Alacritty – Blazing Fast and Minimalist
+### Terminal Emulator: Alacritty (Blazing Fast and Minimalist)
 
 At the heart of my CLI setup is [Alacritty](https://alacritty.org/), a
 GPU-accelerated terminal emulator. While many excellent options exist, Alacritty
@@ -61,7 +61,7 @@ silky-smooth, low-latency experience that feels incredibly responsive, even with
 complex output. My configuration for Alacritty is straightforward, emphasizing
 readability and speed, complementing the rest of my streamlined environment.
 
-### Shell: Fish – The Friendly Interactive SHell
+### Shell: Fish (The Friendly Interactive SHell)
 
 For my shell, I've chosen [Fish](https://fishshell.com/) (the Friendly
 Interactive SHell) over more traditional options like Bash or Zsh. Fish is
@@ -119,7 +119,7 @@ function cat
 end
 ```
 
-### Prompt: Starship – The Cross-Shell Prompt
+### Prompt: Starship (The Cross-Shell Prompt)
 
 To maintain a consistent and information-rich prompt across different shell
 environments (though predominantly Fish for me), I use
@@ -129,7 +129,7 @@ toolchain, Node.js version (managed by `fnm`), and more, directly in the prompt.
 It's configured to be concise yet informative, minimizing visual clutter while
 providing critical context at a glance.
 
-### Multiplexer: Tmux – Terminal Session Management
+### Multiplexer: Tmux for Terminal Session Management
 
 For managing multiple terminal sessions, panes, and windows within a single
 terminal emulator instance, [Tmux](https://github.com/tmux/tmux/wiki) is
@@ -161,7 +161,7 @@ return {
     { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
     { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
     { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-    { "<c-\">", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
   },
 }
 ```
@@ -169,7 +169,7 @@ return {
 This integration means my hands rarely leave the home row, maintaining flow
 whether I'm traversing code in Neovim or checking logs in an adjacent Tmux pane.
 
-### Window Manager: Hyprland – A Keyboard-Driven Wayland Desktop
+### Window Manager: Hyprland (A Keyboard-Driven Wayland Desktop)
 
 Moving beyond the terminal, my entire graphical environment is built around
 [Hyprland](https://hyprland.org/), a dynamic tiling Wayland compositor. Hyprland
@@ -204,7 +204,7 @@ Key aspects of my Hyprland configuration that enhance productivity include:
     picker), and `kooha` (screen recorder).
   - **Custom Menus and Scripts:** A suite of binds to `~/.local/bin/.menu-*`
     scripts (`.menu-power`, `.menu-apps`, `.menu-calc`, etc.) and even
-    autofill/password management (`~/.local/bin/.menu-autofill`) – transforming
+    autofill/password management (`~/.local/bin/.menu-autofill`), transforming
     complex actions into simple key combinations.
 
 ```ini
@@ -253,7 +253,7 @@ tools with modern, blazingly fast alternatives.
   replaced the venerable `ls`. It provides beautiful, informative output with
   Git integration, file type icons, and an intuitive tree view. This makes
   scanning directories and understanding repository status significantly faster.
-- **`fd` (Fast Directory Entry):** This is a faster and more user-friendly
+- **`fd` (a Friendlier `find`):** This is a faster and more user-friendly
   alternative to `find`. Written in Rust, `fd` understands `.gitignore` by
   default and offers a simpler, more intuitive syntax for searching files and
   directories. When combined with `fzf`, it creates an incredibly powerful
@@ -278,28 +278,29 @@ uses `bat` for file previews directly within `fzf`:
 ```fish
 # FZF theme
 set -gx FZF_CTRL_T_OPTS "--preview 'bat -n --color=always {}'"
-set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS" \
-    --height 100%
-    --info=inline-right
-    --ansi
-    --layout=reverse
-    --border=none
-    --color=bg+:#283457
-    --color=bg:#16161e
-    --color=border:#27a1b9
-    --color=fg:#c0caf5
-    --color=gutter:#16161e
-    --color=header:#ff9e64
-    --color=hl+:#2ac3de
-    --color=hl:#2ac3de
-    --color=info:#545c7e
-    --color=marker:#ff007c
-    --color=pointer:#ff007c
-    --color=prompt:#2ac3de
-    --color=query:#c0caf5:regular
-    --color=scrollbar:#27a1b9
-    --color=separator:#ff9e64
-    --color=spinner:#ff007c
+set -gx FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
+    --height 100% \
+    --info=inline-right \
+    --ansi \
+    --layout=reverse \
+    --border=none \
+    --color=bg+:#283457 \
+    --color=bg:#16161e \
+    --color=border:#27a1b9 \
+    --color=fg:#c0caf5 \
+    --color=gutter:#16161e \
+    --color=header:#ff9e64 \
+    --color=hl+:#2ac3de \
+    --color=hl:#2ac3de \
+    --color=info:#545c7e \
+    --color=marker:#ff007c \
+    --color=pointer:#ff007c \
+    --color=prompt:#2ac3de \
+    --color=query:#c0caf5:regular \
+    --color=scrollbar:#27a1b9 \
+    --color=separator:#ff9e64 \
+    --color=spinner:#ff007c \
+    "
 ```
 
 This level of customization transforms `fzf` from a simple tool into a powerful,
@@ -321,7 +322,7 @@ keyboard-driven editor that can stand toe-to-toe with any graphical IDE.
     have comprehensive language support for a wide array of languages including
     Python, Rust, PHP (with Intelephense), JavaScript/TypeScript (with ESLint),
     Docker, SQL, and more. This provides features like auto-completion,
-    go-to-definition, refactoring, and linting—all within the terminal.
+    go-to-definition, refactoring, and linting, all within the terminal.
   - **Keyboard-Driven Efficiency:** Neovim's modal editing paradigm, combined
     with custom keybindings and plugins like `telescope` (for fuzzy finding
     files, symbols, and commands) and `luasnip` (for code snippets), ensures
@@ -388,11 +389,11 @@ Rust-based utilities that deliver speed and intelligence far beyond traditional
   `.gitignore` rules by default, and intelligently skips binary files. Its
   output is clean and easy to parse, making it far superior to `grep` for most
   development tasks.
-- **`fd` (Fast Directory Entry / Find):** While already mentioned in "File
+- **`fd` (Finding Files to Search):** While already mentioned in "File
   Navigation & Exploration" for finding files, `fd` also plays a crucial role
-  here. It's often piped to `ripgrep` to perform highly targeted searches across
-  specific file types or within certain directories. For example,
-  `fd .js | rg 'myFunction'` quickly searches for `myFunction` only within
+  here. It can hand its results straight to `ripgrep` to perform highly targeted
+  searches across specific file types or within certain directories. For
+  example, `fd -e js -X rg 'myFunction'` searches for `myFunction` only within
   JavaScript files, combining the strengths of both tools.
 
 The combination of `ripgrep` and `fd`, often orchestrated with `fzf`, creates an
@@ -475,8 +476,8 @@ your own workflow. By investing time in customizing your terminal, shell,
 editor, and window manager, you create an environment that actively supports
 your focus and accelerates your development.
 
-We've explored how a carefully chosen set of tools – from Alacritty and Fish to
-Neovim, Tmux, and Hyprland – can transform mundane tasks into fluid,
+We've explored how a carefully chosen set of tools, from Alacritty and Fish to
+Neovim, Tmux, and Hyprland, can transform mundane tasks into fluid,
 keyboard-driven operations. We've seen how `eza`, `fd`, `zoxide`, `fzf`,
 `ripgrep`, and `lazygit` elevate file navigation, search, and Git management to
 new heights. And crucially, we've highlighted the power of custom scripting and

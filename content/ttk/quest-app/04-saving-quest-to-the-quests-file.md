@@ -23,7 +23,7 @@ Here's how we'll update our `main.rs` file to save new quests:
 
 ```rust
 use std::fs;        // For reading and writing files
-use std::io::Write; // We need this to use the 'write_all' function
+use std::io::Write; // We need this to use the 'writeln!' macro
 
 fn main() {
   // --- Part 1: Load Quests from quests.txt ---
@@ -100,8 +100,8 @@ fn main() {
 ## What's Changed and New Here?
 
 1. `use std::io::Write;`
-   - We added this new `use` line because the `writeln!` function we're using
-     comes from this part of Rust's tools.
+   - We added this new `use` line because the `writeln!` macro we're using needs
+     this part of Rust's tools.
 
 2. `let _ = fs::File::create("quests.txt").expect("Could not create quests.txt!");`
    - In the `Err` part when loading quests, we added this line. If `quests.txt`
@@ -131,8 +131,8 @@ fn main() {
      printing to the screen, it `write`s the `quest_text` to our `file`
      variable, and then adds a new line (`ln!`) at the end.
    - `if let Err(e) = ...`: Just like when we read the file, writing can
-     sometimes have errors. This checks if there was an `Err`or `e` and prints
-     it if something went wrong while writing.
+     sometimes have errors. This checks if there was an error (`Err(e)`) and
+     prints it if something went wrong while writing.
 
 Now, whenever you add a new quest using `cargo run`, it will be added to your
 `quests.txt` file permanently!

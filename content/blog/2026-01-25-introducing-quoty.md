@@ -42,8 +42,8 @@ more interesting and a lot less lazy. ✨
 
 Beyond just providing a random quote, `quoty` has a few other handy features:
 
-- `quoty --list-authors`: Lists all the authors of the quotes.
-- `quoty --list-quotes`: Prints out every available quote.
+- `quoty authors`: Lists all the authors of the quotes.
+- `quoty quotes`: Prints out every available quote.
 - `quoty --help`: Shows the standard help text.
 - `quoty --version`: Displays the current version of the tool.
 
@@ -60,8 +60,8 @@ personal history and inside jokes to my commit logs.
 I chose to write `quoty` in Rust for a few key reasons. First, the performance
 is fantastic, which is great for a CLI tool that needs to be snappy. Second,
 Rust's ability to compile to a single, dependency-free binary is a huge plus. It
-makes distribution and installation incredibly simple – you don't have to worry
-about managing a runtime or a package manager.
+makes distribution and installation incredibly simple, and you don't have to
+worry about managing a runtime or a package manager.
 
 ## How to Get It 📦
 

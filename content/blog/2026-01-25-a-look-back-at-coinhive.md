@@ -6,8 +6,8 @@ description = "A reflection on the rise and fall of Coinhive, the promise of ad-
 tags = ["coinhive", "cryptocurrency", "monetization", "web development", "ethics", "security", "reflection"]
 +++
 
-A few years ago, I wrote an article about a service called Coinhive, framing it
-as a revolutionary way to monetize websites without resorting to annoying
+Back in 2017, I wrote an article about a service called Coinhive, framing it as
+a revolutionary way to monetize websites without resorting to annoying
 advertisements. You can read my original,
 [optimistic take on it here](@/blog/2017-09-23-monetizing-websites-without-advertisements.md).
 At the time, the idea seemed brilliant: use a small fraction of a visitor's CPU
@@ -51,9 +51,11 @@ began implementing protections against this kind of in-browser mining. The
 negative reputation became so overwhelming that any site using Coinhive, even
 legitimately, was viewed with suspicion.
 
-This, combined with a major crash in Monero's value, made the service
-financially unviable. In March 2019, Coinhive announced it was shutting down.
-The dream of a simple, ad-free monetization solution was over.
+This, combined with a Monero hard fork that cut the service's hash rate by more
+than half and a crash of over 85% in Monero's value, made the service
+financially unviable. In February 2019, Coinhive announced it was shutting down,
+and the miner stopped for good on March 8, 2019. The dream of a simple, ad-free
+monetization solution was over.
 
 ## Final Thoughts: A Sobering Lesson
 

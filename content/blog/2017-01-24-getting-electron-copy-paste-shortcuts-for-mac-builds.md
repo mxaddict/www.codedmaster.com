@@ -10,7 +10,7 @@ If you are new to [Electron][electron] and have noticed that when running the
 Mac/OSX builds there is no copy/paste shortcut support, don't be alarmed.
 
 The reason for this is that MAC/OSX requires you to have those shortcuts
-declared/setup in the application menu, or one of it's sub menus.
+declared/setup in the application menu, or one of its sub menus.
 
 You can do a simple fix by loading the [Electron Menu][electron_menu] module in
 your application's code and setting these shortcuts
@@ -56,9 +56,8 @@ menu that looks like the following image
 
 ![Screenshot](/img/electron-shortcuts.png)
 
-[electron]: http://electron.atom.io/
-[electron_menu]:
-  https://github.com/electron/electron/blob/master/docs/api/menu.md
+[electron]: https://www.electronjs.org/
+[electron_menu]: https://www.electronjs.org/docs/latest/api/menu
 
 ---
 

@@ -47,9 +47,9 @@ wget https://github.com/stanfieldr/ghetto-skype/archive/v1.5.0.zip
 ```
 
 NOTE: You can check what the latest versions of [Ghetto Skype][skype_ghetto] are
-on it's [releases page](https://github.com/stanfieldr/ghetto-skype/releases)
+on its [releases page](https://github.com/stanfieldr/ghetto-skype/releases)
 
-Unzip the new archive, delete the zip, and move into the unziped folder
+Unzip the new archive, delete the zip, and move into the unzipped folder
 
 ```bash
 unzip v1.5.0.zip && rm v1.5.0.zip && cd ghetto-skype-1.5.0
@@ -91,11 +91,11 @@ page][electron_github]
 
 [skype_ghetto]: https://github.com/stanfieldr/ghetto-skype
 [skype_web]: https://web.skype.com/
-[electron]: http://electron.atom.io/
+[electron]: https://www.electronjs.org/
 [electron_github]: https://github.com/electron/electron
 [node_js]: https://nodejs.org/
-[nvm]: https://github.com/creationix/nvm
-[brew_sh]: http://brew.sh/
+[nvm]: https://github.com/nvm-sh/nvm
+[brew_sh]: https://brew.sh/
 
 ---
 

@@ -34,8 +34,8 @@ script to enhance its user experience and reliability:
   ensure immediate exits on errors, unset variables, or failed commands within a
   pipeline. This drastically improves the script's reliability and prevents
   unexpected behavior.
-- **Silent Execution:** Most commands executed by the script now pipe their
-  output to `>/dev/null 2>&1`. This keeps the terminal clean and focused,
+- **Silent Execution:** Most commands executed by the script now redirect their
+  output with `>/dev/null 2>&1`. This keeps the terminal clean and focused,
   preventing a flood of command-line output and allowing the user to concentrate
   on essential updates.
 - **Clear, Step-by-Step Logging:** Instead of raw command output, the script
@@ -88,9 +88,9 @@ the correct development environment is set up with minimal manual intervention.
 
 I plan on updating my **hyprland**, **waybar**, **swaync**, **gnome**, **qt**,
 etc. configurations to use **matugen** for the color scheme and base the colors
-on the currently set wallpaper in **hyprpaper**. This will be major change to my
-current dotfiles theme setup which is completely static and set to a
-**tokyonight** inspired color palette
+on the currently set wallpaper in **hyprpaper**. This will be a major change to
+my current dotfiles theme setup, which is completely static and set to a
+**tokyonight** inspired color palette.
 
 ## Conclusion
 

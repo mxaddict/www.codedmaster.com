@@ -86,8 +86,12 @@ rustc --version
 cargo --version
 ```
 
-You should see something like: `rustc 1.XX.X (YYYY-MM-DD)`
-`cargo 1.XX.X (YYYY-MM-DD)`
+You should see something like:
+
+```text
+rustc 1.XX.X (abc123def YYYY-MM-DD)
+cargo 1.XX.X (abc123def YYYY-MM-DD)
+```
 
 The `1.XX.X` part will be the version number, which might be different from this
 example, and that's perfectly fine! As long as you see version numbers, Rust is

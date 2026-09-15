@@ -1,7 +1,7 @@
 +++
 date = 2026-04-09
 title = "Why opencode Is My Favorite CLI Coding Agent"
-description = "A practical look at why opencode became my preferred CLI coding client, how I use Zen service with the Bigpickle model, and where AI fits into my workflow."
+description = "A practical look at why opencode became my preferred CLI coding client, how I use OpenCode Zen with the Big Pickle model, and where AI fits into my workflow."
 [taxonomies]
 tags = ["ai", "opencode", "cli", "coding-assistants", "neovim", "tmux", "zen", "bigpickle", "productivity"]
 +++
@@ -10,9 +10,9 @@ Of all the CLI coding agent clients I've used, `opencode` is the one I like the
 most.
 
 I've spent 100+ hours using it, and in that time it has felt less buggy, less
-resource intensive, and more reliable than `claude`, `codex`, and `gemini`.
-Just as important, it also feels like the best-looking client. The design is
-clean, focused, and it fits the way I already like to work.
+resource-intensive, and more reliable than `claude`, `codex`, and `gemini`. Just
+as important, it also feels like the best-looking client. The design is clean,
+focused, and it fits the way I already like to work.
 
 ## Why It Clicks For Me
 
@@ -25,14 +25,14 @@ The `tokyonight` theme is a bonus that I genuinely appreciate. It matches my
 `alacritty` and `neovim` setup perfectly, which makes the whole experience feel
 cohesive instead of bolted together.
 
-## Zen Service And Bigpickle
+## OpenCode Zen And Big Pickle
 
-I also use `opencode zen` service, including the `bigpickle` model there. So far
-I've spent about $100 USD on the platform, and it has already paid for itself
-many times over in saved time and finished work.
+I also use the OpenCode Zen service, including its `big-pickle` model. So far
+I've spent about $100 on the platform, and it has already paid for itself many
+times over in saved time and finished work.
 
 That matters because AI tools are only worth it when they help me ship. In this
-case, `opencode zen` has been a practical investment, not just a novelty.
+case, OpenCode Zen has been a practical investment, not just a novelty.
 
 ## How I Actually Use AI
 
@@ -46,8 +46,8 @@ Most of the time, I use my AI agent for:
 - research
 - documentation
 
-I do occasionally let it write code for me when the task is simple enough.
-But most of the time I still end up doing the coding myself.
+I do occasionally let it write code for me when the task is simple enough. But
+most of the time I still end up doing the coding myself.
 
 ## Final Take
 

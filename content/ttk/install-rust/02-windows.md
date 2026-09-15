@@ -44,7 +44,19 @@ sudo apt upgrade -y
 Type your Linux password if it asks, and press Enter. This command tells Ubuntu
 to get the newest lists of apps and then install new versions of apps.
 
-## Step 3: Install Rustup
+## Step 3: Install Building Tools
+
+Rust needs a few helper tools (like a "linker", which glues your code together
+into a program) that Ubuntu doesn't include by default. Without them, running
+your Quest App later will fail with an error like `linker 'cc' not found`.
+
+In your Ubuntu terminal, type this command and press Enter:
+
+```bash
+sudo apt install build-essential -y
+```
+
+## Step 4: Install Rustup
 
 Rustup is the easiest way to install Rust. It's a special tool that helps manage
 different versions of Rust.
@@ -62,13 +74,13 @@ You'll see some messages. When it asks:
 Just press **Enter** to choose the default option. This will download and
 install Rust!
 
-## Step 4: Restart Your Ubuntu Terminal
+## Step 5: Restart Your Ubuntu Terminal
 
 After Rust is installed, it's a good idea to close your Ubuntu terminal window
 and open a new one. This helps your Ubuntu system "refresh" and find the new
 Rust tools.
 
-## Step 5: Verify Your Installation
+## Step 6: Verify Your Installation
 
 Let's check if Rust and Cargo (Rust's build tool) are installed correctly!
 
@@ -80,8 +92,12 @@ rustc --version
 cargo --version
 ```
 
-You should see something like: `rustc 1.XX.X (YYYY-MM-DD)`
-`cargo 1.XX.X (YYYY-MM-DD)`
+You should see something like:
+
+```text
+rustc 1.XX.X (abc123def YYYY-MM-DD)
+cargo 1.XX.X (abc123def YYYY-MM-DD)
+```
 
 The `1.XX.X` part will be the version number, which might be different from this
 example, and that's perfectly fine! As long as you see version numbers, Rust is

@@ -179,8 +179,8 @@ function ls
 end
 ```
 
-And of course, no terminal-centric user would be complete without ensuring every
-possible editor command opens their one true editor:
+And of course, no terminal-centric setup would be complete without ensuring
+every possible editor command opens their one true editor:
 
 ```fish
 # I want v to open vi and vi to open vim

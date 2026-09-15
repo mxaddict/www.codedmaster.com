@@ -14,8 +14,8 @@ prepared for you guys
 
 I recommend watching in 1080p60 and fullscreen! `^_^`
 
-[ubuntu]: http://www.ubuntu.com/
-[ubuntudl]: http://www.ubuntu.com/download
+[ubuntu]: https://ubuntu.com/
+[ubuntudl]: https://ubuntu.com/download
 [vbox]: https://www.virtualbox.org/
 
 ---

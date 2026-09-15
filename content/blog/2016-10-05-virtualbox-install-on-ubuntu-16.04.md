@@ -6,8 +6,8 @@ description = "Learn how to easily set up VirtualBox on Ubuntu 16.04 with a simp
 tags = ["virtualbox", "ubuntu", "linux", "installation", "virtual machine", "tutorial"]
 +++
 
-[Virtualbox][vbox] is a open source, well maintained virtual machine package
-that can install a huge array of x86 and amd64 operating systems
+[Virtualbox][vbox] is an open source, well maintained virtual machine package
+that can install a huge array of x86 and amd64 operating systems.
 
 To install [Virtualbox][vbox] on [Ubuntu 16.04][ubuntu] all you need to do is
 run this in a terminal:
@@ -25,7 +25,7 @@ BTW I created a video version of this tutorial for a more visual feel
 
 I recommend watching in 1080p60 and fullscreen! `^_^`
 
-[ubuntu]: http://www.ubuntu.com/
+[ubuntu]: https://ubuntu.com/
 [vbox]: https://www.virtualbox.org/
 
 ---

@@ -49,7 +49,7 @@ fn main() {
         new_quest_description = Some(args[1..].join(" "));
     }
 
-    // Start with some quests we already know about (just like in 01-displaying-output.md!)
+    // Start with some quests we already know about (just like in Chapter 01!)
     let mut quests: Vec<String> = Vec::new();
     quests.push(String::from("Explore the mysterious forest"));
     quests.push(String::from("Learn a new Rust command"));
@@ -95,8 +95,8 @@ Let's look at the new magic we added:
      words, we put them into our `new_quest_description` inside `Some()`.
 
 3. `let mut quests: Vec<String> = Vec::new();`
-   - Just like in `01-displaying-output.md`, we start our list of `quests`. We
-     even added the same two starting quests to it!
+   - Just like in Chapter 01, we start our list of `quests`. We even added the
+     same two starting quests to it!
 
 4. `if let Some(quest_text) = new_quest_description { ... }`
    - This is a clever way to say: "If `new_quest_description` actually has some
@@ -108,9 +108,8 @@ Let's look at the new magic we added:
      this time.
 
 5. The final `println!` loop:
-   - This is the same as in `01-displaying-output.md`! It goes through our
-     `quests` list (which now might include your new quest!) and prints each one
-     out.
+   - This is the same as in Chapter 01! It goes through our `quests` list (which
+     now might include your new quest!) and prints each one out.
 
 Now your Quest App can both _read_ new quest ideas and _show_ you all your
 quests! Fantastic progress!

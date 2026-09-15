@@ -29,8 +29,7 @@ the most complex update yet, but you're a super programmer now, so you can do
 it!
 
 ```rust
-use std::fs;     // For reading and writing files
-use std::io::Write; // For writing to files
+use std::fs; // For reading and writing files
 
 fn main() {
   // --- Step 1: Load Quests from quests.txt (Same as before) ---
@@ -77,13 +76,14 @@ fn main() {
           // Try to get the quest number you want to remove
           let index_str = &args[2];
           if let Ok(index_num) = index_str.parse::<usize>() {
-            // Remember: lists in programming start counting from 0, not 1!
-            // So, if you say "remove 2", we remove the item at index 1.
-            let actual_index = index_num - 1;
-
-            if actual_index < quests.len() {
+            // Quest numbers start at 1, so the number must be between
+            // 1 and how many quests we have.
+            if index_num >= 1 && index_num <= quests.len() {
+              // Remember: lists in programming start counting from 0, not 1!
+              // So, if you say "remove 2", we remove the item at index 1.
+              let actual_index = index_num - 1;
               let removed_quest = quests.remove(actual_index);
-              println!("Quest removed: "{}"", removed_quest);
+              println!("Quest removed: \"{}\"", removed_quest);
             } else {
               println!("Oops! There is no quest number {} to remove.", index_num);
             }
@@ -112,18 +112,15 @@ fn main() {
   // After we've possibly added or removed quests, we need to save the *entire*
   // updated list back to quests.txt. We can't just append anymore for removals!
   let quests_to_save: Vec<String> = quests.iter()
-    .map(|q| format!("{}
-", q))
+    .map(|q| format!("{}\n", q))
     .collect();
   let all_quests_content = quests_to_save.join(""); // Join all lines together
 
   fs::write("quests.txt", all_quests_content)
     .expect("Could not write quests to file!");
 
-
   // --- Step 4: Display All Quests (Same as before) ---
-  println!("
---- Your Current Quests ---");
+  println!("\n--- Your Current Quests ---");
   if quests.is_empty() {
     println!("No quests found! Time to add some new adventures!");
   } else {
@@ -151,6 +148,9 @@ fn main() {
      - `if let Ok(index_num) = index_str.parse::<usize>()`: We try to turn the
        text (like "2") into a real number (`usize`). `usize` is a type of number
        Rust uses for counting list items. `Ok` means it worked!
+     - `if index_num >= 1 && index_num <= quests.len()`: Before removing
+       anything, we make sure the number actually matches a quest on your list.
+       There is no quest number 0, and no quest number 99 if you only have 4!
      - `let actual_index = index_num - 1;`: This is important! In programming,
        lists usually start counting from 0 (0, 1, 2...) not 1 (1, 2, 3...). So
        if you say "remove 2", it's actually the item at position 1 in Rust's
@@ -160,20 +160,22 @@ fn main() {
      - We added checks to make sure you give a valid number, so the app doesn't
        crash if you make a mistake!
 
-2. **Rewriting the Entire File for Saving:** _Before, we used `.append(true)` to
-   just add a new line. But if we remove a quest from the \_middle_ of the list,
-   simply appending won't fix the file._Instead, after we've made all our
-   changes (added or removed quests), we gather \_all_ the quests from our
-   `quests` list again. _
-   `let quests_to_save: Vec<String> = quests.iter().map(|q| format!("{} ", q)).collect();`
-   This line goes through every quest in our list, adds a new line character
-   (` `) to the end of each, and collects them into a new list._
-   `let all_quests_content = quests_to_save.join("");` This combines all those
-   quest-with-newline strings into one giant string. *
-   `fs::write("quests.txt", all_quests_content).expect(...)`: This is the new
-   way to save! `fs::write` completely*replaces\* the content of `quests.txt`
-   with our `all_quests_content`. This means `quests.txt` will always perfectly
-   match our `quests` list in the program!
+2. **Rewriting the Entire File for Saving:**
+   - Before, we used `.append(true)` to just add a new line. But if we remove a
+     quest from the _middle_ of the list, simply appending won't fix the file.
+   - Instead, after we've made all our changes (added or removed quests), we
+     gather _all_ the quests from our `quests` list again.
+   - `quests.iter().map(|q| format!("{}\n", q)).collect()`: This goes through
+     every quest in our list, adds a new line character (`\n`) to the end of
+     each, and collects them into a new list.
+   - `let all_quests_content = quests_to_save.join("");`: This combines all
+     those quest-with-newline strings into one giant string.
+   - `fs::write("quests.txt", all_quests_content).expect(...)`: This is the new
+     way to save! `fs::write` completely _replaces_ the content of `quests.txt`
+     with our `all_quests_content`. This means `quests.txt` will always
+     perfectly match our `quests` list in the program!
+   - Because `fs::write` does all the work, we don't need `use std::io::Write;`
+     anymore, so we removed it from the top of the file.
 
 ## Your Turn
 

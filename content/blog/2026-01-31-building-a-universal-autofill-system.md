@@ -20,7 +20,7 @@ interactive menu, and `wtype` to simulate keyboard input.
 
 The goal is simple: press a hotkey, get a fuzzy-searchable list of your
 passwords, select one, and have it automatically typed into whatever application
-is currently active—be it a browser, a terminal, or a native GUI application.
+is currently active, be it a browser, a terminal, or a native GUI application.
 
 ## Prerequisites
 
@@ -58,11 +58,8 @@ Create a script named `.menu-pass` in your local bin directory (e.g.,
 # Dependencies: pass, pass-otp, rofi, wtype (for Wayland) or xdotool (for X11)
 
 # --- Configuration ---
-# Use wtype for Wayland, xdotool for X11
-# Wayland
+# This script uses wtype (Wayland). See the X11 note below the script.
 WTYPE_CMD="wtype"
-# X11
-# XDO_CMD="xdotool type --clearmodifiers"
 
 # --- Script Logic ---
 shopt -s nullglob globstar
@@ -125,8 +122,11 @@ exit 0
 
 ### How It Works
 
-1. **Configuration:** It sets the command for typing. If you're on X11, you
-   would comment out `WTYPE_CMD` and uncomment `XDO_CMD`.
+1. **Configuration:** It sets the command for typing. If you're on X11,
+   `xdotool` uses different arguments than `wtype`, so you'd replace each
+   `$WTYPE_CMD "$text"` with `xdotool type --clearmodifiers "$text"` and each
+   `$WTYPE_CMD -k tab` / `-k return` with `xdotool key Tab` /
+   `xdotool key Return`.
 2. **Password Discovery:** It finds all your encrypted password files (`.gpg`)
    within your password store.
 3. **Mode Handling:** It checks the first argument (`$1`) to determine what you
@@ -167,10 +167,9 @@ MODE=${1:-pass} # Default to 'pass'
 
 # Extract a domain-like string from the window title to use as a filter
 # This regex looks for patterns like 'sub.domain.com'
-DOMAIN=$(echo "$TITLE" | grep -oP '(?<=[-—_.\s\[\(])\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b' | head -n 1)
+DOMAIN=$(echo "$TITLE" | grep -oP '(?<=[-\x{2014}_.\s\[\(])\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b' | head -n 1)
 
 # Call the core script with the determined mode and the domain filter
-# The trailing '/' helps match directory-based password entries in 'pass'
 ~/.local/bin/.menu-pass "$MODE" "$DOMAIN"
 ```
 

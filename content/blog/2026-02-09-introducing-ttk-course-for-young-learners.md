@@ -49,7 +49,7 @@ and functional is incredibly motivating.
 
 Parents, if your child (or you!) is ready to dive into the world of programming,
 our "Teach The Kids" Quest App course is the perfect starting point. No prior
-experience is needed – just curiosity and a desire to create!
+experience is needed, just curiosity and a desire to create!
 
 Visit the new TTK Courses page to begin this exciting journey:
 

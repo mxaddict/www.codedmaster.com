@@ -12,10 +12,10 @@ into the CLI-first workflow that defines my life today.
 
 I believe in the power and efficiency of a well-tuned, keyboard-driven
 environment. You'll find me crafting code in my highly customized Neovim setup,
-navigating my Arch Linux desktop with Hyprland, and using a suite of CLI
-tools—many of which I've built myself, like
-[Quoty](@/blog/2026-01-25-introducing-quoty.md)—to streamline every aspect of my
-digital life. For me, the terminal isn't just a tool; it's home.
+navigating my Arch Linux desktop with Hyprland, and using a suite of CLI tools
+(many of which I've built myself, like
+[Quoty](@/blog/2026-01-25-introducing-quoty.md)) to streamline every aspect of
+my digital life. For me, the terminal isn't just a tool; it's home.
 
 ## What You'll Find Here
 
@@ -55,6 +55,10 @@ content spans a wide range of topics, including:
   staking NavCoin since 2018 and have written about its evolution into the
   privacy-focused
   [Navio protocol](@/blog/2026-01-26-from-navcoin-to-navio-a-staking-retrospective.md).
+
+- **Teaching the Next Generation:** I put together
+  [Teach The Kids](@/ttk/_index.md), a hands-on Rust course that takes young
+  learners from installing their tools to building their very own Quest App.
 
 - **Privacy & Security:** In a world of constant surveillance, I'm a strong
   advocate for privacy. I've written guides on using tools like

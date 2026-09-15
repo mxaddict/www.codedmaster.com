@@ -10,7 +10,7 @@ Back in 2017, I wrote an article about a cloud mining service called HashFlare.
 You can read my
 [original post here](@/blog/2017-12-06-crypto-currency-mining-without-hardware-using-cloud-based-solutions.md).
 At the time, I was cautiously optimistic. In a space riddled with scams,
-HashFlare seemed like a legitimate operation. For several months, I used the
+HashFlare seemed like a legitimate operation. For over a year, I used the
 service, saw decent profits, and was even able to cash out those profits. It
 felt real.
 
@@ -21,8 +21,8 @@ turns out, the reality was far darker than I could have imagined.
 ## The Seductive Promise of "Easy Mining"
 
 The appeal of HashFlare was undeniable. It promised to handle all the complex,
-expensive parts of crypto mining—the hardware, the electricity, the
-maintenance—and offer you a slice of the profits. For a fee, you could purchase
+expensive parts of crypto mining (the hardware, the electricity, the
+maintenance) and offer you a slice of the profits. For a fee, you could purchase
 a contract for a certain amount of hashing power. It was a simple, accessible
 entry point into the world of cryptocurrency, and for a time, it worked. The
 dashboard showed profits, and withdrawals were processed. It all seemed to be
@@ -39,15 +39,18 @@ suddenly become unprofitable for _all_ its customers at once?
 The truth, as revealed by subsequent investigations by the FBI and other
 international bodies, was staggering. HashFlare was a massive Ponzi scheme. The
 founders, Sergei Potapenko and Ivan Turõgin, had defrauded hundreds of thousands
-of investors out of more than half a billion dollars. They never had more than a
-tiny fraction of the mining power they claimed to operate. The "profits" early
+of investors out of roughly $577 million. They never had more than a tiny
+fraction of the mining power they claimed to operate. The "profits" early
 investors like myself were able to withdraw were simply other investors' money,
 paid out to keep the illusion of a legitimate business alive.
 
 The entire operation was a fabrication, from the mining activity displayed on
 user dashboards to the very premise of their business. In late 2022, the
-founders were arrested, and in early 2025, they pleaded guilty to wire fraud
-conspiracy.
+founders were arrested in Estonia and later extradited to the United States. In
+February 2025, they pleaded guilty to conspiracy to commit wire fraud. In August
+2025, a U.S. judge sentenced them to time served (about 16 months), a $25,000
+fine each, and community service, far short of the 10 years prosecutors had
+asked for. Prosecutors have appealed those sentences.
 
 ## Final Thoughts: A Hard-Learned Lesson
 

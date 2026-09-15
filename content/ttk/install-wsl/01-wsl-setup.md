@@ -25,7 +25,7 @@ First, we need to open a special program called **PowerShell** with
 5. If a window pops up asking "Do you want to allow this app to make changes to
    your device?", click "Yes".
 
-You'll see a blue window open – that's PowerShell!
+You'll see a blue window open. That's PowerShell!
 
 ## Step 2: Install WSL
 

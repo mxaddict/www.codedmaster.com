@@ -21,13 +21,13 @@ large chunk of this tedious process.
 
 ## The Challenge: Front Matter Overhaul
 
-Jekyll's front matter often includes fields like `description` and `tags` at the
-top level, while Zola prefers these, along with custom data, within `[extra]` or
-`[taxonomies]`. Standardizing this across numerous posts requires attention to
-detail:
+Jekyll's front matter is YAML and keeps fields like `description` and `tags` at
+the top level, while Zola uses TOML, expects tags under `[taxonomies]`, and
+keeps theme-specific data under `[extra]`. Standardizing this across numerous
+posts requires attention to detail:
 
-- **Dates:** Jekyll dates are often in a YYYY-MM-DD format, while Zola might
-  prefer ISO 8601 or just `YYYY-MM-DD`.
+- **Dates:** Jekyll dates often carry a full timestamp (like
+  `2016-08-07T00:00:00Z`), while I wanted plain `YYYY-MM-DD` dates in Zola.
 - **Tags:** Jekyll's top-level `tags` array needs to become
   `[taxonomies]\ntags = [...]` in Zola.
 - **New Fields:** Adding `draft`, `author`, `toc`, and `display_published`
@@ -38,13 +38,13 @@ detail:
 I often use the Gemini CLI for quick tasks, code generation, or even just
 brainstorming. For this migration, I found it particularly useful for front
 matter transformations. My workflow involved a series of targeted prompts to
-help standardize the TOML front matter across my Jekyll posts.
+convert the YAML front matter of my Jekyll posts into consistent TOML.
 
 For instance, I might have used a prompt like this (simulated):
 
 ```bash
 # Imagine a hypothetical prompt to Gemini CLI:
-gemini prompt "Convert the following Jekyll front matter to Zola TOML format.
+gemini -p "Convert the following Jekyll front matter to Zola TOML format.
 Ensure date is YYYY-MM-DD, move tags to [taxonomies], add draft=false,
 and include [extra] fields: toc=true, display_published=true, author='mxaddict'.
 Remove the top-level 'description' field, but include it within [extra] if present.

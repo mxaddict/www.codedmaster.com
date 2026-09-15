@@ -22,7 +22,7 @@ wget https://github.com/stanfieldr/ghetto-skype/releases/download/v1.4.1/ghetto-
 ```
 
 NOTE: You can check for the other versions of [Ghetto Skype][skype_ghetto] on
-it's [releases page](https://github.com/stanfieldr/ghetto-skype/releases)
+its [releases page](https://github.com/stanfieldr/ghetto-skype/releases)
 
 After the download has completed, we should do a checksum to make sure it's not
 corrupted or anything.
@@ -57,7 +57,7 @@ Now you should have something like this once you have logged in
 
 ## For lazy people
 
-This will do all of the mentioned in 1 command
+This will do all of the above in 1 command
 
 ```bash
 # I'm talking to you `John Fiel` (Easier to install on Windows my ass)
@@ -75,7 +75,7 @@ page][electron_github]
 
 [skype_ghetto]: https://github.com/stanfieldr/ghetto-skype
 [skype_web]: https://web.skype.com/
-[electron]: http://electron.atom.io/
+[electron]: https://www.electronjs.org/
 [electron_github]: https://github.com/electron/electron
 
 ---

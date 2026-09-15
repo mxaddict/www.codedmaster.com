@@ -10,7 +10,7 @@ Hello, Vim Editor!
 
 You've mastered moving around in Vim's Normal Mode. That's fantastic! But to
 actually change or write new code, you need to switch into a different mode
-called **Insert Mode**. Think of Insert Mode as your "typing mode" – this is
+called **Insert Mode**. Think of Insert Mode as your "typing mode". This is
 where your keyboard keys actually type letters onto the screen.
 
 ## Switching to Insert Mode: Your Typing Spells

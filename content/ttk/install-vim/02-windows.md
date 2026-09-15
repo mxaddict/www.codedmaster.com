@@ -53,7 +53,7 @@ In your Ubuntu terminal, type this command and press Enter:
 sudo apt install vim
 ```
 
-When it asks `(Y/n)`, type `Y` and press Enter to say "Yes, install it!"
+When it asks `[Y/n]`, type `Y` and press Enter to say "Yes, install it!"
 
 ## Step 4: Verify Your Installation
 

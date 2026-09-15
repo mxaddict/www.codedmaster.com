@@ -36,11 +36,10 @@ they would reside in your `$HOME` directory. For example, if you're adding your
 configuration (`~/.config/fish/config.fish`), you might do the following:
 
 ```bash
+mkdir -p ~/.files/.config/fish # Ensure the parent directories exist
 mv ~/.bashrc ~/.files/.bashrc
 mv ~/.config/nvim ~/.files/.config/nvim
-mkdir -p ~/.files/.config/fish/ # Ensure the parent directory exists
 mv ~/.config/fish/config.fish ~/.files/.config/fish/config.fish
-
 ```
 
 This method ensures that the path inside your `~/.files` directory directly
@@ -50,6 +49,10 @@ creates symlinks, `~/.files/.bashrc` will link to `~/.bashrc`,
 `~/.files/.config/fish/config.fish` will link to `~/.config/fish/config.fish`.
 
 ## Step 3: Create an Update Script with Stow
+
+If you don't have Stow yet, install it with your package manager (for example,
+`sudo pacman -S stow` on Arch, `sudo apt install stow` on Debian/Ubuntu, or
+`brew install stow` on macOS).
 
 Now, let's create a script that will use `GNU Stow` to create symlinks from your
 home directory to the files in your dotfiles repository. This script will also
@@ -89,12 +92,16 @@ This is extremely useful when you're first setting up your dotfiles repository,
 as it allows you to move your existing configurations into the repository
 without having to do it manually.
 
+One word of caution: `--adopt` overwrites the copy in your repository with the
+version from your home directory. Commit your dotfiles before running it, then
+check `git diff` afterwards so you can restore anything you didn't mean to
+replace.
+
 ## Conclusion
 
 You now have a fully functional dotfiles repository! You can add more dotfiles
 as needed, commit your changes with `git`, and push them to a remote repository
 like GitHub or GitLab. For an example of how this method can be used in the
-wild, check out
-[my dotfiles repository](https://www.github.com/mxaddict/dotfiles). When you set
-up a new machine, you can simply clone your dotfiles repository and run the
-`.update` script to get all your configurations in place.
+wild, check out [my dotfiles repository](https://github.com/mxaddict/dotfiles).
+When you set up a new machine, you can simply clone your dotfiles repository and
+run the `.update` script to get all your configurations in place.

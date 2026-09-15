@@ -20,7 +20,7 @@ To open your new Ubuntu Linux terminal:
 
 1. Click on the **Windows Start button**.
 2. Type "Ubuntu".
-3. Click on the "Ubuntu" app that appears (it might say "Ubuntu 22.04 LTS" or a
+3. Click on the "Ubuntu" app that appears (it might say "Ubuntu 24.04 LTS" or a
    different version number).
 
 A brand new black window will open. This is your Ubuntu Linux terminal!

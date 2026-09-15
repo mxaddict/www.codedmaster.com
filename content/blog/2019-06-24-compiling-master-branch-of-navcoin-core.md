@@ -99,11 +99,11 @@ You should also have a binary in `./src/navcoind` which is the
 ## Things to keep in mind
 
 - You should use `./depends` DIR dependencies to have closest experience to the
-  releases from the offical tagged versions
+  releases from the official tagged versions
 - You should use `./depends` DIR dependencies if you are not sure what system
   packages you need
 - You can use system dependencies if you want to have less compiling, you can
-  skip `Step 3` if you have required dependencies install system wide
+  skip `Step 3` if you have required dependencies installed system wide
 - You can run `make` commands with `-j<number of cpu threads>` ( if you have an
   eight thread cpu, i7-4790k, you can run `make -j8` to speed up the compile
   time )

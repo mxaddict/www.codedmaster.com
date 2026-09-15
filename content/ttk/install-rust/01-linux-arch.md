@@ -30,15 +30,16 @@ versions of apps).
 ## Step 2: Install Rustup
 
 Rustup is the easiest way to install Rust. It's a special tool that helps manage
-different versions of Rust.
+different versions of Rust. We'll also install `base-devel`, a bundle of
+building tools that Rust needs to turn your code into a program you can run.
 
 In your terminal, type this command and press Enter:
 
 ```bash
-sudo pacman -S rustup
+sudo pacman -S --needed rustup base-devel
 ```
 
-When it asks `(Y/n)`, type `Y` and press Enter to say "Yes, install it!"
+When it asks `[Y/n]`, type `Y` and press Enter to say "Yes, install it!"
 
 ## Step 3: Install the Rust Toolchain
 
@@ -77,8 +78,12 @@ rustc --version
 cargo --version
 ```
 
-You should see something like: `rustc 1.XX.X (YYYY-MM-DD)`
-`cargo 1.XX.X (YYYY-MM-DD)`
+You should see something like:
+
+```text
+rustc 1.XX.X (abc123def YYYY-MM-DD)
+cargo 1.XX.X (abc123def YYYY-MM-DD)
+```
 
 The `1.XX.X` part will be the version number, which might be different from this
 example, and that's perfectly fine! As long as you see version numbers, Rust is

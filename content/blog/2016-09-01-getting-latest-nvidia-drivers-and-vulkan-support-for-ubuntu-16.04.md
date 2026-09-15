@@ -11,7 +11,8 @@ the best, sometimes they are good, but old. If you want to have access to the
 new BETA drivers plus Vulkan support on [Ubuntu][ubuntu] 16.04 this tutorial is
 for you.
 
-You will need to add the PPA Repo to get access to these packages:
+You will need to add the [PPA Repo][ubuntu_ppa_graphics] to get access to these
+packages:
 
 ```bash
 sudo add-apt-repository ppa:graphics-drivers/ppa
@@ -78,16 +79,16 @@ correctly!
 ## Conclusion
 
 As of the writing of this article, this method is the easiest way to get the
-latest [NVIDIA][nvidia] driver with [Vulkan][vulkan] support, so If you are
+latest [NVIDIA][nvidia] driver with [Vulkan][vulkan] support, so if you are
 reading this in the future, which I damn sure hope so, there may already be
 Vulkan support on the default [Ubuntu][ubuntu] package repos.
 
 [ubuntu_ppa_graphics]:
   https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
-[ubuntu]: http://www.ubuntu.com/
-[nvidia]: http://www.nvidia.com/
-[steam]: http://store.steampowered.com/
-[dota2]: http://blog.dota2.com/
+[ubuntu]: https://ubuntu.com/
+[nvidia]: https://www.nvidia.com/
+[steam]: https://store.steampowered.com/
+[dota2]: https://www.dota2.com/
 [vulkan]: https://www.khronos.org/vulkan/
 
 ---

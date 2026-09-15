@@ -10,7 +10,7 @@ Wanna start staking [NAVCoin][navcoin] but don't know exactly how?
 
 All you need are the following:
 
-- A linux server with atleast `1GB RAM` and `1 CPU Core`
+- A Linux server with at least `1GB RAM` and `1 CPU Core`
 - A [NAVCoin Core][navcoin_github] wallet
 - SOME [NAVCoin][binance] ( Buy some at binance to give me a kick back :D )
 - A tutorial to teach you ( This is that tutorial, LMFAO )
@@ -28,7 +28,8 @@ ssh root@server
 
 ## Step 2
 
-Get the latest NAVCoin Core wallet download link from [navcoin_releases]
+Get the latest NAVCoin Core wallet download link from the [releases
+page][navcoin_releases]
 
 Then download via `wget` on the server
 
@@ -93,7 +94,7 @@ sudo reboot
 
 ## Step 7
 
-Re loggin after reboot
+Log back in after the reboot
 
 ```shell
 ssh root@server
@@ -197,9 +198,9 @@ Which should look like this
 - Your server should be
   **`SECURE AND NOT ACCESSIBLE BY ANYONE YOU DON'T TRUST`** with your coins
 - Your wallet keys **`MUST BE BACKED UP`** in case your server gets corrupted
-- When you first start reboot your server after `Step 6`, it can take a while
-  for the `navcoind` wallet to sync all the block from the network (A few hours
-  on a Gigabit Network)
+- When you first reboot your server after `Step 6`, it can take a while for the
+  `navcoind` wallet to sync all the blocks from the network (A few hours on a
+  Gigabit Network)
 - It takes `2 hours` for any coins sent to your wallet to mature and start
   staking
 
