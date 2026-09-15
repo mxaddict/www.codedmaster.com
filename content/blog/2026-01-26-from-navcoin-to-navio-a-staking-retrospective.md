@@ -6,6 +6,12 @@ description = "A retrospective on my staking journey with NavCoin, detailing its
 tags = ["navcoin", "navio", "staking", "cryptocurrency", "privacy", "retrospective"]
 +++
 
+**_Update (September 2026):_** Navio is no longer just on the horizon. The Navio
+mainnet launched with Navio Core v0.1.0 at the end of June 2026, bringing fully
+private transactions and Proof-of-Private-Stake to everyone. I've written up
+what shipped, how to swap legacy NAV, and how to start staking in
+"[Navio Mainnet Is Live: Private Proof-of-Stake Is Finally Here](@/blog/2026-09-15-navio-mainnet-is-live.md)".
+
 Back in 2018 and 2019, I wrote a couple of posts about getting started with
 NavCoin, first by exploring
 [how to stake it](@/blog/2018-03-27-wanna-start-staking-navcoin.md) and then by
@@ -39,9 +45,9 @@ what's to come.
 
 With Navio, this privacy technology will be extended to **all transactions and
 even the staking process itself**. Imagine a network where your financial
-activities—both sending/receiving funds and participating in network
-consensus—are completely private. This brings a level of anonymity for PoS that
-is comparable to the privacy Monero is famous for in the Proof-of-Work world.
+activities (both sending/receiving funds and participating in network consensus)
+are completely private. This brings a level of anonymity for PoS that is
+comparable to the privacy Monero is famous for in the Proof-of-Work world.
 
 This is a groundbreaking step. Fully private Proof-of-Stake means you can secure
 the network and earn rewards without ever revealing your holdings or transaction
